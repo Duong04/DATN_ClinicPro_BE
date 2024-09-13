@@ -1,0 +1,75 @@
+<?php
+namespace App\Services;
+
+use Exception;
+
+use App\Repositories\User\UserRepositoryInterface;
+class AuthService {
+    private $userRepository;
+    public function __construct(UserRepositoryInterface $userRepository) {
+        $this->userRepository = $userRepository;
+    }
+
+    public function create($request) {
+        try {
+            $data = $request->validated();
+
+            $data['status'] = 'active';
+            $data['role_id'] = 2;
+            $this->userRepository->create($data);
+
+            return response()->json(['message' => 'Register Successfully!'], 201);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
+    }
+
+    public function login($request) {
+        try {
+            $credentials = request(['email', 'password']);
+
+            if (! $token = auth()->attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+
+            return $this->respondWithToken($token);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
+    }
+
+    public function refresh()
+    {
+        try {
+            return $this->respondWithToken(auth()->refresh());
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Token invalid!'], 401);
+        }
+    }
+
+    public function profile()
+    {
+        try {
+            return response()->json(['data' => auth()->user()], 200);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+    }
+
+    public function logout()
+    {
+        auth()->logout(true);
+
+        return response()->json(['message' => 'Successfully logged out'], 203);
+    }
+
+    private function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'data' => auth()->user()->load('role.type')
+        ], 200);
+    }
+}
