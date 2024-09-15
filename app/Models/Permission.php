@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TypeRole extends Model
+class Permission extends Model
 {
     use HasFactory;
 
-    protected $table = 'type_roles';
+    protected $table = 'permissions';
 
     protected $fillable = [
         'name',
-        'redirect_url'
-    ];
-
-    protected $hidden = [
-        'deleted_at'
+        'description',
     ];
 }

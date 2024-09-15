@@ -36,20 +36,10 @@ return new class extends Migration
             $table->foreign('action_id')->references('id')->on('actions');
         });
 
-        Schema::create('type_roles', function (Blueprint $table){
-            $table->id();
-            $table->string('name');
-            $table->string('redirect_url')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
         Schema::create('roles', function (Blueprint $table){
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('type_id');
-            $table->foreign('type_id')->references('id')->on('type_roles');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -273,7 +263,6 @@ return new class extends Migration
         Schema::dropIfExists('permissions');
         Schema::dropIfExists('actions');
         Schema::dropIfExists('permission_actions');
-        Schema::dropIfExists('type_roles');
         Schema::dropIfExists('roles');
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');

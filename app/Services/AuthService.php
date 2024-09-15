@@ -4,10 +4,13 @@ namespace App\Services;
 use Exception;
 
 use App\Repositories\User\UserRepositoryInterface;
+use App\Services\CloundinaryService;
 class AuthService {
     private $userRepository;
-    public function __construct(UserRepositoryInterface $userRepository) {
+    private $image;
+    public function __construct(UserRepositoryInterface $userRepository, CloundinaryService $image) {
         $this->userRepository = $userRepository;
+        $this->image = $image;
     }
 
     public function create($request) {
