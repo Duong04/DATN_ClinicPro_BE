@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\Apis\V1\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Apis\V1\AuthController;
+use App\Http\Controllers\Apis\V1\PackageController;
+use PHPUnit\Framework\Attributes\Group;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -17,4 +19,15 @@ Route::prefix('v1')->group(function () {
             Route::get('/profile', 'profile')->middleware('jwt.auth');
             Route::post('/logout', 'logout')->middleware('jwt.auth');
         });
+
+    Route::controller(PackageController::class)->prefix('packages')->middleware('jwt.auth')
+        ->group(
+            function () {
+                Route::get('/', 'index');
+                Route::post('/', 'store');
+                Route::get('/{id}', 'show');
+                Route::put('/{id}', 'update');
+                Route::delete('/{id}', 'destroy');
+            }
+        );
 });

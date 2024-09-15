@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\Package\PackageRepositoryInterface;
+use App\Services\CloundinaryService;
+use App\Services\PackageService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(PackageService::class, function ($app) {
+            return new PackageService($app->make(PackageRepositoryInterface::class), $app->make(CloundinaryService::class));
+        });
     }
 
     /**

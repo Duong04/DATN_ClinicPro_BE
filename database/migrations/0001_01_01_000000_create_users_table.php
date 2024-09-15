@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('value');
             $table->timestamps();
         });
-    
+
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -25,31 +25,22 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-    
+
         Schema::create('permission_actions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('permission_id');
             $table->unsignedBigInteger('action_id');
             $table->timestamps();
-    
+
             $table->foreign('permission_id')->references('id')->on('permissions');
             $table->foreign('action_id')->references('id')->on('actions');
         });
 
-        Schema::create('type_roles', function (Blueprint $table){
-            $table->id();
-            $table->string('name');
-            $table->string('redirect_url')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
 
-        Schema::create('roles', function (Blueprint $table){
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('type_id');
-            $table->foreign('type_id')->references('id')->on('type_roles');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -60,7 +51,7 @@ return new class extends Migration
             $table->unsignedBigInteger('permission_id');
             $table->unsignedBigInteger('action_id');
             $table->timestamps();
-    
+
             $table->foreign('role_id')->references('id')->on('roles');
             $table->foreign('permission_id')->references('id')->on('permissions');
             $table->foreign('action_id')->references('id')->on('actions');
@@ -92,7 +83,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('manager_id');
             $table->timestamps();
-    
+
             $table->foreign('manager_id')->references('id')->on('users');
         });
 
@@ -108,7 +99,7 @@ return new class extends Migration
             $table->string('identity_card_number')->nullable();
             $table->unsignedBigInteger('department_id')->nullable();
             $table->timestamps();
-    
+
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('identity_card_id')->references('id')->on('identity_card_types');
             $table->foreign('department_id')->references('id')->on('departments');
@@ -120,30 +111,30 @@ return new class extends Migration
             $table->string('provider');
             $table->string('provider_user_id');
             $table->timestamps();
-    
+
             $table->foreign('user_id')->references('id')->on('users');
         });
-    
+
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
             $table->string('specialty');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-    
+
             $table->foreign('user_id')->references('id')->on('users');
         });
-    
+
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->text('medical_history')->nullable();
             $table->string('insurance_number')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-    
+
             $table->foreign('user_id')->references('id')->on('users');
         });
-    
+
         Schema::create('medical_histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('patient_id');
@@ -152,11 +143,11 @@ return new class extends Migration
             $table->text('treatment');
             $table->unsignedBigInteger('doctor_id');
             $table->timestamps();
-    
+
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->foreign('doctor_id')->references('id')->on('doctors');
         });
-    
+
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('patient_id');
@@ -168,11 +159,11 @@ return new class extends Migration
             $table->decimal('total_amount', 10, 2);
             $table->enum('status', ['pending', 'confirmed', 'completed', 'cancelled'])->default('pending');
             $table->timestamps();
-    
+
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->foreign('doctor_id')->references('id')->on('doctors');
         });
-    
+
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('appointment_id');
@@ -182,21 +173,21 @@ return new class extends Migration
             $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
             $table->boolean('is_deposit')->default(false);
             $table->timestamps();
-    
+
             $table->foreign('appointment_id')->references('id')->on('appointments');
             $table->foreign('user_id')->references('id')->on('users');
         });
-    
+
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('appointment_id');
             $table->decimal('total_amount', 10, 2);
             $table->enum('payment_status', ['paid', 'unpaid']);
             $table->timestamps();
-    
+
             $table->foreign('appointment_id')->references('id')->on('appointments');
         });
-    
+
         Schema::create('medications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -205,17 +196,17 @@ return new class extends Migration
             $table->decimal('price_per_unit', 10, 2);
             $table->timestamps();
         });
-    
+
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('patient_id');
             $table->timestamps();
-    
+
             $table->foreign('doctor_id')->references('id')->on('doctors');
             $table->foreign('patient_id')->references('id')->on('patients');
         });
-    
+
         Schema::create('prescription_medications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('prescription_id');
@@ -223,7 +214,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->string('dosage')->nullable();
             $table->timestamps();
-    
+
             $table->foreign('prescription_id')->references('id')->on('prescriptions');
             $table->foreign('medication_id')->references('id')->on('medications');
         });
@@ -236,14 +227,13 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->timestamps();
         });
-    
+
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
             $table->integer('rating');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('package_id')->nullable();
             $table->timestamps();
-    
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
         });
@@ -273,7 +263,6 @@ return new class extends Migration
         Schema::dropIfExists('permissions');
         Schema::dropIfExists('actions');
         Schema::dropIfExists('permission_actions');
-        Schema::dropIfExists('type_roles');
         Schema::dropIfExists('roles');
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');

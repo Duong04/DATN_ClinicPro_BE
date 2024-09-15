@@ -1,16 +1,21 @@
 <?php
+
 namespace App\Services;
 
 use Exception;
 
 use App\Repositories\User\UserRepositoryInterface;
-class AuthService {
+
+class AuthService
+{
     private $userRepository;
-    public function __construct(UserRepositoryInterface $userRepository) {
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
         $this->userRepository = $userRepository;
     }
 
-    public function create($request) {
+    public function create($request)
+    {
         try {
             $data = $request->validated();
 
@@ -24,7 +29,8 @@ class AuthService {
         }
     }
 
-    public function login($request) {
+    public function login($request)
+    {
         try {
             $credentials = request(['email', 'password']);
 
