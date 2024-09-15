@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Apis\V1;
 
 use App\Services\PackageService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PackageRequest;
+use App\Http\Requests\PackageRequest;
 use Illuminate\Http\JsonResponse;
 
 class PackageController extends Controller

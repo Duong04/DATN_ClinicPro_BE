@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -38,32 +38,6 @@ class PackageRequest extends FormRequest
         }
 
         return $rules;
-    }
-
-    /**
-     * Get the custom validation messages.
-     */
-    public function messages(): array
-    {
-        return [
-            'required' => ':attribute không được để trống!',
-            'max' => ':attribute không được lớn hơn :max ký tự!',
-            'unique' => ':attribute này đã tồn tại!',
-            'image' => ':attribute phải là một file ảnh hợp lệ!',
-        ];
-    }
-
-    /**
-     * Get custom attributes for validator errors.
-     */
-    public function attributes(): array
-    {
-        return [
-            'name' => 'Tên gói khám',
-            'description' => 'Mô tả',
-            'content' => 'Nội dung',
-            'image' => 'Hình ảnh'
-        ];
     }
 
     protected function failedValidation(Validator $validator)
