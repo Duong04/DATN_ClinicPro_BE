@@ -20,6 +20,11 @@ class PackageRepository implements PackageRepositoryInterface
         return $this->package::findOrFail($id);
     }
 
+    public function slug($slug)
+    {
+        return $this->package::where('slug', $slug)->firstOrFail();
+    }
+
     public function create($data)
     {
         $result = $this->package::create($data);

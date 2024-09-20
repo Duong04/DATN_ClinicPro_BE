@@ -37,8 +37,10 @@ class PackageRequest extends FormRequest
             $rules['image'] = 'nullable|image|mimes:png,jpg,jpeg,webp';
         }
 
+
         return $rules;
     }
+
 
     protected function failedValidation(Validator $validator)
     {
