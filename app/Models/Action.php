@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\PermissionAction;
 
 class Action extends Model
 {
@@ -15,4 +16,8 @@ class Action extends Model
         'name',
         'value'
     ];
+
+    public function permissionActions() {
+        return $this->hasMany(PermissionAction::class, 'action_id');
+    }
 }

@@ -63,7 +63,7 @@ class AuthService {
     {
         auth()->logout(true);
 
-        return response()->json(['message' => 'Successfully logged out'], 203);
+        return response()->json(['message' => 'Successfully logged out'], 200);
     }
 
     private function respondWithToken($token)

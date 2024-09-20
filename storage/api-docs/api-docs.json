@@ -468,10 +468,1709 @@
                     }
                 }
             }
+        },
+        "/api/v1/actions": {
+            "get": {
+                "tags": [
+                "Actions"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách hành động với phân trang",
+                "description": "Trả về danh sách các hành động với phân trang dựa trên giới hạn và truy vấn tìm kiếm.",
+                "operationId": "getPaginateActions",
+                "parameters": [
+                {
+                    "in": "query",
+                    "name": "limit",
+                    "schema": {
+                    "type": "integer",
+                    "example": 10
+                    },
+                    "description": "Số lượng mục trên mỗi trang."
+                },
+                {
+                    "in": "query",
+                    "name": "page",
+                    "schema": {
+                    "type": "integer",
+                    "example": 2
+                    },
+                    "description": "Trang hiện tại của các mục."
+                },
+                {
+                    "in": "query",
+                    "name": "q",
+                    "schema": {
+                    "type": "string",
+                    "example": "search_term"
+                    },
+                    "description": "Từ khóa để tìm kiếm hành động."
+                }
+                ],
+                "responses": {
+                "200": {
+                    "description": "Danh sách hành động được phân trang",
+                    "content": {
+                    "application/json": {
+                        "schema": {
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 2
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "UPDATE"
+                                },
+                                "value": {
+                                    "type": "string",
+                                    "example": "update"
+                                },
+                                "created_at": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "example": "2024-09-16T14:34:30.000000Z"
+                                },
+                                "updated_at": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "example": "2024-09-16T14:34:30.000000Z"
+                                },
+                                "permission_actions": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                        "type": "integer",
+                                        "example": 2
+                                        },
+                                        "permission_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                        },
+                                        "action_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                        },
+                                        "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-16T16:52:09.000000Z"
+                                        },
+                                        "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-16T16:52:09.000000Z"
+                                        }
+                                    }
+                                    }
+                                }
+                                }
+                            }
+                            },
+                            "prev_page_url": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": "http://example.com/api/v1/actions?page=1"
+                            },
+                            "next_page_url": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": "http://example.com/api/v1/actions?page=3"
+                            },
+                            "total": {
+                            "type": "integer",
+                            "example": 100
+                            }
+                        }
+                        }
+                    }
+                    }
+                },
+                "400": {
+                    "description": "Yêu cầu không hợp lệ",
+                    "content": {
+                    "application/json": {
+                        "schema": {
+                        "type": "object",
+                        "properties": {
+                            "error": {
+                            "type": "string",
+                            "example": "Thông báo lỗi chi tiết vấn đề"
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Actions"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Tạo một hành động mới",
+                "description": "Thêm một hành động mới và có thể liên kết với các quyền đã được chỉ định.",
+                "operationId": "createAction",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Tên hành động",
+                                        "description": "Tên của hành động."
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "example": "Giá trị của hành động",
+                                        "description": "Giá trị duy nhất đại diện cho hành động."
+                                    },
+                                    "permissions": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "permission_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                }
+                                            }
+                                        },
+                                        "description": "Danh sách ID quyền liên quan đến hành động."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Hành động được tạo thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tạo hành động thành công!"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên hành động"
+                                                },
+                                                "value": {
+                                                    "type": "string",
+                                                    "example": "Giá trị của hành động"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2024-09-16T10:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2024-09-16T10:00:00Z"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết về vấn đề xảy ra."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        },
+        "/api/v1/actions/{id}": {
+            "get": {
+                "tags": [
+                "Actions"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy chi tiết hành động theo ID",
+                "description": "Lấy thông tin chi tiết của một hành động cụ thể dựa vào ID.",
+                "operationId": "getActionById",
+                "parameters": [
+                {
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "schema": {
+                    "type": "integer",
+                    "example": 1
+                    },
+                    "description": "ID của hành động cần lấy thông tin."
+                }
+                ],
+                "responses": {
+                "200": {
+                    "description": "Lấy chi tiết hành động thành công",
+                    "content": {
+                    "application/json": {
+                        "schema": {
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                "type": "integer",
+                                "example": 2
+                                },
+                                "name": {
+                                "type": "string",
+                                "example": "UPDATE"
+                                },
+                                "value": {
+                                "type": "string",
+                                "example": "update"
+                                },
+                                "created_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2024-09-16T14:34:30.000000Z"
+                                },
+                                "updated_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2024-09-16T14:34:30.000000Z"
+                                },
+                                "permission_actions": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "permission_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "action_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-16T16:52:09.000000Z"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-16T16:52:09.000000Z"
+                                    }
+                                    }
+                                }
+                                }
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                },
+                "404": {
+                    "description": "Không tìm thấy hành động",
+                    "content": {
+                    "application/json": {
+                        "schema": {
+                        "type": "object",
+                        "properties": {
+                            "error": {
+                            "type": "string",
+                            "example": "Không tìm thấy hành động!"
+                            }
+                        }
+                        }
+                    }
+                    }
+                },
+                "400": {
+                    "description": "Yêu cầu không hợp lệ",
+                    "content": {
+                    "application/json": {
+                        "schema": {
+                        "type": "object",
+                        "properties": {
+                            "error": {
+                            "type": "string",
+                            "example": "Thông báo lỗi chi tiết"
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Actions"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Cập nhật một hành động",
+                "description": "Cập nhật thông tin của một hành động và liên kết với các quyền mới.",
+                "operationId": "updateAction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID của hành động cần cập nhật."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Tên hành động mới",
+                                        "description": "Tên mới của hành động."
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "example": "Giá trị mới của hành động",
+                                        "description": "Giá trị duy nhất đại diện cho hành động."
+                                    },
+                                    "permissions": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "permission_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                }
+                                            }
+                                        },
+                                        "description": "Danh sách ID quyền liên quan đến hành động."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Hành động được cập nhật thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Updated action successfully!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết về vấn đề xảy ra."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Actions"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Xóa một hành động",
+                "description": "Xóa hành động khỏi hệ thống bằng ID.",
+                "operationId": "deleteAction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID của hành động cần xóa."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hành động được xóa thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Deleted action successfully!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hành động không tồn tại",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Action not found!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/permissions": {
+            "get": {
+                "tags": ["Permissions"],
+                "summary": "Lấy danh sách quyền phân trang",
+                "description": "Lấy danh sách quyền với phân trang.",
+                "operationId": "getPaginate",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        },
+                        "description": "Số lượng mục mỗi trang"
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        },
+                        "description": "The pager of items per page."
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string",
+                            "example": "từ khóa tìm kiếm"
+                        },
+                        "description": "Từ khóa để tìm kiếm quyền"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy danh sách quyền thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tên quyền"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Mô tả quyền"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T10:00:00Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T12:00:00Z"
+                                                    },
+                                                    "permission_actions": {
+                                                        "type": "array",
+                                                        "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                            },
+                                                            "permission_id": {
+                                                            "type": "integer",
+                                                            "example": 5
+                                                            },
+                                                            "action_id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                            },
+                                                            "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-16T16:52:09.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-16T16:52:09.000000Z"
+                                                            }
+                                                        }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://api.example.com/api/v1/permissions?page=1"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://api.example.com/api/v1/permissions?page=3"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 50
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Permissions"],
+                "summary": "Tạo mới một quyền",
+                "description": "Tạo mới một quyền.",
+                "operationId": "createPermission",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Tên quyền"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả quyền"
+                                    },
+                                    "actions": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "action_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": ["name"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo quyền thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tạo quyền thành công!"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên quyền"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả quyền"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T10:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T12:00:00Z"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi xác thực"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/permissions/{id}": {
+            "get": {
+                "tags": ["Permissions"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy thông tin quyền theo ID",
+                "description": "Lấy thông tin chi tiết của một quyền cụ thể theo ID.",
+                "operationId": "findPermissionById",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của quyền cần lấy."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy quyền thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên quyền"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả quyền"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T10:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T12:00:00Z"
+                                                },
+                                                "permission_actions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                        },
+                                                        "permission_id": {
+                                                        "type": "integer",
+                                                        "example": 5
+                                                        },
+                                                        "action_id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                        },
+                                                        "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T16:52:09.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T16:52:09.000000Z"
+                                                        }
+                                                    }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy quyền",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Không tìm thấy quyền!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Permissions"],
+                "summary": "Cập nhật quyền",
+                "description": "Cập nhật thông tin quyền theo ID.",
+                "operationId": "updatePermission",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của quyền cần cập nhật."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Tên quyền"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả quyền"
+                                    },
+                                    "actions": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "action_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật quyền thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cập nhật quyền thành công!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi xác thực"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Permissions"],
+                "summary": "Xóa quyền",
+                "description": "Xóa một quyền theo ID.",
+                "operationId": "deletePermission",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của quyền cần xóa."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa quyền thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Xóa quyền thành công!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy quyền",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Không tìm thấy quyền!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách phân trang các vai trò",
+                "description": "Truy xuất danh sách các vai trò với tùy chọn phân trang và tìm kiếm theo tên vai trò.",
+                "operationId": "getRolesPaginate",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Số lượng vai trò trên mỗi trang (giới hạn phân trang).",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                        "type": "integer",
+                        "example": 2
+                        },
+                        "description": "Trang hiện tại của các mục."
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Từ khóa tìm kiếm vai trò theo tên.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Admin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách vai trò phân trang được lấy thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "doctor"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Bác sĩ"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-11T10:03:24.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-20T14:02:22.000000Z"
+                                                    },
+                                                    "users_count": {
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "users": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "fullname": {
+                                                                    "type": "string",
+                                                                    "example": "Nguyễn Thành Đường"
+                                                                },
+                                                                "status": {
+                                                                    "type": "string",
+                                                                    "example": "active"
+                                                                },
+                                                                "email": {
+                                                                    "type": "string",
+                                                                    "example": "johndoe@example.com"
+                                                                },
+                                                                "email_verified_at": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "example": null
+                                                                },
+                                                                "role_id": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "created_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-09-11T16:39:47.000000Z"
+                                                                },
+                                                                "updated_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-09-11T16:39:47.000000Z"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": null
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://127.0.0.1:8000/api/v1/roles?page=2"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 8
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "summary": "Danh sách phân trang vai trò",
+                                        "value": {
+                                            "data": [
+                                                {
+                                                    "id": 2,
+                                                    "name": "patient",
+                                                    "description": "Bệnh nhân",
+                                                    "created_at": "2024-09-11T10:03:24.000000Z",
+                                                    "updated_at": "2024-09-11T10:03:24.000000Z",
+                                                    "users_count": 2,
+                                                    "users": [
+                                                        {
+                                                            "id": 1,
+                                                            "fullname": "Nguyễn Thành Đường",
+                                                            "status": "active",
+                                                            "email": "johndoe@example.com",
+                                                            "role_id": 2,
+                                                            "created_at": "2024-09-11T16:39:47.000000Z",
+                                                            "updated_at": "2024-09-11T16:39:47.000000Z"
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "prev_page_url": null,
+                                            "next_page_url": "http://127.0.0.1:8000/api/v1/roles?page=2",
+                                            "total": 8
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message detailing the issue"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Tạo một vai trò mới",
+                "description": "Tạo một vai trò mới kèm theo các quyền và hành động liên quan.",
+                "operationId": "createRole",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Admin",
+                                        "description": "Tên của vai trò."
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả",
+                                        "description": "Mô tả vai trò."
+                                    },
+                                    "permissions": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1,
+                                                    "description": "ID của quyền."
+                                                },
+                                                "actions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 2,
+                                                                "description": "ID của hành động."
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo vai trò thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Create role successfully!"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Admin"
+                                                },
+                                                "permissions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "actions": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": 2
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message detailing the issue"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],"security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Tìm kiếm vai trò theo ID",
+                "description": "Lấy chi tiết của một vai trò cụ thể dựa trên ID.",
+                "operationId": "getRoleById",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 9
+                        },
+                        "description": "ID của vai trò cần lấy thông tin."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Vai trò được tìm thấy thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 9
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Role"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả demo"
+                                                },
+                                                "permissions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 5
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Test Manager"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "Quản lý demo"
+                                                            },
+                                                            "actions": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": 2
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "UPDATE"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "data": {
+                                        "id": 9,
+                                        "name": "demo ok",
+                                        "description": "Mô tả demo",
+                                        "permissions": [
+                                            {
+                                                "id": 5,
+                                                "name": "Test Manager",
+                                                "description": "Quản lý demo",
+                                                "actions": [
+                                                    {
+                                                        "id": 2,
+                                                        "name": "UPDATE"
+                                                    },
+                                                    {
+                                                        "id": 3,
+                                                        "name": "CREATE"
+                                                    },
+                                                    {
+                                                        "id": 4,
+                                                        "name": "VIEW"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Vai trò không tìm thấy",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Role not found!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi xảy ra khi tìm kiếm",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message detailing the issue"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Roles"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Cập nhật vai trò",
+                "description": "Cập nhật thông tin của vai trò bao gồm các quyền và hành động liên quan.",
+                "operationId": "updateRole",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của vai trò cần cập nhật."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Admin",
+                                        "description": "Tên của vai trò."
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả",
+                                        "description": "Mô tả vai trò."
+                                    },
+                                    "permissions": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1,
+                                                    "description": "ID của quyền."
+                                                },
+                                                "actions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 2,
+                                                                "description": "ID của hành động."
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật vai trò thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Updated role successfully!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message detailing the issue"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Roles"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Xóa một vai trò",
+                "description": "Xóa vai trò khỏi hệ thống bằng ID.",
+                "operationId": "deleteRole",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID của vai trò cần xóa."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Vai trò được xóa thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Deleted role successfully!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Vai trò có người dùng liên kết",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Role has users assigned!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Vai trò không tồn tại",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Role not found!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-
-
-
     },
     "components": {
         "securitySchemes": {
@@ -486,6 +2185,18 @@
         {
             "name": "Authentication",
             "description": "Authentication"
+        },
+        {
+            "name": "Actions",
+            "description": "Thao tác"
+        },
+        {
+            "name": "Permissions",
+            "description": "Quyền"
+        },
+        {
+            "name": "Roles",
+            "description": "Vai trò"
         }
     ]
 }
