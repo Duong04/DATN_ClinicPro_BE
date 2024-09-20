@@ -67,6 +67,7 @@ class PackageService
             $data['image'] = $this->cloundinaryService->upload($file, $folder);
         }
         $data['slug'] = Str::slug($data["name"]);
+
         try {
             return $this->packageRepository->{$action}($data ?? [], $id);
         } catch (\Throwable $th) {

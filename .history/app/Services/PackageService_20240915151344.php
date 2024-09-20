@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Str;
-use App\Services\CloundinaryService;
 use App\Repositories\Package\PackageRepositoryInterface;
+use App\Services\CloundinaryService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PackageService
@@ -31,11 +30,6 @@ class PackageService
     public function getAll()
     {
         return $this->packageRepository->all();
-    }
-
-    public function slug($slug)
-    {
-        return $this->packageRepository->slug($slug);
     }
 
     public function show($id)
@@ -66,7 +60,6 @@ class PackageService
             $folder = 'packages/';
             $data['image'] = $this->cloundinaryService->upload($file, $folder);
         }
-        $data['slug'] = Str::slug($data["name"]);
         try {
             return $this->packageRepository->{$action}($data ?? [], $id);
         } catch (\Throwable $th) {

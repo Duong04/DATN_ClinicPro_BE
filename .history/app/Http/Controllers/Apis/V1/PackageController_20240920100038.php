@@ -28,11 +28,13 @@ class PackageController extends Controller
 
     public function show(string $id): JsonResponse
     {
+        dd('show');
         return $this->respondWithData(fn() => $this->packageService->show($id),);
     }
 
     public function slug($slug): JsonResponse
     {
+        dd('slug');
         return $this->respondWithData(fn() => $this->packageService->slug($slug),);
     }
 

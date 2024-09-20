@@ -20,7 +20,7 @@ Route::prefix('v1')->group(function () {
             Route::post('/logout', 'logout')->middleware('jwt.auth');
         });
 
-    Route::controller(PackageController::class)->prefix('packages')->middleware('jwt.auth')
+    Route::controller(PackageController::class)->prefix('packages')
         ->group(
             function () {
                 Route::get('/', 'index');

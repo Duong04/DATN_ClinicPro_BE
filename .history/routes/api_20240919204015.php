@@ -25,8 +25,9 @@ Route::prefix('v1')->group(function () {
             function () {
                 Route::get('/', 'index');
                 Route::post('/', 'store');
-                Route::get('/{id}', 'show')->where('id', '[0-9]+');
-                Route::get('/{slug}', 'slug')->where('slug', '[A-Za-z0-9\-]+');
+                Route::get('/{id}', 'show')->where('id', '[0-9]+'); // Chỉ nhận ID dạng số
+                Route::get('/{slug}', 'slug')->where('slug', '[A-Za-z0-9\-]+'); // Nhận slug dạng chữ cái, số, gạch ngang
+
                 Route::put('/{id}', 'update');
                 Route::delete('/{id}', 'destroy');
             }

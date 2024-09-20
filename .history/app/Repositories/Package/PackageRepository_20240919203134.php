@@ -22,7 +22,7 @@ class PackageRepository implements PackageRepositoryInterface
 
     public function slug($slug)
     {
-        return $this->package::where('slug', $slug)->firstOrFail();
+        return $this->package::where('slug', $slug);
     }
 
     public function create($data)

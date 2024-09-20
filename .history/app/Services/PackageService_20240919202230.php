@@ -33,11 +33,6 @@ class PackageService
         return $this->packageRepository->all();
     }
 
-    public function slug($slug)
-    {
-        return $this->packageRepository->slug($slug);
-    }
-
     public function show($id)
     {
         try {

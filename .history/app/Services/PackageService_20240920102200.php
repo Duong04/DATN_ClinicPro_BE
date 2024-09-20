@@ -61,12 +61,14 @@ class PackageService
     private function handleRequest($request, $action, $errorMessage, $id = null)
     {
         $data = $request->validated();
+        $data['slug'] = Str::slug($data["name"]);
+        dd($data);
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $folder = 'packages/';
             $data['image'] = $this->cloundinaryService->upload($file, $folder);
         }
-        $data['slug'] = Str::slug($data["name"]);
         try {
             return $this->packageRepository->{$action}($data ?? [], $id);
         } catch (\Throwable $th) {

@@ -31,11 +31,6 @@ class PackageController extends Controller
         return $this->respondWithData(fn() => $this->packageService->show($id),);
     }
 
-    public function slug($slug): JsonResponse
-    {
-        return $this->respondWithData(fn() => $this->packageService->slug($slug),);
-    }
-
     public function update(PackageRequest $request, string $id): JsonResponse
     {
         return $this->respondWithData(fn() => $this->packageService->update($request, $id), '', 201);

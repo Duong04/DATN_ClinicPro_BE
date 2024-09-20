@@ -27,6 +27,7 @@ class PackageRepository implements PackageRepositoryInterface
 
     public function create($data)
     {
+        dd($data);
         $result = $this->package::create($data);
         return  $result;
     }
