@@ -481,7 +481,7 @@
                                                     },
                                                     "name": {
                                                         "type": "string",
-                                                        "example": "package1"
+                                                        "example": "Gói khám mắt"
                                                     },
                                                     "description": {
                                                         "type": "string",
@@ -494,9 +494,245 @@
                                                     "image": {
                                                         "type": "string",
                                                         "example": "http://example.com/image.jpg"
+                                                    },
+                                                    "slug": {
+                                                        "type": "string",
+                                                        "example": "goi-kham-mat"
                                                     }
                                                 }
                                             }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/packages/": {
+            "post": {
+                "tags": ["Packages"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Tạo gói khám",
+                "description": "Tạo gói khám.",
+                "operationId": "createPackage",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "content",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Gói khám mắt"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả gói khám"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Nội dung gói khám"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "example": "http://example.com/premium-package.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create package Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Gói khám mắt"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả gói khám"
+                                                },
+                                                "content": {
+                                                    "type": "string",
+                                                    "example": "Nội dung gói khám"
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "format": "uri",
+                                                    "example": "http://example.com/premium-package.jpg"
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "goi-kham-mat"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-08-21T15:30:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên gói khám đã tồn tại."
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả không được để trống!"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/packages/{slug}": {
+            "get": {
+                "tags": ["Packages"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy thông tin gói khám theo slug",
+                "description": "Lấy thông tin gói khám theo slug.",
+                "operationId": "getPackageBySlug",
+                "parameters": {
+                    "name": "slug",
+                    "required": true,
+                    "description": "slug gói khám",
+                    "schema": {
+                        " type": "string"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Thông tin gói khám",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Gói khám mắt"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả gói khám."
+                                                },
+                                                "content": {
+                                                    "type": "string",
+                                                    "example": "Nội dung gói khám."
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "example": "http://example.com/image.jpg"
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "goi-kham-mat"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Package not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Package not found"
                                         }
                                     },
                                     "type": "object"
@@ -561,7 +797,7 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "package1"
+                                                    "example": "Gói khám mắt"
                                                 },
                                                 "description": {
                                                     "type": "string",
@@ -574,6 +810,10 @@
                                                 "image": {
                                                     "type": "string",
                                                     "example": "http://example.com/image.jpg"
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "goi-kham-mat"
                                                 }
                                             }
                                         }
@@ -648,7 +888,7 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "example": "package1"
+                                        "example": "Gói khám mắt"
                                     },
                                     "description": {
                                         "type": "string",
@@ -684,7 +924,7 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "package1"
+                                                    "example": "Gói khám mắt"
                                                 },
                                                 "description": {
                                                     "type": "string",
@@ -698,6 +938,10 @@
                                                     "type": "string",
                                                     "format": "uri",
                                                     "example": "http://example.com/premium-package.jpg"
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "goi-kham-mat"
                                                 },
                                                 "updated_at": {
                                                     "type": "string",
@@ -802,131 +1046,6 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Package not found"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
-        },
-        "/api/v1/packages/": {
-            "post": {
-                "tags": ["Packages"],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "summary": "Tạo gói khám",
-                "description": "Tạo gói khám.",
-                "operationId": "createPackage",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "name",
-                                    "description",
-                                    "content",
-                                    "image"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "package1"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Mô tả gói khám"
-                                    },
-                                    "content": {
-                                        "type": "string",
-                                        "example": "Nội dung gói khám"
-                                    },
-                                    "image": {
-                                        "type": "string",
-                                        "format": "uri",
-                                        "example": "http://example.com/premium-package.jpg"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Create package Successfully!",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "integer",
-                                                    "example": 1
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "package1"
-                                                },
-                                                "description": {
-                                                    "type": "string",
-                                                    "example": "Mô tả gói khám"
-                                                },
-                                                "content": {
-                                                    "type": "string",
-                                                    "example": "Nội dung gói khám"
-                                                },
-                                                "image": {
-                                                    "type": "string",
-                                                    "format": "uri",
-                                                    "example": "http://example.com/premium-package.jpg"
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-08-21T15:30:00Z"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "error": {
-                                            "type": "object",
-                                            "properties": {
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Tên gói khám đã tồn tại."
-                                                },
-                                                "description": {
-                                                    "type": "string",
-                                                    "example": "Mô tả không được để trống!"
-                                                }
-                                            }
                                         }
                                     },
                                     "type": "object"
