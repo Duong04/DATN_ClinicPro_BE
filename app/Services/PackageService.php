@@ -35,7 +35,11 @@ class PackageService
 
     public function slug($slug)
     {
-        return $this->packageRepository->slug($slug);
+        try {
+            return $this->packageRepository->slug($slug);
+        } catch (ModelNotFoundException $e) {
+            throw new \Exception('Package not found');
+        }
     }
 
     public function show($id)

@@ -9,7 +9,7 @@ class Package extends Model
 {
     use HasFactory;
 
-    protected $table = 'packages';
+    protected $table = 'examination_packages';
     protected $fillable = [
         'name',
         'description',

@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Str;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class CloundinaryService
 {
