@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\TypeRole;
+use App\Models\User;
+use App\Models\Permission;
 
 class Role extends Model
 {
@@ -13,15 +14,22 @@ class Role extends Model
     protected $table = 'roles';
     protected $fillable = [
         'name',
-        'description',
-        'type_id'
+        'description'
     ];
 
     protected $hidden = [
         'deleted_at'
     ];
 
-    public function type() {
-        return $this->belongsTo(TypeRole::class, 'type_id');
+    public function users() {
+        return $this->hasMany(User::class, 'role_id');
     }
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, 'role_permissions')
+                    ->withPivot('role_id', 'permission_id')
+                    ->with('actions');
+    }
+
 }
