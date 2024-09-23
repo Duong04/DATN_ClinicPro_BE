@@ -20,6 +20,7 @@ Route::prefix('v1')->group(function () {
             Route::post('/login', 'login');
             Route::post('/refresh', 'refresh');
             Route::get('/profile', 'profile')->middleware('jwt.auth');
+            Route::put('/profile/{id}', 'updateProfile')->middleware('jwt.auth');
             Route::post('/logout', 'logout')->middleware('jwt.auth');
         });
     
