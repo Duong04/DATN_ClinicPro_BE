@@ -1,21 +1,24 @@
-<?php 
+<?php
+
 namespace App\Services;
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Str;
 
-class CloundinaryService {
-    public function upload($file, $folder) {
+class CloundinaryService
+{
+    public function upload($file, $folder)
+    {
         $image = Cloudinary::upload($file->getRealPath(), [
-            'folder' => env('CLOUDINARY_FOLDER').$folder
+            'folder' => env('CLOUDINARY_FOLDER') . $folder
         ]);
-
         $url = $image->getSecurePath();
 
         return $url;
     }
 
-    public function delete($url) {
+    public function delete($url)
+    {
         $publicId = $this->extractPublicIdFromUrl($url);
         Cloudinary::destroy($publicId);
         return true;
@@ -31,5 +34,4 @@ class CloundinaryService {
 
         return $result;
     }
-
 }

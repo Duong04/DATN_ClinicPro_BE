@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Http\Resources\UserResource;
@@ -17,7 +18,8 @@ class AuthService {
         $this->patientRepository = $patientRepository;
     }
 
-    public function create($request) {
+    public function create($request)
+    {
         try {
             $data = $request->validated();
 
@@ -34,7 +36,8 @@ class AuthService {
         }
     }
 
-    public function login($request) {
+    public function login($request)
+    {
         try {
             $credentials = $request->validated();
 
