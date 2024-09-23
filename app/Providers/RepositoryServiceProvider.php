@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Package\PackageRepository;
+use App\Repositories\Package\PackageRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
@@ -38,6 +40,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RolePermissionRepositoryInterface::class, RolePermissionRepository::class);
         $this->app->bind(PatientInfoRepositoryInterface::class, PatientInfoRepository::class);
         $this->app->bind(PatientRepositoryInterface::class, PatientRepository::class);
+
+        $this->app->bind(PackageRepositoryInterface::class, PackageRepository::class);
     }
 
     /**
