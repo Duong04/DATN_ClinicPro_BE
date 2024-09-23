@@ -7,15 +7,22 @@ use Exception;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
 use App\Repositories\Patient\PatientRepositoryInterface;
+use App\Services\CloundinaryService;
+use App\Repositories\UserInfo\UserInfoRepositoryInterface;
+
 
 class AuthService {
     private $userRepository;
     private $patientInfoRepository;
     private $patientRepository;
-    public function __construct(UserRepositoryInterface $userRepository, PatientInfoRepositoryInterface $patientInfoRepository, PatientRepositoryInterface $patientRepository) {
+    private $cloundinaryService;
+    private $userInfoRepository;
+    public function __construct(UserRepositoryInterface $userRepository, PatientInfoRepositoryInterface $patientInfoRepository, UserInfoRepositoryInterface $userInfoRepository, PatientRepositoryInterface $patientRepository, CloundinaryService $cloundinaryService) {
         $this->userRepository = $userRepository;
         $this->patientInfoRepository = $patientInfoRepository;
+        $this->userInfoRepository = $userInfoRepository;
         $this->patientRepository = $patientRepository;
+        $this->cloundinaryService = $cloundinaryService;
     }
 
     public function create($request)
@@ -66,6 +73,44 @@ class AuthService {
             return response()->json(['data' => auth()->user()], 200);
         } catch (Exception $e) {
             return response()->json(['error' => 'Unauthorized'], 401);
+        }
+    }
+
+    public function updateProfile($request, $id) {
+        try {
+            $data = $request->all();
+            $user = auth()->user()->load('role');
+
+            if ($request->hasFile('avatar')) {
+                $file = $request->file('avatar');
+                $folder = 'avatars';
+                $url = $this->cloundinaryService->upload($file, $folder);
+                $data['user_info']['avatar'] = $url;
+            }
+
+            if (isset($data['email'])) {
+                $data['user_info']['email'] = $data['email'];
+            }
+
+            if ($user->role->name == 'patient') {
+                $user = $user->load('patient.patientInfo');
+                $patientInfo = $user->patient->patientInfo;
+                if (isset($data['user_info'])) {
+                    $patientInfo->update($data['user_info']);
+                }
+            } else {
+                $user = $user->load('userInfo');
+                $userInfo = $user->userInfo;
+                if (isset($data['user_info'])) {
+                    $userInfo->update($data['user_info']);
+                }
+            }
+    
+            $user->update($data);
+
+            return response()->json(['message' => 'Updated profile successfully!', 'data' => new UserResource($user)], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 401);
         }
     }
 

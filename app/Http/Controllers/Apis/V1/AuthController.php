@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ProfileRequest;
 
 class AuthController extends Controller
 {
@@ -21,6 +22,10 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request) {
         return $this->authService->login($request);
+    }
+
+    public function updateProfile(ProfileRequest $request, $id) {
+        return $this->authService->updateProfile($request, $id);
     }
 
     public function refresh() {
