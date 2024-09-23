@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apis\V1\ActionController;
@@ -22,7 +23,7 @@ Route::prefix('v1')->group(function () {
             Route::get('/profile', 'profile')->middleware('jwt.auth');
             Route::post('/logout', 'logout')->middleware('jwt.auth');
         });
-    
+
     Route::controller(ActionController::class)->prefix('actions')->middleware('jwt.auth')
         ->group(function () {
             Route::get('/', 'paginate');
@@ -40,7 +41,7 @@ Route::prefix('v1')->group(function () {
             Route::put('/{id}', 'update');
             Route::delete('/{id}', 'delete');
         });
-    
+
     Route::controller(RoleController::class)->prefix('roles')->middleware('jwt.auth')
         ->group(function () {
             Route::get('/', 'paginate');

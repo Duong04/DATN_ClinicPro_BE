@@ -26,7 +26,7 @@ class PackageRequest extends FormRequest
         $id = $this->route('id');
 
         $rules = [
-            'name' => 'required|max:255|unique:packages,name,' . $id,
+            'name' => 'required|max:255|unique:examination_packages,name,' . $id,
             'description' => 'required',
             'content' => 'required',
         ];
