@@ -1,16 +1,20 @@
 <?php
 namespace App\Services;
 
+use App\Http\Resources\UserResource;
 use Exception;
-
 use App\Repositories\User\UserRepositoryInterface;
-use App\Services\CloundinaryService;
+use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
+use App\Repositories\Patient\PatientRepositoryInterface;
+
 class AuthService {
     private $userRepository;
-    private $image;
-    public function __construct(UserRepositoryInterface $userRepository, CloundinaryService $image) {
+    private $patientInfoRepository;
+    private $patientRepository;
+    public function __construct(UserRepositoryInterface $userRepository, PatientInfoRepositoryInterface $patientInfoRepository, PatientRepositoryInterface $patientRepository) {
         $this->userRepository = $userRepository;
-        $this->image = $image;
+        $this->patientInfoRepository = $patientInfoRepository;
+        $this->patientRepository = $patientRepository;
     }
 
     public function create($request) {
@@ -19,7 +23,10 @@ class AuthService {
 
             $data['status'] = 'active';
             $data['role_id'] = 2;
-            $this->userRepository->create($data);
+            $user = $this->userRepository->create($data);
+            $patient = $this->patientRepository->create(['user_id' => $user->id]);
+            $data['patient_id'] = $patient->id;
+            $this->patientInfoRepository->create($data);
 
             return response()->json(['message' => 'Register Successfully!'], 201);
         } catch (Exception $e) {
@@ -29,7 +36,7 @@ class AuthService {
 
     public function login($request) {
         try {
-            $credentials = request(['email', 'password']);
+            $credentials = $request->validated();
 
             if (! $token = auth()->attempt($credentials)) {
                 return response()->json(['error' => 'Unauthorized'], 401);
@@ -72,7 +79,7 @@ class AuthService {
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'data' => auth()->user()->load('role.type')
+            'data' => new UserResource(auth()->user()->load('userInfo', 'patient.patientInfo', 'role.permissions.actions'))
         ], 200);
     }
 }

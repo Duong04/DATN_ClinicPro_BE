@@ -17,6 +17,10 @@ use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
 use App\Repositories\PermissionAction\PermissionActionRepository;
 use App\Repositories\RolePermission\RolePermissionRepositoryInterface;
 use App\Repositories\RolePermission\RolePermissionRepository;
+use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
+use App\Repositories\PatientInfo\PatientInfoRepository;
+use App\Repositories\Patient\PatientRepository;
+use App\Repositories\Patient\PatientRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -32,6 +36,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PermissionRepositoryInterface::class, PermissionRepository::class);
         $this->app->bind(PermissionActionRepositoryInterface::class, PermissionActionRepository::class);
         $this->app->bind(RolePermissionRepositoryInterface::class, RolePermissionRepository::class);
+        $this->app->bind(PatientInfoRepositoryInterface::class, PatientInfoRepository::class);
+        $this->app->bind(PatientRepositoryInterface::class, PatientRepository::class);
     }
 
     /**

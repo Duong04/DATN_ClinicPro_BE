@@ -1,8 +1,9 @@
 <?php
-namespace App\Repositories\RolePermission;
+namespace App\Repositories\Patient;
 
-interface RolePermissionRepositoryInterface {
+interface PatientRepositoryInterface {
     public function all();
+    public function paginate($limit, $q);
     public function find($id);
     public function create(array $data);
     public function update($id, array $data);

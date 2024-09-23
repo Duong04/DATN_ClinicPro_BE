@@ -8,9 +8,6 @@ class RolePermissionRepository implements RolePermissionRepositoryInterface {
     public function all() {
         
     }
-    public function paginate() {
-        
-    }
     public function find($id) {
         
     }

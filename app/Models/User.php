@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Role;
+use App\Models\UserInfo;
+use App\Models\Patient;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -23,13 +25,20 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'status',
-        'role_id',
-        'fullname'
+        'role_id'
     ];
 
     public function role() {
         return $this->belongsTo(Role::class, 'role_id');
     } 
+
+    public function userInfo() {
+        return $this->hasOne(UserInfo::class, 'user_id');
+    }
+
+    public function patient() {
+        return $this->hasOne(Patient::class, 'user_id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

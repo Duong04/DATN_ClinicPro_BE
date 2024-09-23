@@ -1,7 +1,7 @@
 <?php
-namespace App\Repositories\RolePermission;
+namespace App\Repositories\PatientInfo;
 
-interface RolePermissionRepositoryInterface {
+interface PatientInfoRepositoryInterface {
     public function all();
     public function find($id);
     public function create(array $data);
