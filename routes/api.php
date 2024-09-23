@@ -52,15 +52,15 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'delete');
         });
 
-    Route::controller(PackageController::class)->prefix('packages')->middleware('jwt.auth')
+    Route::controller(PackageController::class)->prefix('packages')
         ->group(
             function () {
                 Route::get('/', 'index');
-                Route::post('/', 'store');
-                Route::get('/{id}', 'show')->where('id', '[0-9]+');
+                Route::post('/', 'store')->middleware('jwt.auth');
+                Route::get('/{id}', 'show')->where('id', '[0-9]+')->middleware('jwt.auth');
                 Route::get('/{slug}', 'slug')->where('slug', '[A-Za-z0-9\-]+');
-                Route::put('/{id}', 'update');
-                Route::delete('/{id}', 'destroy');
+                Route::put('/{id}', 'update')->middleware('jwt.auth');
+                Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
             }
         );
 });
