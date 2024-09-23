@@ -355,10 +355,6 @@
                                                     "type": "integer",
                                                     "example": 1
                                                 },
-                                                "fullname": {
-                                                    "type": "string",
-                                                    "example": "John Doe"
-                                                },
                                                 "email": {
                                                     "type": "string",
                                                     "example": "johndoe@example.com"
@@ -372,6 +368,81 @@
                                                     "type": "string",
                                                     "format": "date-time",
                                                     "example": "2024-08-21T15:30:00Z"
+                                                },
+                                                "role": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "patient"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Bệnh nhân"
+                                                        },
+                                                        "permissions": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "user_info": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "patient_id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "fullname": {
+                                                            "type": "string",
+                                                            "example": "Nguyễn Văn B"
+                                                        },
+                                                        "avatar": {
+                                                            "type": "string",
+                                                            "format": "uri",
+                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "johndoe@example.com"
+                                                        },
+                                                        "phone_number": {
+                                                            "type": "string",
+                                                            "example": "1234567890"
+                                                        },
+                                                        "address": {
+                                                            "type": "string",
+                                                            "example": "123 Main St, City, Country"
+                                                        },
+                                                        "dob": {
+                                                            "type": "string",
+                                                            "example": "1990-01-01"
+                                                        },
+                                                        "gender": {
+                                                            "type": "string",
+                                                            "example": "male"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-22T10:08:14.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-23T15:53:17.000000Z"
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }

@@ -70,7 +70,7 @@ class AuthService {
     public function profile()
     {
         try {
-            return response()->json(['data' => auth()->user()], 200);
+            return response()->json(['data' => new UserResource(auth()->user()->load('userInfo', 'patient.patientInfo', 'role.permissions.actions'))], 200);
         } catch (Exception $e) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
