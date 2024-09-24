@@ -80,10 +80,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('manager_id');
+            $table->unsignedBigInteger('manager_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('manager_id')->references('id')->on('users');
+            $table->foreign('manager_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::create('user_infos', function (Blueprint $table) {
