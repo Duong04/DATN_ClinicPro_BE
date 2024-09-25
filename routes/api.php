@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Apis\v1\DepartmentController;
 use App\Http\Controllers\Apis\V1\ActionController;
 use App\Http\Controllers\Apis\V1\AuthController;
 use App\Http\Controllers\Apis\V1\PermissionController;
@@ -63,4 +64,13 @@ Route::prefix('v1')->group(function () {
                 Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
             }
         );
+
+    Route::controller(DepartmentController::class)->prefix('departments')
+        ->group(function () {
+            Route::get('/', 'paginate');
+            Route::get('/{id}', 'show');
+            Route::post('/', 'create');
+            Route::put('/{id}', 'update');
+            Route::delete('/{id}', 'delete');
+        });
 });

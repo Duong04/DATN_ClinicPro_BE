@@ -3,13 +3,12 @@ namespace App\Repositories\Department;
 
 use App\Repositories\Department\DepartmentRepositoryInterface;
 use App\Models\Department;
-
 class DepartmentRepository implements DepartmentRepositoryInterface {
     public function all() {
         return Department::all();
     }
     public function paginate($limit, $q) {
-        $roles = Department::with('manager','users')->withCount('users');
+        $roles = Department::with('manager')->withCount('users');
         if ($q) {
             $roles->where('name', 'like', "%{$q}%");
         }
@@ -17,7 +16,7 @@ class DepartmentRepository implements DepartmentRepositoryInterface {
         return $limit ? $roles->paginate($limit) : $roles->get();
     }
     public function find($id) {
-        return Department::with('manager', 'users')->withCount('users')->find($id);
+        return Department::with('manager')->withCount('users')->find($id);
     }
     public function create(array $data) {
         return Department::create($data);

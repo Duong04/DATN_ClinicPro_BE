@@ -36,5 +36,19 @@ class ActionRequest extends FormRequest
         return $rules;
     }
 
+    public function messages() {
+        return [
+            'required' => ':attribute là bắt buộc!',
+            'unique' => ':attribute này đã tồn tại!',
+            'array' => ':attribute này phải là 1 mảng!'
+        ];
+    }
+
+    public function attributes() {
+        return [
+            'name' => 'Tên',
+            'value' => 'Giá trị',
+        ];
+    }
 
 }

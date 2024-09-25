@@ -29,4 +29,21 @@ class RegisterRequest extends FormRequest
 
         return $rules;
     }
+
+    public function messages() {
+        return [
+            'required' => ':attribute là bắt buộc!',
+            'unique' => ':attribute này đã tồn tại!',
+            'min' => ':attribute không nhược nhỏ hơn :min kí tự!',
+            'max' => ':attribute không được lớn hơn :max kí tự',
+            'email' => 'Vui lòng nhập đúng định dạng email!'
+        ];
+    }
+
+    public function attributes() {
+        return [
+            'password' => 'Mật khẩu',
+            'fullname' => 'Họ và tên',
+        ];
+    }
 }

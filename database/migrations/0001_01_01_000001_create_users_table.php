@@ -177,7 +177,7 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('patient_id');
-            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('doctor_id')->nullable();
             $table->timestamp('appointment_date');
             $table->decimal('deposit_amount', 10, 2)->nullable();
             $table->enum('booking_type', ['offline', 'online']);

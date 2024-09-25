@@ -28,4 +28,17 @@ class LoginRequest extends FormRequest
 
         return $rules;
     }
+
+    public function messages() {
+        return [
+            'required' => ':attribute là bắt buộc!',
+            'email' => 'Vui lòng nhập đúng định dạng email!'
+        ];
+    }
+
+    public function attributes() {
+        return [
+            'password' => 'Mật khẩu',
+        ];
+    }
 }

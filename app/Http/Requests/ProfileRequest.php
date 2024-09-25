@@ -30,4 +30,10 @@ class ProfileRequest extends FormRequest
         }
         return $rules;
     }
+
+    public function messages() {
+        return [
+            'unique' => ':attribute này đã tồn tại!',
+        ];
+    }
 }

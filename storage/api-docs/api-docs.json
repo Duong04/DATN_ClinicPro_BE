@@ -3025,6 +3025,511 @@
                     }
                 }
             }
+        },
+        "/api/v1/departments": {
+            "get": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Lấy danh sách các phòng ban với phân trang",
+                "description": "Lấy danh sách các phòng ban có hỗ trợ tìm kiếm và phân trang.",
+                "operationId": "getDepartments",
+                "parameters": [
+                    {
+                    "name": "limit",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "description": "Số lượng bản ghi trên mỗi trang."
+                    },
+                    {
+                    "name": "q",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Từ khóa tìm kiếm phòng ban."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "Danh sách phòng ban được trả về thành công.",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                        },
+                                        "name": {
+                                        "type": "string",
+                                        "example": "Phòng IT"
+                                        },
+                                        "description": {
+                                        "type": "string",
+                                        "example": "Mô tả"
+                                        },
+                                        "manager_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                        },
+                                        "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-25T15:33:47.000000Z"
+                                        },
+                                        "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-25T15:33:47.000000Z"
+                                        },
+                                        "users_count": {
+                                        "type": "integer",
+                                        "example": 0
+                                        },
+                                        "manager": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                            "type": "integer",
+                                            "example": 5
+                                            },
+                                            "status": {
+                                            "type": "string",
+                                            "example": "active"
+                                            },
+                                            "email": {
+                                            "type": "string",
+                                            "example": "johndoe@example.com"
+                                            },
+                                            "role_id": {
+                                            "type": "integer",
+                                            "example": 2
+                                            },
+                                            "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-09-22T10:08:14.000000Z"
+                                            },
+                                            "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-09-23T15:16:32.000000Z"
+                                            }
+                                        }
+                                        }
+                                    }
+                                    }
+                                },
+                            "prev_page_url": {
+                                "type": "string",
+                                "example": "null"
+                            },
+                            "next_page_url": {
+                                "type": "string",
+                                "example": "http://localhost:8000/api/v1/departments?page=2"
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 20
+                            }
+                            }
+                        }
+                        }
+                    }
+                    },
+                    "400": {
+                    "description": "Yêu cầu không hợp lệ",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Invalid request parameters."
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Tạo mới phòng ban",
+                "description": "Tạo mới một phòng ban.",
+                "operationId": "createDepartment",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                    "application/json": {
+                        "schema": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "Phòng IT"
+                            },
+                            "description": {
+                                "type": "string",
+                                "example": "Mô tả"
+                            },
+                            "manager_id": {
+                                "type": "integer",
+                                "example": 1
+                            }
+                        }
+                        }
+                    }
+                    }
+                },
+                "responses": {
+                    "201": {
+                    "description": "Phòng ban được tạo thành công.",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                            "message": {
+                                "type": "string",
+                                "example": "Created department successfully!"
+                            },
+                            "data": {
+                                "type": "object",
+                                    "properties": {
+                                        "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                        },
+                                        "name": {
+                                        "type": "string",
+                                        "example": "Phòng IT"
+                                        },
+                                        "description": {
+                                        "type": "string",
+                                        "example": "Mô tả"
+                                        },
+                                        "manager_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                        },
+                                        "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-25T15:33:47.000000Z"
+                                        },
+                                        "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-25T15:33:47.000000Z"
+                                        },
+                                        "users_count": {
+                                        "type": "integer",
+                                        "example": 0
+                                        }
+                                    }
+                            }
+                            }
+                        }
+                        }
+                    }
+                    },
+                    "422": {
+                    "description": "Dữ liệu không hợp lệ.",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Validation error occurred."
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+            }
+        },
+        "/api/v1/departments/{id}": {
+            "get": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Lấy thông tin phòng ban theo ID",
+                "description": "Lấy thông tin chi tiết của một phòng ban dựa trên ID.",
+                "operationId": "getDepartmentById",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "description": "ID của phòng ban."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "Thông tin phòng ban được trả về thành công.",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                            "data": {
+                                "type": "object",
+                                    "properties": {
+                                        "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                        },
+                                        "name": {
+                                        "type": "string",
+                                        "example": "Phòng IT"
+                                        },
+                                        "description": {
+                                        "type": "string",
+                                        "example": "Mô tả"
+                                        },
+                                        "manager_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                        },
+                                        "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-25T15:33:47.000000Z"
+                                        },
+                                        "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-25T15:33:47.000000Z"
+                                        },
+                                        "users_count": {
+                                        "type": "integer",
+                                        "example": 0
+                                        },
+                                        "manager": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                            "type": "integer",
+                                            "example": 5
+                                            },
+                                            "status": {
+                                            "type": "string",
+                                            "example": "active"
+                                            },
+                                            "email": {
+                                            "type": "string",
+                                            "example": "johndoe@example.com"
+                                            },
+                                            "role_id": {
+                                            "type": "integer",
+                                            "example": 2
+                                            },
+                                            "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-09-22T10:08:14.000000Z"
+                                            },
+                                            "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-09-23T15:16:32.000000Z"
+                                            }
+                                        }
+                                        }
+                                    }
+                            }
+                            }
+                        }
+                        }
+                    }
+                    },
+                    "404": {
+                    "description": "Không tìm thấy phòng ban.",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Department not found!"
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+                },
+                "put": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Cập nhật thông tin phòng ban",
+                "description": "Cập nhật thông tin phòng ban theo ID.",
+                "operationId": "updateDepartment",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "description": "ID của phòng ban."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                    "application/json": {
+                        "schema": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                            "type": "string",
+                            "example": "Phòng IT"
+                            },
+                            "description": {
+                                "type": "string",
+                                "example": "Mô tả"
+                            },
+                            "manager_id": {
+                                "type": "integer",
+                                "example": 1
+                            }
+                        }
+                        }
+                    }
+                    }
+                },
+                "responses": {
+                    "200": {
+                    "description": "Cập nhật phòng ban thành công.",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                            "message": {
+                                "type": "string",
+                                "example": "Updated department successfully!"
+                            }
+                            }
+                        }
+                        }
+                    }
+                    },
+                    "422": {
+                    "description": "Dữ liệu không hợp lệ.",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Validation error occurred."
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Xóa phòng ban",
+                "description": "Xóa phòng ban theo ID.",
+                "operationId": "deleteDepartment",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "description": "ID của phòng ban."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "Xóa phòng ban thành công.",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                            "message": {
+                                "type": "string",
+                                "example": "Deleted department successfully!"
+                            }
+                            }
+                        }
+                        }
+                    }
+                    },
+                    "404": {
+                    "description": "Không tìm thấy phòng ban.",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Department not found!"
+                            }
+                            }
+                        }
+                        }
+                    }
+                    },
+                    "400": {
+                    "description": "Phòng ban có người dùng đang được chỉ định.",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Department has users assigned!"
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+            }
         }
     },
     "components": {

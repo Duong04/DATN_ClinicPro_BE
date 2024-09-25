@@ -37,7 +37,7 @@ class AuthService {
             $data['patient_id'] = $patient->id;
             $this->patientInfoRepository->create($data);
 
-            return response()->json(['message' => 'Register Successfully!'], 201);
+            return response()->json(['message' => 'Đăng ký tài khoản thành công!'], 201);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
@@ -49,7 +49,7 @@ class AuthService {
             $credentials = $request->validated();
 
             if (! $token = auth()->attempt($credentials)) {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                return response()->json(['error' => 'Thông tin đăng nhập của bạn không chính xác!'], 401);
             }
 
             return $this->respondWithToken($token);
@@ -72,7 +72,7 @@ class AuthService {
         try {
             return response()->json(['data' => new UserResource(auth()->user()->load('userInfo', 'patient.patientInfo', 'role.permissions.actions'))], 200);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Bạn không có quyền truy cập'], 401);
         }
     }
 
@@ -108,7 +108,7 @@ class AuthService {
     
             $user->update($data);
 
-            return response()->json(['message' => 'Updated profile successfully!', 'data' => new UserResource($user)], 200);
+            return response()->json(['message' => 'Cập nhật thông tin cá nhân thành công!', 'data' => new UserResource($user)], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 401);
         }
@@ -118,7 +118,7 @@ class AuthService {
     {
         auth()->logout(true);
 
-        return response()->json(['message' => 'Successfully logged out'], 200);
+        return response()->json(['message' => 'Tài khoản của bạn đã được đăng xuất!'], 200);
     }
 
     private function respondWithToken($token)
