@@ -21,15 +21,15 @@ class Role extends Model
         'deleted_at'
     ];
 
-    public function users() {
+    public function users()
+    {
         return $this->hasMany(User::class, 'role_id');
     }
 
     public function permissions()
     {
         return $this->belongsToMany(Permission::class, 'role_permissions')
-                    ->withPivot('role_id', 'permission_id')
-                    ->with('actions');
+            ->withPivot('role_id', 'permission_id')
+            ->with('actions');
     }
-
 }

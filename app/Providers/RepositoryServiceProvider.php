@@ -13,6 +13,8 @@ use App\Repositories\Role\RoleRepositoryInterface;
 use App\Repositories\Role\RoleRepository;
 use App\Repositories\Action\ActionRepositoryInterface;
 use App\Repositories\Action\ActionRepository;
+use App\Repositories\Appointment\AppointmentRepository;
+use App\Repositories\Appointment\AppointmentRepositoryInterface;
 use App\Repositories\Permission\PermissionRepositoryInterface;
 use App\Repositories\Permission\PermissionRepository;
 use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
@@ -42,6 +44,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PatientRepositoryInterface::class, PatientRepository::class);
 
         $this->app->bind(PackageRepositoryInterface::class, PackageRepository::class);
+        $this->app->bind(AppointmentRepositoryInterface::class, AppointmentRepository::class);
     }
 
     /**
