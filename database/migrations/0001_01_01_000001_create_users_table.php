@@ -62,6 +62,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('token')->nullable();
+            $table->string('otp')->nullable();
             $table->rememberToken();
             $table->unsignedBigInteger('role_id');
             $table->timestamps();
@@ -72,7 +74,7 @@ return new class extends Migration
 
         Schema::create('identity_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('type_name', 50)->unique();
+            $table->string('type_name', 50)->nullable();
             $table->string('identity_card_number')->nullable();
         });
 

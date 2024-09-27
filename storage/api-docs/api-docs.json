@@ -475,9 +475,7 @@
         },
         "/api/v1/auth/profile/{id}": {
             "put": {
-                "tags": [
-                    "Authentication"
-                ],
+                "tags": ["Authentication"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -530,7 +528,11 @@
                                             },
                                             "gender": {
                                                 "type": "string",
-                                                "enum": ["male", "female", "other"],
+                                                "enum": [
+                                                    "male",
+                                                    "female",
+                                                    "other"
+                                                ],
                                                 "example": "male"
                                             }
                                         }
@@ -1326,9 +1328,7 @@
         },
         "/api/v1/actions": {
             "get": {
-                "tags": [
-                "Actions"
-                ],
+                "tags": ["Actions"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -1338,143 +1338,141 @@
                 "description": "Trả về danh sách các hành động với phân trang dựa trên giới hạn và truy vấn tìm kiếm.",
                 "operationId": "getPaginateActions",
                 "parameters": [
-                {
-                    "in": "query",
-                    "name": "limit",
-                    "schema": {
-                    "type": "integer",
-                    "example": 10
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        },
+                        "description": "Số lượng mục trên mỗi trang."
                     },
-                    "description": "Số lượng mục trên mỗi trang."
-                },
-                {
-                    "in": "query",
-                    "name": "page",
-                    "schema": {
-                    "type": "integer",
-                    "example": 2
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        },
+                        "description": "Trang hiện tại của các mục."
                     },
-                    "description": "Trang hiện tại của các mục."
-                },
-                {
-                    "in": "query",
-                    "name": "q",
-                    "schema": {
-                    "type": "string",
-                    "example": "search_term"
-                    },
-                    "description": "Từ khóa để tìm kiếm hành động."
-                }
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string",
+                            "example": "search_term"
+                        },
+                        "description": "Từ khóa để tìm kiếm hành động."
+                    }
                 ],
                 "responses": {
-                "200": {
-                    "description": "Danh sách hành động được phân trang",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "data": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                "id": {
-                                    "type": "integer",
-                                    "example": 2
-                                },
-                                "name": {
-                                    "type": "string",
-                                    "example": "UPDATE"
-                                },
-                                "value": {
-                                    "type": "string",
-                                    "example": "update"
-                                },
-                                "created_at": {
-                                    "type": "string",
-                                    "format": "date-time",
-                                    "example": "2024-09-16T14:34:30.000000Z"
-                                },
-                                "updated_at": {
-                                    "type": "string",
-                                    "format": "date-time",
-                                    "example": "2024-09-16T14:34:30.000000Z"
-                                },
-                                "permission_actions": {
-                                    "type": "array",
-                                    "items": {
+                    "200": {
+                        "description": "Danh sách hành động được phân trang",
+                        "content": {
+                            "application/json": {
+                                "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "id": {
-                                        "type": "integer",
-                                        "example": 2
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "UPDATE"
+                                                    },
+                                                    "value": {
+                                                        "type": "string",
+                                                        "example": "update"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T14:34:30.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T14:34:30.000000Z"
+                                                    },
+                                                    "permission_actions": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "permission_id": {
+                                                                    "type": "integer",
+                                                                    "example": 5
+                                                                },
+                                                                "action_id": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "created_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-09-16T16:52:09.000000Z"
+                                                                },
+                                                                "updated_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-09-16T16:52:09.000000Z"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         },
-                                        "permission_id": {
-                                        "type": "integer",
-                                        "example": 5
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/actions?page=1"
                                         },
-                                        "action_id": {
-                                        "type": "integer",
-                                        "example": 2
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/actions?page=3"
                                         },
-                                        "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-16T16:52:09.000000Z"
-                                        },
-                                        "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-16T16:52:09.000000Z"
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 100
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết vấn đề"
+                                        }
                                     }
                                 }
-                                }
-                            }
-                            },
-                            "prev_page_url": {
-                            "type": "string",
-                            "nullable": true,
-                            "example": "http://example.com/api/v1/actions?page=1"
-                            },
-                            "next_page_url": {
-                            "type": "string",
-                            "nullable": true,
-                            "example": "http://example.com/api/v1/actions?page=3"
-                            },
-                            "total": {
-                            "type": "integer",
-                            "example": 100
                             }
                         }
-                        }
                     }
-                    }
-                },
-                "400": {
-                    "description": "Yêu cầu không hợp lệ",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "error": {
-                            "type": "string",
-                            "example": "Thông báo lỗi chi tiết vấn đề"
-                            }
-                        }
-                        }
-                    }
-                    }
-                }
                 }
             },
             "post": {
-                "tags": [
-                    "Actions"
-                ],
+                "tags": ["Actions"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -1574,13 +1572,10 @@
                     }
                 }
             }
-
         },
         "/api/v1/actions/{id}": {
             "get": {
-                "tags": [
-                "Actions"
-                ],
+                "tags": ["Actions"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -1590,125 +1585,123 @@
                 "description": "Lấy thông tin chi tiết của một hành động cụ thể dựa vào ID.",
                 "operationId": "getActionById",
                 "parameters": [
-                {
-                    "in": "path",
-                    "name": "id",
-                    "required": true,
-                    "schema": {
-                    "type": "integer",
-                    "example": 1
-                    },
-                    "description": "ID của hành động cần lấy thông tin."
-                }
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của hành động cần lấy thông tin."
+                    }
                 ],
                 "responses": {
-                "200": {
-                    "description": "Lấy chi tiết hành động thành công",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "data": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                "type": "integer",
-                                "example": 2
-                                },
-                                "name": {
-                                "type": "string",
-                                "example": "UPDATE"
-                                },
-                                "value": {
-                                "type": "string",
-                                "example": "update"
-                                },
-                                "created_at": {
-                                "type": "string",
-                                "format": "date-time",
-                                "example": "2024-09-16T14:34:30.000000Z"
-                                },
-                                "updated_at": {
-                                "type": "string",
-                                "format": "date-time",
-                                "example": "2024-09-16T14:34:30.000000Z"
-                                },
-                                "permission_actions": {
-                                "type": "array",
-                                "items": {
+                    "200": {
+                        "description": "Lấy chi tiết hành động thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
                                     "type": "object",
                                     "properties": {
-                                    "id": {
-                                        "type": "integer",
-                                        "example": 2
-                                    },
-                                    "permission_id": {
-                                        "type": "integer",
-                                        "example": 5
-                                    },
-                                    "action_id": {
-                                        "type": "integer",
-                                        "example": 2
-                                    },
-                                    "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-16T16:52:09.000000Z"
-                                    },
-                                    "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-16T16:52:09.000000Z"
-                                    }
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "UPDATE"
+                                                },
+                                                "value": {
+                                                    "type": "string",
+                                                    "example": "update"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T14:34:30.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T14:34:30.000000Z"
+                                                },
+                                                "permission_actions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "permission_id": {
+                                                                "type": "integer",
+                                                                "example": 5
+                                                            },
+                                                            "action_id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-16T16:52:09.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-16T16:52:09.000000Z"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy hành động",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Không tìm thấy hành động!"
+                                        }
+                                    }
                                 }
                             }
+                        }
+                    },
+                    "400": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết"
+                                        }
+                                    }
+                                }
                             }
                         }
-                        }
                     }
-                    }
-                },
-                "404": {
-                    "description": "Không tìm thấy hành động",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "error": {
-                            "type": "string",
-                            "example": "Không tìm thấy hành động!"
-                            }
-                        }
-                        }
-                    }
-                    }
-                },
-                "400": {
-                    "description": "Yêu cầu không hợp lệ",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "error": {
-                            "type": "string",
-                            "example": "Thông báo lỗi chi tiết"
-                            }
-                        }
-                        }
-                    }
-                    }
-                }
                 }
             },
             "put": {
-                "tags": [
-                    "Actions"
-                ],
+                "tags": ["Actions"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -1799,9 +1792,7 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "Actions"
-                ],
+                "tags": ["Actions"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -1935,31 +1926,31 @@
                                                     "permission_actions": {
                                                         "type": "array",
                                                         "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "id": {
-                                                            "type": "integer",
-                                                            "example": 2
-                                                            },
-                                                            "permission_id": {
-                                                            "type": "integer",
-                                                            "example": 5
-                                                            },
-                                                            "action_id": {
-                                                            "type": "integer",
-                                                            "example": 2
-                                                            },
-                                                            "created_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-16T16:52:09.000000Z"
-                                                            },
-                                                            "updated_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-16T16:52:09.000000Z"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "permission_id": {
+                                                                    "type": "integer",
+                                                                    "example": 5
+                                                                },
+                                                                "action_id": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "created_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-09-16T16:52:09.000000Z"
+                                                                },
+                                                                "updated_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-09-16T16:52:09.000000Z"
+                                                                }
                                                             }
-                                                        }
                                                         }
                                                     }
                                                 }
@@ -2167,31 +2158,31 @@
                                                 "permission_actions": {
                                                     "type": "array",
                                                     "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                        "type": "integer",
-                                                        "example": 2
-                                                        },
-                                                        "permission_id": {
-                                                        "type": "integer",
-                                                        "example": 5
-                                                        },
-                                                        "action_id": {
-                                                        "type": "integer",
-                                                        "example": 2
-                                                        },
-                                                        "created_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-09-16T16:52:09.000000Z"
-                                                        },
-                                                        "updated_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-09-16T16:52:09.000000Z"
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "permission_id": {
+                                                                "type": "integer",
+                                                                "example": 5
+                                                            },
+                                                            "action_id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-16T16:52:09.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-16T16:52:09.000000Z"
+                                                            }
                                                         }
-                                                    }
                                                     }
                                                 }
                                             }
@@ -2368,9 +2359,7 @@
         },
         "/api/v1/roles": {
             "get": {
-                "tags": [
-                    "Roles"
-                ],
+                "tags": ["Roles"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -2394,8 +2383,8 @@
                         "in": "query",
                         "name": "page",
                         "schema": {
-                        "type": "integer",
-                        "example": 2
+                            "type": "integer",
+                            "example": 2
                         },
                         "description": "Trang hiện tại của các mục."
                     },
@@ -2564,9 +2553,7 @@
                 }
             },
             "post": {
-                "tags": [
-                    "Roles"
-                ],
+                "tags": ["Roles"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -2694,9 +2681,8 @@
         },
         "/api/v1/roles/{id}": {
             "get": {
-                "tags": [
-                    "Roles"
-                ],"security": [
+                "tags": ["Roles"],
+                "security": [
                     {
                         "bearerAuth": []
                     }
@@ -2845,9 +2831,7 @@
                 }
             },
             "put": {
-                "tags": [
-                    "Roles"
-                ],
+                "tags": ["Roles"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -2952,9 +2936,7 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "Roles"
-                ],
+                "tags": ["Roles"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -3028,505 +3010,1224 @@
         },
         "/api/v1/departments": {
             "get": {
-                "tags": [
-                    "Departments"
-                ],
+                "tags": ["Departments"],
                 "summary": "Lấy danh sách các phòng ban với phân trang",
                 "description": "Lấy danh sách các phòng ban có hỗ trợ tìm kiếm và phân trang.",
                 "operationId": "getDepartments",
                 "parameters": [
                     {
-                    "name": "limit",
-                    "in": "query",
-                    "required": false,
-                    "schema": {
-                        "type": "integer"
-                    },
-                    "description": "Số lượng bản ghi trên mỗi trang."
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Số lượng bản ghi trên mỗi trang."
                     },
                     {
-                    "name": "q",
-                    "in": "query",
-                    "required": false,
-                    "schema": {
-                        "type": "string"
-                    },
-                    "description": "Từ khóa tìm kiếm phòng ban."
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Từ khóa tìm kiếm phòng ban."
                     }
                 ],
                 "responses": {
                     "200": {
-                    "description": "Danh sách phòng ban được trả về thành công.",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "data": {
-                                    "type": "array",
-                                    "items": {
+                        "description": "Danh sách phòng ban được trả về thành công.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "id": {
-                                        "type": "integer",
-                                        "example": 1
-                                        },
-                                        "name": {
-                                        "type": "string",
-                                        "example": "Phòng IT"
-                                        },
-                                        "description": {
-                                        "type": "string",
-                                        "example": "Mô tả"
-                                        },
-                                        "manager_id": {
-                                        "type": "integer",
-                                        "example": 5
-                                        },
-                                        "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-25T15:33:47.000000Z"
-                                        },
-                                        "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-25T15:33:47.000000Z"
-                                        },
-                                        "users_count": {
-                                        "type": "integer",
-                                        "example": 0
-                                        },
-                                        "manager": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                            "type": "integer",
-                                            "example": 5
-                                            },
-                                            "status": {
-                                            "type": "string",
-                                            "example": "active"
-                                            },
-                                            "email": {
-                                            "type": "string",
-                                            "example": "johndoe@example.com"
-                                            },
-                                            "role_id": {
-                                            "type": "integer",
-                                            "example": 2
-                                            },
-                                            "created_at": {
-                                            "type": "string",
-                                            "format": "date-time",
-                                            "example": "2024-09-22T10:08:14.000000Z"
-                                            },
-                                            "updated_at": {
-                                            "type": "string",
-                                            "format": "date-time",
-                                            "example": "2024-09-23T15:16:32.000000Z"
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Phòng IT"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Mô tả"
+                                                    },
+                                                    "manager_id": {
+                                                        "type": "integer",
+                                                        "example": 5
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-25T15:33:47.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-25T15:33:47.000000Z"
+                                                    },
+                                                    "users_count": {
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "manager": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 5
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "active"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "example": "johndoe@example.com"
+                                                            },
+                                                            "role_id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-22T10:08:14.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-23T15:16:32.000000Z"
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
-                                        }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "example": "null"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "example": "http://localhost:8000/api/v1/departments?page=2"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 20
                                         }
                                     }
-                                    }
-                                },
-                            "prev_page_url": {
-                                "type": "string",
-                                "example": "null"
-                            },
-                            "next_page_url": {
-                                "type": "string",
-                                "example": "http://localhost:8000/api/v1/departments?page=2"
-                            },
-                            "total": {
-                                "type": "integer",
-                                "example": 20
-                            }
+                                }
                             }
                         }
-                        }
-                    }
                     },
                     "400": {
-                    "description": "Yêu cầu không hợp lệ",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Invalid request parameters."
-                            }
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid request parameters."
+                                        }
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     }
                 }
             },
             "post": {
-                "tags": [
-                    "Departments"
-                ],
+                "tags": ["Departments"],
                 "summary": "Tạo mới phòng ban",
                 "description": "Tạo mới một phòng ban.",
                 "operationId": "createDepartment",
                 "requestBody": {
                     "required": true,
                     "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "example": "Phòng IT"
-                            },
-                            "description": {
-                                "type": "string",
-                                "example": "Mô tả"
-                            },
-                            "manager_id": {
-                                "type": "integer",
-                                "example": 1
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Phòng IT"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả"
+                                    },
+                                    "manager_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     }
                 },
                 "responses": {
                     "201": {
-                    "description": "Phòng ban được tạo thành công.",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                            "message": {
-                                "type": "string",
-                                "example": "Created department successfully!"
-                            },
-                            "data": {
-                                "type": "object",
+                        "description": "Phòng ban được tạo thành công.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
                                     "properties": {
-                                        "id": {
-                                        "type": "integer",
-                                        "example": 1
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Created department successfully!"
                                         },
-                                        "name": {
-                                        "type": "string",
-                                        "example": "Phòng IT"
-                                        },
-                                        "description": {
-                                        "type": "string",
-                                        "example": "Mô tả"
-                                        },
-                                        "manager_id": {
-                                        "type": "integer",
-                                        "example": 5
-                                        },
-                                        "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-25T15:33:47.000000Z"
-                                        },
-                                        "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-25T15:33:47.000000Z"
-                                        },
-                                        "users_count": {
-                                        "type": "integer",
-                                        "example": 0
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Phòng IT"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả"
+                                                },
+                                                "manager_id": {
+                                                    "type": "integer",
+                                                    "example": 5
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25T15:33:47.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25T15:33:47.000000Z"
+                                                },
+                                                "users_count": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                }
+                                            }
                                         }
                                     }
-                            }
+                                }
                             }
                         }
-                        }
-                    }
                     },
                     "422": {
-                    "description": "Dữ liệu không hợp lệ.",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Validation error occurred."
-                            }
+                        "description": "Dữ liệu không hợp lệ.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Validation error occurred."
+                                        }
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     }
                 }
             }
         },
         "/api/v1/departments/{id}": {
             "get": {
-                "tags": [
-                    "Departments"
-                ],
+                "tags": ["Departments"],
                 "summary": "Lấy thông tin phòng ban theo ID",
                 "description": "Lấy thông tin chi tiết của một phòng ban dựa trên ID.",
                 "operationId": "getDepartmentById",
                 "parameters": [
                     {
-                    "name": "id",
-                    "in": "path",
-                    "required": true,
-                    "schema": {
-                        "type": "integer"
-                    },
-                    "description": "ID của phòng ban."
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID của phòng ban."
                     }
                 ],
                 "responses": {
                     "200": {
-                    "description": "Thông tin phòng ban được trả về thành công.",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                            "data": {
-                                "type": "object",
+                        "description": "Thông tin phòng ban được trả về thành công.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
                                     "properties": {
-                                        "id": {
-                                        "type": "integer",
-                                        "example": 1
-                                        },
-                                        "name": {
-                                        "type": "string",
-                                        "example": "Phòng IT"
-                                        },
-                                        "description": {
-                                        "type": "string",
-                                        "example": "Mô tả"
-                                        },
-                                        "manager_id": {
-                                        "type": "integer",
-                                        "example": 5
-                                        },
-                                        "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-25T15:33:47.000000Z"
-                                        },
-                                        "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-25T15:33:47.000000Z"
-                                        },
-                                        "users_count": {
-                                        "type": "integer",
-                                        "example": 0
-                                        },
-                                        "manager": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                            "type": "integer",
-                                            "example": 5
-                                            },
-                                            "status": {
-                                            "type": "string",
-                                            "example": "active"
-                                            },
-                                            "email": {
-                                            "type": "string",
-                                            "example": "johndoe@example.com"
-                                            },
-                                            "role_id": {
-                                            "type": "integer",
-                                            "example": 2
-                                            },
-                                            "created_at": {
-                                            "type": "string",
-                                            "format": "date-time",
-                                            "example": "2024-09-22T10:08:14.000000Z"
-                                            },
-                                            "updated_at": {
-                                            "type": "string",
-                                            "format": "date-time",
-                                            "example": "2024-09-23T15:16:32.000000Z"
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Phòng IT"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả"
+                                                },
+                                                "manager_id": {
+                                                    "type": "integer",
+                                                    "example": 5
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25T15:33:47.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25T15:33:47.000000Z"
+                                                },
+                                                "users_count": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "manager": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 5
+                                                        },
+                                                        "status": {
+                                                            "type": "string",
+                                                            "example": "active"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "johndoe@example.com"
+                                                        },
+                                                        "role_id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-22T10:08:14.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-23T15:16:32.000000Z"
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
-                                        }
                                     }
-                            }
+                                }
                             }
                         }
-                        }
-                    }
                     },
                     "404": {
-                    "description": "Không tìm thấy phòng ban.",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Department not found!"
-                            }
+                        "description": "Không tìm thấy phòng ban.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Department not found!"
+                                        }
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     }
                 }
-                },
-                "put": {
-                "tags": [
-                    "Departments"
-                ],
+            },
+            "put": {
+                "tags": ["Departments"],
                 "summary": "Cập nhật thông tin phòng ban",
                 "description": "Cập nhật thông tin phòng ban theo ID.",
                 "operationId": "updateDepartment",
                 "parameters": [
                     {
-                    "name": "id",
-                    "in": "path",
-                    "required": true,
-                    "schema": {
-                        "type": "integer"
-                    },
-                    "description": "ID của phòng ban."
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID của phòng ban."
                     }
                 ],
                 "requestBody": {
                     "required": true,
                     "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                            "type": "string",
-                            "example": "Phòng IT"
-                            },
-                            "description": {
-                                "type": "string",
-                                "example": "Mô tả"
-                            },
-                            "manager_id": {
-                                "type": "integer",
-                                "example": 1
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Phòng IT"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả"
+                                    },
+                                    "manager_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     }
                 },
                 "responses": {
                     "200": {
-                    "description": "Cập nhật phòng ban thành công.",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                            "message": {
-                                "type": "string",
-                                "example": "Updated department successfully!"
-                            }
+                        "description": "Cập nhật phòng ban thành công.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Updated department successfully!"
+                                        }
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     },
                     "422": {
-                    "description": "Dữ liệu không hợp lệ.",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Validation error occurred."
-                            }
+                        "description": "Dữ liệu không hợp lệ.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Validation error occurred."
+                                        }
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     }
                 }
             },
             "delete": {
-                "tags": [
-                    "Departments"
-                ],
+                "tags": ["Departments"],
                 "summary": "Xóa phòng ban",
                 "description": "Xóa phòng ban theo ID.",
                 "operationId": "deleteDepartment",
                 "parameters": [
                     {
-                    "name": "id",
-                    "in": "path",
-                    "required": true,
-                    "schema": {
-                        "type": "integer"
-                    },
-                    "description": "ID của phòng ban."
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID của phòng ban."
                     }
                 ],
                 "responses": {
                     "200": {
-                    "description": "Xóa phòng ban thành công.",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                            "message": {
-                                "type": "string",
-                                "example": "Deleted department successfully!"
-                            }
+                        "description": "Xóa phòng ban thành công.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Deleted department successfully!"
+                                        }
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     },
                     "404": {
-                    "description": "Không tìm thấy phòng ban.",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Department not found!"
-                            }
+                        "description": "Không tìm thấy phòng ban.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Department not found!"
+                                        }
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     },
                     "400": {
-                    "description": "Phòng ban có người dùng đang được chỉ định.",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Department has users assigned!"
+                        "description": "Phòng ban có người dùng đang được chỉ định.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Department has users assigned!"
+                                        }
+                                    }
+                                }
                             }
-                            }
-                        }
                         }
                     }
+                }
+            }
+        },
+        "/api/v1/users": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Lấy danh sách người dùng phân trang",
+                "description": "API này trả về danh sách người dùng với phân trang và khả năng tìm kiếm theo từ khóa.",
+                "operationId": "getUsersPaginate",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        },
+                        "description": "Số lượng bản ghi trên mỗi trang."
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        },
+                        "description": "Trang tiếp theo"
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "John"
+                        },
+                        "description": "Từ khóa để tìm kiếm người dùng."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách người dùng phân trang",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 12
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "johndoe33@example.com"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "active"
+                                                },
+                                                "role": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "doctor"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Bác sĩ"
+                                                        },
+                                                        "permissions": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "user_info": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "fullname": {
+                                                            "type": "string",
+                                                            "example": "Nguyễn Văn A"
+                                                        },
+                                                        "address": {
+                                                            "type": "string",
+                                                            "example": "123 Main St, City, Country"
+                                                        },
+                                                        "avatar": {
+                                                            "type": "string",
+                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                        },
+                                                        "phone_number": {
+                                                            "type": "string",
+                                                            "example": "0987654321"
+                                                        },
+                                                        "gender": {
+                                                            "type": "string",
+                                                            "example": "male"
+                                                        },
+                                                        "user_id": {
+                                                            "type": "integer",
+                                                            "example": 12
+                                                        },
+                                                        "dob": {
+                                                            "type": "string",
+                                                            "format": "date",
+                                                            "example": "1990-01-01"
+                                                        },
+                                                        "identity_card_id": {
+                                                            "type": "integer",
+                                                            "example": 3
+                                                        },
+                                                        "department_id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-27T12:10:32.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-27T12:10:32.000000Z"
+                                                        },
+                                                        "identity_card": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 3
+                                                                },
+                                                                "type_name": {
+                                                                    "type": "string",
+                                                                    "example": "CMND"
+                                                                },
+                                                                "identity_card_number": {
+                                                                    "type": "string",
+                                                                    "example": "123456789"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/users?page=1"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/users?page=3"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 100
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi yêu cầu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Chi tiết lỗi xảy ra."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Users"],
+                "summary": "Tạo tài khoản người dùng mới",
+                "description": "Tạo tài khoản người dùng mới với các thông tin cá nhân, avatar và thông tin thẻ căn cước.",
+                "operationId": "createUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "johndoe@example.com",
+                                        "description": "Địa chỉ email của người dùng."
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345678",
+                                        "description": "Mật khẩu của người dùng, ít nhất 8 ký tự."
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "enum": ["active", "inactive"],
+                                        "description": "Trạng thái tài khoản người dùng (active/inactive)."
+                                    },
+                                    "avatar": {
+                                        "type": "string",
+                                        "example": "file",
+                                        "description": "Ảnh đại diện của người dùng (tùy chọn)."
+                                    },
+                                    "role_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "user_info": {
+                                        "type": "object",
+                                        "properties": {
+                                            "fullname": {
+                                                "type": "string",
+                                                "example": "Nguyễn Văn A",
+                                                "description": "Họ và tên người dùng (bắt buộc)."
+                                            },
+                                            "address": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "example": "123 Main St, City, Country",
+                                                "description": "Địa chỉ người dùng (tùy chọn)."
+                                            },
+                                            "phone_number": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "example": "0987654321",
+                                                "description": "Số điện thoại của người dùng (tùy chọn)."
+                                            },
+                                            "gender": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "enum": [
+                                                    "male",
+                                                    "female",
+                                                    "other"
+                                                ],
+                                                "example": "male",
+                                                "description": "Giới tính của người dùng (tùy chọn)."
+                                            },
+                                            "dob": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "nullable": true,
+                                                "example": "1990-01-01",
+                                                "description": "Ngày sinh của người dùng (tùy chọn)."
+                                            },
+                                            "department_id": {
+                                                "type": "integer",
+                                                "nullable": true,
+                                                "example": 1,
+                                                "description": "ID phòng ban của người dùng (tùy chọn, phải tồn tại trong bảng departments)."
+                                            },
+                                            "identity_card": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "type_name": {
+                                                        "type": "string",
+                                                        "nullable": true,
+                                                        "example": "CMND",
+                                                        "description": "Loại thẻ căn cước (tùy chọn)."
+                                                    },
+                                                    "identity_card_number": {
+                                                        "type": "string",
+                                                        "nullable": true,
+                                                        "example": "123456789",
+                                                        "description": "Số thẻ căn cước của người dùng (tùy chọn)."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo tài khoản thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tạo tài khoản thành công!"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "johndoe@example.com"
+                                                },
+                                                "role_id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "user_info": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "fullname": {
+                                                            "type": "string",
+                                                            "example": "Nguyễn Văn A"
+                                                        },
+                                                        "phone_number": {
+                                                            "type": "string",
+                                                            "example": "0987654321"
+                                                        },
+                                                        "address": {
+                                                            "type": "string",
+                                                            "example": "123 Main St, City, Country"
+                                                        },
+                                                        "dob": {
+                                                            "type": "string",
+                                                            "format": "date",
+                                                            "example": "1990-01-01"
+                                                        },
+                                                        "gender": {
+                                                            "type": "string",
+                                                            "example": "male"
+                                                        },
+                                                        "avatar": {
+                                                            "type": "string",
+                                                            "example": "https://res.cloudinary.com/.../avatar.png"
+                                                        },
+                                                        "identity_card": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "type_name": {
+                                                                    "type": "string",
+                                                                    "example": "CMND"
+                                                                },
+                                                                "identity_card_number": {
+                                                                    "type": "string",
+                                                                    "example": "123456789"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Validation error message."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Lấy thông tin chi tiết người dùng",
+                "description": "API này dùng để lấy thông tin chi tiết của một người dùng dựa trên ID.",
+                "operationId": "findUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 12
+                        },
+                        "description": "ID của người dùng cần tìm"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin chi tiết người dùng",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 12
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "johndoe33@example.com"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "active"
+                                                },
+                                                "role": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "doctor"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Bác sĩ"
+                                                        },
+                                                        "permissions": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "user_info": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "fullname": {
+                                                            "type": "string",
+                                                            "example": "Nguyễn Văn A"
+                                                        },
+                                                        "address": {
+                                                            "type": "string",
+                                                            "example": "123 Main St, City, Country"
+                                                        },
+                                                        "avatar": {
+                                                            "type": "string",
+                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                        },
+                                                        "phone_number": {
+                                                            "type": "string",
+                                                            "example": "0987654321"
+                                                        },
+                                                        "gender": {
+                                                            "type": "string",
+                                                            "example": "male"
+                                                        },
+                                                        "user_id": {
+                                                            "type": "integer",
+                                                            "example": 12
+                                                        },
+                                                        "dob": {
+                                                            "type": "string",
+                                                            "format": "date",
+                                                            "example": "1990-01-01"
+                                                        },
+                                                        "identity_card_id": {
+                                                            "type": "integer",
+                                                            "example": 3
+                                                        },
+                                                        "department_id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-27T12:10:32.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-27T12:10:32.000000Z"
+                                                        },
+                                                        "identity_card": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 3
+                                                                },
+                                                                "type_name": {
+                                                                    "type": "string",
+                                                                    "example": "CMND"
+                                                                },
+                                                                "identity_card_number": {
+                                                                    "type": "string",
+                                                                    "example": "123456789"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy người dùng",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Không tìm thấy người dùng!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi yêu cầu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Chi tiết lỗi xảy ra."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Users"],
+                "summary": "Cập nhật thông tin tài khoản người dùng",
+                "description": "Cập nhật thông tin tài khoản người dùng, bao gồm các thông tin cá nhân, avatar và thông tin thẻ căn cước.",
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của người dùng cần cập nhật"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "johndoe@example.com",
+                                        "description": "Địa chỉ email của người dùng."
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345678",
+                                        "description": "Mật khẩu của người dùng, ít nhất 8 ký tự."
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "description": "Trạng thái tài khoản người dùng (tùy chọn)."
+                                    },
+                                    "avatar": {
+                                        "type": "string",
+                                        "example": "file",
+                                        "description": "Ảnh đại diện của người dùng (tùy chọn)."
+                                    },
+                                    "role_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "user_info": {
+                                        "type": "object",
+                                        "properties": {
+                                            "fullname": {
+                                                "type": "string",
+                                                "example": "Nguyễn Văn A",
+                                                "description": "Họ và tên người dùng."
+                                            },
+                                            "address": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "example": "123 Main St, City, Country",
+                                                "description": "Địa chỉ người dùng (tùy chọn)."
+                                            },
+                                            "phone_number": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "example": "0987654321",
+                                                "description": "Số điện thoại của người dùng (tùy chọn)."
+                                            },
+                                            "gender": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "enum": [
+                                                    "male",
+                                                    "female",
+                                                    "other"
+                                                ],
+                                                "example": "male",
+                                                "description": "Giới tính của người dùng (tùy chọn)."
+                                            },
+                                            "dob": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "nullable": true,
+                                                "example": "1990-01-01",
+                                                "description": "Ngày sinh của người dùng (tùy chọn)."
+                                            },
+                                            "department_id": {
+                                                "type": "integer",
+                                                "nullable": true,
+                                                "example": 1,
+                                                "description": "ID phòng ban của người dùng (tùy chọn)."
+                                            },
+                                            "identity_card": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "type_name": {
+                                                        "type": "string",
+                                                        "nullable": true,
+                                                        "example": "CMND",
+                                                        "description": "Loại thẻ căn cước (tùy chọn)."
+                                                    },
+                                                    "identity_card_number": {
+                                                        "type": "string",
+                                                        "nullable": true,
+                                                        "example": "123456789",
+                                                        "description": "Số thẻ căn cước của người dùng (tùy chọn)."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật tài khoản thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cập nhật tài khoản thành công"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Validation error message."
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -3557,6 +4258,14 @@
         {
             "name": "Roles",
             "description": "Vai trò"
+        },
+        {
+            "name": "Departments",
+            "description": "Phòng ban"
+        },
+        {
+            "name": "Users",
+            "description": "Người dùng"
         }
     ]
 }

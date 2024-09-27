@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PatientInfo;
+use App\Models\IdentityCard;
+
 
 class Patient extends Model
 {
@@ -21,5 +23,9 @@ class Patient extends Model
 
     public function patientInfo() {
         return $this->hasOne(PatientInfo::class, 'patient_id');
+    }
+
+    public function identityCard() {
+        return $this->belongsTo(IdentityCard::class, 'identity_card_id');
     }
 }

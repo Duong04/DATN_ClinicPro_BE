@@ -25,7 +25,9 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'status',
-        'role_id'
+        'role_id',
+        'token',
+        'otp'
     ];
 
     public function role() {
