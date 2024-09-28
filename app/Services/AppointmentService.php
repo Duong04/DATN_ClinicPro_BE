@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Mail\AcceptAppointmentMail;
 use App\Repositories\Patient\PatientRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Repositories\Appointment\AppointmentRepositoryInterface;
 use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentService
 {
@@ -64,13 +66,30 @@ class AppointmentService
         return $patient;
     }
 
-
+    public function update($id)
+    {
+        try {
+            $appointment = $this->appointmentRepository->find($id);
+            if ($appointment->status !== 'pending') {
+                return [
+                    'error' => true,
+                    'message' => 'Appointment is not pending and cannot be updated.'
+                ];
+            }
+            $email = $appointment->patient->patientInfo->email;
+            Mail::to($email)->send(new AcceptAppointmentMail($appointment));
+            $data['status'] = 'confirmed';
+            return $this->appointmentRepository->update($data, $id);
+        } catch (ModelNotFoundException $e) {
+            throw new \Exception('Appointment not found');
+        }
+    }
     public function cancel($request, $id)
     {
         try {
             $data['status'] = 'cancelled';
             $data['cancellation_reason'] = $request->input('cancellation_reason');
-            return $this->appointmentRepository->update($data, $id);
+            return $this->appointmentRepository->cancel($data, $id);
         } catch (ModelNotFoundException $e) {
             throw new \Exception('Appointment not found');
         }

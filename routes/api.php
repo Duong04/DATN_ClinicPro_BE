@@ -69,6 +69,7 @@ Route::prefix('v1')->group(function () {
                 Route::get('/', 'index')->middleware('jwt.auth');
                 Route::post('/', 'store');
                 Route::get('/{id}', 'show')->middleware('jwt.auth');
+                Route::get('/send/{id}', 'update')->middleware('jwt.auth');
                 Route::post('/{id}', 'cancel')->middleware('jwt.auth');
                 Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
             }

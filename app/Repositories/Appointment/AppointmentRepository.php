@@ -27,11 +27,18 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     {
         return $this->appointment::create($data);
     }
-    public function update($data, $id)
+    public function cancel($data, $id)
     {
         $package = $this->appointment::findOrFail($id);
         $package->update($data);
         return $package;
+    }
+
+    public function update($data, $id)
+    {
+        $appointment = $this->appointment::findOrFail($id);
+        $appointment->update($data);
+        return $appointment;
     }
 
     public function destroy($id)

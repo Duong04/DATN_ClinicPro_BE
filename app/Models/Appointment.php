@@ -24,7 +24,6 @@ class Appointment extends Model
 
     protected $attributes = [
         'booking_type' => 'online',
-        'status' => 'pending',
     ];
 
     protected $hidden = [
@@ -39,5 +38,10 @@ class Appointment extends Model
     protected function payments()
     {
         return $this->hasOne(Payment::class, 'appointment_id');
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
     }
 }

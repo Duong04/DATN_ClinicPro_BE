@@ -37,6 +37,11 @@ class AppointmentController extends Controller
         return $this->respondWithData(fn() => $this->appointmentService->cancel($request, $id), '', 200);;
     }
 
+    public function update($id)
+    {
+        return $this->respondWithData(fn() => $this->appointmentService->update($id));
+    }
+
     public function destroy($id)
     {
         return $this->respondWithData(fn() => $this->appointmentService->delete($id), '', 204);
@@ -46,6 +51,12 @@ class AppointmentController extends Controller
     {
         try {
             $data = $callback();
+            if (isset($data['error']) && $data['error']) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $data['message']
+                ], 400);
+            }
             return response()->json(['data' => $data], $successStatus);
         } catch (\Exception $e) {
             $status = $e->getMessage() === 'Appointment not found' ? 404 : 500;

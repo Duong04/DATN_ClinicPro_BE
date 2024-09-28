@@ -3329,6 +3329,150 @@
                     }
                 }
             }
+        },
+        "/api/v1/appointments/send/{id}": {
+            "get": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "xác nhận lịch hẹn",
+                "description": "Xác nhận lịch hẹn theo id",
+                "operationId": "acceptAppointmentById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID lịch hẹn."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin lịch hẹn",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "appointment_date": {
+                                                    "type": "Date",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25 12:00"
+                                                },
+                                                "deposit_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "booking_type": {
+                                                    "type": "string",
+                                                    "example": "online"
+                                                },
+                                                "appointment_type": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "total_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "confirmed"
+                                                },
+                                                "cancellation_reason": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment is not pending and cannot be updated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Appointment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "components": {
