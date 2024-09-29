@@ -19,7 +19,8 @@ class Patient extends Model
         'user_id',
     ];
 
-    public function patientInfo() {
+    public function patientInfo()
+    {
         return $this->hasOne(PatientInfo::class, 'patient_id');
     }
 }

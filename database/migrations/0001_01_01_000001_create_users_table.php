@@ -31,7 +31,7 @@ return new class extends Migration
             $table->unsignedBigInteger('permission_id');
             $table->unsignedBigInteger('action_id');
             $table->timestamps();
-    
+
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
             $table->foreign('action_id')->references('id')->on('actions')->onDelete('cascade');
         });
@@ -50,7 +50,7 @@ return new class extends Migration
             $table->unsignedBigInteger('permission_id');
             $table->unsignedBigInteger('action_id');
             $table->timestamps();
-    
+
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
             $table->foreign('action_id')->references('id')->on('actions')->onDelete('cascade');
@@ -173,16 +173,16 @@ return new class extends Migration
 
             $table->foreign('medical_history_id')->references('id')->on('medical_histories')->onDelete('cascade');
         });
-    
+
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('patient_id');
-            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('doctor_id')->nullable();
             $table->timestamp('appointment_date');
             $table->decimal('deposit_amount', 10, 2)->nullable();
             $table->enum('booking_type', ['offline', 'online']);
             $table->string('appointment_type', 255)->nullable();
-            $table->decimal('total_amount', 10, 2);
+            $table->decimal('total_amount', 10, 2)->nullable();
             $table->enum('status', ['pending', 'confirmed', 'completed', 'cancelled'])->default('pending');
             $table->text('cancellation_reason')->nullable();
             $table->timestamps();
@@ -214,7 +214,7 @@ return new class extends Migration
 
             $table->foreign('appointment_id')->references('id')->on('appointments');
         });
-    
+
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
 

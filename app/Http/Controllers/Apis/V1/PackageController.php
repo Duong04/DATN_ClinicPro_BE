@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Apis\V1;
 
-use App\Models\Package;
 use App\Services\PackageService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageRequest;
@@ -19,7 +18,6 @@ class PackageController extends Controller
 
     public function index(): JsonResponse
     {
-
         return $this->respondWithData(fn() => $this->packageService->getAll());
     }
 

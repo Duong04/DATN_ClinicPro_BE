@@ -864,14 +864,18 @@
                 "summary": "Lấy thông tin gói khám theo slug",
                 "description": "Lấy thông tin gói khám theo slug.",
                 "operationId": "getPackageBySlug",
-                "parameters": {
-                    "name": "slug",
-                    "required": true,
-                    "description": "slug gói khám",
-                    "schema": {
-                        " type": "string"
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "goi-kham-mat"
+                        },
+                        "description": "Slug của gói khám."
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Thông tin gói khám",
@@ -967,14 +971,18 @@
                 "summary": "Lấy gói khám theo id",
                 "description": "Lấy gói khám theo id",
                 "operationId": "getPackageById",
-                "parameters": {
-                    "name": "id",
-                    "required": true,
-                    "description": "iD gói khám",
-                    "schema": {
-                        " type": "string"
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của gói khám."
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Thông tin gói khám",
@@ -1068,6 +1076,18 @@
                 "summary": "Cập nhật gói khám",
                 "description": "Cập nhật gói hiện có theo ID .",
                 "operationId": "updatePackage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của gói khám."
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1215,6 +1235,18 @@
                 "summary": "Xóa gói khám",
                 "description": "Xóa gói theo ID.",
                 "operationId": "deletePackage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của gói khám."
+                    }
+                ],
                 "responses": {
                     "204": {
                         "description": "Deleted package Successfully!",
@@ -1255,9 +1287,7 @@
         },
         "/api/v1/actions": {
             "get": {
-                "tags": [
-                "Actions"
-                ],
+                "tags": ["Actions"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -1267,143 +1297,141 @@
                 "description": "Trả về danh sách các hành động với phân trang dựa trên giới hạn và truy vấn tìm kiếm.",
                 "operationId": "getPaginateActions",
                 "parameters": [
-                {
-                    "in": "query",
-                    "name": "limit",
-                    "schema": {
-                    "type": "integer",
-                    "example": 10
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        },
+                        "description": "Số lượng mục trên mỗi trang."
                     },
-                    "description": "Số lượng mục trên mỗi trang."
-                },
-                {
-                    "in": "query",
-                    "name": "page",
-                    "schema": {
-                    "type": "integer",
-                    "example": 2
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        },
+                        "description": "Trang hiện tại của các mục."
                     },
-                    "description": "Trang hiện tại của các mục."
-                },
-                {
-                    "in": "query",
-                    "name": "q",
-                    "schema": {
-                    "type": "string",
-                    "example": "search_term"
-                    },
-                    "description": "Từ khóa để tìm kiếm hành động."
-                }
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string",
+                            "example": "search_term"
+                        },
+                        "description": "Từ khóa để tìm kiếm hành động."
+                    }
                 ],
                 "responses": {
-                "200": {
-                    "description": "Danh sách hành động được phân trang",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "data": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                "id": {
-                                    "type": "integer",
-                                    "example": 2
-                                },
-                                "name": {
-                                    "type": "string",
-                                    "example": "UPDATE"
-                                },
-                                "value": {
-                                    "type": "string",
-                                    "example": "update"
-                                },
-                                "created_at": {
-                                    "type": "string",
-                                    "format": "date-time",
-                                    "example": "2024-09-16T14:34:30.000000Z"
-                                },
-                                "updated_at": {
-                                    "type": "string",
-                                    "format": "date-time",
-                                    "example": "2024-09-16T14:34:30.000000Z"
-                                },
-                                "permission_actions": {
-                                    "type": "array",
-                                    "items": {
+                    "200": {
+                        "description": "Danh sách hành động được phân trang",
+                        "content": {
+                            "application/json": {
+                                "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "id": {
-                                        "type": "integer",
-                                        "example": 2
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "UPDATE"
+                                                    },
+                                                    "value": {
+                                                        "type": "string",
+                                                        "example": "update"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T14:34:30.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T14:34:30.000000Z"
+                                                    },
+                                                    "permission_actions": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "permission_id": {
+                                                                    "type": "integer",
+                                                                    "example": 5
+                                                                },
+                                                                "action_id": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "created_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-09-16T16:52:09.000000Z"
+                                                                },
+                                                                "updated_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-09-16T16:52:09.000000Z"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         },
-                                        "permission_id": {
-                                        "type": "integer",
-                                        "example": 5
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/actions?page=1"
                                         },
-                                        "action_id": {
-                                        "type": "integer",
-                                        "example": 2
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/actions?page=3"
                                         },
-                                        "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-16T16:52:09.000000Z"
-                                        },
-                                        "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-16T16:52:09.000000Z"
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 100
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết vấn đề"
+                                        }
                                     }
                                 }
-                                }
-                            }
-                            },
-                            "prev_page_url": {
-                            "type": "string",
-                            "nullable": true,
-                            "example": "http://example.com/api/v1/actions?page=1"
-                            },
-                            "next_page_url": {
-                            "type": "string",
-                            "nullable": true,
-                            "example": "http://example.com/api/v1/actions?page=3"
-                            },
-                            "total": {
-                            "type": "integer",
-                            "example": 100
                             }
                         }
-                        }
                     }
-                    }
-                },
-                "400": {
-                    "description": "Yêu cầu không hợp lệ",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "error": {
-                            "type": "string",
-                            "example": "Thông báo lỗi chi tiết vấn đề"
-                            }
-                        }
-                        }
-                    }
-                    }
-                }
                 }
             },
             "post": {
-                "tags": [
-                    "Actions"
-                ],
+                "tags": ["Actions"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -1503,13 +1531,10 @@
                     }
                 }
             }
-
         },
         "/api/v1/actions/{id}": {
             "get": {
-                "tags": [
-                "Actions"
-                ],
+                "tags": ["Actions"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -1519,125 +1544,123 @@
                 "description": "Lấy thông tin chi tiết của một hành động cụ thể dựa vào ID.",
                 "operationId": "getActionById",
                 "parameters": [
-                {
-                    "in": "path",
-                    "name": "id",
-                    "required": true,
-                    "schema": {
-                    "type": "integer",
-                    "example": 1
-                    },
-                    "description": "ID của hành động cần lấy thông tin."
-                }
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của hành động cần lấy thông tin."
+                    }
                 ],
                 "responses": {
-                "200": {
-                    "description": "Lấy chi tiết hành động thành công",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "data": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                "type": "integer",
-                                "example": 2
-                                },
-                                "name": {
-                                "type": "string",
-                                "example": "UPDATE"
-                                },
-                                "value": {
-                                "type": "string",
-                                "example": "update"
-                                },
-                                "created_at": {
-                                "type": "string",
-                                "format": "date-time",
-                                "example": "2024-09-16T14:34:30.000000Z"
-                                },
-                                "updated_at": {
-                                "type": "string",
-                                "format": "date-time",
-                                "example": "2024-09-16T14:34:30.000000Z"
-                                },
-                                "permission_actions": {
-                                "type": "array",
-                                "items": {
+                    "200": {
+                        "description": "Lấy chi tiết hành động thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
                                     "type": "object",
                                     "properties": {
-                                    "id": {
-                                        "type": "integer",
-                                        "example": 2
-                                    },
-                                    "permission_id": {
-                                        "type": "integer",
-                                        "example": 5
-                                    },
-                                    "action_id": {
-                                        "type": "integer",
-                                        "example": 2
-                                    },
-                                    "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-16T16:52:09.000000Z"
-                                    },
-                                    "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-16T16:52:09.000000Z"
-                                    }
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "UPDATE"
+                                                },
+                                                "value": {
+                                                    "type": "string",
+                                                    "example": "update"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T14:34:30.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T14:34:30.000000Z"
+                                                },
+                                                "permission_actions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "permission_id": {
+                                                                "type": "integer",
+                                                                "example": 5
+                                                            },
+                                                            "action_id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-16T16:52:09.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-16T16:52:09.000000Z"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy hành động",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Không tìm thấy hành động!"
+                                        }
+                                    }
                                 }
                             }
+                        }
+                    },
+                    "400": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết"
+                                        }
+                                    }
+                                }
                             }
                         }
-                        }
                     }
-                    }
-                },
-                "404": {
-                    "description": "Không tìm thấy hành động",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "error": {
-                            "type": "string",
-                            "example": "Không tìm thấy hành động!"
-                            }
-                        }
-                        }
-                    }
-                    }
-                },
-                "400": {
-                    "description": "Yêu cầu không hợp lệ",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "error": {
-                            "type": "string",
-                            "example": "Thông báo lỗi chi tiết"
-                            }
-                        }
-                        }
-                    }
-                    }
-                }
                 }
             },
             "put": {
-                "tags": [
-                    "Actions"
-                ],
+                "tags": ["Actions"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -1728,9 +1751,7 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "Actions"
-                ],
+                "tags": ["Actions"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -1864,31 +1885,31 @@
                                                     "permission_actions": {
                                                         "type": "array",
                                                         "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "id": {
-                                                            "type": "integer",
-                                                            "example": 2
-                                                            },
-                                                            "permission_id": {
-                                                            "type": "integer",
-                                                            "example": 5
-                                                            },
-                                                            "action_id": {
-                                                            "type": "integer",
-                                                            "example": 2
-                                                            },
-                                                            "created_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-16T16:52:09.000000Z"
-                                                            },
-                                                            "updated_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-16T16:52:09.000000Z"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "permission_id": {
+                                                                    "type": "integer",
+                                                                    "example": 5
+                                                                },
+                                                                "action_id": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "created_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-09-16T16:52:09.000000Z"
+                                                                },
+                                                                "updated_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-09-16T16:52:09.000000Z"
+                                                                }
                                                             }
-                                                        }
                                                         }
                                                     }
                                                 }
@@ -2096,31 +2117,31 @@
                                                 "permission_actions": {
                                                     "type": "array",
                                                     "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                        "type": "integer",
-                                                        "example": 2
-                                                        },
-                                                        "permission_id": {
-                                                        "type": "integer",
-                                                        "example": 5
-                                                        },
-                                                        "action_id": {
-                                                        "type": "integer",
-                                                        "example": 2
-                                                        },
-                                                        "created_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-09-16T16:52:09.000000Z"
-                                                        },
-                                                        "updated_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-09-16T16:52:09.000000Z"
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "permission_id": {
+                                                                "type": "integer",
+                                                                "example": 5
+                                                            },
+                                                            "action_id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-16T16:52:09.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-16T16:52:09.000000Z"
+                                                            }
                                                         }
-                                                    }
                                                     }
                                                 }
                                             }
@@ -2297,9 +2318,7 @@
         },
         "/api/v1/roles": {
             "get": {
-                "tags": [
-                    "Roles"
-                ],
+                "tags": ["Roles"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -2323,8 +2342,8 @@
                         "in": "query",
                         "name": "page",
                         "schema": {
-                        "type": "integer",
-                        "example": 2
+                            "type": "integer",
+                            "example": 2
                         },
                         "description": "Trang hiện tại của các mục."
                     },
@@ -2493,9 +2512,7 @@
                 }
             },
             "post": {
-                "tags": [
-                    "Roles"
-                ],
+                "tags": ["Roles"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -2623,9 +2640,8 @@
         },
         "/api/v1/roles/{id}": {
             "get": {
-                "tags": [
-                    "Roles"
-                ],"security": [
+                "tags": ["Roles"],
+                "security": [
                     {
                         "bearerAuth": []
                     }
@@ -2774,9 +2790,7 @@
                 }
             },
             "put": {
-                "tags": [
-                    "Roles"
-                ],
+                "tags": ["Roles"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -2881,9 +2895,7 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "Roles"
-                ],
+                "tags": ["Roles"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -2954,6 +2966,709 @@
                     }
                 }
             }
+        },
+        "/api/v1/Appointments": {
+            "get": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách lịch hẹn",
+                "description": "Lấy tất cả danh sách lịch hẹn.",
+                "operationId": "getAppointments",
+                "responses": {
+                    "200": {
+                        "description": "Thông tin lịch hẹn",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": 1
+                                                    },
+                                                    "patient_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "doctor_id": {
+                                                        "type": "string",
+                                                        "example": "null"
+                                                    },
+                                                    "appointment_date": {
+                                                        "type": "Date",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-25 12:00"
+                                                    },
+                                                    "deposit_amount": {
+                                                        "type": "string",
+                                                        "example": "null"
+                                                    },
+                                                    "booking_type": {
+                                                        "type": "string",
+                                                        "example": "online"
+                                                    },
+                                                    "appointment_type": {
+                                                        "type": "string",
+                                                        "example": "null"
+                                                    },
+                                                    "total_amount": {
+                                                        "type": "string",
+                                                        "example": "null"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "pending"
+                                                    },
+                                                    "cancellation_reason": {
+                                                        "type": "string",
+                                                        "example": "null"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Tạo lịch hẹn",
+                "description": "Tạo lịch hẹn.",
+                "operationId": "createAppointment",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fullname",
+                                    "email",
+                                    "phone_number",
+                                    "address",
+                                    "gender",
+                                    "dob",
+                                    "appointment_date"
+                                ],
+                                "properties": {
+                                    "fullname": {
+                                        "type": "string",
+                                        "example": "Nguyen Van A"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "email@gmail.com"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "012 345 6789"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Da Nang, Vn"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "example": "male"
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-25"
+                                    },
+                                    "appointment_date": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-26 21:12:58"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create package Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "appointment_date": {
+                                                    "type": "Date",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25 12:00"
+                                                },
+                                                "deposit_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "booking_type": {
+                                                    "type": "string",
+                                                    "example": "online"
+                                                },
+                                                "appointment_type": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "total_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "pending"
+                                                },
+                                                "cancellation_reason": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "properties": {
+                                                "fullname": {
+                                                    "type": "string",
+                                                    "example": "Họ và tên không được để trống."
+                                                },
+                                                "phone_number": {
+                                                    "type": "string",
+                                                    "example": "Số điện thoại không được nhỏ hơn 10 ký tự!"
+                                                },
+                                                "appointment_date": {
+                                                    "type": "string",
+                                                    "example": "Giờ hẹn phải lớn hơn thời gian hiện tại!"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/appointments/{id}": {
+            "get": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy lịch hẹn theo id",
+                "description": "Lấy thông tin lịch hẹn theo id",
+                "operationId": "getAppointmentById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID lịch hẹn."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin lịch hẹn",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "appointment_date": {
+                                                    "type": "Date",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25 12:00"
+                                                },
+                                                "deposit_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "booking_type": {
+                                                    "type": "string",
+                                                    "example": "online"
+                                                },
+                                                "appointment_type": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "total_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "pending"
+                                                },
+                                                "cancellation_reason": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Appointment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Hủy lịch hẹn",
+                "description": "Hủy lịch hẹn theo ID .",
+                "operationId": "updateAppointment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID lịch hẹn."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["cancellation_reason"],
+                                "properties": {
+                                    "cancellation_reason": {
+                                        "type": "string",
+                                        "example": "Nội dung hủy lịch hẹn"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cancel Appointment Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "appointment_date": {
+                                                    "type": "Date",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25 12:00"
+                                                },
+                                                "deposit_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "booking_type": {
+                                                    "type": "string",
+                                                    "example": "online"
+                                                },
+                                                "appointment_type": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "total_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "cancelled"
+                                                },
+                                                "cancellation_reason": {
+                                                    "type": "string",
+                                                    "example": "Nội dung hủy lịch hẹn"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Appointment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Xóa lịch hẹn",
+                "description": "Xóa lịch hẹn theo ID.",
+                "operationId": "deleteAppointment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID lịch hẹn."
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted Appointment Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {},
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Appointment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/appointments/send/{id}": {
+            "get": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "xác nhận lịch hẹn",
+                "description": "Xác nhận lịch hẹn theo id",
+                "operationId": "acceptAppointmentById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID lịch hẹn."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin lịch hẹn",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "appointment_date": {
+                                                    "type": "Date",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25 12:00"
+                                                },
+                                                "deposit_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "booking_type": {
+                                                    "type": "string",
+                                                    "example": "online"
+                                                },
+                                                "appointment_type": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "total_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "confirmed"
+                                                },
+                                                "cancellation_reason": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment is not pending and cannot be updated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Appointment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -2981,6 +3696,14 @@
         {
             "name": "Roles",
             "description": "Vai trò"
+        },
+        {
+            "name": "Packages",
+            "description": "Gói khám"
+        },
+        {
+            "name": "Appointments",
+            "description": "Lịch hẹn"
         }
     ]
 }

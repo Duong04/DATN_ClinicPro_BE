@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apis\V1\ActionController;
+use App\Http\Controllers\Apis\V1\AppointmentController;
 use App\Http\Controllers\Apis\V1\AuthController;
 use App\Http\Controllers\Apis\V1\PermissionController;
 use App\Http\Controllers\Apis\V1\RoleController;
@@ -60,6 +61,17 @@ Route::prefix('v1')->group(function () {
                 Route::get('/{id}', 'show')->where('id', '[0-9]+')->middleware('jwt.auth');
                 Route::get('/{slug}', 'slug')->where('slug', '[A-Za-z0-9\-]+');
                 Route::put('/{id}', 'update')->middleware('jwt.auth');
+                Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
+            }
+        );
+    Route::controller(AppointmentController::class)->prefix('appointments')
+        ->group(
+            function () {
+                Route::get('/', 'index')->middleware('jwt.auth');
+                Route::post('/', 'store');
+                Route::get('/{id}', 'show')->middleware('jwt.auth');
+                Route::get('/send/{id}', 'update')->middleware('jwt.auth');
+                Route::post('/{id}', 'cancel')->middleware('jwt.auth');
                 Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
             }
         );

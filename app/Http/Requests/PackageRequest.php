@@ -41,6 +41,28 @@ class PackageRequest extends FormRequest
         return $rules;
     }
 
+    public function messages(): array
+    {
+        return [
+            'required' => ':attribute không được để trống!',
+            'max' => ':attribute không được lớn hơn :max ký tự!',
+            'unique' => ':attribute này đã tồn tại!',
+            'image' => ':attribute phải là một file ảnh hợp lệ!',
+        ];
+    }
+    /**
+     * Get custom attributes for validator errors.
+     */
+    public function attributes(): array
+    {
+        return [
+            'name' => 'Tên gói khám',
+            'description' => 'Mô tả',
+            'content' => 'Nội dung',
+            'image' => 'Hình ảnh'
+        ];
+    }
+
 
     protected function failedValidation(Validator $validator)
     {
