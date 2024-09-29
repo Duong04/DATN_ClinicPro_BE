@@ -39,4 +39,8 @@ class AuthController extends Controller
     public function logout() {
         return $this->authService->logout();
     }
+
+    public function verifyEmail($token) {
+        return $this->authService->verifyEmail($token);
+    }
 }

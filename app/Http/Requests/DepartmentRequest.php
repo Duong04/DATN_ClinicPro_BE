@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class DepartmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,15 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'fullname' => 'required|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8'
+            'name' => 'required|unique:departments,name',
+            'manager_id' => 'nullable|exists:users,id',
+            'description' => 'nullable'
         ];
+
+        if ($this->method() == 'PUT') {
+            $id = $this->route('id');
+            $rules['name'] = 'nullable|unique:departments,name,'.$id;
+        }
 
         return $rules;
     }
@@ -34,16 +39,14 @@ class RegisterRequest extends FormRequest
         return [
             'required' => ':attribute là bắt buộc!',
             'unique' => ':attribute này đã tồn tại!',
-            'min' => ':attribute không nhược nhỏ hơn :min kí tự!',
-            'max' => ':attribute không được lớn hơn :max kí tự',
-            'email' => 'Vui lòng nhập đúng định dạng email!'
+            'exists' => 'Giá trị của :attribute không tồn tại!',
         ];
     }
 
     public function attributes() {
         return [
-            'password' => 'Mật khẩu',
-            'fullname' => 'Họ và tên',
+            'name' => 'Tên',
+            'description' => 'Mô tả',
         ];
     }
 }

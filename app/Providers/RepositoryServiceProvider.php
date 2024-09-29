@@ -27,6 +27,8 @@ use App\Repositories\Patient\PatientRepository;
 use App\Repositories\Patient\PatientRepositoryInterface;
 use App\Repositories\UserInfo\UserInfoRepository;
 use App\Repositories\UserInfo\UserInfoRepositoryInterface;
+use App\Repositories\Department\DepartmentRepository;
+use App\Repositories\Department\DepartmentRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -47,6 +49,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserInfoRepositoryInterface::class, UserInfoRepository::class);
         $this->app->bind(PackageRepositoryInterface::class, PackageRepository::class);
         $this->app->bind(AppointmentRepositoryInterface::class, AppointmentRepository::class);
+        $this->app->bind(DepartmentRepositoryInterface::class, DepartmentRepository::class);
     }
 
     /**

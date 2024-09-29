@@ -25,7 +25,9 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'status',
-        'role_id'
+        'role_id',
+        'token',
+        'otp'
     ];
 
     public function role() {
@@ -47,7 +49,8 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
-        'deleted_at'
+        'deleted_at',
+        'email_verified_at'
     ];
 
     /**
