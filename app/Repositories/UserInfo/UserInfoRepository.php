@@ -15,8 +15,7 @@ class UserInfoRepository implements UserInfoRepositoryInterface {
         return UserInfo::create($data);
     }
     public function update($id, array $data) {
-        $userInfo = UserInfo::find($id);
-        return $userInfo->update($data);
+        return UserInfo::where('user_id', $id)->update($data);
     }
     public function delete($id) {
         $userInfo = UserInfo::find($id);

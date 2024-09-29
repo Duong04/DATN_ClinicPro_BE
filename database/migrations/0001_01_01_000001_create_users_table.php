@@ -156,9 +156,9 @@ return new class extends Migration
         Schema::create('medical_histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('patient_id');
-            $table->text('description');
-            $table->string('diagnosis');
-            $table->text('treatment');
+            $table->text('description')->nullable();
+            $table->string('diagnosis')->nullable();
+            $table->text('treatment')->nullable();
             $table->unsignedBigInteger('doctor_id');
             $table->timestamps();
 

@@ -13,6 +13,7 @@ use Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmail;
 use App\Models\User;
+use App\Http\Resources\UserResourceThree;
 
 class AuthService {
     private $userRepository;
@@ -44,7 +45,7 @@ class AuthService {
             $url = url("/api/v1/verify-email/$token");
             Mail::to($data['email'])->send(new VerifyEmail($url, $data['email']));
 
-            return response()->json(['message' => 'Đăng ký tài khoản thành công!'], 201);
+            return response()->json(['message' => 'Đăng ký tài khoản thành công, vui lòng kiểm tra mail để kích hoạt tài khoản!'], 201);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
@@ -60,8 +61,12 @@ class AuthService {
             }
 
             $user = auth()->user();
+            $status = [
+                'inactive' => 'chưa được kích hoạt',
+                'disabled' => 'đã bị vô hiệu hóa',
+            ];
             if ($user->status == 'disabled' || $user->status == 'inactive') {
-                return response()->json(['error' => 'Your account is ' . $user->status], 403);
+                return response()->json(['error' => 'Tài khoản của bạn ' . $status[$user->status]], 403);
             }
 
             return $this->respondWithToken($token);
@@ -82,7 +87,7 @@ class AuthService {
     public function profile()
     {
         try {
-            return response()->json(['data' => new UserResource(auth()->user()->load('userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard','role.permissions.actions'))], 200);
+            return response()->json(['data' => new UserResourceThree(auth()->user()->load('userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard','role.permissions.actions'))], 200);
         } catch (Exception $e) {
             return response()->json(['error' => 'Bạn không có quyền truy cập'], 401);
         }
