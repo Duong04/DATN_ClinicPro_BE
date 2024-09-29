@@ -27,15 +27,16 @@ class MedicalHistoryRequest extends FormRequest
             'diagnosis' => 'required|string',
             'treatment' => 'required|string',
             'doctor_id' => 'required|exists:doctors,id',
-            'files.*.file' => 'required|file',
-            'files.*.description' => 'nullable'
+            'files.*.file' => 'nullable|file',
+            'files.*.description' => 'nullable',
         ];
 
         if ($this->method() == 'PUT') {
-            $rules['patient_id'] = 'nullable';
-            $rules['doctor_id'] = 'nullable';
+            $rules['patient_id'] = 'nullable|exists:patients,id';
+            $rules['doctor_id'] = 'nullable|exists:doctors,id';
             $rules['diagnosis'] = 'nullable';
             $rules['treatment'] = 'nullable';
+            $rules['files.*.id'] = 'nullable';
         }
 
         return $rules;

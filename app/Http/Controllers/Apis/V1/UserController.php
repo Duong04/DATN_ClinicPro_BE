@@ -23,7 +23,7 @@ class UserController extends Controller
     }
 
     public function update(UserRequest $request, $id) {
-        return $this->userService->update($id, $request);
+        return $this->userService->update($request, $id);
     }
 
     public function show($id) {

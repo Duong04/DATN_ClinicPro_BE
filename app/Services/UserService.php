@@ -6,6 +6,7 @@ use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserInfo\UserInfoRepositoryInterface;
 use App\Models\IdentityCard;
 use App\Services\CloundinaryService;
+use App\Models\Doctor;
 
 class UserService {
     private $userRepository;
@@ -51,6 +52,13 @@ class UserService {
                 $data['user_info']['avatar'] = $this->cloundinaryService->upload($file, $folder);
             }
     
+            if ($data['role_id'] == 1) {
+                if (isset($data['doctor'])) {
+                    $data['doctor']['user_id'] = $user->id;
+                    Doctor::create($data['doctor']);
+                }
+            }
+
             $identityCard = null;
             if (isset($data['user_info']['identity_card'])) {
                 $identityCard = IdentityCard::create($data['user_info']['identity_card']);
@@ -91,6 +99,18 @@ class UserService {
                 $folder = 'avatars';
     
                 $data['user_info']['avatar'] = $this->cloundinaryService->upload($file, $folder);
+            }
+
+            if (isset($data['role_id']) && $data['role_id'] == 1) {
+                if (isset($data['doctor'])) {
+                    $checkData = Doctor::where('user_id', $id)->first();
+                    if (empty($checkData)) {
+                        $data['doctor']['user_id'] = $id;
+                        Doctor::create($data['doctor']);
+                    }else {
+                        $checkData->update($data['doctor']);
+                    }
+                }
             }
     
             if (isset($data['user_info']['identity_card'])) {

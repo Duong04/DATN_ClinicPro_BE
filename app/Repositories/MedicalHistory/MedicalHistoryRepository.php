@@ -8,15 +8,26 @@ class MedicalHistoryRepository implements MedicalHistoryRepositoryInterface {
         return MedicalHistory::all();
     }
     public function paginate($limit, $q) {
-        $roles = MedicalHistory::with('manager')->withCount('users');
+        $medicalHistories = MedicalHistory::with('files', 'doctor.user.userInfo', 'patient.patientInfo');
         if ($q) {
-            $roles->where('name', 'like', "%{$q}%");
+            $medicalHistories->where('diagnosis', 'like', "%{$q}%")
+            ->orWhere('treatment', 'like', "%{$q}%")
+            ->orWhereHas('doctor.user.userInfo', function($query) use ($q) {
+                $query->where('fullname', 'like', "%{$q}%");
+            })
+            ->orWhereHas('doctor.user', function($query) use ($q) {
+                $query->where('email', 'like', "%{$q}%");
+            })
+            ->orWhereHas('patient.patientInfo', function($query) use ($q) {
+                $query->where('fullname', 'like', "%{$q}%")
+                ->orWhere('email', 'like', "%{$q}%");;
+            });
         }
 
-        return $limit ? $roles->paginate($limit) : $roles->get();
+        return $limit ? $medicalHistories->paginate($limit) : $medicalHistories->get();
     }
     public function find($id) {
-        return MedicalHistory::with('manager')->withCount('users')->find($id);
+        return MedicalHistory::with('files', 'doctor', 'patient')->find($id);
     }
     public function create(array $data) {
         return MedicalHistory::create($data);
