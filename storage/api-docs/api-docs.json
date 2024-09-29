@@ -52,7 +52,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Register Successfully!"
+                                            "example": "Đăng ký tài khoản thành công, vui lòng kiểm tra mail để kích hoạt tài khoản!"
                                         }
                                     },
                                     "type": "object"
@@ -117,10 +117,11 @@
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "access_token": {
                                             "type": "string",
-                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3Mjc1Mzg4MzMsImV4cCI6MTcyNzU0MjQzMywibmJmIjoxNzI3NTM4ODMzLCJqdGkiOiJkeXRuRndZRmN2SWtzNWtPIiwic3ViIjoiMTQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.RZWaDc_LdGOQDH9nBxM3BWNZzTBEf4J69jO1j4DBFeA"
                                         },
                                         "token_type": {
                                             "type": "string",
@@ -135,92 +136,64 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "integer",
-                                                    "example": 1
+                                                    "example": 14
                                                 },
-                                                "fullname": {
+                                                "email": {
                                                     "type": "string",
-                                                    "example": "Nguyễn Thành Đường"
+                                                    "example": "johndoe333@example.com"
                                                 },
                                                 "status": {
                                                     "type": "string",
                                                     "example": "active"
-                                                },
-                                                "email": {
-                                                    "type": "string",
-                                                    "example": "johndoe@example.com"
-                                                },
-                                                "email_verified_at": {
-                                                    "type": "string",
-                                                    "nullable": true,
-                                                    "example": null
-                                                },
-                                                "role_id": {
-                                                    "type": "integer",
-                                                    "example": 2
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-11T16:39:47.000000Z"
-                                                },
-                                                "updated_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-11T16:39:47.000000Z"
                                                 },
                                                 "role": {
                                                     "type": "object",
                                                     "properties": {
                                                         "id": {
                                                             "type": "integer",
-                                                            "example": 2
+                                                            "example": 6
                                                         },
                                                         "name": {
                                                             "type": "string",
-                                                            "example": "patient"
+                                                            "example": "manager"
                                                         },
                                                         "description": {
                                                             "type": "string",
-                                                            "example": "Bệnh nhân"
+                                                            "example": "Giám đốc"
                                                         },
-                                                        "type_id": {
-                                                            "type": "integer",
-                                                            "example": 2
-                                                        },
-                                                        "created_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-11T10:03:24.000000Z"
-                                                        },
-                                                        "updated_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-11T10:03:24.000000Z"
-                                                        },
-                                                        "type": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "integer",
-                                                                    "example": 2
-                                                                },
-                                                                "name": {
-                                                                    "type": "string",
-                                                                    "example": "customer"
-                                                                },
-                                                                "redirect_url": {
-                                                                    "type": "string",
-                                                                    "example": "home"
-                                                                },
-                                                                "created_at": {
-                                                                    "type": "string",
-                                                                    "format": "date-time",
-                                                                    "example": "2024-09-11T10:03:19.000000Z"
-                                                                },
-                                                                "updated_at": {
-                                                                    "type": "string",
-                                                                    "format": "date-time",
-                                                                    "example": "2024-09-11T10:03:19.000000Z"
+                                                        "permissions": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "example": 1
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "Users Management"
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "example": "Quản lý tài khoản"
+                                                                    },
+                                                                    "actions": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "id": {
+                                                                                    "type": "integer",
+                                                                                    "example": 1
+                                                                                },
+                                                                                "name": {
+                                                                                    "type": "string",
+                                                                                    "example": "CREATE"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -228,8 +201,7 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -244,8 +216,7 @@
                                             "type": "string",
                                             "example": "Unauthorized"
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -260,8 +231,7 @@
                                             "type": "string",
                                             "example": "Validation error message"
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -369,29 +339,6 @@
                                                     "format": "date-time",
                                                     "example": "2024-08-21T15:30:00Z"
                                                 },
-                                                "role": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "integer",
-                                                            "example": 2
-                                                        },
-                                                        "name": {
-                                                            "type": "string",
-                                                            "example": "patient"
-                                                        },
-                                                        "description": {
-                                                            "type": "string",
-                                                            "example": "Bệnh nhân"
-                                                        },
-                                                        "permissions": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "type": "string"
-                                                            }
-                                                        }
-                                                    }
-                                                },
                                                 "user_info": {
                                                     "type": "object",
                                                     "properties": {
@@ -432,15 +379,37 @@
                                                             "type": "string",
                                                             "example": "male"
                                                         },
+                                                        "insurance_number": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "example": "12376274672467"
+                                                        },
                                                         "created_at": {
                                                             "type": "string",
                                                             "format": "date-time",
-                                                            "example": "2024-09-22T10:08:14.000000Z"
+                                                            "example": "2024-09-27T12:12:53.000000Z"
                                                         },
                                                         "updated_at": {
                                                             "type": "string",
                                                             "format": "date-time",
-                                                            "example": "2024-09-23T15:53:17.000000Z"
+                                                            "example": "2024-09-27T12:12:53.000000Z"
+                                                        },
+                                                        "identity_card": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "type_name": {
+                                                                    "type": "string",
+                                                                    "example": "CMND"
+                                                                },
+                                                                "identity_card_number": {
+                                                                    "type": "string",
+                                                                    "example": "123456789"
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -2386,7 +2355,7 @@
                             "type": "integer",
                             "example": 2
                         },
-                        "description": "Trang hiện tại của các mục."
+                        "description": "Trang tiếp theo"
                     },
                     {
                         "name": "q",
@@ -3011,6 +2980,11 @@
         "/api/v1/departments": {
             "get": {
                 "tags": ["Departments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "summary": "Lấy danh sách các phòng ban với phân trang",
                 "description": "Lấy danh sách các phòng ban có hỗ trợ tìm kiếm và phân trang.",
                 "operationId": "getDepartments",
@@ -3023,6 +2997,15 @@
                             "type": "integer"
                         },
                         "description": "Số lượng bản ghi trên mỗi trang."
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Trang tiếp theo"
                     },
                     {
                         "name": "q",
@@ -3151,6 +3134,11 @@
                 "summary": "Tạo mới phòng ban",
                 "description": "Tạo mới một phòng ban.",
                 "operationId": "createDepartment",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -3252,6 +3240,11 @@
                 "summary": "Lấy thông tin phòng ban theo ID",
                 "description": "Lấy thông tin chi tiết của một phòng ban dựa trên ID.",
                 "operationId": "getDepartmentById",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -3365,6 +3358,11 @@
                 "summary": "Cập nhật thông tin phòng ban",
                 "description": "Cập nhật thông tin phòng ban theo ID.",
                 "operationId": "updateDepartment",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -3440,6 +3438,11 @@
                 "summary": "Xóa phòng ban",
                 "description": "Xóa phòng ban theo ID.",
                 "operationId": "deleteDepartment",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -3509,6 +3512,11 @@
                 "summary": "Lấy danh sách người dùng phân trang",
                 "description": "API này trả về danh sách người dùng với phân trang và khả năng tìm kiếm theo từ khóa.",
                 "operationId": "getUsersPaginate",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "limit",
@@ -3553,115 +3561,109 @@
                                             "type": "array",
                                             "items": {
                                                 "properties": {
-                                                "id": {
-                                                    "type": "integer",
-                                                    "example": 12
-                                                },
-                                                "email": {
-                                                    "type": "string",
-                                                    "example": "johndoe33@example.com"
-                                                },
-                                                "status": {
-                                                    "type": "string",
-                                                    "example": "active"
-                                                },
-                                                "role": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "integer",
-                                                            "example": 1
-                                                        },
-                                                        "name": {
-                                                            "type": "string",
-                                                            "example": "doctor"
-                                                        },
-                                                        "description": {
-                                                            "type": "string",
-                                                            "example": "Bác sĩ"
-                                                        },
-                                                        "permissions": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "type": "object"
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 12
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "johndoe33@example.com"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "active"
+                                                    },
+                                                    "role": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "doctor"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "Bác sĩ"
                                                             }
                                                         }
-                                                    }
-                                                },
-                                                "user_info": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "integer",
-                                                            "example": 2
-                                                        },
-                                                        "fullname": {
-                                                            "type": "string",
-                                                            "example": "Nguyễn Văn A"
-                                                        },
-                                                        "address": {
-                                                            "type": "string",
-                                                            "example": "123 Main St, City, Country"
-                                                        },
-                                                        "avatar": {
-                                                            "type": "string",
-                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                        },
-                                                        "phone_number": {
-                                                            "type": "string",
-                                                            "example": "0987654321"
-                                                        },
-                                                        "gender": {
-                                                            "type": "string",
-                                                            "example": "male"
-                                                        },
-                                                        "user_id": {
-                                                            "type": "integer",
-                                                            "example": 12
-                                                        },
-                                                        "dob": {
-                                                            "type": "string",
-                                                            "format": "date",
-                                                            "example": "1990-01-01"
-                                                        },
-                                                        "identity_card_id": {
-                                                            "type": "integer",
-                                                            "example": 3
-                                                        },
-                                                        "department_id": {
-                                                            "type": "integer",
-                                                            "example": 2
-                                                        },
-                                                        "created_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-27T12:10:32.000000Z"
-                                                        },
-                                                        "updated_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-27T12:10:32.000000Z"
-                                                        },
-                                                        "identity_card": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "integer",
-                                                                    "example": 3
-                                                                },
-                                                                "type_name": {
-                                                                    "type": "string",
-                                                                    "example": "CMND"
-                                                                },
-                                                                "identity_card_number": {
-                                                                    "type": "string",
-                                                                    "example": "123456789"
+                                                    },
+                                                    "user_info": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "fullname": {
+                                                                "type": "string",
+                                                                "example": "Nguyễn Văn A"
+                                                            },
+                                                            "address": {
+                                                                "type": "string",
+                                                                "example": "123 Main St, City, Country"
+                                                            },
+                                                            "avatar": {
+                                                                "type": "string",
+                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                            },
+                                                            "phone_number": {
+                                                                "type": "string",
+                                                                "example": "0987654321"
+                                                            },
+                                                            "gender": {
+                                                                "type": "string",
+                                                                "example": "male"
+                                                            },
+                                                            "user_id": {
+                                                                "type": "integer",
+                                                                "example": 12
+                                                            },
+                                                            "dob": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "1990-01-01"
+                                                            },
+                                                            "identity_card_id": {
+                                                                "type": "integer",
+                                                                "example": 3
+                                                            },
+                                                            "department_id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
+                                                            },
+                                                            "identity_card": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "example": 3
+                                                                    },
+                                                                    "type_name": {
+                                                                        "type": "string",
+                                                                        "example": "CMND"
+                                                                    },
+                                                                    "identity_card_number": {
+                                                                        "type": "string",
+                                                                        "example": "123456789"
+                                                                    }
                                                                 }
                                                             }
                                                         }
                                                     }
                                                 }
-                                            }
                                             }
                                         },
                                         "prev_page_url": {
@@ -3706,6 +3708,11 @@
                 "summary": "Tạo tài khoản người dùng mới",
                 "description": "Tạo tài khoản người dùng mới với các thông tin cá nhân, avatar và thông tin thẻ căn cước.",
                 "operationId": "createUser",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -3908,6 +3915,11 @@
                 "summary": "Lấy thông tin chi tiết người dùng",
                 "description": "API này dùng để lấy thông tin chi tiết của một người dùng dựa trên ID.",
                 "operationId": "findUserById",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -3957,12 +3969,6 @@
                                                         "description": {
                                                             "type": "string",
                                                             "example": "Bác sĩ"
-                                                        },
-                                                        "permissions": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "type": "object"
-                                                            }
                                                         }
                                                     }
                                                 },
@@ -4085,6 +4091,11 @@
                 "summary": "Cập nhật thông tin tài khoản người dùng",
                 "description": "Cập nhật thông tin tài khoản người dùng, bao gồm các thông tin cá nhân, avatar và thông tin thẻ căn cước.",
                 "operationId": "updateUser",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -4931,6 +4942,291 @@
                     },
                     "500": {
                         "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/medical-histories": {
+            "post": {
+                "tags": ["Medical Histories"],
+                "summary": "Tạo lịch sử bệnh án mới",
+                "description": "API này tạo một lịch sử bệnh án mới.",
+                "operationId": "createMedicalHistory",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                        "patient_id": {
+                            "type": "integer",
+                            "description": "ID của bệnh nhân",
+                            "example": 1
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "Mô tả chung cho lịch sử bệnh án",
+                            "example": "Bệnh án của bệnh nhân A"
+                        },
+                        "diagnosis": {
+                            "type": "string",
+                            "description": "Chẩn đoán bệnh",
+                            "example": "Cúm A"
+                        },
+                        "treatment": {
+                            "type": "string",
+                            "description": "Phương pháp điều trị",
+                            "example": "Nghỉ ngơi, uống thuốc"
+                        },
+                        "doctor_id": {
+                            "type": "integer",
+                            "description": "ID của bác sĩ",
+                            "example": 1
+                        },
+                        "files": {
+                            "type": "array",
+                            "description": "Danh sách các file đính kèm với mô tả",
+                            "items": {
+                            "type": "object",
+                            "properties": {
+                                "file": {
+                                "type": "string",
+                                "description": "File ảnh (mã hóa base64 hoặc URL)",
+                                "example": "file"
+                                },
+                                "description": {
+                                "type": "string",
+                                "description": "Mô tả cho file",
+                                "example": "Kết quả chụp X-quang"
+                                }
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+                },
+                "responses": {
+                "201": {
+                    "description": "Tạo lịch sử bệnh án thành công",
+                    "content": {
+                    "application/json": {
+                        "schema": {
+                        "type": "object",
+                        "properties": {
+                            "message": {
+                            "type": "string",
+                            "example": "Tạo lịch sử bệnh án thành công!"
+                            },
+                            "data": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                "type": "integer",
+                                "description": "ID của lịch sử bệnh án",
+                                "example": 101
+                                },
+                                "patient_id": {
+                                "type": "integer",
+                                "description": "ID của bệnh nhân",
+                                "example": 1
+                                },
+                                "description": {
+                                "type": "string",
+                                "description": "Mô tả chung cho lịch sử bệnh án",
+                                "example": "Bệnh án của bệnh nhân A"
+                                },
+                                "diagnosis": {
+                                "type": "string",
+                                "description": "Chẩn đoán bệnh",
+                                "example": "Cúm A"
+                                },
+                                "treatment": {
+                                "type": "string",
+                                "description": "Phương pháp điều trị",
+                                "example": "Nghỉ ngơi, uống thuốc"
+                                },
+                                "doctor_id": {
+                                "type": "integer",
+                                "description": "ID của bác sĩ",
+                                "example": 1
+                                },
+                                "files": {
+                                "type": "array",
+                                "description": "Danh sách các file đính kèm",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                    "file_url": {
+                                        "type": "string",
+                                        "description": "URL của file đã lưu",
+                                        "example": "http://example.com/storage/medical_files/file1.jpg"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Mô tả của file",
+                                        "example": "Kết quả chụp X-quang"
+                                    }
+                                    }
+                                }
+                                },
+                                "created_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Ngày giờ tạo lịch sử bệnh án",
+                                "example": "2024-09-29T12:34:56Z"
+                                },
+                                "updated_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Ngày giờ cập nhật lịch sử bệnh án",
+                                "example": "2024-09-29T12:34:56Z"
+                                }
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                },
+                "400": {
+                    "description": "Lỗi yêu cầu",
+                    "content": {
+                    "application/json": {
+                        "schema": {
+                        "type": "object",
+                        "properties": {
+                            "error": {
+                            "type": "string",
+                            "example": "Chi tiết lỗi xảy ra."
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+                }
+            }
+        },
+        "/api/v1/medical-histories/{id}": {
+            "put": {
+                "tags": ["Medical Histories"],
+                "summary": "Cập nhật lịch sử bệnh án",
+                "description": "API này cập nhật thông tin lịch sử bệnh án theo ID.",
+                "operationId": "updateMedicalHistory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của lịch sử bệnh án cần cập nhật"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MedicalHistoryUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật lịch sử bệnh án thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cập nhật lịch sử bệnh án thành công!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi yêu cầu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Chi tiết lỗi xảy ra."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Medical Histories"],
+                "summary": "Xóa lịch sử bệnh án",
+                "description": "API này xóa một lịch sử bệnh án theo ID.",
+                "operationId": "deleteMedicalHistory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của lịch sử bệnh án cần xóa"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa lịch sử bệnh án thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Xóa lịch sử bệnh án thành công!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy lịch sử bệnh án",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Không tìm thấy lịch sử bệnh án"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
