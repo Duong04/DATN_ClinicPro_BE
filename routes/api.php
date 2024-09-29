@@ -99,7 +99,7 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'delete');
         });
 
-    Route::controller(MedicalHistoryController::class)->prefix('medical-histories')
+    Route::controller(MedicalHistoryController::class)->prefix('medical-histories')->middleware('jwt.auth')
         ->group(function () {
             Route::get('/', 'paginate');
             Route::get('/{id}', 'show');

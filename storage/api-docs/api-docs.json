@@ -707,11 +707,6 @@
         "/api/v1/packages": {
             "get": {
                 "tags": ["Packages"],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
                 "summary": "Lấy danh sách gói khám",
                 "description": "Lấy tất cả danh sách gói khám.",
                 "operationId": "getpackage",
@@ -912,11 +907,6 @@
         "/api/v1/packages/{slug}": {
             "get": {
                 "tags": ["Packages"],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
                 "summary": "Lấy thông tin gói khám theo slug",
                 "description": "Lấy thông tin gói khám theo slug.",
                 "operationId": "getPackageBySlug",
@@ -5727,6 +5717,10 @@
         {
             "name": "Appointments",
             "description": "Lịch hẹn"
+        },
+        {
+            "name": "Medical Histories",
+            "description": "Lịch sử bệnh án"
         }
     ]
 }
