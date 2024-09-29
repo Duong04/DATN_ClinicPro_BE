@@ -159,7 +159,7 @@
                                                         },
                                                         "description": {
                                                             "type": "string",
-                                                            "example": "Giám đốc"
+                                                            "example": "Quản lý"
                                                         },
                                                         "permissions": {
                                                             "type": "array",
@@ -196,6 +196,20 @@
                                                                     }
                                                                 }
                                                             }
+                                                        }
+                                                    }
+                                                },
+                                                "user_info": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "fullname": {
+                                                            "type": "string",
+                                                            "example": "Nguyễn Văn B"
+                                                        },
+                                                        "avatar": {
+                                                            "type": "string",
+                                                            "format": "uri",
+                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
                                                         }
                                                     }
                                                 }
@@ -693,11 +707,6 @@
         "/api/v1/packages": {
             "get": {
                 "tags": ["Packages"],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
                 "summary": "Lấy danh sách gói khám",
                 "description": "Lấy tất cả danh sách gói khám.",
                 "operationId": "getpackage",
@@ -898,11 +907,6 @@
         "/api/v1/packages/{slug}": {
             "get": {
                 "tags": ["Packages"],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
                 "summary": "Lấy thông tin gói khám theo slug",
                 "description": "Lấy thông tin gói khám theo slug.",
                 "operationId": "getPackageBySlug",
@@ -3807,6 +3811,23 @@
                                                 }
                                             }
                                         }
+                                    },
+                                    "doctor": {
+                                        "type": "object",
+                                        "properties": {
+                                            "specialty": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "example": "specialty",
+                                                "description": "Chuyên khoa"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "example": "Mô tả chuyên khoa",
+                                                "description": "Mô tả"
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -4199,6 +4220,23 @@
                                                         "description": "Số thẻ căn cước của người dùng (tùy chọn)."
                                                     }
                                                 }
+                                            }
+                                        }
+                                    },
+                                    "doctor": {
+                                        "type": "object",
+                                        "properties": {
+                                            "specialty": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "example": "specialty",
+                                                "description": "Chuyên khoa"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "example": "Mô tả chuyên khoa",
+                                                "description": "Mô tả"
                                             }
                                         }
                                     }
@@ -4947,6 +4985,169 @@
             }
         },
         "/api/v1/medical-histories": {
+            "get": {
+                "tags": ["Medical Histories"],
+                "summary": "Lấy danh sách lịch sử bệnh án có phân trang",
+                "description": "API này trả về danh sách lịch sử bệnh án có phân trang và hỗ trợ tìm kiếm theo từ khóa.",
+                "operationId": "getMedicalHistoriesPaginate",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Số lượng lịch sử bệnh án trả về trên mỗi trang",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Trang tiếp theo",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Từ khóa tìm kiếm",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Cúm A"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách lịch sử bệnh án trả về thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/MedicalHistory"
+                                            }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "description": "URL của trang trước",
+                                            "example": "http://example.com/api/v1/medical-histories?page=1"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "description": "URL của trang tiếp theo",
+                                            "example": "http://example.com/api/v1/medical-histories?page=3"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "description": "Tổng số lượng lịch sử bệnh án",
+                                            "example": 100
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 11,
+                                            "description": "Bệnh án của bệnh nhân A",
+                                            "diagnosis": "Cúm A",
+                                            "treatment": "Nghỉ ngơi, uống thuốc",
+                                            "created_at": "2024-09-29T14:46:14.000000Z",
+                                            "updated_at": "2024-09-29T14:46:14.000000Z",
+                                            "files": [
+                                                {
+                                                    "id": 3,
+                                                    "file": "https://i.pinimg.com/736x/6b/a8/61/6ba861c41233ee7bc9c65c3e5cbfe75a.jpg",
+                                                    "description": "Kết quả chụp X-quang okok",
+                                                    "medical_history_id": 11
+                                                }
+                                            ],
+                                            "doctor": {
+                                                "id": 2,
+                                                "specialty": "specialty 1",
+                                                "email": "johndoe333@example.com",
+                                                "fullname": "Nguyễn Văn A",
+                                                "phone_number": null,
+                                                "gender": "other"
+                                            },
+                                            "patient": {
+                                                "id": 1,
+                                                "fullname": "Nguyễn Văn B",
+                                                "email": "johndoe@example.com",
+                                                "phone_number": "1234567890",
+                                                "gender": "male"
+                                            }
+                                        },
+                                        {
+                                            "id": 12,
+                                            "description": "Bệnh án của bệnh nhân B",
+                                            "diagnosis": "Sốt xuất huyết",
+                                            "treatment": "Truyền dịch, nghỉ ngơi",
+                                            "created_at": "2024-09-29T15:00:00.000000Z",
+                                            "updated_at": "2024-09-29T15:00:00.000000Z",
+                                            "files": [
+                                                {
+                                                    "id": 4,
+                                                    "file": "https://i.pinimg.com/736x/9c/a1/91/9ca191e8e4c582438b65b4a5e5a1f41a.jpg",
+                                                    "description": "Kết quả xét nghiệm máu",
+                                                    "medical_history_id": 12
+                                                }
+                                            ],
+                                            "doctor": {
+                                                "id": 3,
+                                                "specialty": "specialty 2",
+                                                "email": "janedoe@example.com",
+                                                "fullname": "Nguyễn Văn C",
+                                                "phone_number": "0987654321",
+                                                "gender": "female"
+                                            },
+                                            "patient": {
+                                                "id": 2,
+                                                "fullname": "Nguyễn Thị D",
+                                                "email": "janedoe@example.com",
+                                                "phone_number": "1231231234",
+                                                "gender": "female"
+                                            }
+                                        }
+                                    ],
+                                    "prev_page_url": "http://example.com/api/v1/medical-histories?page=1",
+                                    "next_page_url": "http://example.com/api/v1/medical-histories?page=3",
+                                    "total": 100
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi yêu cầu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Chi tiết lỗi xảy ra."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": ["Medical Histories"],
                 "summary": "Tạo lịch sử bệnh án mới",
@@ -4958,169 +5159,361 @@
                     }
                 ],
                 "requestBody": {
-                "required": true,
-                "content": {
-                    "application/json": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                        "patient_id": {
-                            "type": "integer",
-                            "description": "ID của bệnh nhân",
-                            "example": 1
-                        },
-                        "description": {
-                            "type": "string",
-                            "description": "Mô tả chung cho lịch sử bệnh án",
-                            "example": "Bệnh án của bệnh nhân A"
-                        },
-                        "diagnosis": {
-                            "type": "string",
-                            "description": "Chẩn đoán bệnh",
-                            "example": "Cúm A"
-                        },
-                        "treatment": {
-                            "type": "string",
-                            "description": "Phương pháp điều trị",
-                            "example": "Nghỉ ngơi, uống thuốc"
-                        },
-                        "doctor_id": {
-                            "type": "integer",
-                            "description": "ID của bác sĩ",
-                            "example": 1
-                        },
-                        "files": {
-                            "type": "array",
-                            "description": "Danh sách các file đính kèm với mô tả",
-                            "items": {
-                            "type": "object",
-                            "properties": {
-                                "file": {
-                                "type": "string",
-                                "description": "File ảnh (mã hóa base64 hoặc URL)",
-                                "example": "file"
-                                },
-                                "description": {
-                                "type": "string",
-                                "description": "Mô tả cho file",
-                                "example": "Kết quả chụp X-quang"
-                                }
-                            }
-                            }
-                        }
-                        }
-                    }
-                    }
-                }
-                },
-                "responses": {
-                "201": {
-                    "description": "Tạo lịch sử bệnh án thành công",
+                    "required": true,
                     "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "message": {
-                            "type": "string",
-                            "example": "Tạo lịch sử bệnh án thành công!"
-                            },
-                            "data": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                "type": "integer",
-                                "description": "ID của lịch sử bệnh án",
-                                "example": 101
-                                },
-                                "patient_id": {
-                                "type": "integer",
-                                "description": "ID của bệnh nhân",
-                                "example": 1
-                                },
-                                "description": {
-                                "type": "string",
-                                "description": "Mô tả chung cho lịch sử bệnh án",
-                                "example": "Bệnh án của bệnh nhân A"
-                                },
-                                "diagnosis": {
-                                "type": "string",
-                                "description": "Chẩn đoán bệnh",
-                                "example": "Cúm A"
-                                },
-                                "treatment": {
-                                "type": "string",
-                                "description": "Phương pháp điều trị",
-                                "example": "Nghỉ ngơi, uống thuốc"
-                                },
-                                "doctor_id": {
-                                "type": "integer",
-                                "description": "ID của bác sĩ",
-                                "example": 1
-                                },
-                                "files": {
-                                "type": "array",
-                                "description": "Danh sách các file đính kèm",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                    "file_url": {
-                                        "type": "string",
-                                        "description": "URL của file đã lưu",
-                                        "example": "http://example.com/storage/medical_files/file1.jpg"
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "patient_id": {
+                                        "type": "integer",
+                                        "description": "ID của bệnh nhân",
+                                        "example": 1
                                     },
                                     "description": {
                                         "type": "string",
-                                        "description": "Mô tả của file",
-                                        "example": "Kết quả chụp X-quang"
-                                    }
+                                        "description": "Mô tả chung cho lịch sử bệnh án",
+                                        "example": "Bệnh án của bệnh nhân A"
+                                    },
+                                    "diagnosis": {
+                                        "type": "string",
+                                        "description": "Chẩn đoán bệnh",
+                                        "example": "Cúm A"
+                                    },
+                                    "treatment": {
+                                        "type": "string",
+                                        "description": "Phương pháp điều trị",
+                                        "example": "Nghỉ ngơi, uống thuốc"
+                                    },
+                                    "doctor_id": {
+                                        "type": "integer",
+                                        "description": "ID của bác sĩ",
+                                        "example": 1
+                                    },
+                                    "files": {
+                                        "type": "array",
+                                        "description": "Danh sách các file đính kèm với mô tả",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "file": {
+                                                    "type": "string",
+                                                    "description": "File ảnh (mã hóa base64 hoặc URL)",
+                                                    "example": "file"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "description": "Mô tả cho file",
+                                                    "example": "Kết quả chụp X-quang"
+                                                }
+                                            }
+                                        }
                                     }
                                 }
-                                },
-                                "created_at": {
-                                "type": "string",
-                                "format": "date-time",
-                                "description": "Ngày giờ tạo lịch sử bệnh án",
-                                "example": "2024-09-29T12:34:56Z"
-                                },
-                                "updated_at": {
-                                "type": "string",
-                                "format": "date-time",
-                                "description": "Ngày giờ cập nhật lịch sử bệnh án",
-                                "example": "2024-09-29T12:34:56Z"
-                                }
-                            }
                             }
                         }
-                        }
-                    }
                     }
                 },
-                "400": {
-                    "description": "Lỗi yêu cầu",
-                    "content": {
-                    "application/json": {
-                        "schema": {
-                        "type": "object",
-                        "properties": {
-                            "error": {
-                            "type": "string",
-                            "example": "Chi tiết lỗi xảy ra."
+                "responses": {
+                    "201": {
+                        "description": "Tạo lịch sử bệnh án thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tạo lịch sử bệnh án thành công!"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "description": "ID của lịch sử bệnh án",
+                                                    "example": 101
+                                                },
+                                                "patient_id": {
+                                                    "type": "integer",
+                                                    "description": "ID của bệnh nhân",
+                                                    "example": 1
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "description": "Mô tả chung cho lịch sử bệnh án",
+                                                    "example": "Bệnh án của bệnh nhân A"
+                                                },
+                                                "diagnosis": {
+                                                    "type": "string",
+                                                    "description": "Chẩn đoán bệnh",
+                                                    "example": "Cúm A"
+                                                },
+                                                "treatment": {
+                                                    "type": "string",
+                                                    "description": "Phương pháp điều trị",
+                                                    "example": "Nghỉ ngơi, uống thuốc"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "integer",
+                                                    "description": "ID của bác sĩ",
+                                                    "example": 1
+                                                },
+                                                "files": {
+                                                    "type": "array",
+                                                    "description": "Danh sách các file đính kèm",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "file_url": {
+                                                                "type": "string",
+                                                                "description": "URL của file đã lưu",
+                                                                "example": "http://example.com/storage/medical_files/file1.jpg"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "description": "Mô tả của file",
+                                                                "example": "Kết quả chụp X-quang"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "description": "Ngày giờ tạo lịch sử bệnh án",
+                                                    "example": "2024-09-29T12:34:56Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "description": "Ngày giờ cập nhật lịch sử bệnh án",
+                                                    "example": "2024-09-29T12:34:56Z"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Lỗi yêu cầu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Chi tiết lỗi xảy ra."
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
-                    }
-                }
                 }
             }
         },
         "/api/v1/medical-histories/{id}": {
+            "get": {
+                "tags": ["Medical Histories"],
+                "summary": "Lấy thông tin chi tiết lịch sử bệnh án",
+                "description": "API này lấy thông tin chi tiết của một lịch sử bệnh án dựa vào ID.",
+                "operationId": "getMedicalHistoryById",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID của lịch sử bệnh án cần lấy",
+                        "schema": {
+                            "type": "integer",
+                            "example": 11
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin chi tiết của lịch sử bệnh án",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "description": "ID của lịch sử bệnh án",
+                                                    "example": 11
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "description": "Mô tả của lịch sử bệnh án",
+                                                    "example": "Bệnh án của bệnh nhân A"
+                                                },
+                                                "diagnosis": {
+                                                    "type": "string",
+                                                    "description": "Chẩn đoán bệnh",
+                                                    "example": "Cúm A"
+                                                },
+                                                "treatment": {
+                                                    "type": "string",
+                                                    "description": "Phương pháp điều trị",
+                                                    "example": "Nghỉ ngơi, uống thuốc"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "description": "Thời gian tạo",
+                                                    "example": "2024-09-29T14:46:14.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "description": "Thời gian cập nhật",
+                                                    "example": "2024-09-29T14:46:14.000000Z"
+                                                },
+                                                "files": {
+                                                    "type": "array",
+                                                    "description": "Danh sách các file đính kèm",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "description": "ID của file",
+                                                                "example": 3
+                                                            },
+                                                            "file": {
+                                                                "type": "string",
+                                                                "description": "URL của file",
+                                                                "example": "https://i.pinimg.com/736x/6b/a8/61/6ba861c41233ee7bc9c65c3e5cbfe75a.jpg"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "description": "Mô tả của file",
+                                                                "example": "Kết quả chụp X-quang okok"
+                                                            },
+                                                            "medical_history_id": {
+                                                                "type": "integer",
+                                                                "description": "ID của lịch sử bệnh án liên kết với file",
+                                                                "example": 11
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "doctor": {
+                                                    "type": "object",
+                                                    "description": "Thông tin của bác sĩ",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "description": "ID của bác sĩ",
+                                                            "example": 2
+                                                        },
+                                                        "specialty": {
+                                                            "type": "string",
+                                                            "description": "Chuyên khoa của bác sĩ",
+                                                            "example": "specialty 1"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "description": "Email của bác sĩ",
+                                                            "example": "johndoe333@example.com"
+                                                        },
+                                                        "fullname": {
+                                                            "type": "string",
+                                                            "description": "Họ tên của bác sĩ",
+                                                            "example": "Nguyễn Văn A"
+                                                        },
+                                                        "phone_number": {
+                                                            "type": "string",
+                                                            "description": "Số điện thoại của bác sĩ",
+                                                            "nullable": true,
+                                                            "example": null
+                                                        },
+                                                        "gender": {
+                                                            "type": "string",
+                                                            "description": "Giới tính của bác sĩ",
+                                                            "example": "other"
+                                                        }
+                                                    }
+                                                },
+                                                "patient": {
+                                                    "type": "object",
+                                                    "description": "Thông tin của bệnh nhân",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "description": "ID của bệnh nhân",
+                                                            "example": 1
+                                                        },
+                                                        "fullname": {
+                                                            "type": "string",
+                                                            "description": "Họ tên của bệnh nhân",
+                                                            "example": "Nguyễn Văn B"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "description": "Email của bệnh nhân",
+                                                            "example": "johndoe@example.com"
+                                                        },
+                                                        "phone_number": {
+                                                            "type": "string",
+                                                            "description": "Số điện thoại của bệnh nhân",
+                                                            "example": "1234567890"
+                                                        },
+                                                        "gender": {
+                                                            "type": "string",
+                                                            "description": "Giới tính của bệnh nhân",
+                                                            "example": "male"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy lịch sử bệnh án",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Lịch sử bệnh án không tồn tại."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "put": {
                 "tags": ["Medical Histories"],
                 "summary": "Cập nhật lịch sử bệnh án",
                 "description": "API này cập nhật thông tin lịch sử bệnh án theo ID.",
                 "operationId": "updateMedicalHistory",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -5138,7 +5531,53 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/MedicalHistoryUpdateRequest"
+                                "type": "object",
+                                "properties": {
+                                    "patient_id": {
+                                        "type": "integer",
+                                        "description": "ID của bệnh nhân",
+                                        "example": 1
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Mô tả chung cho lịch sử bệnh án",
+                                        "example": "Bệnh án của bệnh nhân A"
+                                    },
+                                    "diagnosis": {
+                                        "type": "string",
+                                        "description": "Chẩn đoán bệnh",
+                                        "example": "Cúm A"
+                                    },
+                                    "treatment": {
+                                        "type": "string",
+                                        "description": "Phương pháp điều trị",
+                                        "example": "Nghỉ ngơi, uống thuốc"
+                                    },
+                                    "doctor_id": {
+                                        "type": "integer",
+                                        "description": "ID của bác sĩ",
+                                        "example": 1
+                                    },
+                                    "files": {
+                                        "type": "array",
+                                        "description": "Danh sách các file đính kèm với mô tả",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "file": {
+                                                    "type": "string",
+                                                    "description": "File ảnh (mã hóa base64 hoặc URL)",
+                                                    "example": "file"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "description": "Mô tả cho file",
+                                                    "example": "Kết quả chụp X-quang"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -5183,6 +5622,11 @@
                 "summary": "Xóa lịch sử bệnh án",
                 "description": "API này xóa một lịch sử bệnh án theo ID.",
                 "operationId": "deleteMedicalHistory",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -5273,6 +5717,10 @@
         {
             "name": "Appointments",
             "description": "Lịch hẹn"
+        },
+        {
+            "name": "Medical Histories",
+            "description": "Lịch sử bệnh án"
         }
     ]
 }
