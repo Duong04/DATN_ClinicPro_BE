@@ -14,7 +14,7 @@ class PatientRepository implements PatientRepositoryInterface
     public function paginate($limit, $q) {}
     public function find($id)
     {
-        return Patient::find($id);
+        return Patient::with('patientInfo', 'identityCard')->find($id);
     }
     public function create(array $data)
     {
