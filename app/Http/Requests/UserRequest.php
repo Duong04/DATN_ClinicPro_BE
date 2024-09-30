@@ -66,6 +66,7 @@ class UserRequest extends FormRequest
 
     public function attributes() {
         return [
+            'status' => 'Trạng thái',
             'user_info.fullname' => 'Họ và tên',
             'user_info.address' => 'Địa chỉ',
             'user_info.phone_number' => 'Số điện thoại',

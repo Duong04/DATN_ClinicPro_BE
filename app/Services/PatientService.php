@@ -17,9 +17,22 @@ class PatientService {
 
     public function getPaginate($request) {
         try {
-            //code...
+            $limit = $request->query('limit');
+            $q = $request->query('q');
+            $patients = $this->patientRepository->paginate($limit, $q);
+
+            if ($limit) {
+                return response()->json([
+                    'data' => $patients->items(),
+                    'prev_page_url' => $patients->previousPageUrl(),
+                    'next_page_url' => $patients->nextPageUrl(),
+                    'total' => $patients->total()
+                ], 200);
+            }
+    
+            return response()->json(['data' => $patients], 200);
         } catch (\Throwable $th) {
-            //throw $th;
+            return response()->json(['error' => $th->getMessage()], 400);
         }
     }
 
@@ -28,7 +41,7 @@ class PatientService {
             $patient = $this->patientRepository->find($id);
 
             if (empty($patient)) {
-                return response()->json(['error' => 'Không timg thấy thông tin bệnh nhân!'], 404);
+                return response()->json(['error' => 'Không tìm thấy thông tin bệnh nhân!'], 404);
             }
 
             return response()->json(['data' => $patient], 200);
@@ -43,8 +56,12 @@ class PatientService {
 
             if (isset($data['identity_card'])) {
                 $identityCard = IdentityCard::create($data['identity_card']);
+                $data['identity_card_id'] = $identityCard->id;
             }
-            $data['identity_card'] = $identityCard->id;
+
+            if (!isset($data['status'])) {
+                $data['status'] = 'active';
+            }
 
             $patient = $this->patientRepository->create($data);
             if (isset($data['user_info'])) {
@@ -69,8 +86,8 @@ class PatientService {
                $patient->identityCard->update($data['identity_card']);
             }
 
-            if ($data['patient_info']) {
-                PatientInfo::where('patient_id', $id)->update($data['patient_info']); 
+            if ($data['user_info']) {
+                PatientInfo::where('patient_id', $id)->update($data['user_info']); 
             }
 
             return response()->json(['message' => 'Cập nhật thông tin bệnh nhân thành công!'], 200);
