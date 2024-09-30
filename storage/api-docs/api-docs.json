@@ -4314,6 +4314,16 @@
                         }
                     },
                     {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "description": "Trang tiếp theo",
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        }
+                    },
+                    {
                         "name": "q",
                         "in": "query",
                         "required": false,
