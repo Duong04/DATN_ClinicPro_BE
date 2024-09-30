@@ -18,6 +18,10 @@ class UserController extends Controller
         return $this->userService->getPaginate($request);
     }
 
+    public function getByRole(Request $request, $id) {
+        return $this->userService->getByRoleId($request, $id);
+    }
+
     public function create(UserRequest $request) {
         return $this->userService->create($request);
     }

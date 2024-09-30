@@ -39,6 +39,26 @@ class UserService {
         }
     }
 
+    public function getByRoleId($request, $role_id) {
+        try {
+            $limit = $request->query('limit');
+            $q = $request->query('q');
+            $users = $this->userRepository->getByRoleId($role_id, $limit, $q);
+            
+            if ($limit) {
+                return response()->json([
+                    'data' => UserResourceTwo::collection($users->items()),
+                    'prev_page_url' => $users->previousPageUrl(),
+                    'next_page_url' => $users->nextPageUrl(),
+                    'total' => $users->total()
+                ], 200);
+            }
+            return response()->json(['data' => UserResourceTwo::collection($users)], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
+    }
+
     public function create($request) {
         try {
             $data = $request->validated();
@@ -84,7 +104,6 @@ class UserService {
             return response()->json(['error' => $th->getMessage()], 422);
         }
     }
-    
 
     public function update($request, $id) {
         try {
@@ -121,6 +140,8 @@ class UserService {
                     IdentityCard::where('id', $user->userInfo->identityCard->id)
                         ->update($data['user_info']['identity_card']);
                 }
+
+                unset($data['user_info']['identity_card']);
             }
     
             if (isset($data['user_info'])) {
