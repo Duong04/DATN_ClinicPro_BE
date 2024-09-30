@@ -15,6 +15,14 @@ class PatientService {
         $this->patientRepository = $patientRepository;
     }
 
+    public function getPaginate($request) {
+        try {
+            //code...
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
     public function findById($id) {
         try {
             $patient = $this->patientRepository->find($id);
@@ -70,4 +78,5 @@ class PatientService {
             return response()->json(['error' => $th->getMessage()], 422);
         }
     }
+
 }
