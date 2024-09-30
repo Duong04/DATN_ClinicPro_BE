@@ -6550,6 +6550,10 @@
         {
             "name": "Medical Histories",
             "description": "Lịch sử bệnh án"
+        },
+        {
+            "name": "Patients",
+            "description": "Bệnh nhân"
         }
     ]
 }
