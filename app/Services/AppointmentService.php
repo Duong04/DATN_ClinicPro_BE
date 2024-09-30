@@ -3,11 +3,13 @@
 namespace App\Services;
 
 use App\Mail\AcceptAppointmentMail;
+use App\Models\PatientInfo;
 use App\Repositories\Patient\PatientRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Repositories\Appointment\AppointmentRepositoryInterface;
 use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
 use Illuminate\Support\Facades\Mail;
+use Exception;
 
 class AppointmentService
 {
@@ -30,11 +32,7 @@ class AppointmentService
 
     public function show($id)
     {
-        try {
-            return $this->appointmentRepository->find($id);
-        } catch (ModelNotFoundException $e) {
-            throw new \Exception('Appointment not found');
-        }
+        return $this->findAppointment($id);
     }
 
 
@@ -42,17 +40,17 @@ class AppointmentService
     {
         $dataPatient = $request->validated();
         try {
-            $patient = auth()->check()
-                ? auth()->user()->patient
-                : $this->createPatient($dataPatient);
+            $patient = auth()->check() ? auth()->user()->patient : null;
+            if (!$patient) {
+                $email = $request->input('email');
+                $patient = PatientInfo::where('email', $email)->first() ?? $this->createPatient($dataPatient);
+            }
             $data = [
                 'patient_id' => $patient->id,
                 'appointment_date' => $request->input('appointment_date')
             ];
             return $this->appointmentRepository->create($data);
-        } catch (ModelNotFoundException $e) {
-            throw new \Exception('Unable to find necessary resources for appointment');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => 'Failed to create appointment: ' . $e->getMessage()], 500);
         }
     }
@@ -68,39 +66,54 @@ class AppointmentService
 
     public function update($id)
     {
-        try {
-            $appointment = $this->appointmentRepository->find($id);
-            if ($appointment->status !== 'pending') {
-                return [
-                    'error' => true,
-                    'message' => 'Appointment is not pending and cannot be updated.'
-                ];
-            }
-            $email = $appointment->patient->patientInfo->email;
-            Mail::to($email)->send(new AcceptAppointmentMail($appointment));
-            $data['status'] = 'confirmed';
-            return $this->appointmentRepository->update($data, $id);
-        } catch (ModelNotFoundException $e) {
-            throw new \Exception('Appointment not found');
-        }
+        $appointment = $this->findAppointment($id);
+        $this->checkStatus($appointment, 'pending');
+
+        $email = $appointment->patient->patientInfo->email;
+        Mail::to($email)->send(new AcceptAppointmentMail($appointment));
+
+        return $this->appointmentRepository->update(['status' => 'confirmed'], $id);
     }
     public function cancel($request, $id)
     {
+        return $this->updateStatus($id, 'cancelled', ['cancellation_reason' => $request->input('cancellation_reason')]);
+    }
+
+    public function complete($id)
+    {
+        return $this->updateStatus($id, 'completed');
+    }
+
+    private function checkStatus($appointment, $status)
+    {
+        if ($appointment->status !== $status) {
+            throw new Exception("Appointment must be $status to proceed.");
+        }
+    }
+
+    private function findAppointment($id)
+    {
         try {
-            $data['status'] = 'cancelled';
-            $data['cancellation_reason'] = $request->input('cancellation_reason');
-            return $this->appointmentRepository->cancel($data, $id);
+            return $this->appointmentRepository->find($id);
         } catch (ModelNotFoundException $e) {
-            throw new \Exception('Appointment not found');
+            throw new Exception('Appointment not found');
         }
     }
 
     public function delete($id)
     {
-        try {
-            return $this->appointmentRepository->destroy($id);
-        } catch (ModelNotFoundException $e) {
-            throw new \Exception('Appointment not found');
+        $this->findAppointment($id);
+        return $this->appointmentRepository->destroy($id);
+    }
+
+    private function updateStatus($id, $status, $additionalData = [])
+    {
+        $appointment = $this->findAppointment($id);
+        if ($appointment->status === $status) {
+            throw new Exception("Appointment is already $status.");
         }
+        $data = array_merge(['status' => $status], $additionalData);
+
+        return $this->appointmentRepository->update($data, $id);
     }
 }

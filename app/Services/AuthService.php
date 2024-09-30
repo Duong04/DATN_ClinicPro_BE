@@ -15,13 +15,15 @@ use App\Mail\VerifyEmail;
 use App\Models\User;
 use App\Http\Resources\UserResourceThree;
 
-class AuthService {
+class AuthService
+{
     private $userRepository;
     private $patientInfoRepository;
     private $patientRepository;
     private $cloundinaryService;
     private $userInfoRepository;
-    public function __construct(UserRepositoryInterface $userRepository, PatientInfoRepositoryInterface $patientInfoRepository, UserInfoRepositoryInterface $userInfoRepository, PatientRepositoryInterface $patientRepository, CloundinaryService $cloundinaryService) {
+    public function __construct(UserRepositoryInterface $userRepository, PatientInfoRepositoryInterface $patientInfoRepository, UserInfoRepositoryInterface $userInfoRepository, PatientRepositoryInterface $patientRepository, CloundinaryService $cloundinaryService)
+    {
         $this->userRepository = $userRepository;
         $this->patientInfoRepository = $patientInfoRepository;
         $this->userInfoRepository = $userInfoRepository;
@@ -87,13 +89,14 @@ class AuthService {
     public function profile()
     {
         try {
-            return response()->json(['data' => new UserResourceThree(auth()->user()->load('userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard','role.permissions.actions'))], 200);
+            return response()->json(['data' => new UserResourceThree(auth()->user()->load('userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard', 'role.permissions.actions'))], 200);
         } catch (Exception $e) {
             return response()->json(['error' => 'Bạn không có quyền truy cập'], 401);
         }
     }
 
-    public function updateProfile($request, $id) {
+    public function updateProfile($request, $id)
+    {
         try {
             $data = $request->all();
             $user = auth()->user()->load('role');
@@ -122,7 +125,7 @@ class AuthService {
                     $userInfo->update($data['user_info']);
                 }
             }
-    
+
             $user->update($data);
 
             return response()->json(['message' => 'Cập nhật thông tin cá nhân thành công!', 'data' => new UserResource($user)], 200);
@@ -131,7 +134,8 @@ class AuthService {
         }
     }
 
-    public function verifyEmail($token) {
+    public function verifyEmail($token)
+    {
         try {
             $checkToken = User::where('token', $token)->first();
             if (empty($checkToken)) {
@@ -164,7 +168,7 @@ class AuthService {
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'data' => new UserResource(auth()->user()->load('userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard','role.permissions.actions'))
+            'data' => new UserResource(auth()->user()->load('userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard', 'role.permissions.actions'))
         ], 200);
     }
 }

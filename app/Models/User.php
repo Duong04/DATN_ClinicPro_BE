@@ -30,15 +30,18 @@ class User extends Authenticatable implements JWTSubject
         'otp'
     ];
 
-    public function role() {
+    public function role()
+    {
         return $this->belongsTo(Role::class, 'role_id');
-    } 
+    }
 
-    public function userInfo() {
+    public function userInfo()
+    {
         return $this->hasOne(UserInfo::class, 'user_id');
     }
 
-    public function patient() {
+    public function patient()
+    {
         return $this->hasOne(Patient::class, 'user_id');
     }
     /**
