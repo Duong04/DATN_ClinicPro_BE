@@ -4281,7 +4281,7 @@
                 }
             }
         },
-        "/api/v1/Appointments": {
+        "/api/v1/appointments": {
             "get": {
                 "tags": ["Appointments"],
                 "security": [
@@ -4377,11 +4377,6 @@
             },
             "post": {
                 "tags": ["Appointments"],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
                 "summary": "Tạo lịch hẹn",
                 "description": "Tạo lịch hẹn.",
                 "operationId": "createAppointment",
@@ -4410,7 +4405,7 @@
                                     },
                                     "phone_number": {
                                         "type": "string",
-                                        "example": "012 345 6789"
+                                        "example": "0123456789"
                                     },
                                     "address": {
                                         "type": "string",
@@ -4745,6 +4740,112 @@
                                                 "cancellation_reason": {
                                                     "type": "string",
                                                     "example": "Nội dung hủy lịch hẹn"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Appointment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Hoàn thành lịch hẹn",
+                "description": "Hoàn thành lịch hẹn theo ID .",
+                "operationId": "completedAppointment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID lịch hẹn."
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "completed Appointment Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "appointment_date": {
+                                                    "type": "Date",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25 12:00"
+                                                },
+                                                "deposit_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "booking_type": {
+                                                    "type": "string",
+                                                    "example": "online"
+                                                },
+                                                "appointment_type": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "total_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "completed"
+                                                },
+                                                "cancellation_reason": {
+                                                    "type": "string",
+                                                    "example": "null"
                                                 }
                                             },
                                             "type": "object"
