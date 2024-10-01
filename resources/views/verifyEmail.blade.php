@@ -38,7 +38,7 @@
                     Xin chào, {{$email}}
                 </h1>
                 <p style="margin-top: 15px; font-size: 16px">
-                    Để kích hoạt tại khoản vui lòng click .
+                    Để kích hoạt tài khoản vui lòng click .
                 </p>
                 <a href="{{$url}}"
                     style="

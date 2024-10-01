@@ -42,7 +42,7 @@ class VerifyEmail extends Mailable
         return new Content(
             view: 'verifyEmail',
             with: [
-                'title' => 'Verify Email',
+                'title' => 'Xác nhận đăng ký',
                 'email' => $this->email,
                 'url' => $this->url,
             ]

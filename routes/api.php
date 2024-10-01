@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Apis\V1\MedicalHistoryController;
+use App\Http\Controllers\Apis\V1\PatientController;
 use App\Http\Controllers\Apis\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -118,5 +119,13 @@ Route::prefix('v1')->group(function () {
             Route::post('/', 'store');
             Route::put('/{id}', 'update');
             Route::delete('/{id}', 'destroy');
+          
+    Route::controller(PatientController::class)->prefix('patients')->middleware('jwt.auth')
+        ->group(function () {
+            Route::get('/', 'paginate');
+            Route::get('/{id}', 'show');
+            Route::post('/', 'create');
+            Route::put('/{id}', 'update');
+            Route::delete('/{id}', 'delete');
         });
 });

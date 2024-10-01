@@ -128,7 +128,7 @@ return new class extends Migration
 
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->text('medical_history')->nullable();
+            $table->enum('status', ['active', 'inactive', 'deceased', 'transferred'])->nullable()->default('active');
             $table->string('insurance_number')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('identity_card_id')->nullable();

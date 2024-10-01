@@ -27,6 +27,8 @@ class UserRequest extends FormRequest
             'role_id' => 'required|exists:roles,id',
             'status' => 'nullable|in:active,inactive',
             'avatar' => 'nullable|image',
+            'doctor.description' => 'nullable',
+            'doctor.specialty' => 'nullable',
             'user_info.fullname' => 'required',
             'user_info.address' => 'nullable',
             'user_info.phone_number' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
@@ -64,6 +66,7 @@ class UserRequest extends FormRequest
 
     public function attributes() {
         return [
+            'status' => 'Trạng thái',
             'user_info.fullname' => 'Họ và tên',
             'user_info.address' => 'Địa chỉ',
             'user_info.phone_number' => 'Số điện thoại',
@@ -71,7 +74,9 @@ class UserRequest extends FormRequest
             'user_info.dob' => 'Ngày sinh',
             'user_info.department_id' => 'Phòng ban',
             'user_info.identity_card.type_name' => 'Loại thẻ',
-            'user_info.identity_card.identity_card_number' => 'Số thẻ'
+            'user_info.identity_card.identity_card_number' => 'Số thẻ',
+            'doctor.description' => 'Mô tả',
+            'doctor.specialty' => 'Chuyên khoa',
         ];
     }
 }

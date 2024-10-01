@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Patient;
 
+use App\Models\PatientInfo;
 use App\Repositories\Patient\PatientRepositoryInterface;
 use App\Models\Patient;
 
@@ -11,10 +12,23 @@ class PatientRepository implements PatientRepositoryInterface
     {
         return Patient::all();
     }
-    public function paginate($limit, $q) {}
+    public function paginate($limit, $q) {
+        $patients = Patient::with('identityCard', 'patientInfo')
+            ->when($q, function ($query, $q) {
+                $query->orWhereHas('patientInfo', function ($query) use ($q) {
+                    $query->where('fullname', 'LIKE', "%{$q}%")
+                          ->orWhere('phone_number', 'LIKE', "%{$q}%")
+                          ->orWhere('address', 'LIKE', "%{$q}%")
+                          ->orWhere('email', 'LIKE', "%{$q}%");
+                });
+            });
+    
+        return $limit ? $patients->paginate($limit) : $patients->get();
+    }
+    
     public function find($id)
     {
-        return Patient::findOrFail($id);
+        return Patient::with('patientInfo', 'identityCard')->find($id);
     }
     public function create(array $data)
     {

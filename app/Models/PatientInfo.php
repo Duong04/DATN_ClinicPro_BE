@@ -18,6 +18,7 @@ class PatientInfo extends Model
         'address',
         'dob',
         'gender',
+        'avatar',
         'patient_id',
     ];
 }
