@@ -704,6 +704,221 @@
                 }
             }
         },
+        "/api/v1/auth/change-password": {
+            "put": {
+                "tags": ["Authentication"],
+                "summary": "Thay đổi mật khẩu của người dùng",
+                "description": "API này cho phép người dùng thay đổi mật khẩu của họ bằng cách cung cấp mật khẩu hiện tại và mật khẩu mới.",
+                "operationId": "changePassword",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["password", "new_password"],
+                                "properties": {
+                                    "password": {
+                                        "description": "Mật khẩu hiện tại của người dùng",
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "example": "currentpassword123"
+                                    },
+                                    "new_password": {
+                                        "description": "Mật khẩu mới của người dùng",
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "example": "newpassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật mật khẩu thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cập nhật mật khẩu thành công!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực đầu vào",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Mật khẩu hiện tại không đúng."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/forgot-password": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Khôi phục mật khẩu",
+                "description": "API này cho phép người dùng yêu cầu khôi phục mật khẩu thông qua địa chỉ email. Mã OTP sẽ được gửi đến email để thực hiện quy trình khôi phục.",
+                "operationId": "forgotPassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["email"],
+                                "properties": {
+                                    "email": {
+                                        "description": "Địa chỉ email của người dùng",
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mã OTP đã được gửi thành công đến email của người dùng",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Mã otp đã được gửi vào email của bạn, vui lòng check mail để khôi phục lại mật khẩu!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực đầu vào",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Địa chỉ email không tồn tại trong hệ thống!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/reset-password": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Đặt lại mật khẩu",
+                "description": "API này cho phép người dùng đặt lại mật khẩu của họ bằng cách cung cấp mã OTP và mật khẩu mới.",
+                "operationId": "resetPassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["otp", "password"],
+                                "properties": {
+                                    "otp": {
+                                        "description": "Mã OTP đã được gửi đến email của người dùng",
+                                        "type": "string",
+                                        "example": "123456"
+                                    },
+                                    "password": {
+                                        "description": "Mật khẩu mới của người dùng",
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "example": "newpassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mật khẩu đã được thay đổi thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Mật khẩu của bạn đã được thay đổi!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Mã OTP không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Mã otp không hợp lệ!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực đầu vào",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Mật khẩu phải lớn hơn 8 ký tự!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/packages": {
             "get": {
                 "tags": ["Packages"],

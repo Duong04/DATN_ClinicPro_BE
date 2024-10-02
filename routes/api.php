@@ -25,7 +25,11 @@ Route::prefix('v1')->group(function () {
             Route::post('/register', 'register');
             Route::post('/login', 'login');
             Route::post('/refresh', 'refresh');
+            Route::post('/forgot-password', 'forgotPsw');
+            Route::get('/forgot-password/{otp}', 'redirectResetPsw');
+            Route::post('/reset-password', 'resetPsw');
             Route::get('/profile', 'profile')->middleware('jwt.auth');
+            Route::put('/change-password', 'changePassword')->middleware('jwt.auth');
             Route::put('/profile/{id}', 'updateProfile')->middleware('jwt.auth');
             Route::post('/logout', 'logout')->middleware('jwt.auth');
         });
