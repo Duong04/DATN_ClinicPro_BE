@@ -24,6 +24,8 @@ class MedicalHistoryRepository implements MedicalHistoryRepositoryInterface {
             });
         }
 
+        $medicalHistories->orderByDesc('created_at');
+
         return $limit ? $medicalHistories->paginate($limit) : $medicalHistories->get();
     }
     public function find($id) {

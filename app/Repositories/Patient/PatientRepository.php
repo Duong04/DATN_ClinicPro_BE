@@ -22,6 +22,8 @@ class PatientRepository implements PatientRepositoryInterface
                           ->orWhere('email', 'LIKE', "%{$q}%");
                 });
             });
+
+        $patients->orderByDesc('created_at');
     
         return $limit ? $patients->paginate($limit) : $patients->get();
     }

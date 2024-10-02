@@ -9,15 +9,17 @@ class PermissionRepository implements PermissionRepositoryInterface {
         return Permission::all();
     }
     public function paginate($limit, $q) {
-        $actions = Permission::with('permissionActions');
+        $permissions = Permission::with('permissionpermissions');
         if ($q !== null) {
-            $actions->where(function ($query) use ($q) {
+            $permissions->where(function ($query) use ($q) {
                 $query->where('name', 'like', "%{$q}%")
                 ->orWhere('description', 'like', "%{$q}%");
             });
         }
 
-        return $limit ? $actions->paginate($limit) : $actions->get();
+        $permissions->orderByDesc('created_at');
+
+        return $limit ? $permissions->paginate($limit) : $permissions->get();
     }
     public function find($id) {
         return Permission::with('permissionActions')->find($id);

@@ -704,6 +704,221 @@
                 }
             }
         },
+        "/api/v1/auth/change-password": {
+            "put": {
+                "tags": ["Authentication"],
+                "summary": "Thay đổi mật khẩu của người dùng",
+                "description": "API này cho phép người dùng thay đổi mật khẩu của họ bằng cách cung cấp mật khẩu hiện tại và mật khẩu mới.",
+                "operationId": "changePassword",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["password", "new_password"],
+                                "properties": {
+                                    "password": {
+                                        "description": "Mật khẩu hiện tại của người dùng",
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "example": "currentpassword123"
+                                    },
+                                    "new_password": {
+                                        "description": "Mật khẩu mới của người dùng",
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "example": "newpassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật mật khẩu thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cập nhật mật khẩu thành công!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực đầu vào",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Mật khẩu hiện tại không đúng."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/forgot-password": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Khôi phục mật khẩu",
+                "description": "API này cho phép người dùng yêu cầu khôi phục mật khẩu thông qua địa chỉ email. Mã OTP sẽ được gửi đến email để thực hiện quy trình khôi phục.",
+                "operationId": "forgotPassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["email"],
+                                "properties": {
+                                    "email": {
+                                        "description": "Địa chỉ email của người dùng",
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mã OTP đã được gửi thành công đến email của người dùng",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Mã otp đã được gửi vào email của bạn, vui lòng check mail để khôi phục lại mật khẩu!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực đầu vào",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Địa chỉ email không tồn tại trong hệ thống!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/reset-password": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Đặt lại mật khẩu",
+                "description": "API này cho phép người dùng đặt lại mật khẩu của họ bằng cách cung cấp mã OTP và mật khẩu mới.",
+                "operationId": "resetPassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["otp", "password"],
+                                "properties": {
+                                    "otp": {
+                                        "description": "Mã OTP đã được gửi đến email của người dùng",
+                                        "type": "string",
+                                        "example": "123456"
+                                    },
+                                    "password": {
+                                        "description": "Mật khẩu mới của người dùng",
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "example": "newpassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mật khẩu đã được thay đổi thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Mật khẩu của bạn đã được thay đổi!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Mã OTP không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Mã otp không hợp lệ!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực đầu vào",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Mật khẩu phải lớn hơn 8 ký tự!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/packages": {
             "get": {
                 "tags": ["Packages"],
@@ -4281,7 +4496,141 @@
                 }
             }
         },
-        "/api/v1/appointments": {
+        "/api/v1/users/role/{role_id}": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Lấy danh sách người dùng theo vai trò",
+                "description": "API này trả về danh sách người dùng dựa trên `role_id`, hỗ trợ phân trang và tìm kiếm theo từ khóa.",
+                "operationId": "getUsersByRoleId",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "role_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID của vai trò để lọc người dùng",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "description": "Số lượng bản ghi mỗi trang",
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "description": "Trang tiếp theo",
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        }
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "description": "Từ khóa tìm kiếm người dùng",
+                        "schema": {
+                            "type": "string",
+                            "example": "Nguyen Van A"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách người dùng được trả về thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 5
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Nguyen Van A"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "format": "email",
+                                                        "example": "nguyenvana@example.com"
+                                                    },
+                                                    "role_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-30T15:44:32.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-30T15:44:32.000000Z"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://localhost/api/v1/users/role/1?page=1"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://localhost/api/v1/users/role/1?page=3"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 100
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi không xác định",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Some error message."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/Appointments": {
             "get": {
                 "tags": ["Appointments"],
                 "security": [
@@ -5778,170 +6127,180 @@
         },
         "/api/v1/patients": {
             "get": {
-        "tags": ["Patients"],
-        "summary": "Lấy danh sách bệnh nhân với phân trang",
-        "description": "API này trả về danh sách bệnh nhân với khả năng phân trang và tìm kiếm theo từ khóa.",
-        "operationId": "getPaginatePatients",
-        "parameters": [
-            {
-                "name": "limit",
-                "in": "query",
-                "required": false,
-                "description": "Số lượng bản ghi mỗi trang",
-                "schema": {
-                    "type": "integer",
-                    "example": 10
-                }
-            },
-            {
-                "name": "page",
-                "in": "query",
-                "required": false,
-                "description": "Trang tiếp theo",
-                "schema": {
-                    "type": "integer",
-                    "example": 2
-                }
-            },
-            {
-                "name": "q",
-                "in": "query",
-                "required": false,
-                "description": "Từ khóa tìm kiếm bệnh nhân",
-                "schema": {
-                    "type": "string",
-                    "example": "Nguyen Van A"
-                }
-            }
-        ],
-        "responses": {
-            "200": {
-                "description": "Danh sách bệnh nhân được trả về thành công",
-                "content": {
-                    "application/json": {
+                "tags": ["Patients"],
+                "summary": "Lấy danh sách bệnh nhân với phân trang",
+                "description": "API này trả về danh sách bệnh nhân với khả năng phân trang và tìm kiếm theo từ khóa.",
+                "operationId": "getPaginatePatients",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "description": "Số lượng bản ghi mỗi trang",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "integer",
-                                                "example": 8
-                                            },
-                                            "insurance_number": {
-                                                "type": "string",
-                                                "example": "BH123456789"
-                                            },
-                                            "status": {
-                                                "type": "string",
-                                                "example": "active"
-                                            },
-                                            "user_id": {
-                                                "type": "integer",
-                                                "nullable": true,
-                                                "example": null
-                                            },
-                                            "identity_card_id": {
-                                                "type": "integer",
-                                                "example": 7
-                                            },
-                                            "created_at": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2024-09-30T15:44:32.000000Z"
-                                            },
-                                            "updated_at": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2024-09-30T15:44:32.000000Z"
-                                            },
-                                            "patient_info": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "description": "Trang tiếp theo",
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        }
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "description": "Từ khóa tìm kiếm bệnh nhân",
+                        "schema": {
+                            "type": "string",
+                            "example": "Nguyen Van A"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách bệnh nhân được trả về thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
                                                 "type": "object",
                                                 "properties": {
                                                     "id": {
                                                         "type": "integer",
-                                                        "example": 9
-                                                    },
-                                                    "patient_id": {
-                                                        "type": "integer",
                                                         "example": 8
                                                     },
-                                                    "fullname": {
+                                                    "insurance_number": {
                                                         "type": "string",
-                                                        "example": "Nguyen Van A"
+                                                        "example": "BH123456789"
                                                     },
-                                                    "email": {
+                                                    "status": {
                                                         "type": "string",
-                                                        "format": "email",
-                                                        "example": "nguyenvana@example.com"
+                                                        "example": "active"
                                                     },
-                                                    "phone_number": {
-                                                        "type": "string",
-                                                        "example": "+84987654321"
+                                                    "user_id": {
+                                                        "type": "integer",
+                                                        "nullable": true,
+                                                        "example": null
                                                     },
-                                                    "address": {
-                                                        "type": "string",
-                                                        "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                                    "identity_card_id": {
+                                                        "type": "integer",
+                                                        "example": 7
                                                     },
-                                                    "dob": {
+                                                    "created_at": {
                                                         "type": "string",
-                                                        "format": "date",
-                                                        "example": "1990-01-01"
+                                                        "format": "date-time",
+                                                        "example": "2024-09-30T15:44:32.000000Z"
                                                     },
-                                                    "gender": {
+                                                    "updated_at": {
                                                         "type": "string",
-                                                        "example": "male"
+                                                        "format": "date-time",
+                                                        "example": "2024-09-30T15:44:32.000000Z"
+                                                    },
+                                                    "patient_info": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 9
+                                                            },
+                                                            "patient_id": {
+                                                                "type": "integer",
+                                                                "example": 8
+                                                            },
+                                                            "fullname": {
+                                                                "type": "string",
+                                                                "example": "Nguyen Van A"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "format": "email",
+                                                                "example": "nguyenvana@example.com"
+                                                            },
+                                                            "phone_number": {
+                                                                "type": "string",
+                                                                "example": "+84987654321"
+                                                            },
+                                                            "address": {
+                                                                "type": "string",
+                                                                "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                                            },
+                                                            "dob": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "1990-01-01"
+                                                            },
+                                                            "gender": {
+                                                                "type": "string",
+                                                                "example": "male"
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://localhost/api/v1/patients?page=1"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://localhost/api/v1/patients?page=3"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 100
                                         }
                                     }
-                                },
-                                "prev_page_url": {
-                                    "type": "string",
-                                    "nullable": true,
-                                    "example": "http://localhost/api/v1/patients?page=1"
-                                },
-                                "next_page_url": {
-                                    "type": "string",
-                                    "nullable": true,
-                                    "example": "http://localhost/api/v1/patients?page=3"
-                                },
-                                "total": {
-                                    "type": "integer",
-                                    "example": 100
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi không xác định",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Some error message."
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
                     }
                 }
             },
-            "400": {
-                "description": "Lỗi không xác định",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "properties": {
-                                "error": {
-                                    "type": "string",
-                                    "example": "Some error message."
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        }
-    },
             "post": {
                 "tags": ["Patients"],
                 "summary": "Tạo mới thông tin bệnh nhân",
                 "description": "API này được sử dụng để tạo mới thông tin bệnh nhân bằng cách cung cấp thông tin cá nhân và giấy tờ định danh.",
                 "operationId": "createPatient",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -6181,6 +6540,11 @@
                 "summary": "Tìm thông tin bệnh nhân theo ID",
                 "description": "API này được sử dụng để lấy thông tin của bệnh nhân dựa trên ID đã cung cấp.",
                 "operationId": "findPatientById",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -6352,6 +6716,11 @@
                 "summary": "Cập nhật thông tin bệnh nhân",
                 "description": "API này được sử dụng để cập nhật thông tin của bệnh nhân dựa trên ID.",
                 "operationId": "updatePatient",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",

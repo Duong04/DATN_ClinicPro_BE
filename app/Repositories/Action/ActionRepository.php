@@ -17,6 +17,8 @@ class ActionRepository implements ActionRepositoryInterface {
             });
         }
 
+        $actions->orderByDesc('created_at');
+
         return $limit ? $actions->paginate($limit) : $actions->get();
     }
     public function find($id) {

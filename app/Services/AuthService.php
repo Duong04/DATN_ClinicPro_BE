@@ -12,6 +12,7 @@ use App\Repositories\UserInfo\UserInfoRepositoryInterface;
 use Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmail;
+use App\Mail\ForgotPassword;
 use App\Models\User;
 use App\Http\Resources\UserResourceThree;
 
@@ -152,6 +153,67 @@ class AuthService
             }
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
+        }
+    }
+
+    public function changePassword($request) {
+        try {
+            $id = auth()->id();
+            $data = $request->validated();
+
+            $this->userRepository->update($id, ['password' => $data['new_password']]);
+
+            return response()->json(['message' => 'Cập nhật mật khẩu thành công!'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 422);
+        }
+    }
+
+    public function forgotPsw($request) {
+        try {
+            $request->validate([
+                'email' => 'required|exists:users,email'
+            ], [
+                'email.required' => 'Vui lòng nhập địa chỉ email!',
+                'email.exists' => 'Địa chỉ email không tồn tại trong hệ thống!'
+            ]);
+
+            $email = $request->input('email');
+            $otp = Str::random(40);
+            User::where('email', $email)->update(['otp' => $otp]);
+            
+            $url = url("/api/v1/auth/forgot-password/$otp");
+            Mail::to($email)->send(new ForgotPassword($url, $email));
+
+            return response()->json(['message' => 'Mã otp đã được gửi vào email của bạn, vui lòng check mail để khôi phục lại mật khẩu!']);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 422);
+        }
+    }
+
+    public function resetPsw($request) {
+        try {
+            $data = $request->validate([
+                'otp' => 'required',
+                'password' => 'required|min:8'
+            ], [
+                'required' => ':attribute là bắt buộc!',
+                'min' => 'Mật khẩu phải lớn hơn 8 ký tự!'
+            ]);
+
+            $getOtp = User::where('otp', $data['otp'])->first();
+            if (empty($getOtp)) {
+                return response()->json(['error' => 'Mã otp không hợp lệ!'], 404);
+            }
+
+            $getOtp->update([
+                'password' => $data['password'],
+                'otp' => null
+            ]);
+
+            return response()->json(['message' => 'Mật khẩu của bạn đã được thay đổi!']);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 422);
         }
     }
 
