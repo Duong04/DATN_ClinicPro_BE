@@ -26,7 +26,13 @@ class Patient extends Model
         return $this->hasOne(PatientInfo::class, 'patient_id');
     }
 
-    public function identityCard() {
+    public function identityCard()
+    {
         return $this->belongsTo(IdentityCard::class, 'identity_card_id');
+    }
+
+    public function prescriptions()
+    {
+        return $this->hasMany(Prescription::class, 'patient_id');
     }
 }

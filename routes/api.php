@@ -12,6 +12,7 @@ use App\Http\Controllers\Apis\V1\AuthController;
 use App\Http\Controllers\Apis\V1\PermissionController;
 use App\Http\Controllers\Apis\V1\RoleController;
 use App\Http\Controllers\Apis\V1\PackageController;
+use App\Http\Controllers\Apis\v1\PrescriptionController;
 use PHPUnit\Framework\Attributes\Group;
 
 Route::get('/user', function (Request $request) {
@@ -110,6 +111,15 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'delete');
         });
 
+    Route::controller(PrescriptionController::class)->prefix('prescriptions')->middleware('jwt.auth')
+        ->group(function () {
+            Route::get('/', 'index');
+            Route::get('/{id}', 'show');
+            Route::get('/patient/{id}', 'listById');
+            Route::post('/', 'store');
+            Route::put('/{id}', 'update');
+            Route::delete('/{id}', 'destroy');
+          
     Route::controller(PatientController::class)->prefix('patients')->middleware('jwt.auth')
         ->group(function () {
             Route::get('/', 'paginate');

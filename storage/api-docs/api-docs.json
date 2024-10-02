@@ -6503,6 +6503,630 @@
                     }
                 }
             }
+        },
+         "/api/v1/prescriptions": {
+            "get": {
+                "tags": ["Prescriptions"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách đơn thuốc",
+                "description": "Lấy tất cả danh sách đơn thuốc.",
+                "operationId": "getPrescription",
+                "responses": {
+                    "200": {
+                        "description": "Thông tin đơn thuốc",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": 1
+                                                    },
+                                                    "patient_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "doctor_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tên đơn thuốc"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Mô tả đơn thuốc"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "string",
+                                                        "example": "5"
+                                                    },
+                                                    "dosage": {
+                                                        "type": "string",
+                                                        "example": "Liều lượng thuốc"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Prescriptions"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Tạo đơn thuốc",
+                "description": "Tạo đơn thuốc.",
+                "operationId": "createPrescription",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "doctor_id",
+                                    "patient_id",
+                                    "name",
+                                    "description",
+                                    "quantity",
+                                    "dosage"
+                                ],
+                                "properties": {
+                                    "patient_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "doctor_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Tên đơn thuốc"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả đơn thuốc"
+                                    },
+                                    "quantity": {
+                                        "type": "string",
+                                        "example": "5"
+                                    },
+                                    "dosage": {
+                                        "type": "string",
+                                        "example": "Liều lượng thuốc"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create prescription Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên đơn thuốc"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả đơn thuốc"
+                                                },
+                                                "quantity": {
+                                                    "type": "string",
+                                                    "example": "5"
+                                                },
+                                                "dosage": {
+                                                    "type": "string",
+                                                    "example": "Liều lượng thuốc"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên đơn thuốc không được để trống."
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "id bác sĩ không tồn tại"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/prescriptions{id}": {
+            "get": {
+                "tags": ["Prescriptions"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy đơn thuốc theo id",
+                "description": "Lấy thông tin đơn thuốc theo id",
+                "operationId": "getPrescriptionById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID đơn thuốc."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin đơn thuốc",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên đơn thuốc"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả đơn thuốc"
+                                                },
+                                                "quantity": {
+                                                    "type": "string",
+                                                    "example": "5"
+                                                },
+                                                "dosage": {
+                                                    "type": "string",
+                                                    "example": "Liều lượng thuốc"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Prescription not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Prescription not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Prescriptions"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Cập nhật đơn thuốc",
+                "description": "Cập nhật đơn thuốc theo ID .",
+                "operationId": "updatePrescription",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID đơn thuốc."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "quantity",
+                                    "dosage"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Tên đơn thuốc"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả đơn thuốc"
+                                    },
+                                    "quantity": {
+                                        "type": "string",
+                                        "example": "5"
+                                    },
+                                    "dosage": {
+                                        "type": "string",
+                                        "example": "Liều lượng đơn thuốc"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "update perscription Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên đơn thuốc"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả đơn thuốc"
+                                                },
+                                                "quantity": {
+                                                    "type": "string",
+                                                    "example": "5"
+                                                },
+                                                "dosage": {
+                                                    "type": "string",
+                                                    "example": "Liều lượng thuốc"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Prescription not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Prescription not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Prescriptions"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Xóa đơn thuốc",
+                "description": "Xóa đơn thuốc theo ID.",
+                "operationId": "deletePrescription",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID đơn thuốc."
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted Prescription Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {},
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Prescription not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Prescription not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/prescriptions/patient/{id}": {
+            "get": {
+                "tags": ["Prescriptions"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách đơn thuốc theo id",
+                "description": "Lấy thông tin danh sách đơn thuốc theo id bệnh nhân",
+                "operationId": "getPrescriptionByIdPatient",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID bệnh nhân."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin đơn thuốc",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên đơn thuốc"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả đơn thuốc"
+                                                },
+                                                "quantity": {
+                                                    "type": "string",
+                                                    "example": "5"
+                                                },
+                                                "dosage": {
+                                                    "type": "string",
+                                                    "example": "Liều lượng thuốc"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Patient not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Patient not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -6554,6 +7178,10 @@
         {
             "name": "Patients",
             "description": "Bệnh nhân"
+        },
+         {
+            "name": "Prescriptions",
+            "description": "Đơn thuốc"
         }
     ]
 }
