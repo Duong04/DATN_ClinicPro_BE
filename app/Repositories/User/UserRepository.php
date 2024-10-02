@@ -38,7 +38,8 @@ class UserRepository implements UserRepositoryInterface {
                           $query->where('name', 'LIKE', "%{$q}%");
                         });
             });
-    
+        $users->orderByDesc('created_at');
+
         return $limit ? $users->paginate($limit) : $users->get();
     }
     public function find($id, array $relation) {

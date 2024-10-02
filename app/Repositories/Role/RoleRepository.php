@@ -14,6 +14,8 @@ class RoleRepository implements RoleRepositoryInterface {
             $roles->where('name', 'like', "%{$q}%");
         }
 
+        $roles->orderByDesc('created_at');
+
         return $limit ? $roles->paginate($limit) : $roles->get();
     }
     public function find($id) {
