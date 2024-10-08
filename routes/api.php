@@ -124,6 +124,7 @@ Route::prefix('v1')->group(function () {
             Route::post('/', 'store');
             Route::put('/{id}', 'update');
             Route::delete('/{id}', 'destroy');
+        });
           
     Route::controller(PatientController::class)->prefix('patients')->middleware('jwt.auth')
         ->group(function () {
