@@ -9,7 +9,7 @@ class RoleRepository implements RoleRepositoryInterface {
         
     }
     public function paginate($limit, $q) {
-        $roles = Role::with('users')->withCount('users');
+        $roles = Role::withCount('users');
         if ($q) {
             $roles->where('name', 'like', "%{$q}%");
         }
@@ -19,7 +19,7 @@ class RoleRepository implements RoleRepositoryInterface {
         return $limit ? $roles->paginate($limit) : $roles->get();
     }
     public function find($id) {
-        return Role::with('users', 'permissions.actions')->withCount('users')->find($id);
+        return Role::with('permissions.actions')->withCount('users')->find($id);
     }
     public function create(array $data) {
         return Role::create($data);

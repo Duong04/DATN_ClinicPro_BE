@@ -10,6 +10,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Role;
 use App\Models\UserInfo;
 use App\Models\Patient;
+use App\Models\Doctor;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -44,6 +45,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(Patient::class, 'user_id');
     }
+
+    public function doctor() {
+        return $this->hasOne(Doctor::class, 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -69,6 +75,33 @@ class User extends Authenticatable implements JWTSubject
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function hasPermission($permissionName)
+    {
+        return $this->permissions()->contains('name', $permissionName);
+    }
+
+    public function hasAction($permissionName, $actionName, $role_id)
+    {
+        $permission = $this->permissions()->where('name', $permissionName)->first();
+
+        if (!$permission) {
+            return []; 
+        }
+
+        $filteredActions = $permission->actions->filter(function ($action) use ($role_id, $permission) {
+            return $action->pivot->role_id == $role_id && $action->pivot->permission_id == $permission->id;
+        })->values();
+
+        $permissionNew = [
+            'actions' => $filteredActions,
+        ];
+        
+        if ($permissionNew) {
+            return $permissionNew['actions']->contains('value', $actionName);
+        }
+        return false;
     }
 
     public function getJWTIdentifier()

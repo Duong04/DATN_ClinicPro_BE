@@ -1542,7 +1542,7 @@
                             "type": "integer",
                             "example": 2
                         },
-                        "description": "Trang hiện tại của các mục."
+                        "description": "Trang tiếp theo."
                     },
                     {
                         "in": "query",
@@ -3233,7 +3233,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Từ khóa tìm kiếm phòng ban."
+                        "description": "Từ khóa tìm kiếm phòng ban theo tên, email và tên người quản lý."
                     }
                 ],
                 "responses": {
@@ -3307,6 +3307,23 @@
                                                                 "type": "string",
                                                                 "format": "date-time",
                                                                 "example": "2024-09-23T15:16:32.000000Z"
+                                                            },
+                                                            "user_info": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "user_id": {
+                                                                        "type": "integer",
+                                                                        "example": 5
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyễn Thành Đường"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -7089,7 +7106,7 @@
                 }
             }
         },
-        "/api/v1/prescriptions{id}": {
+        "/api/v1/prescriptions/{id}": {
             "get": {
                 "tags": ["Prescriptions"],
                 "security": [
@@ -7496,7 +7513,465 @@
                     }
                 }
             }
+        },
+        "/api/v1/specialties": {
+            "get": {
+                "tags": ["Specialties"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách chuyên khoa với phân trang",
+                "description": "Trả về danh sách các chuyên khoa với phân trang dựa trên giới hạn và truy vấn tìm kiếm.",
+                "operationId": "getPaginateSpecialties",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        },
+                        "description": "Số lượng chuyên khoa trên mỗi trang."
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        },
+                        "description": "Trang hiện tại của các chuyên khoa."
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string",
+                            "example": "cardiology"
+                        },
+                        "description": "Từ khóa để tìm kiếm chuyên khoa."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách chuyên khoa được phân trang",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Cardiology"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Chuyên khoa tim mạch"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T14:34:30.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T14:34:30.000000Z"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/specialties?page=1"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/specialties?page=3"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 100
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết vấn đề"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Specialties"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Tạo mới một chuyên khoa",
+                "description": "Thêm một chuyên khoa mới vào hệ thống.",
+                "operationId": "createSpecialty",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Cardiology",
+                                        "description": "Tên của chuyên khoa"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Chuyên khoa tim mạch",
+                                        "description": "Mô tả về chuyên khoa"
+                                    }
+                                },
+                                "required": ["name"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Chuyên khoa được tạo thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Thêm chuyên khoa thành công!"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Cardiology"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Chuyên khoa tim mạch"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T14:34:30.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T14:34:30.000000Z"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết vấn đề"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/specialties/{id}": {
+            "get": {
+                "tags": ["Specialties"],
+                "summary": "Lấy thông tin chi tiết của một chuyên khoa",
+                "description": "Trả về thông tin của một chuyên khoa dựa trên ID.",
+                "operationId": "findSpecialtyById",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của chuyên khoa cần tìm."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin chi tiết của chuyên khoa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Cardiology"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Chuyên khoa tim mạch"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T14:34:30.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T14:34:30.000000Z"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy chuyên khoa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Không tìm thấy chuyên khoa!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết vấn đề"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Specialties"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Cập nhật thông tin chuyên khoa",
+                "description": "Cập nhật thông tin của một chuyên khoa dựa trên ID.",
+                "operationId": "updateSpecialty",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của chuyên khoa cần cập nhật."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Cardiology",
+                                        "description": "Tên của chuyên khoa"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Chuyên khoa tim mạch",
+                                        "description": "Mô tả về chuyên khoa"
+                                    }
+                                },
+                                "required": ["name"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật chuyên khoa thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cập nhật thông tin chuyên khoa thành công!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết vấn đề"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Specialties"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Xóa chuyên khoa",
+                "description": "Xóa một chuyên khoa dựa trên ID, với điều kiện chuyên khoa này không được gán cho bất kỳ bác sĩ nào.",
+                "operationId": "deleteSpecialty",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "ID của chuyên khoa cần xóa."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa chuyên khoa thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Đã xóa thành công!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Chuyên khoa không thể xóa vì đã được gán cho bác sĩ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Chuyên khoa này đã được gán cho bác sĩ không thể xóa được!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy chuyên khoa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "không tìm thấy thông tin chuyên khoa!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
+
     },
     "components": {
         "securitySchemes": {
@@ -7548,9 +8023,13 @@
             "name": "Patients",
             "description": "Bệnh nhân"
         },
-         {
+        {
             "name": "Prescriptions",
             "description": "Đơn thuốc"
+        },
+        {
+            "name": "Specialties",
+            "description": "Chuyên khoa"
         }
     ]
 }

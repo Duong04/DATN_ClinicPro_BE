@@ -33,6 +33,8 @@ use App\Repositories\MedicalHistory\MedicalHistoryRepository;
 use App\Repositories\MedicalHistory\MedicalHistoryRepositoryInterface;
 use App\Repositories\Prescription\PrescriptionRepository;
 use App\Repositories\Prescription\PrescriptionRepositoryInterface;
+use App\Repositories\Specialty\SpecialtyRepository;
+use App\Repositories\Specialty\SpecialtyRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -56,6 +58,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(DepartmentRepositoryInterface::class, DepartmentRepository::class);
         $this->app->bind(MedicalHistoryRepositoryInterface::class, MedicalHistoryRepository::class);
         $this->app->bind(PrescriptionRepositoryInterface::class, PrescriptionRepository::class);
+        $this->app->bind(SpecialtyRepositoryInterface::class, SpecialtyRepository::class);
     }
 
     /**

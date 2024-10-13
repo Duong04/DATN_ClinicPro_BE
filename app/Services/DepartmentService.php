@@ -36,7 +36,7 @@ class DepartmentService {
             $department = $this->departmentRepository->create($data);
 
             return response()->json([
-                'message' => 'Created department successfully!',
+                'message' => 'Tạo phòng ban thành công!',
                 'data' => $department
             ], 201);
         } catch (\Throwable $th) {
@@ -49,7 +49,7 @@ class DepartmentService {
             $data = $request->validated();
 
             $department = $this->departmentRepository->update($id, $data);
-            return response()->json(['message' => 'Updated department successfully!'], 200);
+            return response()->json(['message' => 'Cập nhât phòng ban thành công!'], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 422);
         }
@@ -60,7 +60,7 @@ class DepartmentService {
             $department = $this->departmentRepository->find($id);
 
             if (empty($department)) {
-                return response()->json(['error' => 'Department not found!'], 404);
+                return response()->json(['error' => 'Không tìm thấy phòng ban!'], 404);
             }
 
             return response()->json(['data' => $department], 200);
@@ -73,14 +73,14 @@ class DepartmentService {
         try {
             $check_role = $this->departmentRepository->find($id);
             if ($check_role->users_count > 0) {
-                return response()->json(['error' => 'Department has users assigned!'], 400);
+                return response()->json(['error' => 'Phòng ban này đã được gán cho người dùng không thể xóa được!'], 400);
             } 
 
             $this->departmentRepository->delete($id);
 
-            return response()->json(['data' => 'Deleted department successfully!'], 200);
+            return response()->json(['data' => 'Đã xóa phòng ban thành công!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Department not found!'], 404);
+            return response()->json(['error' => 'Không tìm thấy phòng ban!'], 404);
         }
     }
 }

@@ -38,7 +38,7 @@ class RoleService {
         try {
             $role = $this->roleRepository->find($id);
             if (empty($role)) {
-                return response()->json(['error' => 'Role not found!'], 404);
+                return response()->json(['error' => 'Không tìm thấy vai trò!'], 404);
             }
 
             $role = new RoleResource($role);
@@ -64,7 +64,7 @@ class RoleService {
                 }
             }
 
-            return response()->json(['message' => 'Created role successfully!', 'data' => $role], 201);
+            return response()->json(['message' => 'Tạo vai trò thành công!', 'data' => $role], 201);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 422);
         }
@@ -87,7 +87,7 @@ class RoleService {
                 }
             }
 
-            return response()->json(['message' => 'Updated role successfully!'], 200);
+            return response()->json(['message' => 'Cập nhật vai trò thành công!'], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 422);
         }
@@ -97,13 +97,13 @@ class RoleService {
         try {
             $check_role = $this->roleRepository->find($id);
             if ($check_role->users_count > 0) {
-                return response()->json(['error' => 'Role has users assigned!'], 400);
+                return response()->json(['error' => 'Vai trò này đã gán cho người dùng không thể xóa được!'], 400);
             } 
 
             $this->roleRepository->delete($id);
-            return response()->json(['error' => 'Deleted role successfully!'], 200);
+            return response()->json(['error' => 'Đã xóa thành công!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Role not found!'], 404);
+            return response()->json(['error' => 'Không tìm thấy vai trò!'], 404);
         }
     }
 
