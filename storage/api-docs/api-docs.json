@@ -8125,9 +8125,64 @@
                     }
                 }
             }
-        }
-
-    },
+        },
+        "/api/v1/feedbacks": {
+            "get": {
+                "tags": ["Feedbacks"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách đánh giá",
+                "description": "Lấy tất cả danh sách đánh giá.",
+                "operationId": "getFeedbacks",
+                "responses": {
+                    "200": {
+                        "description": "Thông tin đánh giá",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": 1
+                                                    },
+                                                    "user_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "package_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "rating": {
+                                                        "type": "string",
+                                                        "example": "5"
+                                                    },
+                                                    "content": {
+                                                        "type": "string",
+                                                        "example": "Nội dung"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
                                     "properties": {
                                         "error": {
                                             "type": "string",
