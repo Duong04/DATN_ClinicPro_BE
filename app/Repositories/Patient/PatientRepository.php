@@ -12,22 +12,24 @@ class PatientRepository implements PatientRepositoryInterface
     {
         return Patient::all();
     }
-    public function paginate($limit, $q) {
+
+    public function paginate($limit, $q)
+    {
         $patients = Patient::with('identityCard', 'patientInfo')
             ->when($q, function ($query, $q) {
                 $query->orWhereHas('patientInfo', function ($query) use ($q) {
                     $query->where('fullname', 'LIKE', "%{$q}%")
-                          ->orWhere('phone_number', 'LIKE', "%{$q}%")
-                          ->orWhere('address', 'LIKE', "%{$q}%")
-                          ->orWhere('email', 'LIKE', "%{$q}%");
+                        ->orWhere('phone_number', 'LIKE', "%{$q}%")
+                        ->orWhere('address', 'LIKE', "%{$q}%")
+                        ->orWhere('email', 'LIKE', "%{$q}%");
                 });
             });
 
         $patients->orderByDesc('created_at');
-    
+
         return $limit ? $patients->paginate($limit) : $patients->get();
     }
-    
+
     public function find($id)
     {
         return Patient::with('patientInfo', 'identityCard')->find($id);
@@ -45,5 +47,9 @@ class PatientRepository implements PatientRepositoryInterface
     {
         $patient = Patient::find($id);
         return $patient->delete();
+    }
+    public function findOrFail($id)
+    {
+        return Patient::findOrFail($id);
     }
 }

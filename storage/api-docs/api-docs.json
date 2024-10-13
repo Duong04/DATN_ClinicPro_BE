@@ -4647,7 +4647,7 @@
                 }
             }
         },
-        "/api/v1/Appointments": {
+        "/api/v1/appointments": {
             "get": {
                 "tags": ["Appointments"],
                 "security": [
@@ -5422,6 +5422,130 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Appointment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/appointments/patient/{id}": {
+            "get": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh lịch hẹn theo id",
+                "description": "Lấy thông tin danh sách lịch hẹn theo id bệnh nhân",
+                "operationId": "getAppointmentByIdPatient",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID bệnh nhân."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin lịch hẹn",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "doctor_id": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "appointment_date": {
+                                                    "type": "Date",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25 12:00"
+                                                },
+                                                "deposit_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "booking_type": {
+                                                    "type": "string",
+                                                    "example": "online"
+                                                },
+                                                "appointment_type": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "total_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "pending"
+                                                },
+                                                "cancellation_reason": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Patient not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Patient not found"
                                         }
                                     },
                                     "type": "object"
@@ -6890,7 +7014,7 @@
                 }
             }
         },
-         "/api/v1/prescriptions": {
+        "/api/v1/prescriptions": {
             "get": {
                 "tags": ["Prescriptions"],
                 "security": [
@@ -6929,17 +7053,21 @@
                                                         "type": "string",
                                                         "example": "Tên đơn thuốc"
                                                     },
-                                                    "description": {
+                                                    "instructions": {
                                                         "type": "string",
-                                                        "example": "Mô tả đơn thuốc"
+                                                        "example": "Hướng dẫn sử dụng"
                                                     },
-                                                    "quantity": {
+                                                    "frequency": {
                                                         "type": "string",
-                                                        "example": "5"
+                                                        "example": "2 lần/ngày"
                                                     },
                                                     "dosage": {
                                                         "type": "string",
-                                                        "example": "Liều lượng thuốc"
+                                                        "example": "1 viên/lần"
+                                                    },
+                                                    "duration": {
+                                                        "type": "integer",
+                                                        "example": "7"
                                                     }
                                                 }
                                             }
@@ -6990,9 +7118,10 @@
                                     "doctor_id",
                                     "patient_id",
                                     "name",
-                                    "description",
-                                    "quantity",
-                                    "dosage"
+                                    "instructions",
+                                    "frequency",
+                                    "dosage",
+                                    "duration"
                                 ],
                                 "properties": {
                                     "patient_id": {
@@ -7007,17 +7136,21 @@
                                         "type": "string",
                                         "example": "Tên đơn thuốc"
                                     },
-                                    "description": {
+                                    "instructions": {
                                         "type": "string",
-                                        "example": "Mô tả đơn thuốc"
+                                        "example": "Hướng dẫn sử dụng"
                                     },
-                                    "quantity": {
+                                    "frequency": {
                                         "type": "string",
-                                        "example": "5"
+                                        "example": "2 lần/ngày"
                                     },
                                     "dosage": {
                                         "type": "string",
-                                        "example": "Liều lượng thuốc"
+                                        "example": "1 viên/lần"
+                                    },
+                                    "duration": {
+                                        "type": "integer",
+                                        "example": "7"
                                     }
                                 },
                                 "type": "object"
@@ -7050,17 +7183,21 @@
                                                     "type": "string",
                                                     "example": "Tên đơn thuốc"
                                                 },
-                                                "description": {
+                                                "instructions": {
                                                     "type": "string",
-                                                    "example": "Mô tả đơn thuốc"
+                                                    "example": "Hướng dẫn sử dụng"
                                                 },
-                                                "quantity": {
+                                                "frequency": {
                                                     "type": "string",
-                                                    "example": "5"
+                                                    "example": "2 lần/ngày"
                                                 },
                                                 "dosage": {
                                                     "type": "string",
-                                                    "example": "Liều lượng thuốc"
+                                                    "example": "1 viên/lần"
+                                                },
+                                                "duration": {
+                                                    "type": "integer",
+                                                    "example": "7"
                                                 }
                                             },
                                             "type": "object"
@@ -7155,17 +7292,21 @@
                                                     "type": "string",
                                                     "example": "Tên đơn thuốc"
                                                 },
-                                                "description": {
+                                                "instructions": {
                                                     "type": "string",
-                                                    "example": "Mô tả đơn thuốc"
+                                                    "example": "Hướng dẫn sử dụng"
                                                 },
-                                                "quantity": {
+                                                "frequency": {
                                                     "type": "string",
-                                                    "example": "5"
+                                                    "example": "2 lần/ngày"
                                                 },
                                                 "dosage": {
                                                     "type": "string",
-                                                    "example": "Liều lượng thuốc"
+                                                    "example": "1 viên/lần"
+                                                },
+                                                "duration": {
+                                                    "type": "integer",
+                                                    "example": "7"
                                                 }
                                             }
                                         }
@@ -7245,26 +7386,31 @@
                             "schema": {
                                 "required": [
                                     "name",
-                                    "description",
-                                    "quantity",
-                                    "dosage"
+                                    "instructions",
+                                    "frequency",
+                                    "dosage",
+                                    "duration"
                                 ],
                                 "properties": {
                                     "name": {
                                         "type": "string",
                                         "example": "Tên đơn thuốc"
                                     },
-                                    "description": {
+                                    "instructions": {
                                         "type": "string",
-                                        "example": "Mô tả đơn thuốc"
+                                        "example": "Hướng dẫn sử dụng"
                                     },
-                                    "quantity": {
+                                    "frequency": {
                                         "type": "string",
-                                        "example": "5"
+                                        "example": "2 lần/ngày"
                                     },
                                     "dosage": {
                                         "type": "string",
-                                        "example": "Liều lượng đơn thuốc"
+                                        "example": "1 viên/lần"
+                                    },
+                                    "duration": {
+                                        "type": "integer",
+                                        "example": "7"
                                     }
                                 },
                                 "type": "object"
@@ -7297,17 +7443,21 @@
                                                     "type": "string",
                                                     "example": "Tên đơn thuốc"
                                                 },
-                                                "description": {
+                                                "instructions": {
                                                     "type": "string",
-                                                    "example": "Mô tả đơn thuốc"
+                                                    "example": "Hướng dẫn sử dụng"
                                                 },
-                                                "quantity": {
+                                                "frequency": {
                                                     "type": "string",
-                                                    "example": "5"
+                                                    "example": "2 lần/ngày"
                                                 },
                                                 "dosage": {
                                                     "type": "string",
-                                                    "example": "Liều lượng thuốc"
+                                                    "example": "1 viên/lần"
+                                                },
+                                                "duration": {
+                                                    "type": "integer",
+                                                    "example": "7"
                                                 }
                                             },
                                             "type": "object"
@@ -7452,17 +7602,21 @@
                                                     "type": "string",
                                                     "example": "Tên đơn thuốc"
                                                 },
-                                                "description": {
+                                                "instructions": {
                                                     "type": "string",
-                                                    "example": "Mô tả đơn thuốc"
+                                                    "example": "Hướng dẫn sử dụng"
                                                 },
-                                                "quantity": {
+                                                "frequency": {
                                                     "type": "string",
-                                                    "example": "5"
+                                                    "example": "2 lần/ngày"
                                                 },
                                                 "dosage": {
                                                     "type": "string",
-                                                    "example": "Liều lượng thuốc"
+                                                    "example": "1 viên/lần"
+                                                },
+                                                "duration": {
+                                                    "type": "integer",
+                                                    "example": "7"
                                                 }
                                             }
                                         }
@@ -7513,6 +7667,7 @@
                     }
                 }
             }
+
         },
         "/api/v1/specialties": {
             "get": {
@@ -7973,6 +8128,404 @@
         }
 
     },
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Feedbacks"],
+                "summary": "Tạo đánh giá",
+                "description": "Tạo đánh giá.",
+                "operationId": "createFeedbacks",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "rating",
+                                    "content",
+                                    "user_id",
+                                    "package_id"
+                                ],
+                                "properties": {
+                                    "rating": {
+                                        "type": "string",
+                                        "example": "5"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Nội dung"
+                                    },
+                                    "user_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "package_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create feedback Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "rating": {
+                                                    "type": "string",
+                                                    "example": "5"
+                                                },
+                                                "content": {
+                                                    "type": "string",
+                                                    "example": "Nội dung"
+                                                },
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "properties": {
+                                                "rating": {
+                                                    "type": "string",
+                                                    "example": "Đánh giá không được lớn hơn 5 ký tự"
+                                                },
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "example": "ID người dùng không tồn tại"
+                                                },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "ID gói khám không tồn tại"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/feedbacks/{id}": {
+            "get": {
+                "tags": ["Feedbacks"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy đánh giá theo id",
+                "description": "Lấy thông tin đánh giá theo id",
+                "operationId": "getFeedbackById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID đánh giá."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin đánh giá",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "rating": {
+                                                    "type": "string",
+                                                    "example": "5"
+                                                },
+                                                "content": {
+                                                    "type": "string",
+                                                    "example": "Nội dung"
+                                                },
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Feedback not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Feedback not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Feedbacks"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Xóa đánh giá",
+                "description": "Xóa đánh giá theo ID.",
+                "operationId": "deleteFeedback",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID đánh giá."
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted Feedback Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {},
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Feedback not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Feedback not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/feedbacks/package/{id}": {
+            "get": {
+                "tags": ["Feedbacks"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách đánh giá theo id",
+                "description": "Lấy thông tin danh sách đánh giá theo id gói khám",
+                "operationId": "getFeedbackByIdPackage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID gói khám."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin đánh giá",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "rating": {
+                                                    "type": "string",
+                                                    "example": "5"
+                                                },
+                                                "content": {
+                                                    "type": "string",
+                                                    "example": "Nội dung"
+                                                },
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Package not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Package not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    },
     "components": {
         "securitySchemes": {
             "bearerAuth": {
@@ -8030,6 +8583,10 @@
         {
             "name": "Specialties",
             "description": "Chuyên khoa"
+        },
+        {
+            "name": "Feedbacks",
+            "description": "Đánh giá"
         }
     ]
 }
