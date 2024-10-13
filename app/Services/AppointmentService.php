@@ -35,6 +35,12 @@ class AppointmentService
         return $this->findAppointment($id);
     }
 
+    public function findByIdPatient($id)
+    {
+        $this->findPatient($id);
+        return $this->appointmentRepository->findByPatient($id);
+    }
+
 
     public function create($request)
     {
@@ -115,5 +121,14 @@ class AppointmentService
         $data = array_merge(['status' => $status], $additionalData);
 
         return $this->appointmentRepository->update($data, $id);
+    }
+
+    private function findPatient($id)
+    {
+        try {
+            return $this->patientRepository->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            throw new Exception('Patient not found');
+        }
     }
 }

@@ -36,7 +36,7 @@ class PrescriptionService
     private function findPatient($id)
     {
         try {
-            return $this->patientRepository->find($id);
+            return $this->patientRepository->findOrFail($id);
         } catch (ModelNotFoundException $e) {
             throw new Exception('Patient not found');
         }

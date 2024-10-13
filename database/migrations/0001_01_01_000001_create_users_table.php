@@ -219,11 +219,11 @@ return new class extends Migration
 
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
-
             $table->string('name', 255);
-            $table->text('description');
-            $table->integer('quantity');
+            $table->string('frequency', 255);
             $table->string('dosage', 255)->nullable();
+            $table->integer('duration');
+            $table->text('instructions');
             $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('patient_id');
             $table->timestamps();

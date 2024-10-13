@@ -45,7 +45,7 @@ class PrescriptionController extends Controller
             $data = $callback();
             return response()->json(['data' => $data], $successStatus);
         } catch (\Exception $e) {
-            $status = $e->getMessage() === 'Prescription not found' ? 404 : 500;
+            $status = str_contains($e->getMessage(), 'not found')   ? 404 : 500;
             return response()->json(['success' => false, 'message' => $e->getMessage() ?: $message], $status);
         }
     }

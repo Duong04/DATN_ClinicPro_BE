@@ -22,6 +22,10 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     {
         return $this->appointment::findOrFail($id);
     }
+    public function findByPatient($id)
+    {
+        return $this->appointment::where('patient_id', $id)->get();
+    }
 
     public function create($data)
     {
