@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\Apis\V1\MedicalHistoryController;
 use App\Http\Controllers\Apis\V1\PatientController;
+use App\Http\Controllers\Apis\V1\SpecialtyController;
 use App\Http\Controllers\Apis\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Apis\v1\DepartmentController;
+use App\Http\Controllers\Apis\V1\DepartmentController;
 use App\Http\Controllers\Apis\V1\ActionController;
 use App\Http\Controllers\Apis\V1\AppointmentController;
 use App\Http\Controllers\Apis\V1\AuthController;
@@ -13,7 +14,7 @@ use App\Http\Controllers\Apis\V1\FeedbackController;
 use App\Http\Controllers\Apis\V1\PermissionController;
 use App\Http\Controllers\Apis\V1\RoleController;
 use App\Http\Controllers\Apis\V1\PackageController;
-use App\Http\Controllers\Apis\v1\PrescriptionController;
+use App\Http\Controllers\Apis\V1\PrescriptionController;
 use PHPUnit\Framework\Attributes\Group;
 
 Route::get('/user', function (Request $request) {
@@ -137,6 +138,15 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'delete');
         });
 
+    Route::get('specialties', [SpecialtyController::class, 'paginate']);    
+    Route::controller(SpecialtyController::class)->prefix('specialties')->middleware('jwt.auth')
+        ->group(function () {
+            Route::get('/{id}', 'show');
+            Route::post('/', 'create');
+            Route::put('/{id}', 'update');
+            Route::delete('/{id}', 'delete');
+        });
+
     Route::controller(FeedbackController::class)->prefix('feedbacks')->middleware('jwt.auth')->group(function () {
         Route::get('/', 'index');
         Route::get('/{id}', 'show');
@@ -144,4 +154,5 @@ Route::prefix('v1')->group(function () {
         Route::post('/', 'store');
         Route::delete('/{id}', 'destroy');
     });
+
 });

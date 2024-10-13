@@ -8,9 +8,17 @@ class DepartmentRepository implements DepartmentRepositoryInterface {
         return Department::all();
     }
     public function paginate($limit, $q) {
-        $departments = Department::with('manager')->withCount('users');
+        $departments = Department::with(['manager.userInfo' => function ($query) {
+            $query->select('user_id', 'fullname', 'avatar');
+        }])->withCount('users');
         if ($q) {
-            $departments->where('name', 'like', "%{$q}%");
+            $departments->where('name', 'like', "%{$q}%")
+            ->orWhereHas('manager', function ($query) use ($q) {
+                $query->where('email', 'like', "%{$q}%");
+            })
+            ->orWhereHas('manager.userInfo', function ($query) use ($q) {
+                $query->where('fullname', 'like', "%{$q}%");
+            });;
         }
 
         $departments->orderByDesc('created_at');
