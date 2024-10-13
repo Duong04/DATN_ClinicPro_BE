@@ -7036,17 +7036,21 @@
                                                         "type": "string",
                                                         "example": "Tên đơn thuốc"
                                                     },
-                                                    "description": {
+                                                    "instructions": {
                                                         "type": "string",
-                                                        "example": "Mô tả đơn thuốc"
+                                                        "example": "Hướng dẫn sử dụng"
                                                     },
-                                                    "quantity": {
+                                                    "frequency": {
                                                         "type": "string",
-                                                        "example": "5"
+                                                        "example": "2 lần/ngày"
                                                     },
                                                     "dosage": {
                                                         "type": "string",
-                                                        "example": "Liều lượng thuốc"
+                                                        "example": "1 viên/lần"
+                                                    },
+                                                    "duration": {
+                                                        "type": "integer",
+                                                        "example": "7"
                                                     }
                                                 }
                                             }
@@ -7097,9 +7101,10 @@
                                     "doctor_id",
                                     "patient_id",
                                     "name",
-                                    "description",
-                                    "quantity",
-                                    "dosage"
+                                    "instructions",
+                                    "frequency",
+                                    "dosage",
+                                    "duration"
                                 ],
                                 "properties": {
                                     "patient_id": {
@@ -7114,17 +7119,21 @@
                                         "type": "string",
                                         "example": "Tên đơn thuốc"
                                     },
-                                    "description": {
+                                    "instructions": {
                                         "type": "string",
-                                        "example": "Mô tả đơn thuốc"
+                                        "example": "Hướng dẫn sử dụng"
                                     },
-                                    "quantity": {
+                                    "frequency": {
                                         "type": "string",
-                                        "example": "5"
+                                        "example": "2 lần/ngày"
                                     },
                                     "dosage": {
                                         "type": "string",
-                                        "example": "Liều lượng thuốc"
+                                        "example": "1 viên/lần"
+                                    },
+                                    "duration": {
+                                        "type": "integer",
+                                        "example": "7"
                                     }
                                 },
                                 "type": "object"
@@ -7157,17 +7166,21 @@
                                                     "type": "string",
                                                     "example": "Tên đơn thuốc"
                                                 },
-                                                "description": {
+                                                "instructions": {
                                                     "type": "string",
-                                                    "example": "Mô tả đơn thuốc"
+                                                    "example": "Hướng dẫn sử dụng"
                                                 },
-                                                "quantity": {
+                                                "frequency": {
                                                     "type": "string",
-                                                    "example": "5"
+                                                    "example": "2 lần/ngày"
                                                 },
                                                 "dosage": {
                                                     "type": "string",
-                                                    "example": "Liều lượng thuốc"
+                                                    "example": "1 viên/lần"
+                                                },
+                                                "duration": {
+                                                    "type": "integer",
+                                                    "example": "7"
                                                 }
                                             },
                                             "type": "object"
@@ -7262,17 +7275,21 @@
                                                     "type": "string",
                                                     "example": "Tên đơn thuốc"
                                                 },
-                                                "description": {
+                                                "instructions": {
                                                     "type": "string",
-                                                    "example": "Mô tả đơn thuốc"
+                                                    "example": "Hướng dẫn sử dụng"
                                                 },
-                                                "quantity": {
+                                                "frequency": {
                                                     "type": "string",
-                                                    "example": "5"
+                                                    "example": "2 lần/ngày"
                                                 },
                                                 "dosage": {
                                                     "type": "string",
-                                                    "example": "Liều lượng thuốc"
+                                                    "example": "1 viên/lần"
+                                                },
+                                                "duration": {
+                                                    "type": "integer",
+                                                    "example": "7"
                                                 }
                                             }
                                         }
@@ -7352,26 +7369,31 @@
                             "schema": {
                                 "required": [
                                     "name",
-                                    "description",
-                                    "quantity",
-                                    "dosage"
+                                    "instructions",
+                                    "frequency",
+                                    "dosage",
+                                    "duration"
                                 ],
                                 "properties": {
                                     "name": {
                                         "type": "string",
                                         "example": "Tên đơn thuốc"
                                     },
-                                    "description": {
+                                    "instructions": {
                                         "type": "string",
-                                        "example": "Mô tả đơn thuốc"
+                                        "example": "Hướng dẫn sử dụng"
                                     },
-                                    "quantity": {
+                                    "frequency": {
                                         "type": "string",
-                                        "example": "5"
+                                        "example": "2 lần/ngày"
                                     },
                                     "dosage": {
                                         "type": "string",
-                                        "example": "Liều lượng đơn thuốc"
+                                        "example": "1 viên/lần"
+                                    },
+                                    "duration": {
+                                        "type": "integer",
+                                        "example": "7"
                                     }
                                 },
                                 "type": "object"
@@ -7404,17 +7426,21 @@
                                                     "type": "string",
                                                     "example": "Tên đơn thuốc"
                                                 },
-                                                "description": {
+                                                "instructions": {
                                                     "type": "string",
-                                                    "example": "Mô tả đơn thuốc"
+                                                    "example": "Hướng dẫn sử dụng"
                                                 },
-                                                "quantity": {
+                                                "frequency": {
                                                     "type": "string",
-                                                    "example": "5"
+                                                    "example": "2 lần/ngày"
                                                 },
                                                 "dosage": {
                                                     "type": "string",
-                                                    "example": "Liều lượng thuốc"
+                                                    "example": "1 viên/lần"
+                                                },
+                                                "duration": {
+                                                    "type": "integer",
+                                                    "example": "7"
                                                 }
                                             },
                                             "type": "object"
@@ -7559,17 +7585,21 @@
                                                     "type": "string",
                                                     "example": "Tên đơn thuốc"
                                                 },
-                                                "description": {
+                                                "instructions": {
                                                     "type": "string",
-                                                    "example": "Mô tả đơn thuốc"
+                                                    "example": "Hướng dẫn sử dụng"
                                                 },
-                                                "quantity": {
+                                                "frequency": {
                                                     "type": "string",
-                                                    "example": "5"
+                                                    "example": "2 lần/ngày"
                                                 },
                                                 "dosage": {
                                                     "type": "string",
-                                                    "example": "Liều lượng thuốc"
+                                                    "example": "1 viên/lần"
+                                                },
+                                                "duration": {
+                                                    "type": "integer",
+                                                    "example": "7"
                                                 }
                                             }
                                         }

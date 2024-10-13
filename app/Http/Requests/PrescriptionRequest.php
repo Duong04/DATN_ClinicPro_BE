@@ -27,9 +27,10 @@ class PrescriptionRequest extends FormRequest
             'doctor_id' => 'required|exists:doctors,id',
             'patient_id' => 'required|exists:patients,id',
             'name' => 'required',
-            'description' => 'required',
-            'quantity' => 'required',
-            'dosage' => 'required'
+            'instructions' => 'required',
+            'frequency' => 'required',
+            'dosage' => 'required',
+            'duration' => 'required|integer|min:1'
         ];
         if ($this->method() == 'PUT') {
             $rules['patient_id'] = 'nullable';
@@ -43,6 +44,8 @@ class PrescriptionRequest extends FormRequest
         return [
             'required' => ':attribute không được để trống!',
             'exists' => 'Giá trị của :attribute không tồn tại!',
+            "min" => ":attribute không được nhỏ hơn :min ký tự! ",
+            'integer' => ':attribute phải la số'
         ];
     }
 
@@ -52,8 +55,10 @@ class PrescriptionRequest extends FormRequest
             'doctor_id' => 'Id bác sĩ',
             'patient_id' => 'Id bện nhân',
             'name' => 'Tên đơn thuốc',
-            'description' => 'Mô tả',
-            'dosage' => 'Liều lượng'
+            'instructions' => 'Hướng dẫn sử dụng',
+            'dosage' => 'Liều lượng',
+            'frequency' => 'Tần suất',
+            'duration' => 'Thời gian sử dụng'
         ];
     }
     protected function failedValidation(Validator $validator)
