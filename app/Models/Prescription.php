@@ -11,11 +11,12 @@ class Prescription extends Model
 
     protected $table = 'prescriptions';
     protected $fillable = [
-        'doctor_id',
+        'user_id',
         'patient_id',
         'name',
-        'description',
-        'quantity',
+        'instructions',
+        'frequency',
         'dosage',
+        'duration'
     ];
 }
