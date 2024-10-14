@@ -4047,17 +4047,11 @@
                                     "doctor": {
                                         "type": "object",
                                         "properties": {
-                                            "specialty": {
-                                                "type": "string",
+                                            "specialty_id": {
+                                                "type": "integer",
                                                 "nullable": true,
-                                                "example": "specialty",
+                                                "example": 1,
                                                 "description": "Chuyên khoa"
-                                            },
-                                            "description": {
-                                                "type": "string",
-                                                "nullable": true,
-                                                "example": "Mô tả chuyên khoa",
-                                                "description": "Mô tả"
                                             }
                                         }
                                     }
@@ -7517,11 +7511,6 @@
         "/api/v1/specialties": {
             "get": {
                 "tags": ["Specialties"],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
                 "summary": "Lấy danh sách chuyên khoa với phân trang",
                 "description": "Trả về danh sách các chuyên khoa với phân trang dựa trên giới hạn và truy vấn tìm kiếm.",
                 "operationId": "getPaginateSpecialties",
@@ -7728,6 +7717,11 @@
         "/api/v1/specialties/{id}": {
             "get": {
                 "tags": ["Specialties"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "summary": "Lấy thông tin chi tiết của một chuyên khoa",
                 "description": "Trả về thông tin của một chuyên khoa dựa trên ID.",
                 "operationId": "findSpecialtyById",
