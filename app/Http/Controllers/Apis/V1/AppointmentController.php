@@ -26,6 +26,10 @@ class AppointmentController extends Controller
     {
         return   $this->respondWithData(fn() => $this->appointmentService->show($id), '', 200);
     }
+    public function findByIdPatient($id)
+    {
+        return $this->respondWithData(fn() => $this->appointmentService->findByIdPatient($id));
+    }
 
     public function store(AppointmentRequest $request)
     {
@@ -59,7 +63,7 @@ class AppointmentController extends Controller
             }
             return response()->json(['data' => $data], $successStatus);
         } catch (\Exception $e) {
-            $status = $e->getMessage() === 'Appointment not found' ? 404 : 500;
+            $status = str_contains($e->getMessage(), 'not found') ? 404 : 500;
             return response()->json(['success' => false, 'message' => $e->getMessage() ?: $message], $status);
         }
     }

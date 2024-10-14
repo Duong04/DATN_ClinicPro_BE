@@ -29,6 +29,8 @@ use App\Repositories\UserInfo\UserInfoRepository;
 use App\Repositories\UserInfo\UserInfoRepositoryInterface;
 use App\Repositories\Department\DepartmentRepository;
 use App\Repositories\Department\DepartmentRepositoryInterface;
+use App\Repositories\Feedback\FeedbackRepository;
+use App\Repositories\Feedback\FeedbackRepositoryInterface;
 use App\Repositories\MedicalHistory\MedicalHistoryRepository;
 use App\Repositories\MedicalHistory\MedicalHistoryRepositoryInterface;
 use App\Repositories\Prescription\PrescriptionRepository;
@@ -59,6 +61,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(MedicalHistoryRepositoryInterface::class, MedicalHistoryRepository::class);
         $this->app->bind(PrescriptionRepositoryInterface::class, PrescriptionRepository::class);
         $this->app->bind(SpecialtyRepositoryInterface::class, SpecialtyRepository::class);
+        $this->app->bind(FeedbackRepositoryInterface::class, FeedbackRepository::class);
     }
 
     /**

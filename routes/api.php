@@ -10,6 +10,7 @@ use App\Http\Controllers\Apis\V1\DepartmentController;
 use App\Http\Controllers\Apis\V1\ActionController;
 use App\Http\Controllers\Apis\V1\AppointmentController;
 use App\Http\Controllers\Apis\V1\AuthController;
+use App\Http\Controllers\Apis\V1\FeedbackController;
 use App\Http\Controllers\Apis\V1\PermissionController;
 use App\Http\Controllers\Apis\V1\RoleController;
 use App\Http\Controllers\Apis\V1\PackageController;
@@ -82,6 +83,7 @@ Route::prefix('v1')->group(function () {
                 Route::get('/', 'index')->middleware('jwt.auth');
                 Route::post('/', 'store');
                 Route::get('/{id}', 'show')->middleware('jwt.auth');
+                Route::get('/patient/{id}', 'findByIdPatient')->middleware('jwt.auth');
                 Route::get('/send/{id}', 'update')->middleware('jwt.auth');
                 Route::post('/{id}', 'cancel')->middleware('jwt.auth');
                 Route::put('/{id}', 'complete')->middleware('jwt.auth');
@@ -144,4 +146,13 @@ Route::prefix('v1')->group(function () {
             Route::put('/{id}', 'update');
             Route::delete('/{id}', 'delete');
         });
+
+    Route::controller(FeedbackController::class)->prefix('feedbacks')->middleware('jwt.auth')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::get('/package/{id}', 'findByIdPackage');
+        Route::post('/', 'store');
+        Route::delete('/{id}', 'destroy');
+    });
+
 });
