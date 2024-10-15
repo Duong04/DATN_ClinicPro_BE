@@ -20,14 +20,12 @@ class AppointmentService
     private $appointmentRepository;
     private $patientInfoRepository;
     private $patientRepository;
-    private $doctorRepository;
 
-    public function __construct(AppointmentRepositoryInterface $appointmentRepository, PatientRepositoryInterface $patientRepository, PatientInfoRepositoryInterface $patientInfoRepository, DoctorRepositoryInterface $doctorRepository)
+    public function __construct(AppointmentRepositoryInterface $appointmentRepository, PatientRepositoryInterface $patientRepository, PatientInfoRepositoryInterface $patientInfoRepository)
     {
         $this->appointmentRepository = $appointmentRepository;
         $this->patientInfoRepository = $patientInfoRepository;
         $this->patientRepository = $patientRepository;
-        $this->doctorRepository = $doctorRepository;
     }
 
     public function all()
