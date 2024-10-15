@@ -71,7 +71,7 @@ class AppointmentService
         $this->checkStatus($appointment, 'confirmed');
 
         $rules = [
-            'user_id' => "exists:doctors,id"
+            'user_id' => "exists:users,id"
         ];
         $messages = [
             'exists' => 'Giá trị của :attribute không tồn tại!',
