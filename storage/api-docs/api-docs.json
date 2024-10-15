@@ -4672,7 +4672,7 @@
                                                         "type": "string",
                                                         "example": "1"
                                                     },
-                                                    "doctor_id": {
+                                                    "user_id": {
                                                         "type": "string",
                                                         "example": "null"
                                                     },
@@ -4704,6 +4704,10 @@
                                                     "cancellation_reason": {
                                                         "type": "string",
                                                         "example": "null"
+                                                    },
+                                                    "specialty_id": {
+                                                        "type": "string",
+                                                        "example": "1"
                                                     }
                                                 }
                                             }
@@ -4752,7 +4756,8 @@
                                     "address",
                                     "gender",
                                     "dob",
-                                    "appointment_date"
+                                    "appointment_date",
+                                    "specialty_id"
                                 ],
                                 "properties": {
                                     "fullname": {
@@ -4784,6 +4789,10 @@
                                         "type": "string",
                                         "format": "date-time",
                                         "example": "2024-09-26 21:12:58"
+                                    },
+                                    "specialty_id": {
+                                        "type": "string",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"
@@ -4808,7 +4817,7 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "null"
                                                 },
@@ -4840,6 +4849,10 @@
                                                 "cancellation_reason": {
                                                     "type": "string",
                                                     "example": "null"
+                                                },
+                                                "specialty_id": {
+                                                    "type": "string",
+                                                    "example": "1"
                                                 }
                                             },
                                             "type": "object"
@@ -4930,9 +4943,13 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "null"
+                                                },
+                                                "specialty_id": {
+                                                    "type": "string",
+                                                    "example": "1"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -5068,9 +5085,13 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "null"
+                                                },
+                                                "specialty_id": {
+                                                    "type": "string",
+                                                    "example": "1"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -5174,9 +5195,13 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "null"
+                                                },
+                                                "specialty_id": {
+                                                    "type": "string",
+                                                    "example": "1"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -5342,9 +5367,13 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "null"
+                                                },
+                                                "specialty_id": {
+                                                    "type": "string",
+                                                    "example": "1"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -5445,6 +5474,171 @@
                 }
             }
         },
+        "/api/v1/appointments/asign/{id}": {
+            "post": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Giao lịch hẹn",
+                "description": "giao lịch hẹn cho bác sĩ",
+                "operationId": "acceptAppointmentById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "description": "ID lịch hẹn."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["user_id"],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": "ID bác sĩ"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Thông tin lịch hẹn",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": 1
+                                                },
+                                                "patient_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "specialty_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "appointment_date": {
+                                                    "type": "Date",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25 12:00"
+                                                },
+                                                "deposit_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "booking_type": {
+                                                    "type": "string",
+                                                    "example": "online"
+                                                },
+                                                "appointment_type": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "total_amount": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "confirmed"
+                                                },
+                                                "cancellation_reason": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment is not confirmed and cannot be updated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Appointment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/api/v1/appointments/patient/{id}": {
             "get": {
                 "tags": ["Appointments"],
@@ -5486,9 +5680,13 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "null"
+                                                },
+                                                "specialty_id": {
+                                                    "type": "string",
+                                                    "example": "1"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -7039,7 +7237,7 @@
                                                         "type": "string",
                                                         "example": "1"
                                                     },
-                                                    "doctor_id": {
+                                                    "user_id": {
                                                         "type": "string",
                                                         "example": "1"
                                                     },
@@ -7109,7 +7307,7 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "doctor_id",
+                                    "user_id",
                                     "patient_id",
                                     "name",
                                     "instructions",
@@ -7122,7 +7320,7 @@
                                         "type": "string",
                                         "example": "1"
                                     },
-                                    "doctor_id": {
+                                    "user_id": {
                                         "type": "string",
                                         "example": "1"
                                     },
@@ -7169,7 +7367,7 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "1"
                                                 },
@@ -7219,7 +7417,7 @@
                                                     "type": "string",
                                                     "example": "Tên đơn thuốc không được để trống."
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "id bác sĩ không tồn tại"
                                                 }
@@ -7278,7 +7476,7 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "1"
                                                 },
@@ -7429,7 +7627,7 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "1"
                                                 },
@@ -7588,7 +7786,7 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
-                                                "doctor_id": {
+                                                "user_id": {
                                                     "type": "string",
                                                     "example": "1"
                                                 },
@@ -7661,7 +7859,6 @@
                     }
                 }
             }
-
         },
         "/api/v1/specialties": {
             "get": {

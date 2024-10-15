@@ -87,6 +87,7 @@ Route::prefix('v1')->group(function () {
                 Route::get('/send/{id}', 'update')->middleware('jwt.auth');
                 Route::post('/{id}', 'cancel')->middleware('jwt.auth');
                 Route::put('/{id}', 'complete')->middleware('jwt.auth');
+                Route::post('/assign/{id}', 'assign')->middleware('jwt.auth');
                 Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
             }
         );
@@ -128,7 +129,7 @@ Route::prefix('v1')->group(function () {
             Route::put('/{id}', 'update');
             Route::delete('/{id}', 'destroy');
         });
-          
+
     Route::controller(PatientController::class)->prefix('patients')->middleware('jwt.auth')
         ->group(function () {
             Route::get('/', 'paginate');
@@ -138,7 +139,7 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'delete');
         });
 
-    Route::get('specialties', [SpecialtyController::class, 'paginate']);    
+    Route::get('specialties', [SpecialtyController::class, 'paginate']);
     Route::controller(SpecialtyController::class)->prefix('specialties')->middleware('jwt.auth')
         ->group(function () {
             Route::get('/{id}', 'show');
@@ -154,5 +155,4 @@ Route::prefix('v1')->group(function () {
         Route::post('/', 'store');
         Route::delete('/{id}', 'destroy');
     });
-
 });

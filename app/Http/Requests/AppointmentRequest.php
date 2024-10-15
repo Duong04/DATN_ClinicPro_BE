@@ -27,6 +27,7 @@ class AppointmentRequest extends FormRequest
             'fullname' => 'required|string',
             'email' => 'required|email',
             'phone_number' => 'required|min:10|max:11|regex:/^[0-9]+$/',
+            'specialty_id' => 'required|exists:specialties,id',
             'address' => 'required',
             'gender' => 'required',
             'dob' => 'required|date',
@@ -43,7 +44,8 @@ class AppointmentRequest extends FormRequest
             'email' => ':attribute phải là định dạng email!',
             'regex' => ':attribute phải là số hợp lệ!',
             'date' => ':attribute phải là ngày hợp lệ!',
-            'appointment_date.after' => ':attribute phải lớn hơn thời gian hiện tại!'
+            'appointment_date.after' => ':attribute phải lớn hơn thời gian hiện tại!',
+            'exists' => 'Giá trị của :attribute không tồn tại!'
         ];
     }
 
@@ -56,7 +58,8 @@ class AppointmentRequest extends FormRequest
             'address' => 'Địa chỉ',
             'gender' => 'Giới tính',
             'dob' => 'Ngày sinh',
-            'appointment_date' => 'Giờ hẹn'
+            'appointment_date' => 'Giờ hẹn',
+            "specialty_id" => 'ID chuyên khoa'
         ];
     }
 

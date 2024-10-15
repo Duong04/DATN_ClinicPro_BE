@@ -45,6 +45,10 @@ class AppointmentController extends Controller
     {
         return $this->respondWithData(fn() => $this->appointmentService->update($id));
     }
+    public function assign(Request $request, $id)
+    {
+        return $this->respondWithData(fn() => $this->appointmentService->assign($id, $request));
+    }
 
     public function destroy($id)
     {
