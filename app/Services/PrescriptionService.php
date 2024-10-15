@@ -48,7 +48,7 @@ class PrescriptionService
             $data = $request->validated();
             return  $this->prescriptionRepository->create($data);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to create prescription: ' . $e->getMessage()], 500);
+            throw new Exception('Failed to create prescription: ' . $e->getMessage(),);
         }
     }
     public function update($request, $id)
@@ -57,7 +57,7 @@ class PrescriptionService
             $data = $request->validated();
             return $this->prescriptionRepository->update($id, $data);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to update prescription: ' . $e->getMessage()], 500);
+            throw new Exception('Failed to update prescription: ' . $e->getMessage(),);
         }
     }
     public function destroy($id)
