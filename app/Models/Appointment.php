@@ -12,14 +12,15 @@ class Appointment extends Model
     protected $table = 'appointments';
     protected $fillable = [
         'patient_id',
-        'doctor_id',
+        'user_id',
         'appointment_date',
         'deposit_amount',
         'booking_type',
         'appointment_type',
         'total_amount',
         'status',
-        'cancellation_reason'
+        'cancellation_reason',
+        'specialty_id'
     ];
 
     protected $attributes = [

@@ -12,13 +12,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('prescriptions', function (Blueprint $table) {
-            $table->dropColumn(['description', 'quantity', 'doctor_id']);
-
+            $table->dropColumn(['description', 'quantity']);
             $table->string('frequency', 255);
-            $table->unsignedBigInteger('user_id');
             $table->integer('duration');
             $table->text('instructions');
-            $table->foreign('user_id')->references('id')->on('doctors');
         });
     }
 
@@ -27,14 +24,5 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::table('prescriptions', function (Blueprint $table) {
-            $table->text('description');
-            $table->integer('quantity');
-            $table->unsignedBigInteger('doctor_id');
-
-            $table->dropColumn(['frequency', 'user_id', 'duration', 'instructions']);
-        });
-    }
+    public function down() {}
 };

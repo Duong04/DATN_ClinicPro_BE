@@ -24,7 +24,7 @@ class PrescriptionRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'doctor_id' => 'required|exists:doctors,id',
+            'user_id' => 'required|exists:users,id',
             'patient_id' => 'required|exists:patients,id',
             'name' => 'required',
             'instructions' => 'required',
@@ -34,7 +34,7 @@ class PrescriptionRequest extends FormRequest
         ];
         if ($this->method() == 'PUT') {
             $rules['patient_id'] = 'nullable';
-            $rules['doctor_id'] = 'nullable';
+            $rules['user_id'] = 'nullable';
         }
         return $rules;
     }
@@ -52,7 +52,7 @@ class PrescriptionRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'doctor_id' => 'Id bác sĩ',
+            'user_id' => 'Id Bác sĩ',
             'patient_id' => 'Id bện nhân',
             'name' => 'Tên đơn thuốc',
             'instructions' => 'Hướng dẫn sử dụng',

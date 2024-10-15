@@ -2,14 +2,17 @@
 
 namespace App\Services;
 
-use App\Mail\AcceptAppointmentMail;
+use Exception;
+use App\Models\Doctor;
 use App\Models\PatientInfo;
+use App\Mail\AcceptAppointmentMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use App\Repositories\Patient\PatientRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Repositories\Appointment\AppointmentRepositoryInterface;
+use App\Repositories\Doctor\DoctorRepositoryInterface;
 use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
-use Illuminate\Support\Facades\Mail;
-use Exception;
 
 class AppointmentService
 {
@@ -17,12 +20,14 @@ class AppointmentService
     private $appointmentRepository;
     private $patientInfoRepository;
     private $patientRepository;
+    private $doctorRepository;
 
-    public function __construct(AppointmentRepositoryInterface $appointmentRepository, PatientRepositoryInterface $patientRepository, PatientInfoRepositoryInterface $patientInfoRepository)
+    public function __construct(AppointmentRepositoryInterface $appointmentRepository, PatientRepositoryInterface $patientRepository, PatientInfoRepositoryInterface $patientInfoRepository, DoctorRepositoryInterface $doctorRepository)
     {
         $this->appointmentRepository = $appointmentRepository;
         $this->patientInfoRepository = $patientInfoRepository;
         $this->patientRepository = $patientRepository;
+        $this->doctorRepository = $doctorRepository;
     }
 
     public function all()
@@ -60,7 +65,28 @@ class AppointmentService
             return response()->json(['error' => 'Failed to create appointment: ' . $e->getMessage()], 500);
         }
     }
+    public function assign($id, $request)
+    {
+        $appointment = $this->findAppointment($id);
+        $this->checkStatus($appointment, 'confirmed');
 
+        $rules = [
+            'user_id' => "exists:doctors,id"
+        ];
+        $messages = [
+            'exists' => 'Giá trị của :attribute không tồn tại!',
+        ];
+        $attributes = [
+            'user_id' => 'ID Bác sĩ'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages, $attributes);
+        if ($validator->fails()) {
+            throw new Exception($validator->errors());
+        }
+        $validator->validated();
+        $data['user_id'] = $request->input('user_id');
+        return $this->appointmentRepository->update($data, $id);
+    }
     private function createPatient($dataPatient)
     {
         $patient = $this->patientRepository->create([]);
