@@ -3505,7 +3505,7 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "integer",
-                                                    "example": 1
+                                                    "example": 23
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -3513,54 +3513,107 @@
                                                 },
                                                 "description": {
                                                     "type": "string",
-                                                    "example": "Mô tả"
-                                                },
-                                                "manager_id": {
-                                                    "type": "integer",
-                                                    "example": 5
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-25T15:33:47.000000Z"
-                                                },
-                                                "updated_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-25T15:33:47.000000Z"
+                                                    "example": "Mô tả về phòng IT"
                                                 },
                                                 "users_count": {
                                                     "type": "integer",
-                                                    "example": 0
+                                                    "example": 2
                                                 },
                                                 "manager": {
                                                     "type": "object",
                                                     "properties": {
                                                         "id": {
                                                             "type": "integer",
-                                                            "example": 5
-                                                        },
-                                                        "status": {
-                                                            "type": "string",
-                                                            "example": "active"
+                                                            "example": 32
                                                         },
                                                         "email": {
                                                             "type": "string",
-                                                            "example": "johndoe@example.com"
+                                                            "example": "johndoe1111111@example.com"
                                                         },
-                                                        "role_id": {
-                                                            "type": "integer",
-                                                            "example": 2
-                                                        },
-                                                        "created_at": {
+                                                        "fullname": {
                                                             "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-22T10:08:14.000000Z"
+                                                            "example": "Nguyễn Văn A"
                                                         },
-                                                        "updated_at": {
+                                                        "avatar": {
                                                             "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-23T15:16:32.000000Z"
+                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                        },
+                                                        "address": {
+                                                            "type": "string",
+                                                            "example": "123 Main St, City, Country"
+                                                        },
+                                                        "phone_number": {
+                                                            "type": "string",
+                                                            "example": "0987654321"
+                                                        },
+                                                        "gender": {
+                                                            "type": "string",
+                                                            "example": "male"
+                                                        },
+                                                        "dob": {
+                                                            "type": "string",
+                                                            "example": "1990-01-01"
+                                                        }
+                                                    }
+                                                },
+                                                "users": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 34
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "example": "baotam0907@gmail.com"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "active"
+                                                            },
+                                                            "fullname": {
+                                                                "type": "string",
+                                                                "example": "Lê Nguyễn Bảo Tâm"
+                                                            },
+                                                            "avatar": {
+                                                                "type": "string",
+                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                            },
+                                                            "address": {
+                                                                "type": "string",
+                                                                "example": "123 Main St, City, Country"
+                                                            },
+                                                            "phone_number": {
+                                                                "type": "string",
+                                                                "example": "0987654321"
+                                                            },
+                                                            "gender": {
+                                                                "type": "string",
+                                                                "example": "male"
+                                                            },
+                                                            "dob": {
+                                                                "type": "string",
+                                                                "example": "1990-01-01"
+                                                            },
+                                                            "doctor": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "example": 3
+                                                                    },
+                                                                    "specialty": {
+                                                                        "type": "string",
+                                                                        "example": "Chuyên khoa tim mạch"
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "example": "Chuyên khoa tim mạch"
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }

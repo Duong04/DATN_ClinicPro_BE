@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Http\Resources\DepartmentResource;
 use App\Repositories\Department\DepartmentRepositoryInterface;
 
 class DepartmentService {
@@ -63,7 +64,7 @@ class DepartmentService {
                 return response()->json(['error' => 'Không tìm thấy phòng ban!'], 404);
             }
 
-            return response()->json(['data' => $department], 200);
+            return response()->json(['data' => new DepartmentResource($department)], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
         }
