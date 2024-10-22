@@ -26,15 +26,19 @@ class PrescriptionRequest extends FormRequest
         $rules = [
             'user_id' => 'required|exists:users,id',
             'patient_id' => 'required|exists:patients,id',
+            'description' => 'nullable|string',
+            'medications' => 'required|array',
             'name' => 'required',
-            'instructions' => 'required',
-            'frequency' => 'required',
-            'dosage' => 'required',
-            'duration' => 'required|integer|min:1'
+
+            'medications.*.medication_id' => 'required|integer',
+            'medications.*.quantity' => 'required|integer|min:1',
+            'medications.*.instructions' => 'nullable|string',
+            'medications.*.duration' => 'required|integer|min:1',
         ];
         if ($this->method() == 'PUT') {
-            $rules['patient_id'] = 'nullable';
-            $rules['user_id'] = 'nullable';
+            $rules['patient_id'] = 'nullable|exists:users,id';
+            $rules['user_id'] = 'nullable|exists:patients,id';
+            $rules['medications.*.id'] = 'required|exists:prescription_infos,id';
         }
         return $rules;
     }
@@ -44,8 +48,10 @@ class PrescriptionRequest extends FormRequest
         return [
             'required' => ':attribute không được để trống!',
             'exists' => 'Giá trị của :attribute không tồn tại!',
-            "min" => ":attribute không được nhỏ hơn :min ký tự! ",
-            'integer' => ':attribute phải la số'
+            'min' => ':attribute không được nhỏ hơn :min!',
+            'integer' => ':attribute phải là số',
+            'string' => ':attribute phải là chuỗi ký tự',
+            'array' => ':attribute phải là một mảng',
         ];
     }
 
@@ -53,12 +59,11 @@ class PrescriptionRequest extends FormRequest
     {
         return [
             'user_id' => 'Id Bác sĩ',
-            'patient_id' => 'Id bện nhân',
-            'name' => 'Tên đơn thuốc',
+            'patient_id' => 'Id bệnh nhân',
             'instructions' => 'Hướng dẫn sử dụng',
-            'dosage' => 'Liều lượng',
-            'frequency' => 'Tần suất',
-            'duration' => 'Thời gian sử dụng'
+            'duration' => 'Thời gian sử dụng',
+            'medication_id' => 'ID thuốc',
+            'quantity' => 'số lượng',
         ];
     }
     protected function failedValidation(Validator $validator)

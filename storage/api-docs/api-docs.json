@@ -7231,7 +7231,7 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "string",
-                                                        "example": 1
+                                                        "example": "RX-0983132123-uilksd"
                                                     },
                                                     "patient_id": {
                                                         "type": "string",
@@ -7245,21 +7245,53 @@
                                                         "type": "string",
                                                         "example": "Tên đơn thuốc"
                                                     },
-                                                    "instructions": {
+                                                    "description": {
                                                         "type": "string",
-                                                        "example": "Hướng dẫn sử dụng"
+                                                        "example": "luu y cua bac si"
                                                     },
-                                                    "frequency": {
-                                                        "type": "string",
-                                                        "example": "2 lần/ngày"
-                                                    },
-                                                    "dosage": {
-                                                        "type": "string",
-                                                        "example": "1 viên/lần"
-                                                    },
-                                                    "duration": {
-                                                        "type": "integer",
-                                                        "example": "7"
+                                                    "medications": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "prescription_id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "medication_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                }
+                                                            }
+                                                        },
+                                                        "example": [
+                                                            {
+                                                                "id": 1,
+                                                                "prescription_id": "RX-0983132123-uilksd",
+                                                                "medication_name": "thuoc 1",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "prescription_id": "RX-1234567890-uilksd",
+                                                                "medication_name": "thuoc 2",
+                                                                "instructions": "Uống sau khi ăn",
+                                                                "quantity": 30,
+                                                                "duration": 10
+                                                            }
+                                                        ]
                                                     }
                                                 }
                                             }
@@ -7310,10 +7342,11 @@
                                     "user_id",
                                     "patient_id",
                                     "name",
-                                    "instructions",
-                                    "frequency",
-                                    "dosage",
-                                    "duration"
+                                    "description",
+                                    "medication.*.quantity",
+                                    "medication.*.duration",
+                                    "medication.*.instructions",
+                                    "medication.*.medication_id"
                                 ],
                                 "properties": {
                                     "patient_id": {
@@ -7328,21 +7361,43 @@
                                         "type": "string",
                                         "example": "Tên đơn thuốc"
                                     },
-                                    "instructions": {
+                                    "description": {
                                         "type": "string",
-                                        "example": "Hướng dẫn sử dụng"
+                                        "example": "luu y cua bac si"
                                     },
-                                    "frequency": {
-                                        "type": "string",
-                                        "example": "2 lần/ngày"
-                                    },
-                                    "dosage": {
-                                        "type": "string",
-                                        "example": "1 viên/lần"
-                                    },
-                                    "duration": {
-                                        "type": "integer",
-                                        "example": "7"
+                                    "medications": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "medication_id": {
+                                                    "type": "string"
+                                                },
+                                                "instructions": {
+                                                    "type": "string"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer"
+                                                },
+                                                "duration": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        "example": [
+                                            {
+                                                "medication_id": 1,
+                                                "instructions": "Hướng dẫn sử dụng",
+                                                "quantity": 20,
+                                                "duration": 7
+                                            },
+                                            {
+                                                "medication_id": 2,
+                                                "instructions": "Uống sau khi ăn",
+                                                "quantity": 30,
+                                                "duration": 10
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -7358,41 +7413,76 @@
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string",
-                                                    "example": 1
-                                                },
-                                                "patient_id": {
-                                                    "type": "string",
-                                                    "example": "1"
-                                                },
-                                                "user_id": {
-                                                    "type": "string",
-                                                    "example": "1"
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Tên đơn thuốc"
-                                                },
-                                                "instructions": {
-                                                    "type": "string",
-                                                    "example": "Hướng dẫn sử dụng"
-                                                },
-                                                "frequency": {
-                                                    "type": "string",
-                                                    "example": "2 lần/ngày"
-                                                },
-                                                "dosage": {
-                                                    "type": "string",
-                                                    "example": "1 viên/lần"
-                                                },
-                                                "duration": {
-                                                    "type": "integer",
-                                                    "example": "7"
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "RX-0983132123-uilksd"
+                                                    },
+                                                    "patient_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tên đơn thuốc"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "luu y cua bac si"
+                                                    },
+                                                    "medications": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "prescription_id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "medication_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                }
+                                                            }
+                                                        },
+                                                        "example": [
+                                                            {
+                                                                "id": 1,
+                                                                "prescription_id": "RX-0983132123-uilksd",
+                                                                "medication_name": "thuoc 1",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "prescription_id": "RX-1234567890-uilksd",
+                                                                "medication_name": "thuoc 2",
+                                                                "instructions": "Uống sau khi ăn",
+                                                                "quantity": 30,
+                                                                "duration": 10
+                                                            }
+                                                        ]
+                                                    }
                                                 }
-                                            },
-                                            "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -7452,8 +7542,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "RX-0983132123-uilksd"
                         },
                         "description": "ID đơn thuốc."
                     }
@@ -7466,39 +7556,74 @@
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string",
-                                                    "example": 1
-                                                },
-                                                "patient_id": {
-                                                    "type": "string",
-                                                    "example": "1"
-                                                },
-                                                "user_id": {
-                                                    "type": "string",
-                                                    "example": "1"
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Tên đơn thuốc"
-                                                },
-                                                "instructions": {
-                                                    "type": "string",
-                                                    "example": "Hướng dẫn sử dụng"
-                                                },
-                                                "frequency": {
-                                                    "type": "string",
-                                                    "example": "2 lần/ngày"
-                                                },
-                                                "dosage": {
-                                                    "type": "string",
-                                                    "example": "1 viên/lần"
-                                                },
-                                                "duration": {
-                                                    "type": "integer",
-                                                    "example": "7"
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "RX-0983132123-uilksd"
+                                                    },
+                                                    "patient_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tên đơn thuốc"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "luu y cua bac si"
+                                                    },
+                                                    "medications": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "prescription_id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "medication_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                }
+                                                            }
+                                                        },
+                                                        "example": [
+                                                            {
+                                                                "id": 1,
+                                                                "prescription_id": "RX-0983132123-uilksd",
+                                                                "medication_name": "thuoc 1",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "prescription_id": "RX-1234567890-uilksd",
+                                                                "medication_name": "thuoc 2",
+                                                                "instructions": "Uống sau khi ăn",
+                                                                "quantity": 30,
+                                                                "duration": 10
+                                                            }
+                                                        ]
+                                                    }
                                                 }
                                             }
                                         }
@@ -7565,8 +7690,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "RX-0983132123-uilksd"
                         },
                         "description": "ID đơn thuốc."
                     }
@@ -7578,31 +7703,60 @@
                             "schema": {
                                 "required": [
                                     "name",
-                                    "instructions",
-                                    "frequency",
-                                    "dosage",
-                                    "duration"
+                                    "description",
+                                    "medication.*.id",
+                                    "medication.*.medication_id",
+                                    "medication.*.quantity",
+                                    "medication.*.duration",
+                                    "medication.*.instructions"
                                 ],
                                 "properties": {
                                     "name": {
                                         "type": "string",
                                         "example": "Tên đơn thuốc"
                                     },
-                                    "instructions": {
+                                    "description": {
                                         "type": "string",
-                                        "example": "Hướng dẫn sử dụng"
+                                        "example": "luu y cua bac si"
                                     },
-                                    "frequency": {
-                                        "type": "string",
-                                        "example": "2 lần/ngày"
-                                    },
-                                    "dosage": {
-                                        "type": "string",
-                                        "example": "1 viên/lần"
-                                    },
-                                    "duration": {
-                                        "type": "integer",
-                                        "example": "7"
+                                    "medications": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "medication_id": {
+                                                    "type": "integer"
+                                                },
+                                                "instructions": {
+                                                    "type": "string"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer"
+                                                },
+                                                "duration": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        "example": [
+                                            {
+                                                "id": 1,
+                                                "medication_id": 1,
+                                                "instructions": "Hướng dẫn sử dụng",
+                                                "quantity": 20,
+                                                "duration": 7
+                                            },
+                                            {
+                                                "id": 2,
+                                                "medication_id": 2,
+                                                "instructions": "Uống sau khi ăn",
+                                                "quantity": 30,
+                                                "duration": 10
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -7618,41 +7772,76 @@
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string",
-                                                    "example": 1
-                                                },
-                                                "patient_id": {
-                                                    "type": "string",
-                                                    "example": "1"
-                                                },
-                                                "user_id": {
-                                                    "type": "string",
-                                                    "example": "1"
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Tên đơn thuốc"
-                                                },
-                                                "instructions": {
-                                                    "type": "string",
-                                                    "example": "Hướng dẫn sử dụng"
-                                                },
-                                                "frequency": {
-                                                    "type": "string",
-                                                    "example": "2 lần/ngày"
-                                                },
-                                                "dosage": {
-                                                    "type": "string",
-                                                    "example": "1 viên/lần"
-                                                },
-                                                "duration": {
-                                                    "type": "integer",
-                                                    "example": "7"
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "RX-0983132123-uilksd"
+                                                    },
+                                                    "patient_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tên đơn thuốc"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "luu y cua bac si"
+                                                    },
+                                                    "medications": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "prescription_id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "medication_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                }
+                                                            }
+                                                        },
+                                                        "example": [
+                                                            {
+                                                                "id": 1,
+                                                                "prescription_id": "RX-0983132123-uilksd",
+                                                                "medication_name": "thuoc 1",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "prescription_id": "RX-1234567890-uilksd",
+                                                                "medication_name": "thuoc 2",
+                                                                "instructions": "Uống sau khi ăn",
+                                                                "quantity": 30,
+                                                                "duration": 10
+                                                            }
+                                                        ]
+                                                    }
                                                 }
-                                            },
-                                            "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -8770,6 +8959,178 @@
                     }
                 }
             }
+        },
+        "/api/v1/medications": {
+            "get": {
+                "tags": ["Medications"],
+                "summary": "Lấy danh sách thuốc theo id danh mục",
+                "description": "API này trả về danh sách thuốc theo id danh mục .",
+                "operationId": "getMedicationByCategory",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "id danh mục thuốc",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách thuốc ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "name": "Thuốc Pymenospain Pymepharco chống co thắt dạ dày - ruột (200 viên)",
+                                            "created_at": "2024-10-22T13:36:58.000000Z",
+                                            "updated_at": "2024-10-22T13:36:58.000000Z",
+                                            "category_id": 1
+                                        },
+                                        {
+                                            "id": 2,
+                                            "name": "Thuốc bột pha hỗn dịch uống Smecta vị cam điều trị tiêu chảy (30 gói x 3g)",
+                                            "created_at": "2024-10-22T13:36:58.000000Z",
+                                            "updated_at": "2024-10-22T13:36:58.000000Z",
+                                            "category_id": 1
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/categories": {
+            "get": {
+                "tags": ["Medication Category"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách danh mục thuốc",
+                "description": "Lấy tất cả danh sách danh mục thuốc",
+                "operationId": "getMedicationCategory",
+                "responses": {
+                    "200": {
+                        "description": "Thông tin danh mục thuốc",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Thuốc điều trị dạ dày, đường ruột"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "Date",
+                                                        "example": "2024-10-22T13:36:58.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "Date",
+                                                        "example": "2024-10-22T13:36:58.000000Z"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "items": {}
+                                    },
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "name": "Thuốc điều trị dạ dày, đường ruột",
+                                            "created_at": "2024-10-22T13:36:58.000000Z",
+                                            "updated_at": "2024-10-22T13:36:58.000000Z"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "name": "Thuốc giảm đau, hạ sốt",
+                                            "created_at": "2024-10-22T13:36:58.000000Z",
+                                            "updated_at": "2024-10-22T13:36:58.000000Z"
+                                        },
+                                        {
+                                            "id": 3,
+                                            "name": "Thuốc điều trị viêm mũi, dị ứng, hô hấp",
+                                            "created_at": "2024-10-22T13:36:58.000000Z",
+                                            "updated_at": "2024-10-22T13:36:58.000000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -8833,6 +9194,14 @@
         {
             "name": "Feedbacks",
             "description": "Đánh giá"
+        },
+        {
+            "name": "Medication Category",
+            "description": "Danh mục thuốc"
+        },
+        {
+            "name": "Medications",
+            "description": "Thuốc"
         }
     ]
 }

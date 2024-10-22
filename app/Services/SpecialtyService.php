@@ -1,16 +1,20 @@
 <?php
+
 namespace App\Services;
 
 use App\Repositories\Specialty\SpecialtyRepositoryInterface;
 
-class SpecialtyService {
+class SpecialtyService
+{
     private $specialtyRepository;
 
-    public function __construct(SpecialtyRepositoryInterface $specialtyRepository) {
+    public function __construct(SpecialtyRepositoryInterface $specialtyRepository)
+    {
         $this->specialtyRepository = $specialtyRepository;
     }
 
-    public function getPaginate($request) {
+    public function getPaginate($request)
+    {
         try {
             $limit = $request->query('limit');
             $q = $request->query('q');
@@ -30,7 +34,8 @@ class SpecialtyService {
         }
     }
 
-    public function findById($id) {
+    public function findById($id)
+    {
         try {
             $specialty = $this->specialtyRepository->find($id);
             if (empty($specialty)) {
@@ -43,9 +48,10 @@ class SpecialtyService {
         }
     }
 
-    public function create($request) {
+    public function create($request)
+    {
         try {
-            $data = $request->validated(); 
+            $data = $request->validated();
             $specialty = $this->specialtyRepository->create($data);
 
             return response()->json(['message' => 'Thêm chuyên khoa thành công!', 'data' => $specialty], 201);
@@ -54,9 +60,10 @@ class SpecialtyService {
         }
     }
 
-    public function update($request, $id) {
+    public function update($request, $id)
+    {
         try {
-            $data = $request->validated(); 
+            $data = $request->validated();
             $this->specialtyRepository->update($id, $data);
 
             return response()->json(['message' => 'Cập nhật thông tin chuyên khoa thành công!'], 200);
@@ -65,7 +72,8 @@ class SpecialtyService {
         }
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         try {
             $specialty = $this->specialtyRepository->find($id);
             if ($specialty->doctors_count > 0) {

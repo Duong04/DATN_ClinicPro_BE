@@ -31,7 +31,8 @@ class PrescriptionRepository implements PrescriptionRepositoryInterface
     public function update($id, $data)
     {
         $prescription = $this->find($id);
-        return $prescription->update($data);
+        $prescription->update($data);
+        return $prescription;
     }
     public function destroy($id)
     {
