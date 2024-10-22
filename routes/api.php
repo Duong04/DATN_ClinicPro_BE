@@ -121,7 +121,7 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'delete');
         });
 
-    Route::controller(PrescriptionController::class)->prefix('prescriptions')
+    Route::controller(PrescriptionController::class)->prefix('prescriptions')->middleware('jwt.auth')
         ->group(function () {
             Route::get('/', 'index');
             Route::get('/{id}', 'show');
