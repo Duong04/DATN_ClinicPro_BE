@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\IdentityCard;
+use App\Models\User;
 
 class UserInfo extends Model
 {
@@ -25,5 +26,9 @@ class UserInfo extends Model
 
     public function identityCard() {
         return $this->belongsTo(IdentityCard::class, 'identity_card_id');
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
