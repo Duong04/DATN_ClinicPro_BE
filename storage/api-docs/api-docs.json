@@ -763,9 +763,21 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
+                                        "message": {
                                             "type": "string",
-                                            "example": "Mật khẩu hiện tại không đúng."
+                                            "example": "Mật khẩu không đúng!"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "properties": {
+                                                "password": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Mật khẩu không đúng!"
+                                                    }
+                                                }
+                                            }
                                         }
                                     },
                                     "type": "object"
