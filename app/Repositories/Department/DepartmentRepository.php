@@ -9,7 +9,7 @@ class DepartmentRepository implements DepartmentRepositoryInterface {
     }
     public function paginate($limit, $q) {
         $departments = Department::with(['manager.userInfo' => function ($query) {
-            $query->select('user_id', 'fullname', 'avatar');
+            $query->select('id', 'user_id', 'fullname', 'address', 'avatar', 'gender', 'dob', 'phone_number');
         }])->withCount('users');
         if ($q) {
             $departments->where('name', 'like', "%{$q}%")

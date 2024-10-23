@@ -25,7 +25,7 @@ class DepartmentService {
                     'total' => $departments->total()
                 ], 200);
             }
-            return response()->json(['data' => $departments], 200);
+            return response()->json(['data' => DepartmentResource::collection($departments)], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
         }
