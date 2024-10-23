@@ -158,5 +158,5 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::get('categories/', [MedicationController::class, 'index'])->middleware('jwt.auth');
-    Route::get('medications/', [MedicationController::class, 'find'])->middleware('jwt.auth');
+    Route::get('medications/', [MedicationController::class, 'show'])->middleware('jwt.auth');
 });
