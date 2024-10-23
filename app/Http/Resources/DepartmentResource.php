@@ -15,22 +15,27 @@ class DepartmentResource extends JsonResource
     public function toArray(Request $request): array
     {
         $department = [
-            'id' => $this?->id,
-            'name' => $this?->name,
-            'description' => $this?->description,
-            'users_count' => $this?->users_count,
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'users_count' => $this->users_count,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'manager' => [
-                'id' => $this?->manager?->id,
-                'email' => $this?->manager?->email,
-                'fullname' => $this?->manager?->userInfo?->fullname,
-                'avatar' => $this?->manager?->userInfo?->avatar,
-                'address' => $this?->manager?->userInfo?->address,
-                'phone_number' => $this?->manager?->userInfo?->phone_number,
-                'gender' => $this?->manager?->userInfo?->gender,
-                'dob' => $this?->manager?->userInfo?->dob
-            ],
-            'users' => UserResourceFour::collection($this->users)
+                'id' => $this->manager?->id,
+                'email' => $this->manager?->email,
+                'fullname' => $this->manager?->userInfo?->fullname,
+                'avatar' => $this->manager?->userInfo?->avatar,
+                'address' => $this->manager?->userInfo?->address,
+                'phone_number' => $this->manager?->userInfo?->phone_number,
+                'gender' => $this->manager?->userInfo?->gender,
+                'dob' => $this->manager?->userInfo?->dob
+            ]
         ];
+
+        if ($request->route('id')) {
+            $department['users'] = UserResourceFour::collection($this->users);
+        }
 
         return $department;
     }
