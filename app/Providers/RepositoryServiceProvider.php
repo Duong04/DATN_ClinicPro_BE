@@ -2,41 +2,43 @@
 
 namespace App\Providers;
 
-use App\Repositories\Package\PackageRepository;
-use App\Repositories\Package\PackageRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\User\UserRepository;
-use App\Repositories\User\UserRepositoryInterface;
-use App\Repositories\UserDetail\UserDetailRepositoryInterface;
-use App\Repositories\UserDetail\UserDetailRepository;
-use App\Repositories\Role\RoleRepositoryInterface;
 use App\Repositories\Role\RoleRepository;
-use App\Repositories\Action\ActionRepositoryInterface;
+use App\Repositories\User\UserRepository;
 use App\Repositories\Action\ActionRepository;
-use App\Repositories\Appointment\AppointmentRepository;
-use App\Repositories\Appointment\AppointmentRepositoryInterface;
-use App\Repositories\Permission\PermissionRepositoryInterface;
-use App\Repositories\Permission\PermissionRepository;
-use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
-use App\Repositories\PermissionAction\PermissionActionRepository;
-use App\Repositories\RolePermission\RolePermissionRepositoryInterface;
-use App\Repositories\RolePermission\RolePermissionRepository;
-use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
-use App\Repositories\PatientInfo\PatientInfoRepository;
+use App\Repositories\Package\PackageRepository;
 use App\Repositories\Patient\PatientRepository;
-use App\Repositories\Patient\PatientRepositoryInterface;
-use App\Repositories\UserInfo\UserInfoRepository;
-use App\Repositories\UserInfo\UserInfoRepositoryInterface;
-use App\Repositories\Department\DepartmentRepository;
-use App\Repositories\Department\DepartmentRepositoryInterface;
 use App\Repositories\Feedback\FeedbackRepository;
-use App\Repositories\Feedback\FeedbackRepositoryInterface;
-use App\Repositories\MedicalHistory\MedicalHistoryRepository;
-use App\Repositories\MedicalHistory\MedicalHistoryRepositoryInterface;
-use App\Repositories\Prescription\PrescriptionRepository;
-use App\Repositories\Prescription\PrescriptionRepositoryInterface;
+use App\Repositories\UserInfo\UserInfoRepository;
+use App\Repositories\Role\RoleRepositoryInterface;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\Specialty\SpecialtyRepository;
+use App\Repositories\Department\DepartmentRepository;
+use App\Repositories\Permission\PermissionRepository;
+use App\Repositories\UserDetail\UserDetailRepository;
+use App\Repositories\Action\ActionRepositoryInterface;
+use App\Repositories\Appointment\AppointmentRepository;
+use App\Repositories\PatientInfo\PatientInfoRepository;
+use App\Repositories\Package\PackageRepositoryInterface;
+use App\Repositories\Patient\PatientRepositoryInterface;
+use App\Repositories\Prescription\PrescriptionRepository;
+use App\Repositories\Feedback\FeedbackRepositoryInterface;
+use App\Repositories\UserInfo\UserInfoRepositoryInterface;
 use App\Repositories\Specialty\SpecialtyRepositoryInterface;
+use App\Repositories\MedicalHistory\MedicalHistoryRepository;
+use App\Repositories\RolePermission\RolePermissionRepository;
+use App\Repositories\Department\DepartmentRepositoryInterface;
+use App\Repositories\Permission\PermissionRepositoryInterface;
+use App\Repositories\UserDetail\UserDetailRepositoryInterface;
+use App\Repositories\Appointment\AppointmentRepositoryInterface;
+use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
+use App\Repositories\PermissionAction\PermissionActionRepository;
+use App\Repositories\PrescriptionInfo\PrescriptionInfoRepository;
+use App\Repositories\Prescription\PrescriptionRepositoryInterface;
+use App\Repositories\MedicalHistory\MedicalHistoryRepositoryInterface;
+use App\Repositories\RolePermission\RolePermissionRepositoryInterface;
+use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
+use App\Repositories\PrescriptionInfo\PrescriptionInfoRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -62,6 +64,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PrescriptionRepositoryInterface::class, PrescriptionRepository::class);
         $this->app->bind(SpecialtyRepositoryInterface::class, SpecialtyRepository::class);
         $this->app->bind(FeedbackRepositoryInterface::class, FeedbackRepository::class);
+        $this->app->bind(PrescriptionInfoRepositoryInterface::class, PrescriptionInfoRepository::class);
     }
 
     /**

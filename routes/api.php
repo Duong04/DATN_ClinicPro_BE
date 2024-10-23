@@ -11,6 +11,7 @@ use App\Http\Controllers\Apis\V1\ActionController;
 use App\Http\Controllers\Apis\V1\AppointmentController;
 use App\Http\Controllers\Apis\V1\AuthController;
 use App\Http\Controllers\Apis\V1\FeedbackController;
+use App\Http\Controllers\Apis\V1\MedicationController;
 use App\Http\Controllers\Apis\V1\PermissionController;
 use App\Http\Controllers\Apis\V1\RoleController;
 use App\Http\Controllers\Apis\V1\PackageController;
@@ -155,4 +156,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/', 'store');
         Route::delete('/{id}', 'destroy');
     });
+
+    Route::get('categories/', [MedicationController::class, 'index'])->middleware('jwt.auth');
+    Route::get('medications/', [MedicationController::class, 'find'])->middleware('jwt.auth');
 });
