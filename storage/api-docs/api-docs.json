@@ -3273,10 +3273,6 @@
                                                         "type": "string",
                                                         "example": "Mô tả"
                                                     },
-                                                    "manager_id": {
-                                                        "type": "integer",
-                                                        "example": 5
-                                                    },
                                                     "created_at": {
                                                         "type": "string",
                                                         "format": "date-time",
@@ -3296,46 +3292,35 @@
                                                         "properties": {
                                                             "id": {
                                                                 "type": "integer",
-                                                                "example": 5
-                                                            },
-                                                            "status": {
-                                                                "type": "string",
-                                                                "example": "active"
+                                                                "example": 32
                                                             },
                                                             "email": {
                                                                 "type": "string",
-                                                                "example": "johndoe@example.com"
+                                                                "example": "johndoe1111111@example.com"
                                                             },
-                                                            "role_id": {
-                                                                "type": "integer",
-                                                                "example": 2
-                                                            },
-                                                            "created_at": {
+                                                            "fullname": {
                                                                 "type": "string",
-                                                                "format": "date-time",
-                                                                "example": "2024-09-22T10:08:14.000000Z"
+                                                                "example": "Nguyễn Văn A"
                                                             },
-                                                            "updated_at": {
+                                                            "avatar": {
                                                                 "type": "string",
-                                                                "format": "date-time",
-                                                                "example": "2024-09-23T15:16:32.000000Z"
+                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
                                                             },
-                                                            "user_info": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "user_id": {
-                                                                        "type": "integer",
-                                                                        "example": 5
-                                                                    },
-                                                                    "fullname": {
-                                                                        "type": "string",
-                                                                        "example": "Nguyễn Thành Đường"
-                                                                    },
-                                                                    "avatar": {
-                                                                        "type": "string",
-                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                    }
-                                                                }
+                                                            "address": {
+                                                                "type": "string",
+                                                                "example": "123 Main St, City, Country"
+                                                            },
+                                                            "phone_number": {
+                                                                "type": "string",
+                                                                "example": "0987654321"
+                                                            },
+                                                            "gender": {
+                                                                "type": "string",
+                                                                "example": "male"
+                                                            },
+                                                            "dob": {
+                                                                "type": "string",
+                                                                "example": "1990-01-01"
                                                             }
                                                         }
                                                     }
@@ -3530,6 +3515,16 @@
                                                 "users_count": {
                                                     "type": "integer",
                                                     "example": 2
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25T15:33:47.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-25T15:33:47.000000Z"
                                                 },
                                                 "manager": {
                                                     "type": "object",
