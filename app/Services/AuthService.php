@@ -15,6 +15,7 @@ use App\Mail\VerifyEmail;
 use App\Mail\ForgotPassword;
 use App\Models\User;
 use App\Http\Resources\UserResourceThree;
+use App\Models\PasswordReset;
 
 class AuthService
 {
@@ -179,16 +180,41 @@ class AuthService
             ]);
 
             $email = $request->input('email');
-            $otp = Str::random(40);
-            User::where('email', $email)->update(['otp' => $otp]);
+            $otp = $this->generateUniqueOtp();
+            $user = User::where('email', $email)->first();
             
-            $url = url("/api/v1/auth/forgot-password/$otp");
-            Mail::to($email)->send(new ForgotPassword($url, $email));
+            if ($user) {
+                $passwordReset = PasswordReset::where('user_id', $user->id)->first();
+
+                if ($passwordReset) {
+                    $passwordReset->otp = rand(100000, 999999); 
+                    $passwordReset->expires_at = now()->addMinutes(15); 
+                    $passwordReset->save();
+                } else {
+                    PasswordReset::create([
+                        'user_id' => $user->id,
+                        'otp' => rand(100000, 999999), 
+                        'expires_at' => now()->addMinutes(15), 
+                    ]);
+                }
+            }
+ 
+            Mail::to($email)->send(new ForgotPassword($otp, $email));
 
             return response()->json(['message' => 'Mã otp đã được gửi vào email của bạn, vui lòng check mail để khôi phục lại mật khẩu!']);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 422);
         }
+    }
+
+    private function generateUniqueOtp()
+    {
+        do {
+            $otp = $otp = rand(100000, 999999);
+            $otpExists = PasswordReset::where('otp', $otp)->exists();
+        } while ($otpExists); 
+
+        return $otp;
     }
 
     public function resetPsw($request) {
@@ -201,15 +227,19 @@ class AuthService
                 'min' => 'Mật khẩu phải lớn hơn 8 ký tự!'
             ]);
 
-            $getOtp = User::where('otp', $data['otp'])->first();
-            if (empty($getOtp)) {
-                return response()->json(['error' => 'Mã otp không hợp lệ!'], 404);
+            $passwordReset = PasswordReset::with('user')
+                    ->where('otp', $request->otp)
+                    ->first();
+
+            if (!$passwordReset || $passwordReset->expires_at < now()) {
+                return response()->json(['message' => 'OTP không hợp lệ hoặc đã hết hạn'], 400);
             }
 
-            $getOtp->update([
-                'password' => $data['password'],
-                'otp' => null
+            $passwordReset->user->update([
+                'password' => $data['password']
             ]);
+
+            $passwordReset->delete();
 
             return response()->json(['message' => 'Mật khẩu của bạn đã được thay đổi!']);
         } catch (\Throwable $th) {
