@@ -2,19 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PasswordReset extends Model
 {
-    use HasFactory;
+    use HasFactory, UsesUuid;
 
     protected $table = 'password_resets';
 
     protected $fillable = [
         'user_id', 
         'otp',
-        'expries_at'
+        'expires_at'
     ];
 
     public function user() {

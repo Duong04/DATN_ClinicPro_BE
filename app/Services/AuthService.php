@@ -39,7 +39,7 @@ class AuthService
             $data = $request->validated();
 
             $data['status'] = 'inactive';
-            $data['role_id'] = 2;
+            $data['role_id'] = 'bdfe1b72-51c9-419f-b8af-453cbf4cc816';
             $token = Str::random(40);
             $data['token'] = $token;
             $user = $this->userRepository->create($data);
@@ -188,13 +188,13 @@ class AuthService
 
                 if ($passwordReset) {
                     $passwordReset->otp = rand(100000, 999999); 
-                    $passwordReset->expires_at = now()->addMinutes(15); 
+                    $passwordReset->expires_at = now('Asia/Ho_Chi_Minh')->addMinutes(15); 
                     $passwordReset->save();
                 } else {
                     PasswordReset::create([
                         'user_id' => $user->id,
                         'otp' => rand(100000, 999999), 
-                        'expires_at' => now()->addMinutes(15), 
+                        'expires_at' => now('Asia/Ho_Chi_Minh')->addMinutes(15), 
                     ]);
                 }
             }
@@ -231,7 +231,7 @@ class AuthService
                     ->where('otp', $request->otp)
                     ->first();
 
-            if (!$passwordReset || $passwordReset->expires_at < now()) {
+            if (!$passwordReset || $passwordReset->expires_at < now('Asia/Ho_Chi_Minh')) {
                 return response()->json(['message' => 'OTP không hợp lệ hoặc đã hết hạn'], 400);
             }
 

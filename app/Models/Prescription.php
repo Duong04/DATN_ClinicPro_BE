@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Prescription extends Model
 {
-    use HasFactory;
+    use HasFactory, UsesUuid;
 
     protected $table = 'prescriptions';
     protected $fillable = [

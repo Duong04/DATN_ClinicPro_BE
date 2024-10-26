@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PatientInfo;
@@ -10,7 +11,7 @@ use App\Models\IdentityCard;
 
 class Patient extends Model
 {
-    use HasFactory;
+    use HasFactory, UsesUuid;
 
     protected $table = 'patients';
 
