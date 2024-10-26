@@ -54,8 +54,6 @@ class PackageService
     public function destroy($id)
     {
         try {
-            $package = $this->packageRepository->show($id);
-            $this->cloundinaryService->delete($package->image);
             return $this->packageRepository->destroy($id);
         } catch (ModelNotFoundException $e) {
             throw new \Exception('Package not found');
