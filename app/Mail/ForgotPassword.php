@@ -17,10 +17,10 @@ class ForgotPassword extends Mailable
      * Create a new message instance.
      */
     protected $email;
-    protected $url;
-    public function __construct($url, $email)
+    protected $otp;
+    public function __construct($otp, $email)
     {
-        $this->url = $url;
+        $this->otp = $otp;
         $this->email = $email;
     }
 
@@ -43,7 +43,7 @@ class ForgotPassword extends Mailable
             view: 'forgotPsw',
             with: [
                 'title' => 'Thay đổi mật khẩu',
-                'url' => $this->url,
+                'otp' => $this->otp,
                 'email' => $this->email,
             ]
         );

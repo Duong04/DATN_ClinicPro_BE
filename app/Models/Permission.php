@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PermissionAction;
@@ -9,7 +10,7 @@ use App\Models\Action;
 
 class Permission extends Model
 {
-    use HasFactory;
+    use HasFactory, UsesUuid;
 
     protected $table = 'permissions';
 

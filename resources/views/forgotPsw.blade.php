@@ -38,23 +38,14 @@
                     Xin chào, {{$email}}
                 </h1>
                 <p style="margin-top: 15px; font-size: 16px">
-                    Để khôi phục mật của của bạn vui lòng click .
+                    Chúng tôi đã nhận được yêu cầu khôi phục mật khẩu cho tài khoản của bạn. Để tiếp tục, vui lòng sử dụng mã OTP dưới đây để xác thực và đặt lại mật khẩu:
                 </p>
-                <a href="{{$url}}"
-                    style="
-                  display: inline-block;
-                  color: #2579f2;
-                  border: 2px solid rgba(37, 121, 242, 0.5);
-                  padding: 2px 15px;
-                  border-radius: 5px;
-                  font-weight: 600;
-                  margin-top: 15px;
-                  font-size: 24px;
-                ">Tại đây</a>
+                <br>
+                <h5 style="font-size: 20px">Mã OTP của bạn là: <span style="color: #2579f2">{{ $otp }}</span></h5>
                 <p style="margin-top: 15px; font-size: 16px">
-                    Nếu bạn không thực hiện yêu cầu này xin vui lòng bỏ qua nó hoặc nếu
-                    cần hỗ trợ hãy liên hệ với chúng tôi ngay.
+                    Mã OTP này sẽ hết hạn sau <b>15 phút</b>. Nếu bạn không thực hiện yêu cầu khôi phục mật khẩu, vui lòng bỏ qua email này. Tài khoản của bạn sẽ vẫn an toàn.
                 </p>
+                <p style="margin-top: 15px; font-size: 16px">Nếu bạn gặp bất kỳ vấn đề nào trong quá trình đặt lại mật khẩu, hãy liên hệ với đội ngũ hỗ trợ của chúng tôi.</p>
                 <p style="margin-top: 15px; font-size: 16px">
                     Trân trọng <br />
                 </p>

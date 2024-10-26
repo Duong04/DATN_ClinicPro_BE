@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Doctor;
 
 class Specialty extends Model
 {
-    use HasFactory;
+    use HasFactory, UsesUuid;
 
     protected $table = 'specialties';
 

@@ -896,8 +896,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Mã OTP không hợp lệ",
+                    "400": {
+                        "description": "Mã OTP không hợp lệ hoặc đã hết hạn",
                         "content": {
                             "application/json": {
                                 "schema": {
