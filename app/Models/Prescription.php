@@ -18,16 +18,6 @@ class Prescription extends Model
         'name',
         'description'
     ];
-    public $incrementing = false;
-    protected $keyType = 'string';
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            $model->id = 'RX-' . time() . '-' . strtoupper(Str::random(6));
-        });
-    }
 
     public function prescription_Infos()
     {

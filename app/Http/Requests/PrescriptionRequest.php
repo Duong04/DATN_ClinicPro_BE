@@ -30,7 +30,7 @@ class PrescriptionRequest extends FormRequest
             'medications' => 'required|array',
             'name' => 'required',
 
-            'medications.*.medication_id' => 'required|integer',
+            'medications.*.medication_id' => 'required',
             'medications.*.quantity' => 'required|integer|min:1',
             'medications.*.instructions' => 'nullable|string',
             'medications.*.duration' => 'required|integer|min:1',

@@ -72,7 +72,7 @@ Route::prefix('v1')->group(function () {
             function () {
                 Route::get('/', 'index');
                 Route::post('/', 'store')->middleware('jwt.auth');
-                Route::get('/{id}', 'show')->where('id', '[0-9]+')->middleware('jwt.auth');
+                Route::get('/{id}', 'show')->where('id', '[A-Fa-f0-9\-]{36}')->middleware('jwt.auth');
                 Route::get('/{slug}', 'slug')->where('slug', '[A-Za-z0-9\-]+');
                 Route::put('/{id}', 'update')->middleware('jwt.auth');
                 Route::delete('/{id}', 'destroy')->middleware('jwt.auth');

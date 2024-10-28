@@ -31,7 +31,6 @@ class CloundinaryService
         $result = Str::after($path, env('CL_ID'));
 
         $result = Str::beforeLast($result, '.');
-
         return $result;
     }
 }
