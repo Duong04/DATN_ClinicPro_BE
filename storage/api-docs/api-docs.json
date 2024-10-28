@@ -135,8 +135,8 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 14
+                                                    "type": "string",
+                                                    "example": "1d1b0113-32d8-4455-baac-7aeab401d7d7"
                                                 },
                                                 "email": {
                                                     "type": "string",
@@ -150,8 +150,8 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "id": {
-                                                            "type": "integer",
-                                                            "example": 6
+                                                            "type": "string",
+                                                            "example": "1d1b0113-32d8-4455-baac-7aeab401d7d7"
                                                         },
                                                         "name": {
                                                             "type": "string",
@@ -167,8 +167,8 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "id": {
-                                                                        "type": "integer",
-                                                                        "example": 1
+                                                                        "type": "string",
+                                                                        "example": "1d1b0113-32d8-4455-baac-7aeab401d7d7"
                                                                     },
                                                                     "name": {
                                                                         "type": "string",
@@ -184,8 +184,8 @@
                                                                             "type": "object",
                                                                             "properties": {
                                                                                 "id": {
-                                                                                    "type": "integer",
-                                                                                    "example": 1
+                                                                                    "type": "string",
+                                                                                    "example": "1d1b0113-32d8-4455-baac-7aeab401d7d7"
                                                                                 },
                                                                                 "name": {
                                                                                     "type": "string",
@@ -336,8 +336,8 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "example": "a3bb88e2-0a64-4ad2-b6da-df3f2ed16a61"
                                                 },
                                                 "email": {
                                                     "type": "string",
@@ -357,12 +357,12 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "id": {
-                                                            "type": "integer",
-                                                            "example": 2
+                                                            "type": "string",
+                                                            "example": "5f47acb5-6e22-4356-a1ae-1c0b47f9b1b6"
                                                         },
                                                         "patient_id": {
-                                                            "type": "integer",
-                                                            "example": 1
+                                                            "type": "string",
+                                                            "example": "6fbb4ae7-2b35-4dbe-a8f5-17bfef2d9238"
                                                         },
                                                         "fullname": {
                                                             "type": "string",
@@ -412,8 +412,8 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer",
-                                                                    "example": 1
+                                                                    "type": "string",
+                                                                    "example": "a98ff6e0-3c57-423a-8b7c-26c5079e2f1e"
                                                                 },
                                                                 "type_name": {
                                                                     "type": "string",
@@ -465,7 +465,7 @@
                     }
                 ],
                 "summary": "Cập nhật hồ sơ người dùng",
-                "description": "Cập nhật thông tin hồ sơ của người dùng bằng ID.",
+                "description": "Cập nhật thông tin hồ sơ của người dùng bằng UUID.",
                 "operationId": "updateProfile",
                 "parameters": [
                     {
@@ -473,9 +473,9 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
-                        "description": "ID của người dùng cần cập nhật hồ sơ."
+                        "description": "UUID của người dùng cần cập nhật hồ sơ."
                     }
                 ],
                 "requestBody": {
@@ -546,8 +546,8 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 5
+                                                    "type": "string",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "email": {
                                                     "type": "string",
@@ -557,8 +557,8 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "id": {
-                                                            "type": "integer",
-                                                            "example": 2
+                                                            "type": "string",
+                                                            "example": "4c8a3312-f2b3-47b1-9d5e-f14cb067f231"
                                                         },
                                                         "name": {
                                                             "type": "string",
@@ -580,12 +580,12 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "id": {
-                                                            "type": "integer",
-                                                            "example": 2
+                                                            "type": "string",
+                                                            "example": "d9b2d63d-a233-4123-9f2b-493f5e67ff28"
                                                         },
                                                         "patient_id": {
-                                                            "type": "integer",
-                                                            "example": 1
+                                                            "type": "string",
+                                                            "example": "1"
                                                         },
                                                         "fullname": {
                                                             "type": "string",
@@ -936,13 +936,14 @@
                 "tags": ["Packages"],
                 "summary": "Lấy danh sách gói khám",
                 "description": "Lấy tất cả danh sách gói khám.",
-                "operationId": "getpackage",
+                "operationId": "getPackages",
                 "responses": {
                     "200": {
                         "description": "Thông tin gói khám",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "array",
@@ -951,7 +952,8 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "string",
-                                                        "example": 1
+                                                        "format": "uuid",
+                                                        "example": "550e8400-e29b-41d4-a716-446655440000"
                                                     },
                                                     "name": {
                                                         "type": "string",
@@ -976,8 +978,7 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -987,13 +988,13 @@
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "error": {
                                             "type": "string",
                                             "example": "Unauthorized"
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -1018,6 +1019,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
+                                "type": "object",
                                 "required": [
                                     "name",
                                     "description",
@@ -1042,8 +1044,7 @@
                                         "format": "uri",
                                         "example": "http://example.com/premium-package.jpg"
                                     }
-                                },
-                                "type": "object"
+                                }
                             }
                         }
                     }
@@ -1054,12 +1055,15 @@
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "data": {
+                                            "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -1087,11 +1091,9 @@
                                                     "format": "date-time",
                                                     "example": "2024-08-21T15:30:00Z"
                                                 }
-                                            },
-                                            "type": "object"
+                                            }
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -1101,6 +1103,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "success": {
                                             "type": "boolean",
@@ -1119,8 +1122,7 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -1135,29 +1137,35 @@
             "get": {
                 "tags": ["Packages"],
                 "summary": "Lấy thông tin gói khám theo slug",
-                "description": "Lấy thông tin gói khám theo slug.",
+                "description": "Lấy thông tin chi tiết của một gói khám dựa trên `slug`.",
                 "operationId": "getPackageBySlug",
-                "parameters": {
-                    "name": "slug",
-                    "required": true,
-                    "description": "slug gói khám",
-                    "schema": {
-                        " type": "string"
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "required": true,
+                        "description": "Slug của gói khám để xác định gói cụ thể",
+                        "schema": {
+                            "type": "string",
+                            "example": "goi-kham-mat"
+                        }
                     }
-                },
+                ],
                 "responses": {
                     "200": {
-                        "description": "Thông tin gói khám",
+                        "description": "Thông tin gói khám được trả về thành công",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "object",
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "format": "uuid",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -1165,14 +1173,15 @@
                                                 },
                                                 "description": {
                                                     "type": "string",
-                                                    "example": "Mô tả gói khám."
+                                                    "example": "Mô tả chi tiết của gói khám mắt."
                                                 },
                                                 "content": {
                                                     "type": "string",
-                                                    "example": "Nội dung gói khám."
+                                                    "example": "Nội dung của gói khám mắt."
                                                 },
                                                 "image": {
                                                     "type": "string",
+                                                    "format": "uri",
                                                     "example": "http://example.com/image.jpg"
                                                 },
                                                 "slug": {
@@ -1182,27 +1191,26 @@
                                             }
                                         }
                                     }
-                                },
-                                "type": "object"
+                                }
                             }
                         }
                     },
                     "404": {
-                        "description": "Package not found",
+                        "description": "Không tìm thấy gói khám",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "success": {
-                                            "type": "string",
+                                            "type": "boolean",
                                             "example": false
                                         },
                                         "message": {
                                             "type": "string",
                                             "example": "Package not found"
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -1212,19 +1220,19 @@
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "error": {
                                             "type": "string",
                                             "example": "Unauthorized"
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "Internal server error"
+                        "description": "Lỗi hệ thống"
                     }
                 }
             }
@@ -1237,30 +1245,36 @@
                         "bearerAuth": []
                     }
                 ],
-                "summary": "Lấy gói khám theo id",
-                "description": "Lấy gói khám theo id",
+                "summary": "Lấy thông tin gói khám theo ID",
+                "description": "Trả về thông tin chi tiết của gói khám dựa trên ID.",
                 "operationId": "getPackageById",
-                "parameters": {
-                    "name": "id",
-                    "required": true,
-                    "description": "iD gói khám",
-                    "schema": {
-                        " type": "string"
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID của gói khám",
+                        "schema": {
+                            "type": "string",
+                            "example": "550e8400-e29b-41d4-a716-446655440000"
+                        }
                     }
-                },
+                ],
                 "responses": {
                     "200": {
-                        "description": "Thông tin gói khám",
+                        "description": "Thông tin chi tiết của gói khám",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "object",
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "format": "uuid",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -1272,10 +1286,11 @@
                                                 },
                                                 "content": {
                                                     "type": "string",
-                                                    "example": "Nội dung gói khám."
+                                                    "example": "Nội dung của gói khám."
                                                 },
                                                 "image": {
                                                     "type": "string",
+                                                    "format": "uri",
                                                     "example": "http://example.com/image.jpg"
                                                 },
                                                 "slug": {
@@ -1285,27 +1300,26 @@
                                             }
                                         }
                                     }
-                                },
-                                "type": "object"
+                                }
                             }
                         }
                     },
                     "404": {
-                        "description": "Package not found",
+                        "description": "Không tìm thấy gói khám",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "success": {
-                                            "type": "string",
+                                            "type": "boolean",
                                             "example": false
                                         },
                                         "message": {
                                             "type": "string",
                                             "example": "Package not found"
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -1315,19 +1329,19 @@
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "error": {
                                             "type": "string",
                                             "example": "Unauthorized"
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "Internal server error"
+                        "description": "Lỗi hệ thống"
                     }
                 }
             },
@@ -1338,14 +1352,15 @@
                         "bearerAuth": []
                     }
                 ],
-                "summary": "Cập nhật gói khám",
-                "description": "Cập nhật gói hiện có theo ID .",
+                "summary": "Cập nhật thông tin gói khám",
+                "description": "Cập nhật chi tiết gói khám dựa trên ID.",
                 "operationId": "updatePackage",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "type": "object",
                                 "required": [
                                     "name",
                                     "description",
@@ -1363,31 +1378,33 @@
                                     },
                                     "content": {
                                         "type": "string",
-                                        "example": "Nội dung gói khám"
+                                        "example": "Nội dung của gói khám"
                                     },
                                     "image": {
                                         "type": "string",
                                         "format": "uri",
                                         "example": "http://example.com/premium-package.jpg"
                                     }
-                                },
-                                "type": "object"
+                                }
                             }
                         }
                     }
                 },
                 "responses": {
-                    "201": {
-                        "description": "Updated package Successfully!",
+                    "200": {
+                        "description": "Cập nhật gói khám thành công!",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "data": {
+                                            "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -1399,7 +1416,7 @@
                                                 },
                                                 "content": {
                                                     "type": "string",
-                                                    "example": "Nội dung gói khám"
+                                                    "example": "Nội dung của gói khám"
                                                 },
                                                 "image": {
                                                     "type": "string",
@@ -1415,46 +1432,45 @@
                                                     "format": "date-time",
                                                     "example": "2024-08-21T15:30:00Z"
                                                 }
-                                            },
-                                            "type": "object"
+                                            }
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "Package not found",
+                        "description": "Không tìm thấy gói khám",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "success": {
-                                            "type": "string",
+                                            "type": "boolean",
                                             "example": false
                                         },
                                         "message": {
                                             "type": "string",
                                             "example": "Package not found"
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
                     },
                     "422": {
-                        "description": "Validation error",
+                        "description": "Lỗi xác thực dữ liệu",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "success": {
                                             "type": "boolean",
                                             "example": false
                                         },
-                                        "error": {
+                                        "errors": {
                                             "type": "object",
                                             "properties": {
                                                 "name": {
@@ -1467,14 +1483,13 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "Internal server error"
+                        "description": "Lỗi hệ thống"
                     }
                 }
             },
@@ -1486,42 +1501,47 @@
                     }
                 ],
                 "summary": "Xóa gói khám",
-                "description": "Xóa gói theo ID.",
+                "description": "Xóa một gói khám dựa trên ID.",
                 "operationId": "deletePackage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID của gói khám cần xóa",
+                        "schema": {
+                            "type": "string",
+                            "example": "550e8400-e29b-41d4-a716-446655440000"
+                        }
+                    }
+                ],
                 "responses": {
                     "204": {
-                        "description": "Deleted package Successfully!",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {},
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Xóa gói khám thành công!",
+                        "content": {}
                     },
                     "404": {
-                        "description": "Package not found",
+                        "description": "Không tìm thấy gói khám",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "object",
                                     "properties": {
                                         "success": {
-                                            "type": "string",
+                                            "type": "boolean",
                                             "example": false
                                         },
                                         "message": {
                                             "type": "string",
                                             "example": "Package not found"
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "Internal server error"
+                        "description": "Lỗi hệ thống"
                     }
                 }
             }
@@ -1580,8 +1600,9 @@
                                                 "type": "object",
                                                 "properties": {
                                                     "id": {
-                                                        "type": "integer",
-                                                        "example": 2
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "example": "123e4567-e89b-12d3-a456-426614174000"
                                                     },
                                                     "name": {
                                                         "type": "string",
@@ -1607,16 +1628,19 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer",
-                                                                    "example": 2
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "123e4567-e89b-12d3-a456-426614174001"
                                                                 },
                                                                 "permission_id": {
-                                                                    "type": "integer",
-                                                                    "example": 5
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "123e4567-e89b-12d3-a456-426614174002"
                                                                 },
                                                                 "action_id": {
-                                                                    "type": "integer",
-                                                                    "example": 2
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "123e4567-e89b-12d3-a456-426614174000"
                                                                 },
                                                                 "created_at": {
                                                                     "type": "string",
@@ -1704,8 +1728,9 @@
                                             "type": "object",
                                             "properties": {
                                                 "permission_id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "123e4567-e89b-12d3-a456-426614174002"
                                                 }
                                             }
                                         },
@@ -1790,8 +1815,9 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "550e8400-e29b-41d4-a716-446655440000"
                         },
                         "description": "ID của hành động cần lấy thông tin."
                     }
@@ -1808,8 +1834,9 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 2
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -1835,16 +1862,19 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
-                                                                "type": "integer",
-                                                                "example": 2
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440001"
                                                             },
                                                             "permission_id": {
-                                                                "type": "integer",
-                                                                "example": 5
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440002"
                                                             },
                                                             "action_id": {
-                                                                "type": "integer",
-                                                                "example": 2
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440003"
                                                             },
                                                             "created_at": {
                                                                 "type": "string",
@@ -1916,9 +1946,10 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
-                        },
-                        "description": "ID của hành động cần cập nhật."
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "ID của hành động cần cập nhật."
+                        }
                     }
                 ],
                 "requestBody": {
@@ -1944,14 +1975,17 @@
                                             "type": "object",
                                             "properties": {
                                                 "permission_id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440002"
                                                 }
                                             }
                                         },
                                         "description": "Danh sách ID quyền liên quan đến hành động."
                                     }
-                                }
+                                },
+                                "required": ["name", "value"],
+                                "additionalProperties": false
                             }
                         }
                     }
@@ -1966,7 +2000,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Updated action successfully!"
+                                            "example": "Cập nhật hành động thành công!"
                                         }
                                     }
                                 }
@@ -2007,9 +2041,10 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
-                        },
-                        "description": "ID của hành động cần xóa."
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "ID của hành động cần xóa."
+                        }
                     }
                 ],
                 "responses": {
@@ -2022,7 +2057,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Deleted action successfully!"
+                                            "example": "Xóa hành động thành công!"
                                         }
                                     }
                                 }
@@ -2038,7 +2073,7 @@
                                     "properties": {
                                         "error": {
                                             "type": "string",
-                                            "example": "Action not found!"
+                                            "example": "Hành động không tồn tại!"
                                         }
                                     }
                                 }
@@ -2102,8 +2137,8 @@
                                                 "type": "object",
                                                 "properties": {
                                                     "id": {
-                                                        "type": "integer",
-                                                        "example": 1
+                                                        "type": "string",
+                                                        "example": "550e8400-e29b-41d4-a716-446655440000"
                                                     },
                                                     "name": {
                                                         "type": "string",
@@ -2129,16 +2164,16 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer",
-                                                                    "example": 2
+                                                                    "type": "string",
+                                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                                 },
                                                                 "permission_id": {
-                                                                    "type": "integer",
-                                                                    "example": 5
+                                                                    "type": "string",
+                                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                                 },
                                                                 "action_id": {
-                                                                    "type": "integer",
-                                                                    "example": 2
+                                                                    "type": "string",
+                                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                                 },
                                                                 "created_at": {
                                                                     "type": "string",
@@ -2224,8 +2259,8 @@
                                             "type": "object",
                                             "properties": {
                                                 "action_id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 }
                                             }
                                         }
@@ -2252,8 +2287,8 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -2316,8 +2351,8 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "example": "550e8400-e29b-41d4-a716-446655440000"
                         },
                         "description": "ID của quyền cần lấy."
                     }
@@ -2334,8 +2369,8 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -2361,26 +2396,26 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
-                                                                "type": "integer",
-                                                                "example": 2
+                                                                "type": "string",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440001"
                                                             },
                                                             "permission_id": {
-                                                                "type": "integer",
-                                                                "example": 5
+                                                                "type": "string",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440000"
                                                             },
                                                             "action_id": {
-                                                                "type": "integer",
-                                                                "example": 2
+                                                                "type": "string",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440002"
                                                             },
                                                             "created_at": {
                                                                 "type": "string",
                                                                 "format": "date-time",
-                                                                "example": "2024-09-16T16:52:09.000000Z"
+                                                                "example": "2024-09-16T16:52:09Z"
                                                             },
                                                             "updated_at": {
                                                                 "type": "string",
                                                                 "format": "date-time",
-                                                                "example": "2024-09-16T16:52:09.000000Z"
+                                                                "example": "2024-09-16T16:52:09Z"
                                                             }
                                                         }
                                                     }
@@ -2426,8 +2461,8 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "example": "550e8400-e29b-41d4-a716-446655440000"
                         },
                         "description": "ID của quyền cần cập nhật."
                     }
@@ -2453,8 +2488,8 @@
                                             "type": "object",
                                             "properties": {
                                                 "action_id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440002"
                                                 }
                                             }
                                         }
@@ -2515,8 +2550,8 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "example": "550e8400-e29b-41d4-a716-446655440000"
                         },
                         "description": "ID của quyền cần xóa."
                     }
@@ -2613,8 +2648,9 @@
                                                 "type": "object",
                                                 "properties": {
                                                     "id": {
-                                                        "type": "integer",
-                                                        "example": 1
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "example": "123e4567-e89b-12d3-a456-426614174000"
                                                     },
                                                     "name": {
                                                         "type": "string",
@@ -2644,8 +2680,9 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer",
-                                                                    "example": 1
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "123e4567-e89b-12d3-a456-426614174001"
                                                                 },
                                                                 "fullname": {
                                                                     "type": "string",
@@ -2665,8 +2702,9 @@
                                                                     "example": null
                                                                 },
                                                                 "role_id": {
-                                                                    "type": "integer",
-                                                                    "example": 2
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "123e4567-e89b-12d3-a456-426614174002"
                                                                 },
                                                                 "created_at": {
                                                                     "type": "string",
@@ -2706,7 +2744,7 @@
                                         "value": {
                                             "data": [
                                                 {
-                                                    "id": 2,
+                                                    "id": "123e4567-e89b-12d3-a456-426614174000",
                                                     "name": "patient",
                                                     "description": "Bệnh nhân",
                                                     "created_at": "2024-09-11T10:03:24.000000Z",
@@ -2714,11 +2752,11 @@
                                                     "users_count": 2,
                                                     "users": [
                                                         {
-                                                            "id": 1,
+                                                            "id": "123e4567-e89b-12d3-a456-426614174001",
                                                             "fullname": "Nguyễn Thành Đường",
                                                             "status": "active",
                                                             "email": "johndoe@example.com",
-                                                            "role_id": 2,
+                                                            "role_id": "123e4567-e89b-12d3-a456-426614174002",
                                                             "created_at": "2024-09-11T16:39:47.000000Z",
                                                             "updated_at": "2024-09-11T16:39:47.000000Z"
                                                         }
@@ -2785,8 +2823,9 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 1,
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "123e4567-e89b-12d3-a456-426614174000",
                                                     "description": "ID của quyền."
                                                 },
                                                 "actions": {
@@ -2795,8 +2834,9 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
-                                                                "type": "integer",
-                                                                "example": 2,
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "example": "123e4567-e89b-12d3-a456-426614174000",
                                                                 "description": "ID của hành động."
                                                             }
                                                         }
@@ -2825,6 +2865,11 @@
                                         "data": {
                                             "type": "object",
                                             "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "123e4567-e89b-12d3-a456-426614174003"
+                                                },
                                                 "name": {
                                                     "type": "string",
                                                     "example": "Admin"
@@ -2835,8 +2880,9 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
-                                                                "type": "integer",
-                                                                "example": 1
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "example": "123e4567-e89b-12d3-a456-426614174000"
                                                             },
                                                             "actions": {
                                                                 "type": "array",
@@ -2852,6 +2898,16 @@
                                                             }
                                                         }
                                                     }
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-21T12:39:57.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-21T12:39:57.000000Z"
                                                 }
                                             }
                                         }
@@ -2860,8 +2916,8 @@
                             }
                         }
                     },
-                    "422": {
-                        "description": "Dữ liệu không hợp lệ",
+                    "400": {
+                        "description": "Yêu cầu không hợp lệ",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2896,8 +2952,9 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 9
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "d1e7e3bc-f7d5-4e84-93a4-b7f72f86b7c9"
                         },
                         "description": "ID của vai trò cần lấy thông tin."
                     }
@@ -2914,8 +2971,9 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 9
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "d1e7e3bc-f7d5-4e84-93a4-b7f72f86b7c9"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -2931,8 +2989,9 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
-                                                                "type": "integer",
-                                                                "example": 5
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "example": "e41b1a12-f49d-4cf5-b5ef-0a776ee56d56"
                                                             },
                                                             "name": {
                                                                 "type": "string",
@@ -2948,8 +3007,9 @@
                                                                     "type": "object",
                                                                     "properties": {
                                                                         "id": {
-                                                                            "type": "integer",
-                                                                            "example": 2
+                                                                            "type": "string",
+                                                                            "format": "uuid",
+                                                                            "example": "34f0b4b6-1538-4e74-a65f-1f893e5ef232"
                                                                         },
                                                                         "name": {
                                                                             "type": "string",
@@ -2967,25 +3027,25 @@
                                 },
                                 "example": {
                                     "data": {
-                                        "id": 9,
+                                        "id": "d1e7e3bc-f7d5-4e84-93a4-b7f72f86b7c9",
                                         "name": "demo ok",
                                         "description": "Mô tả demo",
                                         "permissions": [
                                             {
-                                                "id": 5,
+                                                "id": "e41b1a12-f49d-4cf5-b5ef-0a776ee56d56",
                                                 "name": "Test Manager",
                                                 "description": "Quản lý demo",
                                                 "actions": [
                                                     {
-                                                        "id": 2,
+                                                        "id": "34f0b4b6-1538-4e74-a65f-1f893e5ef232",
                                                         "name": "UPDATE"
                                                     },
                                                     {
-                                                        "id": 3,
+                                                        "id": "5e2a6c84-bcc1-4ae1-8cc8-2f01b1657b3d",
                                                         "name": "CREATE"
                                                     },
                                                     {
-                                                        "id": 4,
+                                                        "id": "db4f33a5-9985-4d60-b1cc-f0a3d2252b82",
                                                         "name": "VIEW"
                                                     }
                                                 ]
@@ -3046,8 +3106,9 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "d1e7e3bc-f7d5-4e84-93a4-b7f72f86b7c9"
                         },
                         "description": "ID của vai trò cần cập nhật."
                     }
@@ -3075,8 +3136,9 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 1,
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "e41b1a12-f49d-4cf5-b5ef-0a776ee56d56",
                                                     "description": "ID của quyền."
                                                 },
                                                 "actions": {
@@ -3085,8 +3147,9 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
-                                                                "type": "integer",
-                                                                "example": 2,
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "example": "34f0b4b6-1538-4e74-a65f-1f893e5ef232",
                                                                 "description": "ID của hành động."
                                                             }
                                                         }
@@ -3151,7 +3214,9 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "d1e7e3bc-f7d5-4e84-93a4-b7f72f86b7c9"
                         },
                         "description": "ID của vai trò cần xóa."
                     }
@@ -3182,23 +3247,7 @@
                                     "properties": {
                                         "error": {
                                             "type": "string",
-                                            "example": "Role has users assigned!"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Vai trò không tồn tại",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Role not found!"
+                                            "example": "Role has users linked and cannot be deleted!"
                                         }
                                     }
                                 }
@@ -3262,8 +3311,8 @@
                                                 "type": "object",
                                                 "properties": {
                                                     "id": {
-                                                        "type": "integer",
-                                                        "example": 1
+                                                        "type": "string",
+                                                        "example": "b4a51bcd-f24c-4e9f-8c91-25e5e5b391e6"
                                                     },
                                                     "name": {
                                                         "type": "string",
@@ -3291,8 +3340,8 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
-                                                                "type": "integer",
-                                                                "example": 32
+                                                                "type": "string",
+                                                                "example": "8c3af5a6-0543-4b43-91a1-d1562b0cf21a"
                                                             },
                                                             "email": {
                                                                 "type": "string",
@@ -3388,8 +3437,8 @@
                                         "example": "Mô tả"
                                     },
                                     "manager_id": {
-                                        "type": "integer",
-                                        "example": 1
+                                        "type": "string",
+                                        "example": "8c3af5a6-0543-4b43-91a1-d1562b0cf21a"
                                     }
                                 }
                             }
@@ -3412,8 +3461,8 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "example": "b4a51bcd-f24c-4e9f-8c91-25e5e5b391e6"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -3424,8 +3473,8 @@
                                                     "example": "Mô tả"
                                                 },
                                                 "manager_id": {
-                                                    "type": "integer",
-                                                    "example": 5
+                                                    "type": "string",
+                                                    "example": "8c3af5a6-0543-4b43-91a1-d1562b0cf21a"
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -3484,9 +3533,10 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         },
-                        "description": "ID của phòng ban."
+                        "description": "ID của phòng ban (UUID)."
                     }
                 ],
                 "responses": {
@@ -3501,8 +3551,9 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 23
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "e07a5b34-456f-4ac3-a4e2-3d457d9f45e0"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -3665,9 +3716,10 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         },
-                        "description": "ID của phòng ban."
+                        "description": "ID của phòng ban (UUID)."
                     }
                 ],
                 "requestBody": {
@@ -3745,9 +3797,10 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         },
-                        "description": "ID của phòng ban."
+                        "description": "ID của phòng ban (UUID)."
                     }
                 ],
                 "responses": {
@@ -3858,8 +3911,8 @@
                                             "items": {
                                                 "properties": {
                                                     "id": {
-                                                        "type": "integer",
-                                                        "example": 12
+                                                        "type": "string",
+                                                        "example": "550e8400-e29b-41d4-a716-446655440000"
                                                     },
                                                     "email": {
                                                         "type": "string",
@@ -3873,8 +3926,8 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
-                                                                "type": "integer",
-                                                                "example": 1
+                                                                "type": "string",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440001"
                                                             },
                                                             "name": {
                                                                 "type": "string",
@@ -3890,8 +3943,8 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
-                                                                "type": "integer",
-                                                                "example": 2
+                                                                "type": "string",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440002"
                                                             },
                                                             "fullname": {
                                                                 "type": "string",
@@ -3914,8 +3967,8 @@
                                                                 "example": "male"
                                                             },
                                                             "user_id": {
-                                                                "type": "integer",
-                                                                "example": 12
+                                                                "type": "string",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440000"
                                                             },
                                                             "dob": {
                                                                 "type": "string",
@@ -3923,12 +3976,12 @@
                                                                 "example": "1990-01-01"
                                                             },
                                                             "identity_card_id": {
-                                                                "type": "integer",
-                                                                "example": 3
+                                                                "type": "string",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440003"
                                                             },
                                                             "department_id": {
-                                                                "type": "integer",
-                                                                "example": 2
+                                                                "type": "string",
+                                                                "example": "550e8400-e29b-41d4-a716-446655440004"
                                                             },
                                                             "created_at": {
                                                                 "type": "string",
@@ -3944,8 +3997,8 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "id": {
-                                                                        "type": "integer",
-                                                                        "example": 3
+                                                                        "type": "string",
+                                                                        "example": "550e8400-e29b-41d4-a716-446655440005"
                                                                     },
                                                                     "type_name": {
                                                                         "type": "string",
@@ -4038,8 +4091,9 @@
                                         "description": "Ảnh đại diện của người dùng (tùy chọn)."
                                     },
                                     "role_id": {
-                                        "type": "integer",
-                                        "example": 1
+                                        "type": "string",
+                                        "example": "550e8400-e29b-41d4-a716-446655440000",
+                                        "description": "ID vai trò của người dùng (bắt buộc, kiểu UUID)."
                                     },
                                     "user_info": {
                                         "type": "object",
@@ -4080,10 +4134,10 @@
                                                 "description": "Ngày sinh của người dùng (tùy chọn)."
                                             },
                                             "department_id": {
-                                                "type": "integer",
+                                                "type": "string",
                                                 "nullable": true,
-                                                "example": 1,
-                                                "description": "ID phòng ban của người dùng (tùy chọn, phải tồn tại trong bảng departments)."
+                                                "example": "550e8400-e29b-41d4-a716-446655440000",
+                                                "description": "ID phòng ban của người dùng (tùy chọn, kiểu UUID, phải tồn tại trong bảng departments)."
                                             },
                                             "identity_card": {
                                                 "type": "object",
@@ -4108,10 +4162,10 @@
                                         "type": "object",
                                         "properties": {
                                             "specialty_id": {
-                                                "type": "integer",
+                                                "type": "string",
                                                 "nullable": true,
-                                                "example": 1,
-                                                "description": "Chuyên khoa"
+                                                "example": "550e8400-e29b-41d4-a716-446655440000",
+                                                "description": "Chuyên khoa (tùy chọn, kiểu UUID)."
                                             }
                                         }
                                     }
@@ -4136,16 +4190,16 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                    "type": "string",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "email": {
                                                     "type": "string",
                                                     "example": "johndoe@example.com"
                                                 },
                                                 "role_id": {
-                                                    "type": "integer",
-                                                    "example": 2
+                                                    "type": "string",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "user_info": {
                                                     "type": "object",
@@ -4233,8 +4287,9 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 12
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "550e8400-e29b-41d4-a716-446655440000"
                         },
                         "description": "ID của người dùng cần tìm"
                     }
@@ -4251,8 +4306,9 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "example": 12
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                 },
                                                 "email": {
                                                     "type": "string",
@@ -4266,8 +4322,9 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "id": {
-                                                            "type": "integer",
-                                                            "example": 1
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "550e8400-e29b-41d4-a716-446655440000"
                                                         },
                                                         "name": {
                                                             "type": "string",
@@ -4283,8 +4340,9 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "id": {
-                                                            "type": "integer",
-                                                            "example": 2
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "550e8400-e29b-41d4-a716-446655440000"
                                                         },
                                                         "fullname": {
                                                             "type": "string",
@@ -4307,8 +4365,9 @@
                                                             "example": "male"
                                                         },
                                                         "user_id": {
-                                                            "type": "integer",
-                                                            "example": 12
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "550e8400-e29b-41d4-a716-446655440000"
                                                         },
                                                         "dob": {
                                                             "type": "string",
@@ -4316,12 +4375,14 @@
                                                             "example": "1990-01-01"
                                                         },
                                                         "identity_card_id": {
-                                                            "type": "integer",
-                                                            "example": 3
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "550e8400-e29b-41d4-a716-446655440000"
                                                         },
                                                         "department_id": {
-                                                            "type": "integer",
-                                                            "example": 2
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "550e8400-e29b-41d4-a716-446655440000"
                                                         },
                                                         "created_at": {
                                                             "type": "string",
@@ -4337,8 +4398,9 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer",
-                                                                    "example": 3
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "550e8400-e29b-41d4-a716-446655440000"
                                                                 },
                                                                 "type_name": {
                                                                     "type": "string",
@@ -4409,8 +4471,9 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "123e4567-e89b-12d3-a456-426614174000"
                         },
                         "description": "ID của người dùng cần cập nhật"
                     }
@@ -4443,8 +4506,9 @@
                                         "description": "Ảnh đại diện của người dùng (tùy chọn)."
                                     },
                                     "role_id": {
-                                        "type": "integer",
-                                        "example": 1
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "123e4567-e89b-12d3-a456-426614174000"
                                     },
                                     "user_info": {
                                         "type": "object",
@@ -4485,9 +4549,10 @@
                                                 "description": "Ngày sinh của người dùng (tùy chọn)."
                                             },
                                             "department_id": {
-                                                "type": "integer",
+                                                "type": "string",
+                                                "format": "uuid",
                                                 "nullable": true,
-                                                "example": 1,
+                                                "example": "123e4567-e89b-12d3-a456-426614174000",
                                                 "description": "ID phòng ban của người dùng (tùy chọn)."
                                             },
                                             "identity_card": {
@@ -4585,8 +4650,9 @@
                         "required": true,
                         "description": "ID của vai trò để lọc người dùng",
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "123e4567-e89b-12d3-a456-426614174000"
                         }
                     },
                     {
@@ -4634,8 +4700,9 @@
                                                 "type": "object",
                                                 "properties": {
                                                     "id": {
-                                                        "type": "integer",
-                                                        "example": 5
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "example": "550e8400-e29b-41d4-a716-446655440000"
                                                     },
                                                     "name": {
                                                         "type": "string",
@@ -4647,8 +4714,9 @@
                                                         "example": "nguyenvana@example.com"
                                                     },
                                                     "role_id": {
-                                                        "type": "integer",
-                                                        "example": 1
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "example": "123e4567-e89b-12d3-a456-426614174000"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
@@ -4666,12 +4734,12 @@
                                         "prev_page_url": {
                                             "type": "string",
                                             "nullable": true,
-                                            "example": "http://localhost/api/v1/users/role/1?page=1"
+                                            "example": "http://localhost/api/v1/users/role/123e4567-e89b-12d3-a456-426614174000?page=1"
                                         },
                                         "next_page_url": {
                                             "type": "string",
                                             "nullable": true,
-                                            "example": "http://localhost/api/v1/users/role/1?page=3"
+                                            "example": "http://localhost/api/v1/users/role/123e4567-e89b-12d3-a456-426614174000?page=3"
                                         },
                                         "total": {
                                             "type": "integer",
@@ -5904,7 +5972,7 @@
                                 "example": {
                                     "data": [
                                         {
-                                            "id": 11,
+                                            "id": "a1234567-e89b-12d3-a456-426614174000",
                                             "description": "Bệnh án của bệnh nhân A",
                                             "diagnosis": "Cúm A",
                                             "treatment": "Nghỉ ngơi, uống thuốc",
@@ -5912,14 +5980,14 @@
                                             "updated_at": "2024-09-29T14:46:14.000000Z",
                                             "files": [
                                                 {
-                                                    "id": 3,
+                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
                                                     "file": "https://i.pinimg.com/736x/6b/a8/61/6ba861c41233ee7bc9c65c3e5cbfe75a.jpg",
                                                     "description": "Kết quả chụp X-quang okok",
-                                                    "medical_history_id": 11
+                                                    "medical_history_id": "a1234567-e89b-12d3-a456-426614174000"
                                                 }
                                             ],
                                             "doctor": {
-                                                "id": 2,
+                                                "id": "c3456789-e89b-12d3-a456-426614174002",
                                                 "specialty": "specialty 1",
                                                 "email": "johndoe333@example.com",
                                                 "fullname": "Nguyễn Văn A",
@@ -5927,64 +5995,17 @@
                                                 "gender": "other"
                                             },
                                             "patient": {
-                                                "id": 1,
+                                                "id": "d4567890-e89b-12d3-a456-426614174003",
                                                 "fullname": "Nguyễn Văn B",
                                                 "email": "johndoe@example.com",
                                                 "phone_number": "1234567890",
                                                 "gender": "male"
-                                            }
-                                        },
-                                        {
-                                            "id": 12,
-                                            "description": "Bệnh án của bệnh nhân B",
-                                            "diagnosis": "Sốt xuất huyết",
-                                            "treatment": "Truyền dịch, nghỉ ngơi",
-                                            "created_at": "2024-09-29T15:00:00.000000Z",
-                                            "updated_at": "2024-09-29T15:00:00.000000Z",
-                                            "files": [
-                                                {
-                                                    "id": 4,
-                                                    "file": "https://i.pinimg.com/736x/9c/a1/91/9ca191e8e4c582438b65b4a5e5a1f41a.jpg",
-                                                    "description": "Kết quả xét nghiệm máu",
-                                                    "medical_history_id": 12
-                                                }
-                                            ],
-                                            "doctor": {
-                                                "id": 3,
-                                                "specialty": "specialty 2",
-                                                "email": "janedoe@example.com",
-                                                "fullname": "Nguyễn Văn C",
-                                                "phone_number": "0987654321",
-                                                "gender": "female"
-                                            },
-                                            "patient": {
-                                                "id": 2,
-                                                "fullname": "Nguyễn Thị D",
-                                                "email": "janedoe@example.com",
-                                                "phone_number": "1231231234",
-                                                "gender": "female"
                                             }
                                         }
                                     ],
                                     "prev_page_url": "http://example.com/api/v1/medical-histories?page=1",
                                     "next_page_url": "http://example.com/api/v1/medical-histories?page=3",
                                     "total": 100
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Lỗi yêu cầu",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Chi tiết lỗi xảy ra."
-                                        }
-                                    }
                                 }
                             }
                         }
@@ -6009,9 +6030,9 @@
                                 "type": "object",
                                 "properties": {
                                     "patient_id": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "description": "ID của bệnh nhân",
-                                        "example": 1
+                                        "example": "d4567890-e89b-12d3-a456-426614174003"
                                     },
                                     "description": {
                                         "type": "string",
@@ -6029,9 +6050,9 @@
                                         "example": "Nghỉ ngơi, uống thuốc"
                                     },
                                     "doctor_id": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "description": "ID của bác sĩ",
-                                        "example": 1
+                                        "example": "c3456789-e89b-12d3-a456-426614174002"
                                     },
                                     "files": {
                                         "type": "array",
@@ -6073,14 +6094,14 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "description": "ID của lịch sử bệnh án",
-                                                    "example": 101
+                                                    "example": "a1234567-e89b-12d3-a456-426614174000"
                                                 },
                                                 "patient_id": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "description": "ID của bệnh nhân",
-                                                    "example": 1
+                                                    "example": "d4567890-e89b-12d3-a456-426614174003"
                                                 },
                                                 "description": {
                                                     "type": "string",
@@ -6098,9 +6119,9 @@
                                                     "example": "Nghỉ ngơi, uống thuốc"
                                                 },
                                                 "doctor_id": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "description": "ID của bác sĩ",
-                                                    "example": 1
+                                                    "example": "c3456789-e89b-12d3-a456-426614174002"
                                                 },
                                                 "files": {
                                                     "type": "array",
@@ -6139,22 +6160,6 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Lỗi yêu cầu",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Chi tiết lỗi xảy ra."
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -6175,10 +6180,10 @@
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "description": "ID của lịch sử bệnh án cần lấy",
+                        "description": "ID của lịch sử bệnh án cần lấy (UUID)",
                         "schema": {
-                            "type": "integer",
-                            "example": 11
+                            "type": "string",
+                            "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
                         }
                     }
                 ],
@@ -6194,9 +6199,9 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
-                                                    "description": "ID của lịch sử bệnh án",
-                                                    "example": 11
+                                                    "type": "string",
+                                                    "description": "ID của lịch sử bệnh án (UUID)",
+                                                    "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
                                                 },
                                                 "description": {
                                                     "type": "string",
@@ -6232,9 +6237,9 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
-                                                                "type": "integer",
-                                                                "description": "ID của file",
-                                                                "example": 3
+                                                                "type": "string",
+                                                                "description": "ID của file (UUID)",
+                                                                "example": "d9b0a92d-3c9e-4f2f-8c28-1a2f0a6726e4"
                                                             },
                                                             "file": {
                                                                 "type": "string",
@@ -6244,12 +6249,12 @@
                                                             "description": {
                                                                 "type": "string",
                                                                 "description": "Mô tả của file",
-                                                                "example": "Kết quả chụp X-quang okok"
+                                                                "example": "Kết quả chụp X-quang"
                                                             },
                                                             "medical_history_id": {
-                                                                "type": "integer",
-                                                                "description": "ID của lịch sử bệnh án liên kết với file",
-                                                                "example": 11
+                                                                "type": "string",
+                                                                "description": "ID của lịch sử bệnh án liên kết với file (UUID)",
+                                                                "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
                                                             }
                                                         }
                                                     }
@@ -6259,14 +6264,14 @@
                                                     "description": "Thông tin của bác sĩ",
                                                     "properties": {
                                                         "id": {
-                                                            "type": "integer",
-                                                            "description": "ID của bác sĩ",
-                                                            "example": 2
+                                                            "type": "string",
+                                                            "description": "ID của bác sĩ (UUID)",
+                                                            "example": "2c8d5a90-5d58-4f3b-b96c-64f2a39d45a3"
                                                         },
                                                         "specialty": {
                                                             "type": "string",
                                                             "description": "Chuyên khoa của bác sĩ",
-                                                            "example": "specialty 1"
+                                                            "example": "Nội khoa"
                                                         },
                                                         "email": {
                                                             "type": "string",
@@ -6287,7 +6292,7 @@
                                                         "gender": {
                                                             "type": "string",
                                                             "description": "Giới tính của bác sĩ",
-                                                            "example": "other"
+                                                            "example": "Khác"
                                                         }
                                                     }
                                                 },
@@ -6296,9 +6301,9 @@
                                                     "description": "Thông tin của bệnh nhân",
                                                     "properties": {
                                                         "id": {
-                                                            "type": "integer",
-                                                            "description": "ID của bệnh nhân",
-                                                            "example": 1
+                                                            "type": "string",
+                                                            "description": "ID của bệnh nhân (UUID)",
+                                                            "example": "1e8b2f7f-b7c9-4cde-b4c4-74e74e489576"
                                                         },
                                                         "fullname": {
                                                             "type": "string",
@@ -6313,32 +6318,17 @@
                                                         "phone_number": {
                                                             "type": "string",
                                                             "description": "Số điện thoại của bệnh nhân",
-                                                            "example": "1234567890"
+                                                            "nullable": true,
+                                                            "example": null
                                                         },
                                                         "gender": {
                                                             "type": "string",
                                                             "description": "Giới tính của bệnh nhân",
-                                                            "example": "male"
+                                                            "example": "Nam"
                                                         }
                                                     }
                                                 }
                                             }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Không tìm thấy lịch sử bệnh án",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Lịch sử bệnh án không tồn tại."
                                         }
                                     }
                                 }
@@ -6363,10 +6353,10 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
                         },
-                        "description": "ID của lịch sử bệnh án cần cập nhật"
+                        "description": "ID của lịch sử bệnh án cần cập nhật (UUID)"
                     }
                 ],
                 "requestBody": {
@@ -6377,9 +6367,9 @@
                                 "type": "object",
                                 "properties": {
                                     "patient_id": {
-                                        "type": "integer",
-                                        "description": "ID của bệnh nhân",
-                                        "example": 1
+                                        "type": "string",
+                                        "description": "ID của bệnh nhân (UUID)",
+                                        "example": "1e8b2f7f-b7c9-4cde-b4c4-74e74e489576"
                                     },
                                     "description": {
                                         "type": "string",
@@ -6397,9 +6387,9 @@
                                         "example": "Nghỉ ngơi, uống thuốc"
                                     },
                                     "doctor_id": {
-                                        "type": "integer",
-                                        "description": "ID của bác sĩ",
-                                        "example": 1
+                                        "type": "string",
+                                        "description": "ID của bác sĩ (UUID)",
+                                        "example": "2c8d5a90-5d58-4f3b-b96c-64f2a39d45a3"
                                     },
                                     "files": {
                                         "type": "array",
@@ -6476,10 +6466,10 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
                         },
-                        "description": "ID của lịch sử bệnh án cần xóa"
+                        "description": "ID của lịch sử bệnh án cần xóa (UUID)"
                     }
                 ],
                 "responses": {
@@ -6797,7 +6787,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "example": 8
                                                 },
                                                 "insurance_number": {
@@ -6962,7 +6952,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "example": 8
                                                 },
                                                 "insurance_number": {
@@ -8268,7 +8258,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "example": 1
                                                 },
                                                 "name": {
@@ -8350,7 +8340,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "example": 1
                                                 },
                                                 "name": {

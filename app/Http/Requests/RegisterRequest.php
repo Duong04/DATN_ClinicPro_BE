@@ -24,7 +24,9 @@ class RegisterRequest extends FormRequest
         $rules = [
             'fullname' => 'required|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'regex:/[A-Z]/',
+            'regex:/[@$!%*#?&]/'
         ];
 
         return $rules;
@@ -36,7 +38,8 @@ class RegisterRequest extends FormRequest
             'unique' => ':attribute này đã tồn tại!',
             'min' => ':attribute không nhược nhỏ hơn :min kí tự!',
             'max' => ':attribute không được lớn hơn :max kí tự',
-            'email' => 'Vui lòng nhập đúng định dạng email!'
+            'email' => 'Vui lòng nhập đúng định dạng email!',
+            'password.regex' => ':attribute phải chứa ít nhất một ký tự in hoa và một ký tự đặc biệt!'
         ];
     }
 
