@@ -4794,15 +4794,15 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "string",
-                                                        "example": 1
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
                                                     },
                                                     "patient_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                     },
                                                     "user_id": {
                                                         "type": "string",
-                                                        "example": "null"
+                                                        "example": "c3456789-e89b-12d3-a456-426614174002"
                                                     },
                                                     "appointment_date": {
                                                         "type": "Date",
@@ -4835,7 +4835,7 @@
                                                     },
                                                     "specialty_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "b2345678-e89b-12d3-a456-426614174002"
                                                     }
                                                 }
                                             }
@@ -4920,7 +4920,7 @@
                                     },
                                     "specialty_id": {
                                         "type": "string",
-                                        "example": "1"
+                                        "example": "b2345678-e89b-12d3-a456-426614174002"
                                     }
                                 },
                                 "type": "object"
@@ -4939,15 +4939,15 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 },
                                                 "patient_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "null"
+                                                    "example": "c3456789-e89b-12d3-a456-426614174002"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -4980,7 +4980,7 @@
                                                 },
                                                 "specialty_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "b2345678-e89b-12d3-a456-426614174002"
                                                 }
                                             },
                                             "type": "object"
@@ -5047,8 +5047,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
                         },
                         "description": "ID lịch hẹn."
                     }
@@ -5065,19 +5065,19 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 },
                                                 "patient_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "null"
+                                                    "example": "c3456789-e89b-12d3-a456-426614174002"
                                                 },
                                                 "specialty_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "b2345678-e89b-12d3-a456-426614174002"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -5173,8 +5173,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
                         },
                         "description": "ID lịch hẹn."
                     }
@@ -5207,15 +5207,15 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 },
                                                 "patient_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "null"
+                                                    "example": "c3456789-e89b-12d3-a456-426614174002"
                                                 },
                                                 "specialty_id": {
                                                     "type": "string",
@@ -5300,8 +5300,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
                         },
                         "description": "ID lịch hẹn."
                     }
@@ -5317,19 +5317,19 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 },
                                                 "patient_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "null"
+                                                    "example": "c3456789-e89b-12d3-a456-426614174002"
                                                 },
                                                 "specialty_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "b2345678-e89b-12d3-a456-426614174002"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -5410,8 +5410,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
                         },
                         "description": "ID lịch hẹn."
                     }
@@ -5471,8 +5471,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
                         },
                         "description": "ID lịch hẹn."
                     }
@@ -5489,19 +5489,19 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 },
                                                 "patient_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "null"
+                                                    "example": "c3456789-e89b-12d3-a456-426614174002"
                                                 },
                                                 "specialty_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "b2345678-e89b-12d3-a456-426614174002"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -5619,8 +5619,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
                         },
                         "description": "ID lịch hẹn."
                     }
@@ -5633,8 +5633,8 @@
                                 "required": ["user_id"],
                                 "properties": {
                                     "user_id": {
-                                        "type": "integer",
-                                        "example": "ID bác sĩ"
+                                        "type": "string",
+                                        "example": "c3456789-e89b-12d3-a456-426614174002"
                                     }
                                 },
                                 "type": "object"
@@ -5654,19 +5654,19 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 },
                                                 "patient_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "c3456789-e89b-12d3-a456-426614174002"
                                                 },
                                                 "specialty_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "b2345678-e89b-12d3-a456-426614174002"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -5784,8 +5784,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                         },
                         "description": "ID bệnh nhân."
                     }
@@ -5802,19 +5802,19 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 },
                                                 "patient_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "null"
+                                                    "example": "c3456789-e89b-12d3-a456-426614174002"
                                                 },
                                                 "specialty_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "b2345678-e89b-12d3-a456-426614174002"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -6510,751 +6510,772 @@
         },
         "/api/v1/patients": {
             "get": {
-                "tags": ["Patients"],
-                "summary": "Lấy danh sách bệnh nhân với phân trang",
-                "description": "API này trả về danh sách bệnh nhân với khả năng phân trang và tìm kiếm theo từ khóa.",
-                "operationId": "getPaginatePatients",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "required": false,
-                        "description": "Số lượng bản ghi mỗi trang",
-                        "schema": {
-                            "type": "integer",
-                            "example": 10
-                        }
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "required": false,
-                        "description": "Trang tiếp theo",
-                        "schema": {
-                            "type": "integer",
-                            "example": 2
-                        }
-                    },
-                    {
-                        "name": "q",
-                        "in": "query",
-                        "required": false,
-                        "description": "Từ khóa tìm kiếm bệnh nhân",
-                        "schema": {
-                            "type": "string",
-                            "example": "Nguyen Van A"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Danh sách bệnh nhân được trả về thành công",
-                        "content": {
-                            "application/json": {
-                                "schema": {
+    "tags": ["Patients"],
+    "summary": "Lấy danh sách bệnh nhân với phân trang",
+    "description": "API này trả về danh sách bệnh nhân với khả năng phân trang và tìm kiếm theo từ khóa.",
+    "operationId": "getPaginatePatients",
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Số lượng bản ghi mỗi trang",
+            "schema": {
+                "type": "integer",
+                "example": 10
+            }
+        },
+        {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Trang tiếp theo",
+            "schema": {
+                "type": "integer",
+                "example": 2
+            }
+        },
+        {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "description": "Từ khóa tìm kiếm bệnh nhân",
+            "schema": {
+                "type": "string",
+                "example": "Nguyen Van A"
+            }
+        }
+    ],
+    "responses": {
+        "200": {
+            "description": "Danh sách bệnh nhân được trả về thành công",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "items": {
                                     "type": "object",
                                     "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer",
-                                                        "example": 8
-                                                    },
-                                                    "insurance_number": {
-                                                        "type": "string",
-                                                        "example": "BH123456789"
-                                                    },
-                                                    "status": {
-                                                        "type": "string",
-                                                        "example": "active"
-                                                    },
-                                                    "user_id": {
-                                                        "type": "integer",
-                                                        "nullable": true,
-                                                        "example": null
-                                                    },
-                                                    "identity_card_id": {
-                                                        "type": "integer",
-                                                        "example": 7
-                                                    },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-09-30T15:44:32.000000Z"
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-09-30T15:44:32.000000Z"
-                                                    },
-                                                    "patient_info": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "id": {
-                                                                "type": "integer",
-                                                                "example": 9
-                                                            },
-                                                            "patient_id": {
-                                                                "type": "integer",
-                                                                "example": 8
-                                                            },
-                                                            "fullname": {
-                                                                "type": "string",
-                                                                "example": "Nguyen Van A"
-                                                            },
-                                                            "email": {
-                                                                "type": "string",
-                                                                "format": "email",
-                                                                "example": "nguyenvana@example.com"
-                                                            },
-                                                            "phone_number": {
-                                                                "type": "string",
-                                                                "example": "+84987654321"
-                                                            },
-                                                            "address": {
-                                                                "type": "string",
-                                                                "example": "123 Đường ABC, Phường XYZ, TP. HCM"
-                                                            },
-                                                            "dob": {
-                                                                "type": "string",
-                                                                "format": "date",
-                                                                "example": "1990-01-01"
-                                                            },
-                                                            "gender": {
-                                                                "type": "string",
-                                                                "example": "male"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "prev_page_url": {
+                                        "id": {
                                             "type": "string",
+                                            "format": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                        },
+                                        "insurance_number": {
+                                            "type": "string",
+                                            "example": "BH123456789"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "active"
+                                        },
+                                        "user_id": {
+                                            "type": "string",
+                                            "format": "uuid",
                                             "nullable": true,
-                                            "example": "http://localhost/api/v1/patients?page=1"
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
                                         },
-                                        "next_page_url": {
+                                        "identity_card_id": {
                                             "type": "string",
-                                            "nullable": true,
-                                            "example": "http://localhost/api/v1/patients?page=3"
+                                            "format": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174001"
                                         },
-                                        "total": {
-                                            "type": "integer",
-                                            "example": 100
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Lỗi không xác định",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
+                                        "created_at": {
                                             "type": "string",
-                                            "example": "Some error message."
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": ["Patients"],
-                "summary": "Tạo mới thông tin bệnh nhân",
-                "description": "API này được sử dụng để tạo mới thông tin bệnh nhân bằng cách cung cấp thông tin cá nhân và giấy tờ định danh.",
-                "operationId": "createPatient",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": ["patient_info"],
-                                "properties": {
-                                    "insurance_number": {
-                                        "description": "Số bảo hiểm của bệnh nhân (nếu có)",
-                                        "type": "string",
-                                        "example": "BH123456789"
-                                    },
-                                    "status": {
-                                        "description": "Trạng thái của bệnh nhân",
-                                        "type": "string",
-                                        "enum": [
-                                            "active",
-                                            "inactive",
-                                            "deceased",
-                                            "transferred"
-                                        ],
-                                        "example": "active"
-                                    },
-                                    "user_info": {
-                                        "type": "object",
-                                        "required": ["fullname"],
-                                        "properties": {
-                                            "fullname": {
-                                                "description": "Họ và tên của bệnh nhân",
-                                                "type": "string",
-                                                "example": "Nguyen Van A"
-                                            },
-                                            "email": {
-                                                "description": "Email của bệnh nhân",
-                                                "type": "string",
-                                                "format": "email",
-                                                "example": "nguyenvana@example.com"
-                                            },
-                                            "phone_number": {
-                                                "description": "Số điện thoại của bệnh nhân",
-                                                "type": "string",
-                                                "example": "+84987654321"
-                                            },
-                                            "address": {
-                                                "description": "Địa chỉ của bệnh nhân",
-                                                "type": "string",
-                                                "example": "123 Đường ABC, Phường XYZ, TP. HCM"
-                                            },
-                                            "gender": {
-                                                "description": "Giới tính của bệnh nhân",
-                                                "type": "string",
-                                                "enum": [
-                                                    "male",
-                                                    "female",
-                                                    "other"
-                                                ],
-                                                "example": "male"
-                                            },
-                                            "dob": {
-                                                "description": "Ngày sinh của bệnh nhân",
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "1990-01-01"
-                                            }
-                                        }
-                                    },
-                                    "identity_card": {
-                                        "type": "object",
-                                        "properties": {
-                                            "type_name": {
-                                                "description": "Loại thẻ định danh",
-                                                "type": "string",
-                                                "example": "Căn cước công dân"
-                                            },
-                                            "identity_card_number": {
-                                                "description": "Số thẻ định danh của bệnh nhân",
-                                                "type": "string",
-                                                "example": "123456789"
-                                            }
-                                        }
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Thông tin bệnh nhân đã được tạo thành công",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Thông tin bệnh nhân đã được tạo"
+                                            "format": "date-time",
+                                            "example": "2024-09-30T15:44:32.000000Z"
                                         },
-                                        "data": {
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-09-30T15:44:32.000000Z"
+                                        },
+                                        "patient_info": {
                                             "type": "object",
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 8
+                                                    "format": "uuid",
+                                                    "example": "123e4567-e89b-12d3-a456-426614174002"
                                                 },
-                                                "insurance_number": {
+                                                "patient_id": {
                                                     "type": "string",
-                                                    "example": "BH123456789"
+                                                    "format": "uuid",
+                                                    "example": "123e4567-e89b-12d3-a456-426614174000"
                                                 },
-                                                "status": {
+                                                "fullname": {
                                                     "type": "string",
-                                                    "example": "active"
+                                                    "example": "Nguyen Van A"
                                                 },
-                                                "user_id": {
-                                                    "type": "integer",
-                                                    "nullable": true,
-                                                    "example": null
-                                                },
-                                                "identity_card_id": {
-                                                    "type": "integer",
-                                                    "example": 7
-                                                },
-                                                "created_at": {
+                                                "email": {
                                                     "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-30T15:44:32.000000Z"
+                                                    "format": "email",
+                                                    "example": "nguyenvana@example.com"
                                                 },
-                                                "updated_at": {
+                                                "phone_number": {
                                                     "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-30T15:44:32.000000Z"
+                                                    "example": "+84987654321"
                                                 },
-                                                "patient_info": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "integer",
-                                                            "example": 9
-                                                        },
-                                                        "patient_id": {
-                                                            "type": "integer",
-                                                            "example": 8
-                                                        },
-                                                        "fullname": {
-                                                            "type": "string",
-                                                            "example": "Nguyen Van A"
-                                                        },
-                                                        "avatar": {
-                                                            "type": "string",
-                                                            "format": "uri",
-                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                        },
-                                                        "email": {
-                                                            "type": "string",
-                                                            "format": "email",
-                                                            "example": "nguyenvana@example.com"
-                                                        },
-                                                        "phone_number": {
-                                                            "type": "string",
-                                                            "example": "+84987654321"
-                                                        },
-                                                        "address": {
-                                                            "type": "string",
-                                                            "example": "123 Đường ABC, Phường XYZ, TP. HCM"
-                                                        },
-                                                        "dob": {
-                                                            "type": "string",
-                                                            "format": "date",
-                                                            "example": "1990-01-01"
-                                                        },
-                                                        "gender": {
-                                                            "type": "string",
-                                                            "example": "male"
-                                                        },
-                                                        "created_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-30T15:44:32.000000Z"
-                                                        },
-                                                        "updated_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-30T15:44:32.000000Z"
-                                                        }
-                                                    }
+                                                "address": {
+                                                    "type": "string",
+                                                    "example": "123 Đường ABC, Phường XYZ, TP. HCM"
                                                 },
-                                                "identity_card": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "integer",
-                                                            "example": 7
-                                                        },
-                                                        "type_name": {
-                                                            "type": "string",
-                                                            "example": "Căn cước công dân"
-                                                        },
-                                                        "identity_card_number": {
-                                                            "type": "string",
-                                                            "example": "123456789"
-                                                        }
-                                                    }
+                                                "dob": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "1990-01-01"
+                                                },
+                                                "gender": {
+                                                    "type": "string",
+                                                    "example": "male"
                                                 }
                                             }
                                         }
                                     }
                                 }
+                            },
+                            "prev_page_url": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "http://localhost/api/v1/patients?page=1"
+                            },
+                            "next_page_url": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "http://localhost/api/v1/patients?page=3"
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 100
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Lỗi xác thực",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "The email has already been taken."
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Lỗi máy chủ nội bộ"
                     }
                 }
             }
         },
-        "/api/v1/patients/{id}": {
-            "get": {
-                "tags": ["Patients"],
-                "summary": "Tìm thông tin bệnh nhân theo ID",
-                "description": "API này được sử dụng để lấy thông tin của bệnh nhân dựa trên ID đã cung cấp.",
-                "operationId": "findPatientById",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "description": "ID của bệnh nhân cần tìm",
-                        "schema": {
-                            "type": "integer",
-                            "example": 8
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Thông tin bệnh nhân được tìm thấy",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string",
-                                                    "example": 8
-                                                },
-                                                "insurance_number": {
-                                                    "type": "string",
-                                                    "example": "BH123456789"
-                                                },
-                                                "status": {
-                                                    "type": "string",
-                                                    "example": "active"
-                                                },
-                                                "user_id": {
-                                                    "type": "integer",
-                                                    "nullable": true,
-                                                    "example": null
-                                                },
-                                                "identity_card_id": {
-                                                    "type": "integer",
-                                                    "example": 7
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-30T15:44:32.000000Z"
-                                                },
-                                                "updated_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-30T15:44:32.000000Z"
-                                                },
-                                                "patient_info": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "integer",
-                                                            "example": 9
-                                                        },
-                                                        "patient_id": {
-                                                            "type": "integer",
-                                                            "example": 8
-                                                        },
-                                                        "fullname": {
-                                                            "type": "string",
-                                                            "example": "Nguyen Van A"
-                                                        },
-                                                        "avatar": {
-                                                            "type": "string",
-                                                            "format": "uri",
-                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                        },
-                                                        "email": {
-                                                            "type": "string",
-                                                            "format": "email",
-                                                            "example": "nguyenvana@example.com"
-                                                        },
-                                                        "phone_number": {
-                                                            "type": "string",
-                                                            "example": "+84987654321"
-                                                        },
-                                                        "address": {
-                                                            "type": "string",
-                                                            "example": "123 Đường ABC, Phường XYZ, TP. HCM"
-                                                        },
-                                                        "dob": {
-                                                            "type": "string",
-                                                            "format": "date",
-                                                            "example": "1990-01-01"
-                                                        },
-                                                        "gender": {
-                                                            "type": "string",
-                                                            "example": "male"
-                                                        },
-                                                        "created_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-30T15:44:32.000000Z"
-                                                        },
-                                                        "updated_at": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2024-09-30T15:44:32.000000Z"
-                                                        }
-                                                    }
-                                                },
-                                                "identity_card": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "integer",
-                                                            "example": 7
-                                                        },
-                                                        "type_name": {
-                                                            "type": "string",
-                                                            "example": "Căn cước công dân"
-                                                        },
-                                                        "identity_card_number": {
-                                                            "type": "string",
-                                                            "example": "123456789"
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+        "400": {
+            "description": "Lỗi không xác định",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Some error message."
                             }
-                        }
-                    },
-                    "404": {
-                        "description": "Không tìm thấy thông tin bệnh nhân",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Không tìm thấy thông tin bệnh nhân!"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Lỗi không xác định",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Some error message."
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        },
+                        "type": "object"
                     }
                 }
-            },
-            "put": {
-                "tags": ["Patients"],
-                "summary": "Cập nhật thông tin bệnh nhân",
-                "description": "API này được sử dụng để cập nhật thông tin của bệnh nhân dựa trên ID.",
-                "operationId": "updatePatient",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "description": "ID của bệnh nhân cần cập nhật",
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
+            }
+        }
+    }
+},
+            "post": {
+    "tags": ["Patients"],
+    "summary": "Tạo mới thông tin bệnh nhân",
+    "description": "API này được sử dụng để tạo mới thông tin bệnh nhân bằng cách cung cấp thông tin cá nhân và giấy tờ định danh.",
+    "operationId": "createPatient",
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "requestBody": {
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "required": ["patient_info"],
+                    "properties": {
+                        "insurance_number": {
+                            "description": "Số bảo hiểm của bệnh nhân (nếu có)",
+                            "type": "string",
+                            "example": "BH123456789"
+                        },
+                        "status": {
+                            "description": "Trạng thái của bệnh nhân",
+                            "type": "string",
+                            "enum": [
+                                "active",
+                                "inactive",
+                                "deceased",
+                                "transferred"
+                            ],
+                            "example": "active"
+                        },
+                        "user_info": {
+                            "type": "object",
+                            "required": ["fullname"],
+                            "properties": {
+                                "fullname": {
+                                    "description": "Họ và tên của bệnh nhân",
+                                    "type": "string",
+                                    "example": "Nguyen Van A"
+                                },
+                                "email": {
+                                    "description": "Email của bệnh nhân",
+                                    "type": "string",
+                                    "format": "email",
+                                    "example": "nguyenvana@example.com"
+                                },
+                                "phone_number": {
+                                    "description": "Số điện thoại của bệnh nhân",
+                                    "type": "string",
+                                    "example": "+84987654321"
+                                },
+                                "address": {
+                                    "description": "Địa chỉ của bệnh nhân",
+                                    "type": "string",
+                                    "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                },
+                                "gender": {
+                                    "description": "Giới tính của bệnh nhân",
+                                    "type": "string",
+                                    "enum": [
+                                        "male",
+                                        "female",
+                                        "other"
+                                    ],
+                                    "example": "male"
+                                },
+                                "dob": {
+                                    "description": "Ngày sinh của bệnh nhân",
+                                    "type": "string",
+                                    "format": "date",
+                                    "example": "1990-01-01"
+                                }
+                            }
+                        },
+                        "identity_card": {
+                            "type": "object",
+                            "properties": {
+                                "type_name": {
+                                    "description": "Loại thẻ định danh",
+                                    "type": "string",
+                                    "example": "Căn cước công dân"
+                                },
+                                "identity_card_number": {
+                                    "description": "Số thẻ định danh của bệnh nhân",
+                                    "type": "string",
+                                    "example": "123456789"
+                                }
+                            }
                         }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
+                    },
+                    "type": "object"
+                }
+            }
+        }
+    },
+    "responses": {
+        "201": {
+            "description": "Thông tin bệnh nhân đã được tạo thành công",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "message": {
+                                "type": "string",
+                                "example": "Thông tin bệnh nhân đã được tạo"
+                            },
+                            "data": {
+                                "type": "object",
                                 "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "123e4567-e89b-12d3-a456-426614174000"
+                                    },
                                     "insurance_number": {
-                                        "description": "Số bảo hiểm của bệnh nhân (nếu có)",
                                         "type": "string",
                                         "example": "BH123456789"
                                     },
                                     "status": {
-                                        "description": "Trạng thái của bệnh nhân",
                                         "type": "string",
-                                        "enum": [
-                                            "active",
-                                            "inactive",
-                                            "deceased",
-                                            "transferred"
-                                        ],
                                         "example": "active"
                                     },
-                                    "user_info": {
+                                    "user_id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "nullable": true,
+                                        "example": null
+                                    },
+                                    "identity_card_id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "123e4567-e89b-12d3-a456-426614174001"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-30T15:44:32.000000Z"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-30T15:44:32.000000Z"
+                                    },
+                                    "patient_info": {
                                         "type": "object",
                                         "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid",
+                                                "example": "123e4567-e89b-12d3-a456-426614174002"
+                                            },
+                                            "patient_id": {
+                                                "type": "string",
+                                                "format": "uuid",
+                                                "example": "123e4567-e89b-12d3-a456-426614174000"
+                                            },
                                             "fullname": {
-                                                "description": "Họ và tên của bệnh nhân",
                                                 "type": "string",
                                                 "example": "Nguyen Van A"
                                             },
+                                            "avatar": {
+                                                "type": "string",
+                                                "format": "uri",
+                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                            },
                                             "email": {
-                                                "description": "Email của bệnh nhân",
                                                 "type": "string",
                                                 "format": "email",
                                                 "example": "nguyenvana@example.com"
                                             },
                                             "phone_number": {
-                                                "description": "Số điện thoại của bệnh nhân",
                                                 "type": "string",
                                                 "example": "+84987654321"
                                             },
                                             "address": {
-                                                "description": "Địa chỉ của bệnh nhân",
                                                 "type": "string",
                                                 "example": "123 Đường ABC, Phường XYZ, TP. HCM"
                                             },
-                                            "gender": {
-                                                "description": "Giới tính của bệnh nhân",
-                                                "type": "string",
-                                                "enum": [
-                                                    "male",
-                                                    "female",
-                                                    "other"
-                                                ],
-                                                "example": "male"
-                                            },
                                             "dob": {
-                                                "description": "Ngày sinh của bệnh nhân",
                                                 "type": "string",
                                                 "format": "date",
                                                 "example": "1990-01-01"
+                                            },
+                                            "gender": {
+                                                "type": "string",
+                                                "example": "male"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-09-30T15:44:32.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-09-30T15:44:32.000000Z"
                                             }
                                         }
                                     },
                                     "identity_card": {
                                         "type": "object",
                                         "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid",
+                                                "example": "123e4567-e89b-12d3-a456-426614174001"
+                                            },
                                             "type_name": {
-                                                "description": "Loại thẻ định danh",
                                                 "type": "string",
                                                 "example": "Căn cước công dân"
                                             },
                                             "identity_card_number": {
-                                                "description": "Số thẻ định danh của bệnh nhân",
                                                 "type": "string",
                                                 "example": "123456789"
                                             }
                                         }
                                     }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Cập nhật thông tin bệnh nhân thành công",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Cập nhật thông tin bệnh nhân thành công!"
-                                        }
-                                    },
-                                    "type": "object"
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Không tìm thấy bệnh nhân",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Patient not found."
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Lỗi xác thực",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "The email has already been taken."
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Lỗi máy chủ nội bộ"
                     }
                 }
             }
+        },
+        "422": {
+            "description": "Lỗi xác thực",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "The email has already been taken."
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "500": {
+            "description": "Lỗi máy chủ nội bộ"
+        }
+    }
+}
+
+        },
+        "/api/v1/patients/{id}": {
+            "get": {
+    "tags": ["Patients"],
+    "summary": "Tìm thông tin bệnh nhân theo ID",
+    "description": "API này được sử dụng để lấy thông tin của bệnh nhân dựa trên ID đã cung cấp.",
+    "operationId": "findPatientById",
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "UUID của bệnh nhân cần tìm",
+            "schema": {
+                "type": "string",
+                "format": "uuid",
+                "example": "123e4567-e89b-12d3-a456-426614174000"
+            }
+        }
+    ],
+    "responses": {
+        "200": {
+            "description": "Thông tin bệnh nhân được tìm thấy",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "123e4567-e89b-12d3-a456-426614174000"
+                                    },
+                                    "insurance_number": {
+                                        "type": "string",
+                                        "example": "BH123456789"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    },
+                                    "user_id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "nullable": true,
+                                        "example": "123e4567-e89b-12d3-a456-426614174000"
+                                    },
+                                    "identity_card_id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "123e4567-e89b-12d3-a456-426614174001"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-30T15:44:32.000000Z"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-30T15:44:32.000000Z"
+                                    },
+                                    "patient_info": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid",
+                                                "example": "123e4567-e89b-12d3-a456-426614174002"
+                                            },
+                                            "patient_id": {
+                                                "type": "string",
+                                                "format": "uuid",
+                                                "example": "123e4567-e89b-12d3-a456-426614174000"
+                                            },
+                                            "fullname": {
+                                                "type": "string",
+                                                "example": "Nguyen Van A"
+                                            },
+                                            "avatar": {
+                                                "type": "string",
+                                                "format": "uri",
+                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "format": "email",
+                                                "example": "nguyenvana@example.com"
+                                            },
+                                            "phone_number": {
+                                                "type": "string",
+                                                "example": "+84987654321"
+                                            },
+                                            "address": {
+                                                "type": "string",
+                                                "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                            },
+                                            "dob": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "1990-01-01"
+                                            },
+                                            "gender": {
+                                                "type": "string",
+                                                "example": "male"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-09-30T15:44:32.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-09-30T15:44:32.000000Z"
+                                            }
+                                        }
+                                    },
+                                    "identity_card": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid",
+                                                "example": "123e4567-e89b-12d3-a456-426614174001"
+                                            },
+                                            "type_name": {
+                                                "type": "string",
+                                                "example": "Căn cước công dân"
+                                            },
+                                            "identity_card_number": {
+                                                "type": "string",
+                                                "example": "123456789"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "404": {
+            "description": "Không tìm thấy thông tin bệnh nhân",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Không tìm thấy thông tin bệnh nhân!"
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "400": {
+            "description": "Lỗi không xác định",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Some error message."
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            }
+        }
+    }
+},
+            "put": {
+    "tags": ["Patients"],
+    "summary": "Cập nhật thông tin bệnh nhân",
+    "description": "API này được sử dụng để cập nhật thông tin của bệnh nhân dựa trên ID.",
+    "operationId": "updatePatient",
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "UUID của bệnh nhân cần cập nhật",
+            "schema": {
+                "type": "string",
+                "format": "uuid",
+                "example": "123e4567-e89b-12d3-a456-426614174000"
+            }
+        }
+    ],
+    "requestBody": {
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "properties": {
+                        "insurance_number": {
+                            "description": "Số bảo hiểm của bệnh nhân (nếu có)",
+                            "type": "string",
+                            "example": "BH123456789"
+                        },
+                        "status": {
+                            "description": "Trạng thái của bệnh nhân",
+                            "type": "string",
+                            "enum": [
+                                "active",
+                                "inactive",
+                                "deceased",
+                                "transferred"
+                            ],
+                            "example": "active"
+                        },
+                        "user_info": {
+                            "type": "object",
+                            "properties": {
+                                "fullname": {
+                                    "description": "Họ và tên của bệnh nhân",
+                                    "type": "string",
+                                    "example": "Nguyen Van A"
+                                },
+                                "email": {
+                                    "description": "Email của bệnh nhân",
+                                    "type": "string",
+                                    "format": "email",
+                                    "example": "nguyenvana@example.com"
+                                },
+                                "phone_number": {
+                                    "description": "Số điện thoại của bệnh nhân",
+                                    "type": "string",
+                                    "example": "+84987654321"
+                                },
+                                "address": {
+                                    "description": "Địa chỉ của bệnh nhân",
+                                    "type": "string",
+                                    "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                },
+                                "gender": {
+                                    "description": "Giới tính của bệnh nhân",
+                                    "type": "string",
+                                    "enum": [
+                                        "male",
+                                        "female",
+                                        "other"
+                                    ],
+                                    "example": "male"
+                                },
+                                "dob": {
+                                    "description": "Ngày sinh của bệnh nhân",
+                                    "type": "string",
+                                    "format": "date",
+                                    "example": "1990-01-01"
+                                }
+                            }
+                        },
+                        "identity_card": {
+                            "type": "object",
+                            "properties": {
+                                "type_name": {
+                                    "description": "Loại thẻ định danh",
+                                    "type": "string",
+                                    "example": "Căn cước công dân"
+                                },
+                                "identity_card_number": {
+                                    "description": "Số thẻ định danh của bệnh nhân",
+                                    "type": "string",
+                                    "example": "123456789"
+                                }
+                            }
+                        }
+                    },
+                    "type": "object"
+                }
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "description": "Cập nhật thông tin bệnh nhân thành công",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "properties": {
+                            "message": {
+                                "type": "string",
+                                "example": "Cập nhật thông tin bệnh nhân thành công!"
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "404": {
+            "description": "Không tìm thấy bệnh nhân",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Patient not found."
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "422": {
+            "description": "Lỗi xác thực",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "The email has already been taken."
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "500": {
+            "description": "Lỗi máy chủ nội bộ"
+        }
+    }
+}
+
         },
         "/api/v1/prescriptions": {
             "get": {
@@ -7281,15 +7302,15 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "string",
-                                                        "example": "RX-0983132123-uilksd"
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
                                                     },
                                                     "patient_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                     },
                                                     "user_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "c3456789-e89b-12d3-a456-426614174002"
                                                     },
                                                     "name": {
                                                         "type": "string",
@@ -7327,7 +7348,7 @@
                                                         "example": [
                                                             {
                                                                 "id": 1,
-                                                                "prescription_id": "RX-0983132123-uilksd",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 1",
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
@@ -7335,7 +7356,7 @@
                                                             },
                                                             {
                                                                 "id": 2,
-                                                                "prescription_id": "RX-1234567890-uilksd",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 2",
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
@@ -7401,11 +7422,11 @@
                                 "properties": {
                                     "patient_id": {
                                         "type": "string",
-                                        "example": "1"
+                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                     },
                                     "user_id": {
                                         "type": "string",
-                                        "example": "1"
+                                        "example": "c3456789-e89b-12d3-a456-426614174002"
                                     },
                                     "name": {
                                         "type": "string",
@@ -7436,7 +7457,7 @@
                                         },
                                         "example": [
                                             {
-                                                "medication_id": 1,
+                                                "medication_id": "b2345678-e89b-12d3-a456-426614174001",
                                                 "instructions": "Hướng dẫn sử dụng",
                                                 "quantity": 20,
                                                 "duration": 7
@@ -7469,15 +7490,15 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "string",
-                                                        "example": "RX-0983132123-uilksd"
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
                                                     },
                                                     "patient_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                     },
                                                     "user_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "c3456789-e89b-12d3-a456-426614174002"
                                                     },
                                                     "name": {
                                                         "type": "string",
@@ -7493,7 +7514,7 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer"
+                                                                    "type": "string"
                                                                 },
                                                                 "prescription_id": {
                                                                     "type": "string"
@@ -7514,20 +7535,20 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": 1,
-                                                                "prescription_id": "RX-0983132123-uilksd",
+                                                                "id": "c3456789-e89b-12d3-a456-426614174002",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 1",
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": 2,
-                                                                "prescription_id": "RX-1234567890-uilksd",
-                                                                "medication_name": "thuoc 2",
-                                                                "instructions": "Uống sau khi ăn",
-                                                                "quantity": 30,
-                                                                "duration": 10
+                                                                "id": "c3456789-e89b-12d3-a456-426614174004",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 1",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
                                                             }
                                                         ]
                                                     }
@@ -7593,7 +7614,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "RX-0983132123-uilksd"
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
                         },
                         "description": "ID đơn thuốc."
                     }
@@ -7612,15 +7633,15 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "string",
-                                                        "example": "RX-0983132123-uilksd"
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
                                                     },
                                                     "patient_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                     },
                                                     "user_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "c3456789-e89b-12d3-a456-426614174002"
                                                     },
                                                     "name": {
                                                         "type": "string",
@@ -7636,7 +7657,7 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer"
+                                                                    "type": "string"
                                                                 },
                                                                 "prescription_id": {
                                                                     "type": "string"
@@ -7657,20 +7678,20 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": 1,
-                                                                "prescription_id": "RX-0983132123-uilksd",
+                                                                "id": "c3456789-e89b-12d3-a456-426614174002",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 1",
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": 2,
-                                                                "prescription_id": "RX-1234567890-uilksd",
+                                                                "id": "c3456789-e89b-12d3-a456-426614174004",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 2",
-                                                                "instructions": "Uống sau khi ăn",
-                                                                "quantity": 30,
-                                                                "duration": 10
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
                                                             }
                                                         ]
                                                     }
@@ -7741,7 +7762,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "RX-0983132123-uilksd"
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
                         },
                         "description": "ID đơn thuốc."
                     }
@@ -7775,7 +7796,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "id": {
-                                                    "type": "integer"
+                                                    "type": "string"
                                                 },
                                                 "medication_id": {
                                                     "type": "integer"
@@ -7793,15 +7814,15 @@
                                         },
                                         "example": [
                                             {
-                                                "id": 1,
-                                                "medication_id": 1,
+                                                "id": "b2345678-e89b-12d3-a456-426614174005",
+                                                "medication_id": "c3456789-e89b-12d3-a456-426614174002",
                                                 "instructions": "Hướng dẫn sử dụng",
                                                 "quantity": 20,
                                                 "duration": 7
                                             },
                                             {
-                                                "id": 2,
-                                                "medication_id": 2,
+                                                "id": "b2345678-e89b-12d3-a456-426614174007",
+                                                "medication_id": "c3456789-e89b-12d3-a456-426614174004",
                                                 "instructions": "Uống sau khi ăn",
                                                 "quantity": 30,
                                                 "duration": 10
@@ -7828,15 +7849,15 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "string",
-                                                        "example": "RX-0983132123-uilksd"
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
                                                     },
                                                     "patient_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                     },
                                                     "user_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "c3456789-e89b-12d3-a456-426614174002"
                                                     },
                                                     "name": {
                                                         "type": "string",
@@ -7852,7 +7873,7 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer"
+                                                                    "type": "string"
                                                                 },
                                                                 "prescription_id": {
                                                                     "type": "string"
@@ -7873,16 +7894,16 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": 1,
-                                                                "prescription_id": "RX-0983132123-uilksd",
+                                                                "id": "b2345678-e89b-12d3-a456-426614174005",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 1",
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": 2,
-                                                                "prescription_id": "RX-1234567890-uilksd",
+                                                                "id": "b2345678-e89b-12d3-a456-426614174007",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 2",
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
@@ -8002,7 +8023,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "example": "1"
+                            "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                         },
                         "description": "ID bệnh nhân."
                     }
@@ -8019,15 +8040,15 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 },
                                                 "patient_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "c3456789-e89b-12d3-a456-426614174002"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -8101,202 +8122,185 @@
         },
         "/api/v1/specialties": {
             "get": {
-                "tags": ["Specialties"],
-                "summary": "Lấy danh sách chuyên khoa với phân trang",
-                "description": "Trả về danh sách các chuyên khoa với phân trang dựa trên giới hạn và truy vấn tìm kiếm.",
-                "operationId": "getPaginateSpecialties",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "schema": {
-                            "type": "integer",
-                            "example": 10
-                        },
-                        "description": "Số lượng chuyên khoa trên mỗi trang."
-                    },
-                    {
-                        "in": "query",
-                        "name": "page",
-                        "schema": {
-                            "type": "integer",
-                            "example": 2
-                        },
-                        "description": "Trang hiện tại của các chuyên khoa."
-                    },
-                    {
-                        "in": "query",
-                        "name": "q",
-                        "schema": {
-                            "type": "string",
-                            "example": "cardiology"
-                        },
-                        "description": "Từ khóa để tìm kiếm chuyên khoa."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Danh sách chuyên khoa được phân trang",
-                        "content": {
-                            "application/json": {
-                                "schema": {
+    "tags": ["Specialties"],
+    "summary": "Lấy danh sách chuyên khoa với phân trang",
+    "description": "Trả về danh sách các chuyên khoa với phân trang dựa trên giới hạn và truy vấn tìm kiếm.",
+    "operationId": "getPaginateSpecialties",
+    "parameters": [
+        {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+                "type": "integer",
+                "example": 10
+            },
+            "description": "Số lượng chuyên khoa trên mỗi trang."
+        },
+        {
+            "in": "query",
+            "name": "page",
+            "schema": {
+                "type": "integer",
+                "example": 2
+            },
+            "description": "Trang hiện tại của các chuyên khoa."
+        },
+        {
+            "in": "query",
+            "name": "q",
+            "schema": {
+                "type": "string",
+                "example": "cardiology"
+            },
+            "description": "Từ khóa để tìm kiếm chuyên khoa."
+        }
+    ],
+    "responses": {
+        "200": {
+            "description": "Danh sách chuyên khoa được phân trang",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "items": {
                                     "type": "object",
                                     "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "name": {
-                                                        "type": "string",
-                                                        "example": "Cardiology"
-                                                    },
-                                                    "description": {
-                                                        "type": "string",
-                                                        "example": "Chuyên khoa tim mạch"
-                                                    },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-09-16T14:34:30.000000Z"
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-09-16T14:34:30.000000Z"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "prev_page_url": {
+                                        "id": {
                                             "type": "string",
-                                            "nullable": true,
-                                            "example": "http://example.com/api/v1/specialties?page=1"
+                                            "format": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
                                         },
-                                        "next_page_url": {
+                                        "name": {
                                             "type": "string",
-                                            "nullable": true,
-                                            "example": "http://example.com/api/v1/specialties?page=3"
+                                            "example": "Cardiology"
                                         },
-                                        "total": {
-                                            "type": "integer",
-                                            "example": 100
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Chuyên khoa tim mạch"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-09-16T14:34:30.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-09-16T14:34:30.000000Z"
                                         }
                                     }
                                 }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Yêu cầu không hợp lệ",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Thông báo lỗi chi tiết vấn đề"
-                                        }
-                                    }
-                                }
+                            },
+                            "prev_page_url": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "http://example.com/api/v1/specialties?page=1"
+                            },
+                            "next_page_url": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "http://example.com/api/v1/specialties?page=3"
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 100
                             }
                         }
                     }
                 }
-            },
-            "post": {
-                "tags": ["Specialties"],
-                "security": [
-                    {
-                        "bearerAuth": []
+            }
+        },
+        "400": {
+            "description": "Yêu cầu không hợp lệ",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Thông báo lỗi chi tiết vấn đề"
+                            }
+                        }
                     }
-                ],
-                "summary": "Tạo mới một chuyên khoa",
-                "description": "Thêm một chuyên khoa mới vào hệ thống.",
-                "operationId": "createSpecialty",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
+                }
+            }
+        }
+    }
+},
+            "post": {
+    "tags": ["Specialties"],
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "summary": "Tạo mới một chuyên khoa",
+    "description": "Thêm một chuyên khoa mới vào hệ thống.",
+    "operationId": "createSpecialty",
+    "requestBody": {
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "example": "Cardiology",
+                            "description": "Tên của chuyên khoa"
+                        },
+                        "description": {
+                            "type": "string",
+                            "example": "Chuyên khoa tim mạch",
+                            "description": "Mô tả về chuyên khoa"
+                        }
+                    },
+                    "required": ["name"]
+                }
+            }
+        }
+    },
+    "responses": {
+        "201": {
+            "description": "Chuyên khoa được tạo thành công",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "message": {
+                                "type": "string",
+                                "example": "Thêm chuyên khoa thành công!"
+                            },
+                            "data": {
                                 "type": "object",
                                 "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "123e4567-e89b-12d3-a456-426614174000"
+                                    },
                                     "name": {
                                         "type": "string",
-                                        "example": "Cardiology",
-                                        "description": "Tên của chuyên khoa"
+                                        "example": "Cardiology"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "example": "Chuyên khoa tim mạch",
-                                        "description": "Mô tả về chuyên khoa"
-                                    }
-                                },
-                                "required": ["name"]
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Chuyên khoa được tạo thành công",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Thêm chuyên khoa thành công!"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string",
-                                                    "example": 1
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Cardiology"
-                                                },
-                                                "description": {
-                                                    "type": "string",
-                                                    "example": "Chuyên khoa tim mạch"
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-16T14:34:30.000000Z"
-                                                },
-                                                "updated_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-16T14:34:30.000000Z"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Dữ liệu không hợp lệ",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Thông báo lỗi chi tiết vấn đề"
-                                        }
+                                        "example": "Chuyên khoa tim mạch"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-16T14:34:30.000000Z"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-09-16T14:34:30.000000Z"
                                     }
                                 }
                             }
@@ -8304,6 +8308,26 @@
                     }
                 }
             }
+        },
+        "422": {
+            "description": "Dữ liệu không hợp lệ",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "error": {
+                                "type": "string",
+                                "example": "Thông báo lỗi chi tiết vấn đề"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
         },
         "/api/v1/specialties/{id}": {
             "get": {
@@ -8322,10 +8346,11 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "123e4567-e89b-12d3-a456-426614174000"
                         },
-                        "description": "ID của chuyên khoa cần tìm."
+                        "description": "UUID của chuyên khoa cần tìm."
                     }
                 ],
                 "responses": {
@@ -8341,7 +8366,8 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "format": "uuid",
+                                                    "example": "123e4567-e89b-12d3-a456-426614174000"
                                                 },
                                                 "name": {
                                                     "type": "string",
@@ -8418,10 +8444,11 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "123e4567-e89b-12d3-a456-426614174000"
                         },
-                        "description": "ID của chuyên khoa cần cập nhật."
+                        "description": "UUID của chuyên khoa cần cập nhật."
                     }
                 ],
                 "requestBody": {
@@ -8498,10 +8525,11 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "123e4567-e89b-12d3-a456-426614174000"
                         },
-                        "description": "ID của chuyên khoa cần xóa."
+                        "description": "UUID của chuyên khoa cần xóa."
                     }
                 ],
                 "responses": {
@@ -8581,15 +8609,15 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "string",
-                                                        "example": 1
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a3423423"
                                                     },
                                                     "user_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "324c13314-2273-49bf-bbaf-daeds39a348b8"
                                                     },
                                                     "package_id": {
                                                         "type": "string",
-                                                        "example": "1"
+                                                        "example": "76asgdva-2273-49bf-bbaf-dae139a348b8"
                                                     },
                                                     "rating": {
                                                         "type": "string",
@@ -8656,11 +8684,11 @@
                                     },
                                     "user_id": {
                                         "type": "string",
-                                        "example": "1"
+                                        "example": "324c13314-2273-49bf-bbaf-daeds39a348b8"
                                     },
                                     "package_id": {
                                         "type": "string",
-                                        "example": "1"
+                                        "example": "76asgdva-2273-49bf-bbaf-dae139a348b8"
                                     }
                                 },
                                 "type": "object"
@@ -8691,11 +8719,11 @@
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "324c13314-2273-49bf-bbaf-daeds39a348b8"
                                                 },
                                                 "package_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "76asgdva-2273-49bf-bbaf-dae139a348b8"
                                                 }
                                             },
                                             "type": "object"
@@ -8762,8 +8790,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "64c13314-2273-49bf-bbaf-dae139a3423423"
                         },
                         "description": "ID đánh giá."
                     }
@@ -8780,7 +8808,7 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a3423423"
                                                 },
                                                 "rating": {
                                                     "type": "string",
@@ -8792,11 +8820,11 @@
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "324c13314-2273-49bf-bbaf-daeds39a348b8"
                                                 },
                                                 "package_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "76asgdva-2273-49bf-bbaf-dae139a348b8"
                                                 }
                                             }
                                         }
@@ -8864,7 +8892,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "example": "1"
+                            "example": "64c13314-2273-49bf-bbaf-dae139a3423423"
                         },
                         "description": "ID đánh giá."
                     }
@@ -8924,8 +8952,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": "1"
+                            "type": "string",
+                            "example": "64c13314-2273-49bf-bbaf-dae139a3423423"
                         },
                         "description": "ID gói khám."
                     }
@@ -8942,7 +8970,7 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "example": 1
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a3423423"
                                                 },
                                                 "rating": {
                                                     "type": "string",
@@ -8954,11 +8982,11 @@
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "324c13314-2273-49bf-bbaf-daeds39a348b8"
                                                 },
                                                 "package_id": {
                                                     "type": "string",
-                                                    "example": "1"
+                                                    "example": "76asgdva-2273-49bf-bbaf-dae139a348b8"
                                                 }
                                             }
                                         }
@@ -9014,7 +9042,7 @@
             "get": {
                 "tags": ["Medications"],
                 "summary": "Lấy danh sách thuốc theo id danh mục",
-                "description": "API này trả về danh sách thuốc theo id danh mục .",
+                "description": "API này trả về danh sách thuốc theo id danh mục.",
                 "operationId": "getMedicationByCategory",
                 "security": [
                     {
@@ -9028,14 +9056,15 @@
                         "description": "id danh mục thuốc",
                         "required": false,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "123e4567-e89b-12d3-a456-426614174000"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Danh sách thuốc ",
+                        "description": "Danh sách thuốc",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -9049,18 +9078,18 @@
                                 "example": {
                                     "data": [
                                         {
-                                            "id": 1,
+                                            "id": "123e4567-e89b-12d3-a456-426614174001",
                                             "name": "Thuốc Pymenospain Pymepharco chống co thắt dạ dày - ruột (200 viên)",
                                             "created_at": "2024-10-22T13:36:58.000000Z",
                                             "updated_at": "2024-10-22T13:36:58.000000Z",
-                                            "category_id": 1
+                                            "category_id": "123e4567-e89b-12d3-a456-426614174000"
                                         },
                                         {
-                                            "id": 2,
+                                            "id": "123e4567-e89b-12d3-a456-426614174002",
                                             "name": "Thuốc bột pha hỗn dịch uống Smecta vị cam điều trị tiêu chảy (30 gói x 3g)",
                                             "created_at": "2024-10-22T13:36:58.000000Z",
                                             "updated_at": "2024-10-22T13:36:58.000000Z",
-                                            "category_id": 1
+                                            "category_id": "123e4567-e89b-12d3-a456-426614174000"
                                         }
                                     ]
                                 }
@@ -9114,18 +9143,21 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "string",
-                                                        "example": 1
+                                                        "format": "uuid",
+                                                        "example": "123e4567-e89b-12d3-a456-426614174000"
                                                     },
                                                     "name": {
                                                         "type": "string",
                                                         "example": "Thuốc điều trị dạ dày, đường ruột"
                                                     },
                                                     "created_at": {
-                                                        "type": "Date",
+                                                        "type": "string",
+                                                        "format": "date-time",
                                                         "example": "2024-10-22T13:36:58.000000Z"
                                                     },
                                                     "updated_at": {
-                                                        "type": "Date",
+                                                        "type": "string",
+                                                        "format": "date-time",
                                                         "example": "2024-10-22T13:36:58.000000Z"
                                                     }
                                                 }
@@ -9138,19 +9170,19 @@
                                 "example": {
                                     "data": [
                                         {
-                                            "id": 1,
+                                            "id": "123e4567-e89b-12d3-a456-426614174001",
                                             "name": "Thuốc điều trị dạ dày, đường ruột",
                                             "created_at": "2024-10-22T13:36:58.000000Z",
                                             "updated_at": "2024-10-22T13:36:58.000000Z"
                                         },
                                         {
-                                            "id": 2,
+                                            "id": "123e4567-e89b-12d3-a456-426614174002",
                                             "name": "Thuốc giảm đau, hạ sốt",
                                             "created_at": "2024-10-22T13:36:58.000000Z",
                                             "updated_at": "2024-10-22T13:36:58.000000Z"
                                         },
                                         {
-                                            "id": 3,
+                                            "id": "123e4567-e89b-12d3-a456-426614174003",
                                             "name": "Thuốc điều trị viêm mũi, dị ứng, hô hấp",
                                             "created_at": "2024-10-22T13:36:58.000000Z",
                                             "updated_at": "2024-10-22T13:36:58.000000Z"
