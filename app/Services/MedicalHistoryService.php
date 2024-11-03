@@ -70,7 +70,20 @@ class MedicalHistoryService {
 
             $medicalHistory = $this->medicalHistoryRepository->find($medicalHistory->id);
 
-            return response()->json(['message' => 'Tạo lịch sử bệnh án thành công!', 'data' => $medicalHistory], 201);
+            return response()->json(['message' => 'Tạo lịch sử bệnh án thành công!', 'data' => new MedicalHistoryResource($medicalHistory)], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
+    }
+
+    public function getByPatientId($patient_id) {
+        try {
+            $medicalHistories = $this->medicalHistoryRepository->getByPatientId($patient_id);
+            if (count($medicalHistories) <= 0) {
+                return response()->json(['error' => 'Không tìm thấy hồ sơ bệnh án của người này'], 404);
+            }
+
+            return response()->json(['data' => MedicalHistoryResource::collection($medicalHistories)], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
         }

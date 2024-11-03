@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\File;
 use App\Models\Patient;
 use App\Models\Doctor;
+use App\Models\User;
 
 class MedicalHistory extends Model
 {
@@ -20,7 +21,7 @@ class MedicalHistory extends Model
         'description',
         'diagnosis',
         'treatment',
-        'doctor_id'
+        'user_id'
     ];
 
     public function files() {
@@ -31,7 +32,7 @@ class MedicalHistory extends Model
         return $this->belongsTo(Patient::class, 'patient_id');
     }
 
-    public function doctor() {
-        return $this->belongsTo(Doctor::class, 'doctor_id');
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

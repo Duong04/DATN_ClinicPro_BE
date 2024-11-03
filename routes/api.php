@@ -116,6 +116,7 @@ Route::prefix('v1')->group(function () {
         ->group(function () {
             Route::get('/', 'paginate');
             Route::get('/{id}', 'show');
+            Route::get('/patient/{patient_id}', 'getByPatientId');
             Route::post('/', 'create');
             Route::put('/{id}', 'update');
             Route::delete('/{id}', 'delete');
