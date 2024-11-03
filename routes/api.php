@@ -12,6 +12,7 @@ use App\Http\Controllers\Apis\V1\AppointmentController;
 use App\Http\Controllers\Apis\V1\AuthController;
 use App\Http\Controllers\Apis\V1\FeedbackController;
 use App\Http\Controllers\Apis\V1\MedicationController;
+use App\Http\Controllers\Apis\V1\PackageCategoryController;
 use App\Http\Controllers\Apis\V1\PermissionController;
 use App\Http\Controllers\Apis\V1\RoleController;
 use App\Http\Controllers\Apis\V1\PackageController;
@@ -73,6 +74,7 @@ Route::prefix('v1')->group(function () {
                 Route::get('/', 'index');
                 Route::post('/', 'store')->middleware('jwt.auth');
                 Route::get('/{id}', 'show')->where('id', '[A-Fa-f0-9\-]{36}')->middleware('jwt.auth');
+                Route::get('/categories/{id}', 'getByCategories');
                 Route::get('/{slug}', 'slug')->where('slug', '[A-Za-z0-9\-]+');
                 Route::put('/{id}', 'update')->middleware('jwt.auth');
                 Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
@@ -159,4 +161,14 @@ Route::prefix('v1')->group(function () {
 
     Route::get('categories/', [MedicationController::class, 'index'])->middleware('jwt.auth');
     Route::get('medications/', [MedicationController::class, 'show'])->middleware('jwt.auth');
+
+    Route::controller(PackageCategoryController::class)->prefix('package-categories')
+        ->group(function () {
+            Route::get('/', 'index');
+            Route::get('/{id}', 'show')->where('id', '[A-Fa-f0-9\-]{36}');
+            Route::get('/{slug}', 'slug')->where('slug', '[A-Za-z0-9\-]+');
+            Route::post('/', 'store');
+            Route::put('/{id}', 'update');
+            Route::delete('/{id}', 'destroy');
+        });
 });

@@ -29,12 +29,13 @@ class PackageRequest extends FormRequest
             'name' => 'required|max:255|unique:examination_packages,name,' . $id,
             'description' => 'required',
             'content' => 'required',
+            'category_id' => "required|exists:category_packages,id"
         ];
 
         if (!$id) {
-            $rules['image'] = 'required|image|mimes:jpg,jpeg,png,webp';
+            $rules['image'] = 'required|mimes:jpg,jpeg,png,webp';
         } else {
-            $rules['image'] = 'nullable|image|mimes:png,jpg,jpeg,webp';
+            $rules['image'] = 'nullable|mimes:png,jpg,jpeg,webp';
         }
 
 
@@ -48,6 +49,7 @@ class PackageRequest extends FormRequest
             'max' => ':attribute không được lớn hơn :max ký tự!',
             'unique' => ':attribute này đã tồn tại!',
             'image' => ':attribute phải là một file ảnh hợp lệ!',
+            'exists' => 'Giá trị của :attribute không tồn tại!',
         ];
     }
     /**
@@ -59,7 +61,8 @@ class PackageRequest extends FormRequest
             'name' => 'Tên gói khám',
             'description' => 'Mô tả',
             'content' => 'Nội dung',
-            'image' => 'Hình ảnh'
+            'image' => 'Hình ảnh',
+            "category_id" => 'ID danh mục'
         ];
     }
 

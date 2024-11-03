@@ -972,25 +972,13 @@
                                                     "slug": {
                                                         "type": "string",
                                                         "example": "goi-kham-mat"
+                                                    },
+                                                    "category_id": {
+                                                        "type": "string",
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
                                                     }
                                                 }
                                             }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
                                         }
                                     },
                                     "type": "object"
@@ -1022,7 +1010,8 @@
                                     "name",
                                     "description",
                                     "content",
-                                    "image"
+                                    "image",
+                                    "category_id"
                                 ],
                                 "properties": {
                                     "name": {
@@ -1041,6 +1030,10 @@
                                         "type": "string",
                                         "format": "uri",
                                         "example": "http://example.com/premium-package.jpg"
+                                    },
+                                    "category_id": {
+                                        "type": "string",
+                                        "example": "b2345678-e89b-12d3-a456-426614174001"
                                     }
                                 },
                                 "type": "object"
@@ -1081,6 +1074,10 @@
                                                 "slug": {
                                                     "type": "string",
                                                     "example": "goi-kham-mat"
+                                                },
+                                                "category_id": {
+                                                    "type": "string",
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -1137,14 +1134,18 @@
                 "summary": "Lấy thông tin gói khám theo slug",
                 "description": "Lấy thông tin gói khám theo slug.",
                 "operationId": "getPackageBySlug",
-                "parameters": {
-                    "name": "slug",
-                    "required": true,
-                    "description": "slug gói khám",
-                    "schema": {
-                        " type": "string"
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "goi-kham-mat"
+                        },
+                        "description": "slug gói khám"
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Thông tin gói khám",
@@ -1178,6 +1179,10 @@
                                                 "slug": {
                                                     "type": "string",
                                                     "example": "goi-kham-mat"
+                                                },
+                                                "category_id": {
+                                                    "type": "string",
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 }
                                             }
                                         }
@@ -1232,23 +1237,21 @@
         "/api/v1/packages/{id}": {
             "get": {
                 "tags": ["Packages"],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
                 "summary": "Lấy gói khám theo id",
                 "description": "Lấy gói khám theo id",
                 "operationId": "getPackageById",
-                "parameters": {
-                    "name": "id",
-                    "required": true,
-                    "description": "iD gói khám",
-                    "schema": {
-                        " type": "string",
-                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
+                        },
+                        "description": "ID  gói khám."
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Thông tin gói khám",
@@ -1282,6 +1285,10 @@
                                                 "slug": {
                                                     "type": "string",
                                                     "example": "goi-kham-mat"
+                                                },
+                                                "category_id": {
+                                                    "type": "string",
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a3423423"
                                                 }
                                             }
                                         }
@@ -1304,22 +1311,6 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Package not found"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
                                         }
                                     },
                                     "type": "object"
@@ -1351,7 +1342,8 @@
                                     "name",
                                     "description",
                                     "content",
-                                    "image"
+                                    "image",
+                                    "category_id"
                                 ],
                                 "properties": {
                                     "name": {
@@ -1370,6 +1362,10 @@
                                         "type": "string",
                                         "format": "uri",
                                         "example": "http://example.com/premium-package.jpg"
+                                    },
+                                    "category_id": {
+                                        "type": "string",
+                                        "example": "b2345678-e89b-12d3-a456-426614174001"
                                     }
                                 },
                                 "type": "object"
@@ -1377,6 +1373,18 @@
                         }
                     }
                 },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
+                        },
+                        "description": "ID  gói khám."
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Updated package Successfully!",
@@ -1410,6 +1418,10 @@
                                                 "slug": {
                                                     "type": "string",
                                                     "example": "goi-kham-mat"
+                                                },
+                                                "category_id": {
+                                                    "type": "string",
+                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
                                                 },
                                                 "updated_at": {
                                                     "type": "string",
@@ -1489,6 +1501,18 @@
                 "summary": "Xóa gói khám",
                 "description": "Xóa gói theo ID.",
                 "operationId": "deletePackage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
+                        },
+                        "description": "ID  gói khám."
+                    }
+                ],
                 "responses": {
                     "204": {
                         "description": "Deleted package Successfully!",
@@ -1503,6 +1527,99 @@
                     },
                     "404": {
                         "description": "Package not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Package not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/packages/categories/{id}": {
+            "get": {
+                "tags": ["Packages"],
+                "summary": "Lấy danh sachsb gói khám theo id danh mục",
+                "description": "Lấy danh sachsb gói khám theo id danh mục.",
+                "operationId": "getPackageByIdCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
+                        },
+                        "description": "ID danh mục gói khám."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin gói khám",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Gói khám mắt"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Mô tả gói khám."
+                                                    },
+                                                    "content": {
+                                                        "type": "string",
+                                                        "example": "Nội dung gói khám."
+                                                    },
+                                                    "image": {
+                                                        "type": "string",
+                                                        "example": "http://example.com/image.jpg"
+                                                    },
+                                                    "slug": {
+                                                        "type": "string",
+                                                        "example": "goi-kham-mat"
+                                                    },
+                                                    "category_id": {
+                                                        "type": "string",
+                                                        "example": "c3456789-e89b-12d3-a456-426614174002"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Package category not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -7453,7 +7570,7 @@
                                                 "duration": 7
                                             },
                                             {
-                                                "medication_id": 2,
+                                                "medication_id": "b2345678-e89b-12d3-a456-426614174083",
                                                 "instructions": "Uống sau khi ăn",
                                                 "quantity": 30,
                                                 "duration": 10
@@ -7535,7 +7652,7 @@
                                                             {
                                                                 "id": "c3456789-e89b-12d3-a456-426614174004",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
+                                                                "medication_name": "thuoc 2",
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
@@ -9192,6 +9309,510 @@
                     }
                 }
             }
+        },
+        "/api/v1/package-categories": {
+            "get": {
+                "tags": ["Packages Category"],
+                "summary": "Lấy danh sách danh mục gói khám",
+                "description": "Lấy tất cả danh sách danh mục gói khám gói khám.",
+                "operationId": "getpackageCategory",
+                "responses": {
+                    "200": {
+                        "description": "Thông tin danh mục gói khám",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Gói khám mắt"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Mô tả danh mục gói khám."
+                                                    },
+                                                    "slug": {
+                                                        "type": "string",
+                                                        "example": "goi-kham-mat"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Packages Category"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Tạo gói khám",
+                "description": "Tạo gói khám.",
+                "operationId": "createPackage",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["name", "description"],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Gói khám mắt"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả danh mục gói khám"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create package category Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Gói khám mắt"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả gói khám"
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "goi-kham-mat"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-08-21T15:30:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên gói khám đã tồn tại."
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả không được để trống!"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/package-categories/{slug}": {
+            "get": {
+                "tags": ["Packages Category"],
+                "summary": "Lấy thông tin danh mục gói khám theo slug",
+                "description": "Lấy thông tin danh mục gói khám theo slug.",
+                "operationId": "getPackageCategoryBySlug",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "goi-kham-mat"
+                        },
+                        "description": "slug danh mục gói khám."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin danh mục gói khám",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Gói khám mắt"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả gói khám."
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "goi-kham-mat"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Package category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Package category not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/package-categories/{id}": {
+            "get": {
+                "tags": ["Packages Category"],
+                "summary": "Lấy danh mục gói khám theo id",
+                "description": "Lấy danh mục gói khám theo id",
+                "operationId": "getPackageCategoryById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
+                        },
+                        "description": "ID danh mục gói khám."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin danh mục gói khám",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Gói khám mắt"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả gói khám."
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "goi-kham-mat"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Package Category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Package category not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Packages Category"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Cập nhật danh mục gói khám",
+                "description": "Cập nhật danh mục gói hiện có theo ID .",
+                "operationId": "updatePackagecategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
+                        },
+                        "description": "ID danh mục gói khám."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["name", "description"],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Gói khám mắt"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả gói khám"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Updated package category Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Gói khám mắt"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả gói khám"
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "goi-kham-mat"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-08-21T15:30:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Package Category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Package category not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Tên gói khám đã tồn tại."
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Mô tả không được để trống!"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Packages Category"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Xóa danh mục gói khám",
+                "description": "Xóa danh mục gói theo ID.",
+                "operationId": "deletePackageCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
+                        },
+                        "description": "ID danh mục gói khám."
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted package category Successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {},
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Package Category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Package category not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -9263,6 +9884,10 @@
         {
             "name": "Medications",
             "description": "Thuốc"
+        },
+        {
+            "name": "Packages Category",
+            "description": "Danh mục gói khám"
         }
     ]
 }

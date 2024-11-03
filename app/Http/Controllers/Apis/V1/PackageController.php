@@ -35,6 +35,10 @@ class PackageController extends Controller
     {
         return $this->respondWithData(fn() => $this->packageService->slug($slug),);
     }
+    public function getByCategories($id)
+    {
+        return $this->respondWithData(fn() => $this->packageService->getByCategory($id));
+    }
 
     public function update(PackageRequest $request, string $id): JsonResponse
     {
