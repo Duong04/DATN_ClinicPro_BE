@@ -76,6 +76,7 @@ class MedicalHistoryService {
         }
     }
 
+    
     public function getByPatientId($patient_id) {
         try {
             $medicalHistories = $this->medicalHistoryRepository->getByPatientId($patient_id);
