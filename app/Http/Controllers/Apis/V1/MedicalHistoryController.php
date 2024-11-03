@@ -21,6 +21,10 @@ class MedicalHistoryController extends Controller
         return $this->medicalHistoryService->findById($id);
     }
 
+    public function getByPatientId($patient_id) {
+        return $this->medicalHistoryService->getByPatientId($patient_id);
+    }
+
     public function create(MedicalHistoryRequest $request) {
         return $this->medicalHistoryService->create($request);
     }

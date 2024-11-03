@@ -8,7 +8,7 @@ class MedicalHistoryRepository implements MedicalHistoryRepositoryInterface {
         return MedicalHistory::all();
     }
     public function paginate($limit, $q) {
-        $medicalHistories = MedicalHistory::with('files', 'doctor.user.userInfo', 'patient.patientInfo');
+        $medicalHistories = MedicalHistory::with('files', 'user.userInfo', 'user.doctor.specialty', 'patient.patientInfo');
         if ($q) {
             $medicalHistories->where('diagnosis', 'like', "%{$q}%")
             ->orWhere('treatment', 'like', "%{$q}%")
@@ -29,7 +29,10 @@ class MedicalHistoryRepository implements MedicalHistoryRepositoryInterface {
         return $limit ? $medicalHistories->paginate($limit) : $medicalHistories->get();
     }
     public function find($id) {
-        return MedicalHistory::with('files', 'doctor', 'patient')->find($id);
+        return MedicalHistory::with('files', 'user', 'patient')->find($id);
+    }
+    public function getByPatientId($patient_id) {
+        return MedicalHistory::with('files', 'user', 'patient')->where('patient_id', $patient_id)->get();
     }
     public function create(array $data) {
         return MedicalHistory::create($data);

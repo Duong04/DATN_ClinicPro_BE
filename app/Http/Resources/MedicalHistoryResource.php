@@ -23,12 +23,12 @@ class MedicalHistoryResource extends JsonResource
             'updated_at' => $this->updated_at,
             'files' => $this->files,
             'doctor' => [
-                'id' => $this?->doctor?->id,
-                'specialty' => $this?->doctor?->specialty,
-                'email' => $this?->doctor?->user?->email,
-                'fullname' => $this?->doctor?->user?->userInfo?->fullname,
-                'phone_number' => $this?->doctor?->user?->userInfo?->phone_number,
-                'gender' => $this?->doctor?->user?->userInfo?->gender
+                'id' => $this->user?->id,
+                'specialty' => $this->user?->doctor?->specialty->name,
+                'email' => $this?->user?->email,
+                'fullname' => $this?->user?->userInfo?->fullname,
+                'phone_number' => $this?->user?->userInfo?->phone_number,
+                'gender' => $this?->user?->userInfo?->gender
             ],
             'patient' => [
                 'id' => $this?->patient?->id,
