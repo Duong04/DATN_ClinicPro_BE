@@ -16,10 +16,16 @@ class Package extends Model
         'description',
         'content',
         'image',
-        'slug'
+        'slug',
+        "category_id"
     ];
 
     protected $hidden = [
         'deleted_at'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(CategoryPackage::class, 'category_id');
+    }
 }

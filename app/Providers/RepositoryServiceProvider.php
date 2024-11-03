@@ -30,6 +30,7 @@ use App\Repositories\RolePermission\RolePermissionRepository;
 use App\Repositories\Department\DepartmentRepositoryInterface;
 use App\Repositories\Permission\PermissionRepositoryInterface;
 use App\Repositories\UserDetail\UserDetailRepositoryInterface;
+use App\Repositories\PackageCategory\PackageCategoryRepository;
 use App\Repositories\Appointment\AppointmentRepositoryInterface;
 use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
 use App\Repositories\PermissionAction\PermissionActionRepository;
@@ -37,6 +38,7 @@ use App\Repositories\PrescriptionInfo\PrescriptionInfoRepository;
 use App\Repositories\Prescription\PrescriptionRepositoryInterface;
 use App\Repositories\MedicalHistory\MedicalHistoryRepositoryInterface;
 use App\Repositories\RolePermission\RolePermissionRepositoryInterface;
+use App\Repositories\PackageCategory\PackageCategoryRepositoryInterface;
 use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
 use App\Repositories\PrescriptionInfo\PrescriptionInfoRepositoryInterface;
 
@@ -65,6 +67,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SpecialtyRepositoryInterface::class, SpecialtyRepository::class);
         $this->app->bind(FeedbackRepositoryInterface::class, FeedbackRepository::class);
         $this->app->bind(PrescriptionInfoRepositoryInterface::class, PrescriptionInfoRepository::class);
+        $this->app->bind(PackageCategoryRepositoryInterface::class, PackageCategoryRepository::class);
     }
 
     /**

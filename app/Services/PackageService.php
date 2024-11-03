@@ -3,19 +3,23 @@
 namespace App\Services;
 
 use Illuminate\Support\Str;
+use App\Models\CategoryPackage;
 use App\Services\CloundinaryService;
+use App\Http\Resources\PackageResource;
 use App\Repositories\Package\PackageRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Repositories\PackageCategory\PackageCategoryRepositoryInterface;
 
 class PackageService
 {
     private $packageRepository;
     private $cloundinaryService;
-
-    public function __construct(PackageRepositoryInterface $packageRepository, CloundinaryService $cloundinaryService)
+    private $packageCategoryRepository;
+    public function __construct(PackageRepositoryInterface $packageRepository, CloundinaryService $cloundinaryService, PackageCategoryRepositoryInterface $packageCategoryRepository)
     {
         $this->packageRepository = $packageRepository;
         $this->cloundinaryService = $cloundinaryService;
+        $this->packageCategoryRepository = $packageCategoryRepository;
     }
 
     public function create($request)
@@ -57,6 +61,16 @@ class PackageService
             return $this->packageRepository->destroy($id);
         } catch (ModelNotFoundException $e) {
             throw new \Exception('Package not found');
+        }
+    }
+
+    public function getByCategory($id)
+    {
+        try {
+            $categoryPackage = CategoryPackage::with('packages')->findOrFail($id);
+            return PackageResource::collection($categoryPackage->packages);
+        } catch (ModelNotFoundException $e) {
+            throw new \Exception('Package category not found');
         }
     }
 
