@@ -9,6 +9,7 @@ use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
 use App\Repositories\Patient\PatientRepositoryInterface;
 use App\Services\CloundinaryService;
 use App\Repositories\UserInfo\UserInfoRepositoryInterface;
+use Password;
 use Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmail;
@@ -184,19 +185,11 @@ class AuthService
             $user = User::where('email', $email)->first();
             
             if ($user) {
-                $passwordReset = PasswordReset::where('user_id', $user->id)->first();
-
-                if ($passwordReset) {
-                    $passwordReset->otp = rand(100000, 999999); 
-                    $passwordReset->expires_at = now('Asia/Ho_Chi_Minh')->addMinutes(15); 
-                    $passwordReset->save();
-                } else {
-                    PasswordReset::create([
-                        'user_id' => $user->id,
-                        'otp' => rand(100000, 999999), 
-                        'expires_at' => now('Asia/Ho_Chi_Minh')->addMinutes(15), 
-                    ]);
-                }
+                PasswordReset::create([
+                    'user_id' => $user->id,
+                    'otp' => $otp, 
+                    'expires_at' => now('Asia/Ho_Chi_Minh')->addMinutes(15), 
+                ]);
             }
  
             Mail::to($email)->send(new ForgotPassword($otp, $email));
@@ -227,19 +220,23 @@ class AuthService
                 'min' => 'Mật khẩu phải lớn hơn 8 ký tự!'
             ]);
 
+            $otp = $request->otp;
             $passwordReset = PasswordReset::with('user')
-                    ->where('otp', $request->otp)
+                    ->where('otp', $otp)
                     ->first();
 
-            if (!$passwordReset || $passwordReset->expires_at < now('Asia/Ho_Chi_Minh')) {
-                return response()->json(['message' => 'OTP không hợp lệ hoặc đã hết hạn'], 400);
+            if (!$passwordReset) {
+                return response()->json(['error' => 'OTP không hợp lệ'], 400);
+            }else if($passwordReset->expires_at < now('Asia/Ho_Chi_Minh')) {
+                PasswordReset::where('otp', $otp)->delete();
+                return response()->json(['error' => 'OTP đã hết hạn'], 400);
             }
 
             $passwordReset->user->update([
                 'password' => $data['password']
             ]);
 
-            $passwordReset->delete();
+            PasswordReset::where('user_id', $passwordReset->user_id)->delete();
 
             return response()->json(['message' => 'Mật khẩu của bạn đã được thay đổi!']);
         } catch (\Throwable $th) {
