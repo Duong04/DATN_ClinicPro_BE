@@ -13,45 +13,38 @@ class MedicationSeeder extends Seeder
      */
     public function run(): void
     {
-        CategoryMedication::create([
-            'name' => 'Thuốc điều trị dạ dày, đường ruột',
-        ]);
-        CategoryMedication::create([
-            'name' => 'Thuốc giảm đau, hạ sốt',
-        ]);
-        CategoryMedication::create([
-            'name' => 'Thuốc điều trị viêm mũi, dị ứng, hô hấp',
-        ]);
-        CategoryMedication::create([
-            'name' => 'Thuốc bổ sung vitamin, khoáng chất',
-        ]);
-        CategoryMedication::create([
-            'name' => 'Thuốc điều trị ho, cảm cúm',
-        ]);
-        CategoryMedication::create([
-            'name' => 'Thuốc điều trị mụn',
-        ]);
-        CategoryMedication::create([
-            'name' => 'Thuốc điều trị thần kinh, tuần hoàn máu',
-        ]);
-        CategoryMedication::create([
-            'name' => 'Thuốc điều trị đau cơ, xương khớp',
-        ]);
-        CategoryMedication::create([
-            'name' => 'Thuốc điều trị tim mạch, huyết áp',
-        ]);
-        CategoryMedication::create([
-            'name' => 'Thuốc điều trị tim mạch, huyết áp',
-        ]);
+
+        $medicationCategory = [
+            'Thuốc điều trị dạ dày, đường ruột',
+            'Thuốc giảm đau, hạ sốt',
+            'Thuốc điều trị viêm mũi, dị ứng, hô hấp',
+            'Thuốc bổ sung vitamin, khoáng chất',
+            'Thuốc điều trị ho, cảm cúm',
+            'Thuốc điều trị thần kinh, tuần hoàn máu',
+            'Thuốc điều trị đau cơ, xương khớp',
+            'Thuốc điều trị tim mạch, huyết áp',
+            'Thuốc điều trị tiểu đường'
+        ];
+
+        foreach ($medicationCategory as $index => $name) {
+            CategoryMedication::create([
+                'name' => $name,
+                'order' => $index + 1,
+            ]);
+        }
 
         $data = require(database_path('data/medications.php'));
 
-        for ($i = 0; $i < count($data); $i++) {
-            foreach ($data[$i] as $value) {
-                Medication::create([
-                    'name' => $value,
-                    'category_id' => $i + 1
-                ]);
+        $categories = CategoryMedication::orderBy('order')->get();
+
+        foreach ($categories as $index => $category) {
+            if (isset($data[$index])) {
+                foreach ($data[$index] as $medicationName) {
+                    Medication::create([
+                        'name' => $medicationName,
+                        'category_id' => $category->id
+                    ]);
+                }
             }
         }
     }
