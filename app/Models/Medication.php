@@ -12,5 +12,11 @@ class Medication extends Model
     protected $table = 'medications';
     protected $fillable = [
         'name',
+        'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(CategoryMedication::class, 'category_id');
+    }
 }
