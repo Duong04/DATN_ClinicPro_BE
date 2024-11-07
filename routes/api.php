@@ -76,7 +76,7 @@ Route::prefix('v1')->group(function () {
                 Route::get('/{id}', 'show')->where('id', '[A-Fa-f0-9\-]{36}')->middleware('jwt.auth');
                 Route::get('/categories/{id}', 'getByCategories');
                 Route::get('/{slug}', 'slug')->where('slug', '[A-Za-z0-9\-]+');
-                Route::put('/{id}', 'update')->middleware('jwt.auth');
+                Route::post('/{id}', 'update')->middleware('jwt.auth');
                 Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
             }
         );

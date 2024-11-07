@@ -158,7 +158,8 @@ class AuthService
         }
     }
 
-    public function changePassword($request) {
+    public function changePassword($request)
+    {
         try {
             $id = auth()->id();
             $data = $request->validated();
@@ -171,7 +172,8 @@ class AuthService
         }
     }
 
-    public function forgotPsw($request) {
+    public function forgotPsw($request)
+    {
         try {
             $request->validate([
                 'email' => 'required|exists:users,email'
@@ -183,15 +185,23 @@ class AuthService
             $email = $request->input('email');
             $otp = $this->generateUniqueOtp();
             $user = User::where('email', $email)->first();
-            
+
             if ($user) {
-                PasswordReset::create([
-                    'user_id' => $user->id,
-                    'otp' => $otp, 
-                    'expires_at' => now('Asia/Ho_Chi_Minh')->addMinutes(15), 
-                ]);
+                $passwordReset = PasswordReset::where('user_id', $user->id)->first();
+
+                if ($passwordReset) {
+                    $passwordReset->otp = rand(100000, 999999);
+                    $passwordReset->expires_at = now('Asia/Ho_Chi_Minh')->addMinutes(15);
+                    $passwordReset->save();
+                } else {
+                    PasswordReset::create([
+                        'user_id' => $user->id,
+                        'otp' => rand(100000, 999999),
+                        'expires_at' => now('Asia/Ho_Chi_Minh')->addMinutes(15),
+                    ]);
+                }
             }
- 
+
             Mail::to($email)->send(new ForgotPassword($otp, $email));
 
             return response()->json(['message' => 'Mã otp đã được gửi vào email của bạn, vui lòng check mail để khôi phục lại mật khẩu!']);
@@ -205,12 +215,13 @@ class AuthService
         do {
             $otp = $otp = rand(100000, 999999);
             $otpExists = PasswordReset::where('otp', $otp)->exists();
-        } while ($otpExists); 
+        } while ($otpExists);
 
         return $otp;
     }
 
-    public function resetPsw($request) {
+    public function resetPsw($request)
+    {
         try {
             $data = $request->validate([
                 'otp' => 'required',
@@ -222,14 +233,11 @@ class AuthService
 
             $otp = $request->otp;
             $passwordReset = PasswordReset::with('user')
-                    ->where('otp', $otp)
-                    ->first();
+                ->where('otp', $request->otp)
+                ->first();
 
-            if (!$passwordReset) {
-                return response()->json(['error' => 'OTP không hợp lệ'], 400);
-            }else if($passwordReset->expires_at < now('Asia/Ho_Chi_Minh')) {
-                PasswordReset::where('otp', $otp)->delete();
-                return response()->json(['error' => 'OTP đã hết hạn'], 400);
+            if (!$passwordReset || $passwordReset->expires_at < now('Asia/Ho_Chi_Minh')) {
+                return response()->json(['message' => 'OTP không hợp lệ hoặc đã hết hạn'], 400);
             }
 
             $passwordReset->user->update([
