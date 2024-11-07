@@ -1147,7 +1147,6 @@
                             "example": "goi-kham-mat"
                         },
                         "description": "slug gói khám"
-
                     }
                 ],
                 "responses": {
@@ -1258,7 +1257,6 @@
                             "example": "b2345678-e89b-12d3-a456-426614174001"
                         },
                         "description": "ID  gói khám."
-
                     }
                 ],
                 "responses": {
@@ -1523,7 +1521,6 @@
                             "example": "b2345678-e89b-12d3-a456-426614174001"
                         },
                         "description": "ID  gói khám."
-
                     }
                 ],
                 "responses": {
@@ -3518,7 +3515,7 @@
             "post": {
                 "tags": ["Departments"],
                 "summary": "Tạo mới phòng ban",
-                "description": "Tạo mới một phòng ban.",
+                "description": "Tạo mới một phòng ban và gán người dùng vào phòng ban nếu chưa thuộc phòng ban khác.",
                 "operationId": "createDepartment",
                 "security": [
                     {
@@ -3543,6 +3540,14 @@
                                     "manager_id": {
                                         "type": "string",
                                         "example": "8c3af5a6-0543-4b43-91a1-d1562b0cf21a"
+                                    },
+                                    "users": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "8c3af5a6-0543-4b43-91a1-d1562b0cf21a"
+                                        },
+                                        "description": "Danh sách ID của người dùng sẽ được gán vào phòng ban."
                                     }
                                 }
                             }
@@ -3559,7 +3564,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Created department successfully!"
+                                            "example": "Tạo phòng ban thành công!"
                                         },
                                         "data": {
                                             "type": "object",
@@ -3602,7 +3607,7 @@
                         }
                     },
                     "422": {
-                        "description": "Dữ liệu không hợp lệ.",
+                        "description": "Dữ liệu không hợp lệ hoặc người dùng đã thuộc phòng ban khác.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3610,7 +3615,7 @@
                                     "properties": {
                                         "error": {
                                             "type": "string",
-                                            "example": "Validation error occurred."
+                                            "example": "Người dùng ID 12345 đã thuộc phòng ban khác!"
                                         }
                                     }
                                 }
@@ -3807,7 +3812,7 @@
             "put": {
                 "tags": ["Departments"],
                 "summary": "Cập nhật thông tin phòng ban",
-                "description": "Cập nhật thông tin phòng ban theo ID.",
+                "description": "Cập nhật thông tin phòng ban theo ID và gán người dùng vào phòng ban nếu chưa thuộc phòng ban khác.",
                 "operationId": "updateDepartment",
                 "security": [
                     {
@@ -3842,8 +3847,16 @@
                                         "example": "Mô tả"
                                     },
                                     "manager_id": {
-                                        "type": "integer",
-                                        "example": 1
+                                        "type": "string",
+                                        "example": "8c3af5a6-0543-4b43-91a1-d1562b0cf21a"
+                                    },
+                                    "users": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "8c3af5a6-0543-4b43-91a1-d1562b0cf21a"
+                                        },
+                                        "description": "Danh sách ID của người dùng sẽ được gán vào phòng ban."
                                     }
                                 }
                             }
@@ -3860,15 +3873,15 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Updated department successfully!"
+                                            "example": "Cập nhật phòng ban thành công!"
                                         }
                                     }
                                 }
                             }
                         }
                     },
-                    "422": {
-                        "description": "Dữ liệu không hợp lệ.",
+                    "404": {
+                        "description": "Không tìm thấy phòng ban.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3876,7 +3889,23 @@
                                     "properties": {
                                         "error": {
                                             "type": "string",
-                                            "example": "Validation error occurred."
+                                            "example": "Phòng ban không tồn tại!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ hoặc người dùng đã thuộc phòng ban khác.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Người dùng ID 12345 đã thuộc phòng ban khác!"
                                         }
                                     }
                                 }
@@ -6613,168 +6642,170 @@
             }
         },
         "/api/v1/medical-histories/patient/{patient_id}": {
-    "get": {
-        "tags": ["Medical Histories"],
-        "summary": "Lấy danh sách lịch sử bệnh án theo Patient ID",
-        "description": "API này lấy danh sách chi tiết các lịch sử bệnh án dựa vào Patient ID.",
-        "operationId": "getMedicalHistoriesByPatientId",
-        "security": [
-            {
-                "bearerAuth": []
-            }
-        ],
-        "parameters": [
-            {
-                "name": "patient_id",
-                "in": "path",
-                "required": true,
-                "description": "ID của bệnh nhân cần lấy danh sách lịch sử bệnh án (UUID)",
-                "schema": {
-                    "type": "string",
-                    "example": "1e8b2f7f-b7c9-4cde-b4c4-74e74e489576"
-                }
-            }
-        ],
-        "responses": {
-            "200": {
-                "description": "Danh sách chi tiết của các lịch sử bệnh án theo Patient ID",
-                "content": {
-                    "application/json": {
+            "get": {
+                "tags": ["Medical Histories"],
+                "summary": "Lấy danh sách lịch sử bệnh án theo Patient ID",
+                "description": "API này lấy danh sách chi tiết các lịch sử bệnh án dựa vào Patient ID.",
+                "operationId": "getMedicalHistoriesByPatientId",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "patient_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID của bệnh nhân cần lấy danh sách lịch sử bệnh án (UUID)",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "description": "ID của lịch sử bệnh án (UUID)",
-                                                "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
-                                            },
-                                            "description": {
-                                                "type": "string",
-                                                "description": "Mô tả của lịch sử bệnh án",
-                                                "example": "Bệnh án của bệnh nhân A"
-                                            },
-                                            "diagnosis": {
-                                                "type": "string",
-                                                "description": "Chẩn đoán bệnh",
-                                                "example": "Cúm A"
-                                            },
-                                            "treatment": {
-                                                "type": "string",
-                                                "description": "Phương pháp điều trị",
-                                                "example": "Nghỉ ngơi, uống thuốc"
-                                            },
-                                            "created_at": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "description": "Thời gian tạo",
-                                                "example": "2024-09-29T14:46:14.000000Z"
-                                            },
-                                            "updated_at": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "description": "Thời gian cập nhật",
-                                                "example": "2024-09-29T14:46:14.000000Z"
-                                            },
-                                            "files": {
-                                                "type": "array",
-                                                "description": "Danh sách các file đính kèm",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "string",
-                                                            "description": "ID của file (UUID)",
-                                                            "example": "d9b0a92d-3c9e-4f2f-8c28-1a2f0a6726e4"
-                                                        },
-                                                        "file": {
-                                                            "type": "string",
-                                                            "description": "URL của file",
-                                                            "example": "https://i.pinimg.com/736x/6b/a8/61/6ba861c41233ee7bc9c65c3e5cbfe75a.jpg"
-                                                        },
-                                                        "description": {
-                                                            "type": "string",
-                                                            "description": "Mô tả của file",
-                                                            "example": "Kết quả chụp X-quang"
-                                                        },
-                                                        "medical_history_id": {
-                                                            "type": "string",
-                                                            "description": "ID của lịch sử bệnh án liên kết với file (UUID)",
-                                                            "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                            "type": "string",
+                            "example": "1e8b2f7f-b7c9-4cde-b4c4-74e74e489576"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách chi tiết của các lịch sử bệnh án theo Patient ID",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "ID của lịch sử bệnh án (UUID)",
+                                                        "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "description": "Mô tả của lịch sử bệnh án",
+                                                        "example": "Bệnh án của bệnh nhân A"
+                                                    },
+                                                    "diagnosis": {
+                                                        "type": "string",
+                                                        "description": "Chẩn đoán bệnh",
+                                                        "example": "Cúm A"
+                                                    },
+                                                    "treatment": {
+                                                        "type": "string",
+                                                        "description": "Phương pháp điều trị",
+                                                        "example": "Nghỉ ngơi, uống thuốc"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "Thời gian tạo",
+                                                        "example": "2024-09-29T14:46:14.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "Thời gian cập nhật",
+                                                        "example": "2024-09-29T14:46:14.000000Z"
+                                                    },
+                                                    "files": {
+                                                        "type": "array",
+                                                        "description": "Danh sách các file đính kèm",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "description": "ID của file (UUID)",
+                                                                    "example": "d9b0a92d-3c9e-4f2f-8c28-1a2f0a6726e4"
+                                                                },
+                                                                "file": {
+                                                                    "type": "string",
+                                                                    "description": "URL của file",
+                                                                    "example": "https://i.pinimg.com/736x/6b/a8/61/6ba861c41233ee7bc9c65c3e5cbfe75a.jpg"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "description": "Mô tả của file",
+                                                                    "example": "Kết quả chụp X-quang"
+                                                                },
+                                                                "medical_history_id": {
+                                                                    "type": "string",
+                                                                    "description": "ID của lịch sử bệnh án liên kết với file (UUID)",
+                                                                    "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                                                                }
+                                                            }
                                                         }
-                                                    }
-                                                }
-                                            },
-                                            "doctor": {
-                                                "type": "object",
-                                                "description": "Thông tin của bác sĩ",
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string",
-                                                        "description": "ID của bác sĩ (UUID)",
-                                                        "example": "2c8d5a90-5d58-4f3b-b96c-64f2a39d45a3"
                                                     },
-                                                    "specialty": {
-                                                        "type": "string",
-                                                        "description": "Chuyên khoa của bác sĩ",
-                                                        "example": "Nội khoa"
+                                                    "doctor": {
+                                                        "type": "object",
+                                                        "description": "Thông tin của bác sĩ",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "ID của bác sĩ (UUID)",
+                                                                "example": "2c8d5a90-5d58-4f3b-b96c-64f2a39d45a3"
+                                                            },
+                                                            "specialty": {
+                                                                "type": "string",
+                                                                "description": "Chuyên khoa của bác sĩ",
+                                                                "example": "Nội khoa"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "description": "Email của bác sĩ",
+                                                                "example": "johndoe333@example.com"
+                                                            },
+                                                            "fullname": {
+                                                                "type": "string",
+                                                                "description": "Họ tên của bác sĩ",
+                                                                "example": "Nguyễn Văn A"
+                                                            },
+                                                            "phone_number": {
+                                                                "type": "string",
+                                                                "description": "Số điện thoại của bác sĩ",
+                                                                "nullable": true,
+                                                                "example": "+84987654321"
+                                                            },
+                                                            "gender": {
+                                                                "type": "string",
+                                                                "description": "Giới tính của bác sĩ",
+                                                                "example": "Khác"
+                                                            }
+                                                        }
                                                     },
-                                                    "email": {
-                                                        "type": "string",
-                                                        "description": "Email của bác sĩ",
-                                                        "example": "johndoe333@example.com"
-                                                    },
-                                                    "fullname": {
-                                                        "type": "string",
-                                                        "description": "Họ tên của bác sĩ",
-                                                        "example": "Nguyễn Văn A"
-                                                    },
-                                                    "phone_number": {
-                                                        "type": "string",
-                                                        "description": "Số điện thoại của bác sĩ",
-                                                        "nullable": true,
-                                                        "example": "+84987654321"
-                                                    },
-                                                    "gender": {
-                                                        "type": "string",
-                                                        "description": "Giới tính của bác sĩ",
-                                                        "example": "Khác"
-                                                    }
-                                                }
-                                            },
-                                            "patient": {
-                                                "type": "object",
-                                                "description": "Thông tin của bệnh nhân",
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string",
-                                                        "description": "ID của bệnh nhân (UUID)",
-                                                        "example": "1e8b2f7f-b7c9-4cde-b4c4-74e74e489576"
-                                                    },
-                                                    "fullname": {
-                                                        "type": "string",
-                                                        "description": "Họ tên của bệnh nhân",
-                                                        "example": "Nguyễn Văn B"
-                                                    },
-                                                    "email": {
-                                                        "type": "string",
-                                                        "description": "Email của bệnh nhân",
-                                                        "example": "johndoe@example.com"
-                                                    },
-                                                    "phone_number": {
-                                                        "type": "string",
-                                                        "description": "Số điện thoại của bệnh nhân",
-                                                        "nullable": true,
-                                                        "example": "+84987654321"
-                                                    },
-                                                    "gender": {
-                                                        "type": "string",
-                                                        "description": "Giới tính của bệnh nhân",
-                                                        "example": "Nam"
+                                                    "patient": {
+                                                        "type": "object",
+                                                        "description": "Thông tin của bệnh nhân",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "ID của bệnh nhân (UUID)",
+                                                                "example": "1e8b2f7f-b7c9-4cde-b4c4-74e74e489576"
+                                                            },
+                                                            "fullname": {
+                                                                "type": "string",
+                                                                "description": "Họ tên của bệnh nhân",
+                                                                "example": "Nguyễn Văn B"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "description": "Email của bệnh nhân",
+                                                                "example": "johndoe@example.com"
+                                                            },
+                                                            "phone_number": {
+                                                                "type": "string",
+                                                                "description": "Số điện thoại của bệnh nhân",
+                                                                "nullable": true,
+                                                                "example": "+84987654321"
+                                                            },
+                                                            "gender": {
+                                                                "type": "string",
+                                                                "description": "Giới tính của bệnh nhân",
+                                                                "example": "Nam"
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -6783,812 +6814,808 @@
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "404": {
-                "description": "Không tìm thấy hồ sơ bệnh án của bệnh nhân",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "error": {
-                                    "type": "string",
-                                    "example": "Không tìm thấy hồ sơ bệnh án của người này"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "400": {
-                "description": "Lỗi khi xử lý yêu cầu",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "error": {
-                                    "type": "string",
-                                    "example": "Chi tiết lỗi sẽ được hiển thị tại đây"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-},
-        "/api/v1/patients": {
-            "get": {
-    "tags": ["Patients"],
-    "summary": "Lấy danh sách bệnh nhân với phân trang",
-    "description": "API này trả về danh sách bệnh nhân với khả năng phân trang và tìm kiếm theo từ khóa.",
-    "operationId": "getPaginatePatients",
-    "security": [
-        {
-            "bearerAuth": []
-        }
-    ],
-    "parameters": [
-        {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Số lượng bản ghi mỗi trang",
-            "schema": {
-                "type": "integer",
-                "example": 10
-            }
-        },
-        {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "description": "Trang tiếp theo",
-            "schema": {
-                "type": "integer",
-                "example": 2
-            }
-        },
-        {
-            "name": "q",
-            "in": "query",
-            "required": false,
-            "description": "Từ khóa tìm kiếm bệnh nhân",
-            "schema": {
-                "type": "string",
-                "example": "Nguyen Van A"
-            }
-        }
-    ],
-    "responses": {
-        "200": {
-            "description": "Danh sách bệnh nhân được trả về thành công",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
+                    },
+                    "404": {
+                        "description": "Không tìm thấy hồ sơ bệnh án của bệnh nhân",
+                        "content": {
+                            "application/json": {
+                                "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "id": {
+                                        "error": {
                                             "type": "string",
-                                            "format": "uuid",
-                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                            "example": "Không tìm thấy hồ sơ bệnh án của người này"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi khi xử lý yêu cầu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Chi tiết lỗi sẽ được hiển thị tại đây"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/patients": {
+            "get": {
+                "tags": ["Patients"],
+                "summary": "Lấy danh sách bệnh nhân với phân trang",
+                "description": "API này trả về danh sách bệnh nhân với khả năng phân trang và tìm kiếm theo từ khóa.",
+                "operationId": "getPaginatePatients",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "description": "Số lượng bản ghi mỗi trang",
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "description": "Trang tiếp theo",
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        }
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "description": "Từ khóa tìm kiếm bệnh nhân",
+                        "schema": {
+                            "type": "string",
+                            "example": "Nguyen Van A"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách bệnh nhân được trả về thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "example": "123e4567-e89b-12d3-a456-426614174000"
+                                                    },
+                                                    "insurance_number": {
+                                                        "type": "string",
+                                                        "example": "BH123456789"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "active"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "nullable": true,
+                                                        "example": "123e4567-e89b-12d3-a456-426614174000"
+                                                    },
+                                                    "identity_card_id": {
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "example": "123e4567-e89b-12d3-a456-426614174001"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-30T15:44:32.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-30T15:44:32.000000Z"
+                                                    },
+                                                    "patient_info": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "example": "123e4567-e89b-12d3-a456-426614174002"
+                                                            },
+                                                            "patient_id": {
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "example": "123e4567-e89b-12d3-a456-426614174000"
+                                                            },
+                                                            "fullname": {
+                                                                "type": "string",
+                                                                "example": "Nguyen Van A"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "format": "email",
+                                                                "example": "nguyenvana@example.com"
+                                                            },
+                                                            "phone_number": {
+                                                                "type": "string",
+                                                                "example": "+84987654321"
+                                                            },
+                                                            "address": {
+                                                                "type": "string",
+                                                                "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                                            },
+                                                            "dob": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "1990-01-01"
+                                                            },
+                                                            "gender": {
+                                                                "type": "string",
+                                                                "example": "male"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         },
-                                        "insurance_number": {
+                                        "prev_page_url": {
                                             "type": "string",
-                                            "example": "BH123456789"
-                                        },
-                                        "status": {
-                                            "type": "string",
-                                            "example": "active"
-                                        },
-                                        "user_id": {
-                                            "type": "string",
-                                            "format": "uuid",
                                             "nullable": true,
-                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                            "example": "http://localhost/api/v1/patients?page=1"
                                         },
-                                        "identity_card_id": {
+                                        "next_page_url": {
                                             "type": "string",
-                                            "format": "uuid",
-                                            "example": "123e4567-e89b-12d3-a456-426614174001"
+                                            "nullable": true,
+                                            "example": "http://localhost/api/v1/patients?page=3"
                                         },
-                                        "created_at": {
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 100
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi không xác định",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
                                             "type": "string",
-                                            "format": "date-time",
-                                            "example": "2024-09-30T15:44:32.000000Z"
-                                        },
-                                        "updated_at": {
+                                            "example": "Some error message."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Patients"],
+                "summary": "Tạo mới thông tin bệnh nhân",
+                "description": "API này được sử dụng để tạo mới thông tin bệnh nhân bằng cách cung cấp thông tin cá nhân và giấy tờ định danh.",
+                "operationId": "createPatient",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["patient_info"],
+                                "properties": {
+                                    "insurance_number": {
+                                        "description": "Số bảo hiểm của bệnh nhân (nếu có)",
+                                        "type": "string",
+                                        "example": "BH123456789"
+                                    },
+                                    "status": {
+                                        "description": "Trạng thái của bệnh nhân",
+                                        "type": "string",
+                                        "enum": [
+                                            "active",
+                                            "inactive",
+                                            "deceased",
+                                            "transferred"
+                                        ],
+                                        "example": "active"
+                                    },
+                                    "user_info": {
+                                        "type": "object",
+                                        "required": ["fullname"],
+                                        "properties": {
+                                            "fullname": {
+                                                "description": "Họ và tên của bệnh nhân",
+                                                "type": "string",
+                                                "example": "Nguyen Van A"
+                                            },
+                                            "email": {
+                                                "description": "Email của bệnh nhân",
+                                                "type": "string",
+                                                "format": "email",
+                                                "example": "nguyenvana@example.com"
+                                            },
+                                            "phone_number": {
+                                                "description": "Số điện thoại của bệnh nhân",
+                                                "type": "string",
+                                                "example": "+84987654321"
+                                            },
+                                            "address": {
+                                                "description": "Địa chỉ của bệnh nhân",
+                                                "type": "string",
+                                                "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                            },
+                                            "gender": {
+                                                "description": "Giới tính của bệnh nhân",
+                                                "type": "string",
+                                                "enum": [
+                                                    "male",
+                                                    "female",
+                                                    "other"
+                                                ],
+                                                "example": "male"
+                                            },
+                                            "dob": {
+                                                "description": "Ngày sinh của bệnh nhân",
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "1990-01-01"
+                                            }
+                                        }
+                                    },
+                                    "identity_card": {
+                                        "type": "object",
+                                        "properties": {
+                                            "type_name": {
+                                                "description": "Loại thẻ định danh",
+                                                "type": "string",
+                                                "example": "Căn cước công dân"
+                                            },
+                                            "identity_card_number": {
+                                                "description": "Số thẻ định danh của bệnh nhân",
+                                                "type": "string",
+                                                "example": "123456789"
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Thông tin bệnh nhân đã được tạo thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
                                             "type": "string",
-                                            "format": "date-time",
-                                            "example": "2024-09-30T15:44:32.000000Z"
+                                            "example": "Thông tin bệnh nhân đã được tạo"
                                         },
-                                        "patient_info": {
+                                        "data": {
                                             "type": "object",
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
                                                     "format": "uuid",
-                                                    "example": "123e4567-e89b-12d3-a456-426614174002"
-                                                },
-                                                "patient_id": {
-                                                    "type": "string",
-                                                    "format": "uuid",
                                                     "example": "123e4567-e89b-12d3-a456-426614174000"
                                                 },
-                                                "fullname": {
+                                                "insurance_number": {
                                                     "type": "string",
-                                                    "example": "Nguyen Van A"
+                                                    "example": "BH123456789"
                                                 },
-                                                "email": {
+                                                "status": {
                                                     "type": "string",
-                                                    "format": "email",
-                                                    "example": "nguyenvana@example.com"
+                                                    "example": "active"
                                                 },
-                                                "phone_number": {
+                                                "user_id": {
                                                     "type": "string",
-                                                    "example": "+84987654321"
+                                                    "format": "uuid",
+                                                    "nullable": true,
+                                                    "example": null
                                                 },
-                                                "address": {
+                                                "identity_card_id": {
                                                     "type": "string",
-                                                    "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                                    "format": "uuid",
+                                                    "example": "123e4567-e89b-12d3-a456-426614174001"
                                                 },
-                                                "dob": {
+                                                "created_at": {
                                                     "type": "string",
-                                                    "format": "date",
-                                                    "example": "1990-01-01"
+                                                    "format": "date-time",
+                                                    "example": "2024-09-30T15:44:32.000000Z"
                                                 },
-                                                "gender": {
+                                                "updated_at": {
                                                     "type": "string",
-                                                    "example": "male"
+                                                    "format": "date-time",
+                                                    "example": "2024-09-30T15:44:32.000000Z"
+                                                },
+                                                "patient_info": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "123e4567-e89b-12d3-a456-426614174002"
+                                                        },
+                                                        "patient_id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                                        },
+                                                        "fullname": {
+                                                            "type": "string",
+                                                            "example": "Nguyen Van A"
+                                                        },
+                                                        "avatar": {
+                                                            "type": "string",
+                                                            "format": "uri",
+                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "format": "email",
+                                                            "example": "nguyenvana@example.com"
+                                                        },
+                                                        "phone_number": {
+                                                            "type": "string",
+                                                            "example": "+84987654321"
+                                                        },
+                                                        "address": {
+                                                            "type": "string",
+                                                            "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                                        },
+                                                        "dob": {
+                                                            "type": "string",
+                                                            "format": "date",
+                                                            "example": "1990-01-01"
+                                                        },
+                                                        "gender": {
+                                                            "type": "string",
+                                                            "example": "male"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-30T15:44:32.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-30T15:44:32.000000Z"
+                                                        }
+                                                    }
+                                                },
+                                                "identity_card": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "123e4567-e89b-12d3-a456-426614174001"
+                                                        },
+                                                        "type_name": {
+                                                            "type": "string",
+                                                            "example": "Căn cước công dân"
+                                                        },
+                                                        "identity_card_number": {
+                                                            "type": "string",
+                                                            "example": "123456789"
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 }
-                            },
-                            "prev_page_url": {
-                                "type": "string",
-                                "nullable": true,
-                                "example": "http://localhost/api/v1/patients?page=1"
-                            },
-                            "next_page_url": {
-                                "type": "string",
-                                "nullable": true,
-                                "example": "http://localhost/api/v1/patients?page=3"
-                            },
-                            "total": {
-                                "type": "integer",
-                                "example": 100
                             }
                         }
-                    }
-                }
-            }
-        },
-        "400": {
-            "description": "Lỗi không xác định",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Some error message."
-                            }
-                        },
-                        "type": "object"
-                    }
-                }
-            }
-        }
-    }
-},
-            "post": {
-    "tags": ["Patients"],
-    "summary": "Tạo mới thông tin bệnh nhân",
-    "description": "API này được sử dụng để tạo mới thông tin bệnh nhân bằng cách cung cấp thông tin cá nhân và giấy tờ định danh.",
-    "operationId": "createPatient",
-    "security": [
-        {
-            "bearerAuth": []
-        }
-    ],
-    "requestBody": {
-        "required": true,
-        "content": {
-            "application/json": {
-                "schema": {
-                    "required": ["patient_info"],
-                    "properties": {
-                        "insurance_number": {
-                            "description": "Số bảo hiểm của bệnh nhân (nếu có)",
-                            "type": "string",
-                            "example": "BH123456789"
-                        },
-                        "status": {
-                            "description": "Trạng thái của bệnh nhân",
-                            "type": "string",
-                            "enum": [
-                                "active",
-                                "inactive",
-                                "deceased",
-                                "transferred"
-                            ],
-                            "example": "active"
-                        },
-                        "user_info": {
-                            "type": "object",
-                            "required": ["fullname"],
-                            "properties": {
-                                "fullname": {
-                                    "description": "Họ và tên của bệnh nhân",
-                                    "type": "string",
-                                    "example": "Nguyen Van A"
-                                },
-                                "email": {
-                                    "description": "Email của bệnh nhân",
-                                    "type": "string",
-                                    "format": "email",
-                                    "example": "nguyenvana@example.com"
-                                },
-                                "phone_number": {
-                                    "description": "Số điện thoại của bệnh nhân",
-                                    "type": "string",
-                                    "example": "+84987654321"
-                                },
-                                "address": {
-                                    "description": "Địa chỉ của bệnh nhân",
-                                    "type": "string",
-                                    "example": "123 Đường ABC, Phường XYZ, TP. HCM"
-                                },
-                                "gender": {
-                                    "description": "Giới tính của bệnh nhân",
-                                    "type": "string",
-                                    "enum": [
-                                        "male",
-                                        "female",
-                                        "other"
-                                    ],
-                                    "example": "male"
-                                },
-                                "dob": {
-                                    "description": "Ngày sinh của bệnh nhân",
-                                    "type": "string",
-                                    "format": "date",
-                                    "example": "1990-01-01"
-                                }
-                            }
-                        },
-                        "identity_card": {
-                            "type": "object",
-                            "properties": {
-                                "type_name": {
-                                    "description": "Loại thẻ định danh",
-                                    "type": "string",
-                                    "example": "Căn cước công dân"
-                                },
-                                "identity_card_number": {
-                                    "description": "Số thẻ định danh của bệnh nhân",
-                                    "type": "string",
-                                    "example": "123456789"
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "The email has already been taken."
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
                     },
-                    "type": "object"
-                }
-            }
-        }
-    },
-    "responses": {
-        "201": {
-            "description": "Thông tin bệnh nhân đã được tạo thành công",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "message": {
-                                "type": "string",
-                                "example": "Thông tin bệnh nhân đã được tạo"
-                            },
-                            "data": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "string",
-                                        "format": "uuid",
-                                        "example": "123e4567-e89b-12d3-a456-426614174000"
-                                    },
-                                    "insurance_number": {
-                                        "type": "string",
-                                        "example": "BH123456789"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "example": "active"
-                                    },
-                                    "user_id": {
-                                        "type": "string",
-                                        "format": "uuid",
-                                        "nullable": true,
-                                        "example": null
-                                    },
-                                    "identity_card_id": {
-                                        "type": "string",
-                                        "format": "uuid",
-                                        "example": "123e4567-e89b-12d3-a456-426614174001"
-                                    },
-                                    "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-30T15:44:32.000000Z"
-                                    },
-                                    "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-30T15:44:32.000000Z"
-                                    },
-                                    "patient_info": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "format": "uuid",
-                                                "example": "123e4567-e89b-12d3-a456-426614174002"
-                                            },
-                                            "patient_id": {
-                                                "type": "string",
-                                                "format": "uuid",
-                                                "example": "123e4567-e89b-12d3-a456-426614174000"
-                                            },
-                                            "fullname": {
-                                                "type": "string",
-                                                "example": "Nguyen Van A"
-                                            },
-                                            "avatar": {
-                                                "type": "string",
-                                                "format": "uri",
-                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                            },
-                                            "email": {
-                                                "type": "string",
-                                                "format": "email",
-                                                "example": "nguyenvana@example.com"
-                                            },
-                                            "phone_number": {
-                                                "type": "string",
-                                                "example": "+84987654321"
-                                            },
-                                            "address": {
-                                                "type": "string",
-                                                "example": "123 Đường ABC, Phường XYZ, TP. HCM"
-                                            },
-                                            "dob": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "1990-01-01"
-                                            },
-                                            "gender": {
-                                                "type": "string",
-                                                "example": "male"
-                                            },
-                                            "created_at": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2024-09-30T15:44:32.000000Z"
-                                            },
-                                            "updated_at": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2024-09-30T15:44:32.000000Z"
-                                            }
-                                        }
-                                    },
-                                    "identity_card": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "format": "uuid",
-                                                "example": "123e4567-e89b-12d3-a456-426614174001"
-                                            },
-                                            "type_name": {
-                                                "type": "string",
-                                                "example": "Căn cước công dân"
-                                            },
-                                            "identity_card_number": {
-                                                "type": "string",
-                                                "example": "123456789"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    "500": {
+                        "description": "Lỗi máy chủ nội bộ"
                     }
                 }
             }
-        },
-        "422": {
-            "description": "Lỗi xác thực",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "The email has already been taken."
-                            }
-                        },
-                        "type": "object"
-                    }
-                }
-            }
-        },
-        "500": {
-            "description": "Lỗi máy chủ nội bộ"
-        }
-    }
-}
-
         },
         "/api/v1/patients/{id}": {
             "get": {
-    "tags": ["Patients"],
-    "summary": "Tìm thông tin bệnh nhân theo ID",
-    "description": "API này được sử dụng để lấy thông tin của bệnh nhân dựa trên ID đã cung cấp.",
-    "operationId": "findPatientById",
-    "security": [
-        {
-            "bearerAuth": []
-        }
-    ],
-    "parameters": [
-        {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "UUID của bệnh nhân cần tìm",
-            "schema": {
-                "type": "string",
-                "format": "uuid",
-                "example": "123e4567-e89b-12d3-a456-426614174000"
-            }
-        }
-    ],
-    "responses": {
-        "200": {
-            "description": "Thông tin bệnh nhân được tìm thấy",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "data": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "string",
-                                        "format": "uuid",
-                                        "example": "123e4567-e89b-12d3-a456-426614174000"
-                                    },
-                                    "insurance_number": {
-                                        "type": "string",
-                                        "example": "BH123456789"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "example": "active"
-                                    },
-                                    "user_id": {
-                                        "type": "string",
-                                        "format": "uuid",
-                                        "nullable": true,
-                                        "example": "123e4567-e89b-12d3-a456-426614174000"
-                                    },
-                                    "identity_card_id": {
-                                        "type": "string",
-                                        "format": "uuid",
-                                        "example": "123e4567-e89b-12d3-a456-426614174001"
-                                    },
-                                    "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-30T15:44:32.000000Z"
-                                    },
-                                    "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-30T15:44:32.000000Z"
-                                    },
-                                    "patient_info": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "format": "uuid",
-                                                "example": "123e4567-e89b-12d3-a456-426614174002"
-                                            },
-                                            "patient_id": {
-                                                "type": "string",
-                                                "format": "uuid",
-                                                "example": "123e4567-e89b-12d3-a456-426614174000"
-                                            },
-                                            "fullname": {
-                                                "type": "string",
-                                                "example": "Nguyen Van A"
-                                            },
-                                            "avatar": {
-                                                "type": "string",
-                                                "format": "uri",
-                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                            },
-                                            "email": {
-                                                "type": "string",
-                                                "format": "email",
-                                                "example": "nguyenvana@example.com"
-                                            },
-                                            "phone_number": {
-                                                "type": "string",
-                                                "example": "+84987654321"
-                                            },
-                                            "address": {
-                                                "type": "string",
-                                                "example": "123 Đường ABC, Phường XYZ, TP. HCM"
-                                            },
-                                            "dob": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "1990-01-01"
-                                            },
-                                            "gender": {
-                                                "type": "string",
-                                                "example": "male"
-                                            },
-                                            "created_at": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2024-09-30T15:44:32.000000Z"
-                                            },
-                                            "updated_at": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2024-09-30T15:44:32.000000Z"
-                                            }
-                                        }
-                                    },
-                                    "identity_card": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "format": "uuid",
-                                                "example": "123e4567-e89b-12d3-a456-426614174001"
-                                            },
-                                            "type_name": {
-                                                "type": "string",
-                                                "example": "Căn cước công dân"
-                                            },
-                                            "identity_card_number": {
-                                                "type": "string",
-                                                "example": "123456789"
+                "tags": ["Patients"],
+                "summary": "Tìm thông tin bệnh nhân theo ID",
+                "description": "API này được sử dụng để lấy thông tin của bệnh nhân dựa trên ID đã cung cấp.",
+                "operationId": "findPatientById",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "UUID của bệnh nhân cần tìm",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin bệnh nhân được tìm thấy",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "123e4567-e89b-12d3-a456-426614174000"
+                                                },
+                                                "insurance_number": {
+                                                    "type": "string",
+                                                    "example": "BH123456789"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "active"
+                                                },
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "nullable": true,
+                                                    "example": "123e4567-e89b-12d3-a456-426614174000"
+                                                },
+                                                "identity_card_id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "123e4567-e89b-12d3-a456-426614174001"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-30T15:44:32.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-30T15:44:32.000000Z"
+                                                },
+                                                "patient_info": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "123e4567-e89b-12d3-a456-426614174002"
+                                                        },
+                                                        "patient_id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                                        },
+                                                        "fullname": {
+                                                            "type": "string",
+                                                            "example": "Nguyen Van A"
+                                                        },
+                                                        "avatar": {
+                                                            "type": "string",
+                                                            "format": "uri",
+                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "format": "email",
+                                                            "example": "nguyenvana@example.com"
+                                                        },
+                                                        "phone_number": {
+                                                            "type": "string",
+                                                            "example": "+84987654321"
+                                                        },
+                                                        "address": {
+                                                            "type": "string",
+                                                            "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                                        },
+                                                        "dob": {
+                                                            "type": "string",
+                                                            "format": "date",
+                                                            "example": "1990-01-01"
+                                                        },
+                                                        "gender": {
+                                                            "type": "string",
+                                                            "example": "male"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-30T15:44:32.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2024-09-30T15:44:32.000000Z"
+                                                        }
+                                                    }
+                                                },
+                                                "identity_card": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "123e4567-e89b-12d3-a456-426614174001"
+                                                        },
+                                                        "type_name": {
+                                                            "type": "string",
+                                                            "example": "Căn cước công dân"
+                                                        },
+                                                        "identity_card_number": {
+                                                            "type": "string",
+                                                            "example": "123456789"
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
-                }
-            }
-        },
-        "404": {
-            "description": "Không tìm thấy thông tin bệnh nhân",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Không tìm thấy thông tin bệnh nhân!"
-                            }
-                        },
-                        "type": "object"
-                    }
-                }
-            }
-        },
-        "400": {
-            "description": "Lỗi không xác định",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Some error message."
-                            }
-                        },
-                        "type": "object"
-                    }
-                }
-            }
-        }
-    }
-},
-            "put": {
-    "tags": ["Patients"],
-    "summary": "Cập nhật thông tin bệnh nhân",
-    "description": "API này được sử dụng để cập nhật thông tin của bệnh nhân dựa trên ID.",
-    "operationId": "updatePatient",
-    "security": [
-        {
-            "bearerAuth": []
-        }
-    ],
-    "parameters": [
-        {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "UUID của bệnh nhân cần cập nhật",
-            "schema": {
-                "type": "string",
-                "format": "uuid",
-                "example": "123e4567-e89b-12d3-a456-426614174000"
-            }
-        }
-    ],
-    "requestBody": {
-        "required": true,
-        "content": {
-            "application/json": {
-                "schema": {
-                    "properties": {
-                        "insurance_number": {
-                            "description": "Số bảo hiểm của bệnh nhân (nếu có)",
-                            "type": "string",
-                            "example": "BH123456789"
-                        },
-                        "status": {
-                            "description": "Trạng thái của bệnh nhân",
-                            "type": "string",
-                            "enum": [
-                                "active",
-                                "inactive",
-                                "deceased",
-                                "transferred"
-                            ],
-                            "example": "active"
-                        },
-                        "user_info": {
-                            "type": "object",
-                            "properties": {
-                                "fullname": {
-                                    "description": "Họ và tên của bệnh nhân",
-                                    "type": "string",
-                                    "example": "Nguyen Van A"
-                                },
-                                "email": {
-                                    "description": "Email của bệnh nhân",
-                                    "type": "string",
-                                    "format": "email",
-                                    "example": "nguyenvana@example.com"
-                                },
-                                "phone_number": {
-                                    "description": "Số điện thoại của bệnh nhân",
-                                    "type": "string",
-                                    "example": "+84987654321"
-                                },
-                                "address": {
-                                    "description": "Địa chỉ của bệnh nhân",
-                                    "type": "string",
-                                    "example": "123 Đường ABC, Phường XYZ, TP. HCM"
-                                },
-                                "gender": {
-                                    "description": "Giới tính của bệnh nhân",
-                                    "type": "string",
-                                    "enum": [
-                                        "male",
-                                        "female",
-                                        "other"
-                                    ],
-                                    "example": "male"
-                                },
-                                "dob": {
-                                    "description": "Ngày sinh của bệnh nhân",
-                                    "type": "string",
-                                    "format": "date",
-                                    "example": "1990-01-01"
-                                }
-                            }
-                        },
-                        "identity_card": {
-                            "type": "object",
-                            "properties": {
-                                "type_name": {
-                                    "description": "Loại thẻ định danh",
-                                    "type": "string",
-                                    "example": "Căn cước công dân"
-                                },
-                                "identity_card_number": {
-                                    "description": "Số thẻ định danh của bệnh nhân",
-                                    "type": "string",
-                                    "example": "123456789"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy thông tin bệnh nhân",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Không tìm thấy thông tin bệnh nhân!"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
                     },
-                    "type": "object"
-                }
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "description": "Cập nhật thông tin bệnh nhân thành công",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "properties": {
-                            "message": {
-                                "type": "string",
-                                "example": "Cập nhật thông tin bệnh nhân thành công!"
+                    "400": {
+                        "description": "Lỗi không xác định",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Some error message."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
                             }
-                        },
-                        "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Patients"],
+                "summary": "Cập nhật thông tin bệnh nhân",
+                "description": "API này được sử dụng để cập nhật thông tin của bệnh nhân dựa trên ID.",
+                "operationId": "updatePatient",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "UUID của bệnh nhân cần cập nhật",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "insurance_number": {
+                                        "description": "Số bảo hiểm của bệnh nhân (nếu có)",
+                                        "type": "string",
+                                        "example": "BH123456789"
+                                    },
+                                    "status": {
+                                        "description": "Trạng thái của bệnh nhân",
+                                        "type": "string",
+                                        "enum": [
+                                            "active",
+                                            "inactive",
+                                            "deceased",
+                                            "transferred"
+                                        ],
+                                        "example": "active"
+                                    },
+                                    "user_info": {
+                                        "type": "object",
+                                        "properties": {
+                                            "fullname": {
+                                                "description": "Họ và tên của bệnh nhân",
+                                                "type": "string",
+                                                "example": "Nguyen Van A"
+                                            },
+                                            "email": {
+                                                "description": "Email của bệnh nhân",
+                                                "type": "string",
+                                                "format": "email",
+                                                "example": "nguyenvana@example.com"
+                                            },
+                                            "phone_number": {
+                                                "description": "Số điện thoại của bệnh nhân",
+                                                "type": "string",
+                                                "example": "+84987654321"
+                                            },
+                                            "address": {
+                                                "description": "Địa chỉ của bệnh nhân",
+                                                "type": "string",
+                                                "example": "123 Đường ABC, Phường XYZ, TP. HCM"
+                                            },
+                                            "gender": {
+                                                "description": "Giới tính của bệnh nhân",
+                                                "type": "string",
+                                                "enum": [
+                                                    "male",
+                                                    "female",
+                                                    "other"
+                                                ],
+                                                "example": "male"
+                                            },
+                                            "dob": {
+                                                "description": "Ngày sinh của bệnh nhân",
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "1990-01-01"
+                                            }
+                                        }
+                                    },
+                                    "identity_card": {
+                                        "type": "object",
+                                        "properties": {
+                                            "type_name": {
+                                                "description": "Loại thẻ định danh",
+                                                "type": "string",
+                                                "example": "Căn cước công dân"
+                                            },
+                                            "identity_card_number": {
+                                                "description": "Số thẻ định danh của bệnh nhân",
+                                                "type": "string",
+                                                "example": "123456789"
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật thông tin bệnh nhân thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cập nhật thông tin bệnh nhân thành công!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy bệnh nhân",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Patient not found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Lỗi xác thực",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "The email has already been taken."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Lỗi máy chủ nội bộ"
                     }
                 }
             }
-        },
-        "404": {
-            "description": "Không tìm thấy bệnh nhân",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Patient not found."
-                            }
-                        },
-                        "type": "object"
-                    }
-                }
-            }
-        },
-        "422": {
-            "description": "Lỗi xác thực",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "The email has already been taken."
-                            }
-                        },
-                        "type": "object"
-                    }
-                }
-            }
-        },
-        "500": {
-            "description": "Lỗi máy chủ nội bộ"
-        }
-    }
-}
-
         },
         "/api/v1/prescriptions": {
             "get": {
@@ -8435,185 +8462,204 @@
         },
         "/api/v1/specialties": {
             "get": {
-    "tags": ["Specialties"],
-    "summary": "Lấy danh sách chuyên khoa với phân trang",
-    "description": "Trả về danh sách các chuyên khoa với phân trang dựa trên giới hạn và truy vấn tìm kiếm.",
-    "operationId": "getPaginateSpecialties",
-    "parameters": [
-        {
-            "in": "query",
-            "name": "limit",
-            "schema": {
-                "type": "integer",
-                "example": 10
-            },
-            "description": "Số lượng chuyên khoa trên mỗi trang."
-        },
-        {
-            "in": "query",
-            "name": "page",
-            "schema": {
-                "type": "integer",
-                "example": 2
-            },
-            "description": "Trang hiện tại của các chuyên khoa."
-        },
-        {
-            "in": "query",
-            "name": "q",
-            "schema": {
-                "type": "string",
-                "example": "cardiology"
-            },
-            "description": "Từ khóa để tìm kiếm chuyên khoa."
-        }
-    ],
-    "responses": {
-        "200": {
-            "description": "Danh sách chuyên khoa được phân trang",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
+                "tags": ["Specialties"],
+                "summary": "Lấy danh sách chuyên khoa với phân trang",
+                "description": "Trả về danh sách các chuyên khoa với phân trang dựa trên giới hạn và truy vấn tìm kiếm.",
+                "operationId": "getPaginateSpecialties",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        },
+                        "description": "Số lượng chuyên khoa trên mỗi trang."
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        },
+                        "description": "Trang hiện tại của các chuyên khoa."
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string",
+                            "example": "cardiology"
+                        },
+                        "description": "Từ khóa để tìm kiếm chuyên khoa."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách chuyên khoa được phân trang",
+                        "content": {
+                            "application/json": {
+                                "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "format": "uuid",
-                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "example": "123e4567-e89b-12d3-a456-426614174000"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Cardiology"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Chuyên khoa tim mạch"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T14:34:30.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-16T14:34:30.000000Z"
+                                                    }
+                                                }
+                                            }
                                         },
-                                        "name": {
+                                        "prev_page_url": {
                                             "type": "string",
-                                            "example": "Cardiology"
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/specialties?page=1"
                                         },
-                                        "description": {
+                                        "next_page_url": {
                                             "type": "string",
-                                            "example": "Chuyên khoa tim mạch"
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/specialties?page=3"
                                         },
-                                        "created_at": {
-                                            "type": "string",
-                                            "format": "date-time",
-                                            "example": "2024-09-16T14:34:30.000000Z"
-                                        },
-                                        "updated_at": {
-                                            "type": "string",
-                                            "format": "date-time",
-                                            "example": "2024-09-16T14:34:30.000000Z"
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 100
                                         }
                                     }
                                 }
-                            },
-                            "prev_page_url": {
-                                "type": "string",
-                                "nullable": true,
-                                "example": "http://example.com/api/v1/specialties?page=1"
-                            },
-                            "next_page_url": {
-                                "type": "string",
-                                "nullable": true,
-                                "example": "http://example.com/api/v1/specialties?page=3"
-                            },
-                            "total": {
-                                "type": "integer",
-                                "example": 100
                             }
-                        }
-                    }
-                }
-            }
-        },
-        "400": {
-            "description": "Yêu cầu không hợp lệ",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Thông báo lỗi chi tiết vấn đề"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-},
-            "post": {
-    "tags": ["Specialties"],
-    "security": [
-        {
-            "bearerAuth": []
-        }
-    ],
-    "summary": "Tạo mới một chuyên khoa",
-    "description": "Thêm một chuyên khoa mới vào hệ thống.",
-    "operationId": "createSpecialty",
-    "requestBody": {
-        "required": true,
-        "content": {
-            "application/json": {
-                "schema": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "example": "Cardiology",
-                            "description": "Tên của chuyên khoa"
-                        },
-                        "description": {
-                            "type": "string",
-                            "example": "Chuyên khoa tim mạch",
-                            "description": "Mô tả về chuyên khoa"
                         }
                     },
-                    "required": ["name"]
+                    "400": {
+                        "description": "Yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết vấn đề"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-            }
-        }
-    },
-    "responses": {
-        "201": {
-            "description": "Chuyên khoa được tạo thành công",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "message": {
-                                "type": "string",
-                                "example": "Thêm chuyên khoa thành công!"
-                            },
-                            "data": {
+            },
+            "post": {
+                "tags": ["Specialties"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Tạo mới một chuyên khoa",
+                "description": "Thêm một chuyên khoa mới vào hệ thống.",
+                "operationId": "createSpecialty",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "id": {
-                                        "type": "string",
-                                        "format": "uuid",
-                                        "example": "123e4567-e89b-12d3-a456-426614174000"
-                                    },
                                     "name": {
                                         "type": "string",
-                                        "example": "Cardiology"
+                                        "example": "Cardiology",
+                                        "description": "Tên của chuyên khoa"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "example": "Chuyên khoa tim mạch"
-                                    },
-                                    "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-16T14:34:30.000000Z"
-                                    },
-                                    "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2024-09-16T14:34:30.000000Z"
+                                        "example": "Chuyên khoa tim mạch",
+                                        "description": "Mô tả về chuyên khoa"
+                                    }
+                                },
+                                "required": ["name"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Chuyên khoa được tạo thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Thêm chuyên khoa thành công!"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "123e4567-e89b-12d3-a456-426614174000"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Cardiology"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Chuyên khoa tim mạch"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T14:34:30.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-09-16T14:34:30.000000Z"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Thông báo lỗi chi tiết vấn đề"
+                                        }
                                     }
                                 }
                             }
@@ -8621,26 +8667,6 @@
                     }
                 }
             }
-        },
-        "422": {
-            "description": "Dữ liệu không hợp lệ",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "error": {
-                                "type": "string",
-                                "example": "Thông báo lỗi chi tiết vấn đề"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
         },
         "/api/v1/specialties/{id}": {
             "get": {

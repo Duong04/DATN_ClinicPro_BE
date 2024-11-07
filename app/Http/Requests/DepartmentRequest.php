@@ -24,7 +24,8 @@ class DepartmentRequest extends FormRequest
         $rules = [
             'name' => 'required|unique:departments,name',
             'manager_id' => 'nullable|exists:users,id',
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'users' => 'nullable|array',
         ];
 
         if ($this->method() == 'PUT') {
@@ -40,6 +41,7 @@ class DepartmentRequest extends FormRequest
             'required' => ':attribute là bắt buộc!',
             'unique' => ':attribute này đã tồn tại!',
             'exists' => 'Giá trị của :attribute không tồn tại!',
+            'array' => ':attribute phải là 1 array'
         ];
     }
 
@@ -47,6 +49,7 @@ class DepartmentRequest extends FormRequest
         return [
             'name' => 'Tên',
             'description' => 'Mô tả',
+            'users' => 'Danh sách người dùng'
         ];
     }
 }
