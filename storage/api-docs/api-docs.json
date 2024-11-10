@@ -1211,23 +1211,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Package not found"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
+                                            "example": "Gói khám không tồn tại"
                                         }
                                     }
                                 }
@@ -1321,7 +1305,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Package not found"
+                                            "example": "Gói khám không tồn tại"
                                         }
                                     }
                                 }
@@ -1461,7 +1445,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Package not found"
+                                            "example": "không tìm thấy gói khán"
                                         }
                                     }
                                 }
@@ -1542,7 +1526,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Package not found"
+                                            "example": "Gói khám không tồn tại"
                                         }
                                     }
                                 }
@@ -1558,8 +1542,8 @@
         "/api/v1/packages/categories/{id}": {
             "get": {
                 "tags": ["Packages"],
-                "summary": "Lấy danh sachsb gói khám theo id danh mục",
-                "description": "Lấy danh sachsb gói khám theo id danh mục.",
+                "summary": "Lấy danh sách gói khám theo id danh mục",
+                "description": "Lấy danh sách gói khám theo id danh mục gói khám.",
                 "operationId": "getPackageByIdCategory",
                 "parameters": [
                     {
@@ -1623,7 +1607,7 @@
                         }
                     },
                     "404": {
-                        "description": "Package category not found",
+                        "description": "Không tìm thấy danh mục gói khám",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1634,7 +1618,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Package not found"
+                                            "example": "Danh mục gói khám không tồn tại"
                                         }
                                     },
                                     "type": "object"
