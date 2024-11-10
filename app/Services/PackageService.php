@@ -13,23 +13,19 @@ use App\Repositories\PackageCategory\PackageCategoryRepositoryInterface;
 class PackageService
 {
     private $packageRepository;
-    private $cloundinaryService;
-    private $packageCategoryRepository;
-    public function __construct(PackageRepositoryInterface $packageRepository, CloundinaryService $cloundinaryService, PackageCategoryRepositoryInterface $packageCategoryRepository)
+    public function __construct(PackageRepositoryInterface $packageRepository)
     {
         $this->packageRepository = $packageRepository;
-        $this->cloundinaryService = $cloundinaryService;
-        $this->packageCategoryRepository = $packageCategoryRepository;
     }
 
     public function create($request)
     {
-        return $this->handleRequest($request, 'create', 'Failed to create package');
+        return $this->handleRequest($request, 'create', 'Tạo gói khám thất bại');
     }
 
     public function update($request, $id)
     {
-        return $this->handleRequest($request, 'update', 'Failed to update package', $id);
+        return $this->handleRequest($request, 'update', 'Sửa gói khám thất bại', $id);
     }
 
     public function getAll()
@@ -42,7 +38,7 @@ class PackageService
         try {
             return $this->packageRepository->slug($slug);
         } catch (ModelNotFoundException $e) {
-            throw new \Exception('Package not found');
+            throw new \Exception('Gói khám không tồn tại');
         }
     }
 
@@ -51,7 +47,7 @@ class PackageService
         try {
             return $this->packageRepository->show($id);
         } catch (ModelNotFoundException $e) {
-            throw new \Exception('Package not found');
+            throw new \Exception('Gói khám không tồn tại');
         }
     }
 
@@ -60,7 +56,7 @@ class PackageService
         try {
             return $this->packageRepository->destroy($id);
         } catch (ModelNotFoundException $e) {
-            throw new \Exception('Package not found');
+            throw new \Exception('Gói khám không tồn tại');
         }
     }
 
@@ -70,18 +66,13 @@ class PackageService
             $categoryPackage = CategoryPackage::with('packages')->findOrFail($id);
             return PackageResource::collection($categoryPackage->packages);
         } catch (ModelNotFoundException $e) {
-            throw new \Exception('Package category not found');
+            throw new \Exception('Danh mục gói khám không tồn tại');
         }
     }
 
     private function handleRequest($request, $action, $errorMessage, $id = null)
     {
         $data = $request->validated();
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $folder = 'packages/';
-            $data['image'] = $this->cloundinaryService->upload($file, $folder);
-        }
         $data['slug'] = Str::slug($data["name"]);
         try {
             return $this->packageRepository->{$action}($data ?? [], $id);

@@ -29,15 +29,9 @@ class PackageRequest extends FormRequest
             'name' => 'required|max:255|unique:examination_packages,name,' . $id,
             'description' => 'required',
             'content' => 'required',
-            'category_id' => "required|exists:category_packages,id"
+            'category_id' => "required|exists:category_packages,id",
+            'image' => 'required|string'
         ];
-
-        if (!$id) {
-            $rules['image'] = 'required|mimes:jpg,jpeg,png,webp';
-        } else {
-            $rules['image'] = 'nullable|mimes:png,jpg,jpeg,webp';
-        }
-
 
         return $rules;
     }
@@ -48,8 +42,8 @@ class PackageRequest extends FormRequest
             'required' => ':attribute không được để trống!',
             'max' => ':attribute không được lớn hơn :max ký tự!',
             'unique' => ':attribute này đã tồn tại!',
-            'image' => ':attribute phải là một file ảnh hợp lệ!',
             'exists' => 'Giá trị của :attribute không tồn tại!',
+            'string' => ':attribute này phải là 1 string!',
         ];
     }
     /**
