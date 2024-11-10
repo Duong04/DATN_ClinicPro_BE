@@ -10056,6 +10056,286 @@
                     }
                 }
             }
+        },
+        "/api/v1/upload/image": {
+            "post": {
+                "tags": ["Upload"],
+                "summary": "Upload một ảnh",
+                "description": "API này cho phép upload một ảnh duy nhất. File ảnh không được vượt quá 10MB.",
+                "operationId": "uploadSingleImage",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": ["image"],
+                                "properties": {
+                                    "image": {
+                                        "description": "Ảnh cần upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Upload thành công!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Upload thành công!"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "https://example.com/image.jpg"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "File không hợp lệ hoặc vượt quá kích thước cho phép."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/upload/images": {
+            "post": {
+                "tags": ["Upload"],
+                "summary": "Upload nhiều ảnh",
+                "description": "API này cho phép upload nhiều ảnh cùng lúc. Mỗi file không được vượt quá 10MB.",
+                "operationId": "uploadMultipleImages",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": ["images"],
+                                "properties": {
+                                    "images": {
+                                        "description": "Danh sách ảnh cần upload",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Upload thành công!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Upload thành công!"
+                                        },
+                                        "urls": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "https://example.com/image1.jpg"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Một hoặc nhiều file không hợp lệ."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/upload/file": {
+            "post": {
+                "tags": ["Upload"],
+                "summary": "Upload một file",
+                "description": "API này cho phép upload một file duy nhất. File không được vượt quá 10MB.",
+                "operationId": "uploadSingleFile",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": ["file"],
+                                "properties": {
+                                    "file": {
+                                        "description": "File cần upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Upload thành công!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Upload thành công!"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "https://example.com/file.pdf"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "File không hợp lệ hoặc vượt quá kích thước cho phép."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/upload/files": {
+            "post": {
+                "tags": ["Upload"],
+                "summary": "Upload nhiều file",
+                "description": "API này cho phép upload nhiều file cùng lúc. Mỗi file không được vượt quá 10MB.",
+                "operationId": "uploadMultipleFiles",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": ["files"],
+                                "properties": {
+                                    "files": {
+                                        "description": "Danh sách file cần upload",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Upload thành công!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Upload thành công!"
+                                        },
+                                        "urls": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "https://example.com/file1.pdf"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Một hoặc nhiều file không hợp lệ."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "components": {

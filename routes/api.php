@@ -3,6 +3,7 @@
 use App\Http\Controllers\Apis\V1\MedicalHistoryController;
 use App\Http\Controllers\Apis\V1\PatientController;
 use App\Http\Controllers\Apis\V1\SpecialtyController;
+use App\Http\Controllers\Apis\V1\UploadController;
 use App\Http\Controllers\Apis\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -172,4 +173,10 @@ Route::prefix('v1')->group(function () {
             Route::put('/{id}', 'update')->middleware('jwt.auth');
             Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
         });
+    Route::controller(UploadController::class)->prefix('upload')->group(function () {
+        Route::post('/image', 'uploadImage');
+        Route::post('/images', 'uploadImages');
+        Route::post('/file', 'uploadFile');
+        Route::post('/files', 'uploadFiles');
+    });
 });
