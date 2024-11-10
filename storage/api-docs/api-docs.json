@@ -517,13 +517,14 @@
                                                     "other"
                                                 ],
                                                 "example": "male"
+                                            },
+                                            "avatar": {
+                                                "type": "string",
+                                                "format": "uri",
+                                                "description": "URL của hình ảnh đại diện của người dùng.",
+                                                "example": "URL của hình ảnh đại diện của người dùng."
                                             }
                                         }
-                                    },
-                                    "avatar": {
-                                        "type": "string",
-                                        "format": "uri",
-                                        "description": "URL của hình ảnh đại diện của người dùng."
                                     }
                                 }
                             }
@@ -4218,11 +4219,6 @@
                                         "enum": ["active", "inactive"],
                                         "description": "Trạng thái tài khoản người dùng (active/inactive)."
                                     },
-                                    "avatar": {
-                                        "type": "string",
-                                        "example": "file",
-                                        "description": "Ảnh đại diện của người dùng (tùy chọn)."
-                                    },
                                     "role_id": {
                                         "type": "string",
                                         "example": "550e8400-e29b-41d4-a716-446655440000",
@@ -4247,6 +4243,11 @@
                                                 "nullable": true,
                                                 "example": "0987654321",
                                                 "description": "Số điện thoại của người dùng (tùy chọn)."
+                                            },
+                                            "avatar": {
+                                                "type": "string",
+                                                "example": "file",
+                                                "description": "Url ảnh đại diện của người dùng (tùy chọn)."
                                             },
                                             "gender": {
                                                 "type": "string",
@@ -4633,11 +4634,6 @@
                                         "nullable": true,
                                         "description": "Trạng thái tài khoản người dùng (tùy chọn)."
                                     },
-                                    "avatar": {
-                                        "type": "string",
-                                        "example": "file",
-                                        "description": "Ảnh đại diện của người dùng (tùy chọn)."
-                                    },
                                     "role_id": {
                                         "type": "string",
                                         "format": "uuid",
@@ -4662,6 +4658,11 @@
                                                 "nullable": true,
                                                 "example": "0987654321",
                                                 "description": "Số điện thoại của người dùng (tùy chọn)."
+                                            },
+                                            "avatar": {
+                                                "type": "string",
+                                                "example": "file",
+                                                "description": "Url ảnh đại diện của người dùng (tùy chọn)."
                                             },
                                             "gender": {
                                                 "type": "string",
@@ -6196,7 +6197,7 @@
                                                 "file": {
                                                     "type": "string",
                                                     "description": "File ảnh (mã hóa base64 hoặc URL)",
-                                                    "example": "file"
+                                                    "example": "Url của file"
                                                 },
                                                 "description": {
                                                     "type": "string",
@@ -6533,7 +6534,7 @@
                                                 "file": {
                                                     "type": "string",
                                                     "description": "File ảnh (mã hóa base64 hoặc URL)",
-                                                    "example": "file"
+                                                    "example": "Url của file"
                                                 },
                                                 "description": {
                                                     "type": "string",

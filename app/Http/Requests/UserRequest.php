@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
             'password' => 'required|min:8',
             'role_id' => 'required|exists:roles,id',
             'status' => 'nullable|in:active,inactive',
-            'avatar' => 'nullable|image',
+            'user_info.avatar' => 'nullable|string',
             'doctor.specialty_id' => 'nullable|exists:specialties,id',
             'user_info.fullname' => 'required',
             'user_info.address' => 'nullable',

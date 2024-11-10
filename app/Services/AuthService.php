@@ -104,13 +104,6 @@ class AuthService
             $data = $request->all();
             $user = auth()->user()->load('role');
 
-            if ($request->hasFile('avatar')) {
-                $file = $request->file('avatar');
-                $folder = 'avatars';
-                $url = $this->cloundinaryService->upload($file, $folder);
-                $data['user_info']['avatar'] = $url;
-            }
-
             if (isset($data['email'])) {
                 $data['user_info']['email'] = $data['email'];
             }
