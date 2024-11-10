@@ -55,16 +55,9 @@ class MedicalHistoryService {
 
             $medicalHistory = $this->medicalHistoryRepository->create($data);
             if (isset($data['files']) && is_array($data['files'])) {
-                foreach ($data['files'] as $index => $fileItem) {
-    
-                    if ($request->hasFile("files.$index.file")) {
-                        $file = $request->file("files.$index.file");
-                        $folder = 'medical-histories';
-                        $fileItem['file'] = $this->cloundinaryService->upload($file, $folder);;
-                        $fileItem['medical_history_id'] = $medicalHistory->id;
-
-                        File::create($fileItem);
-                    }
+                foreach ($data['files'] as $fileItem) {
+                    $fileItem['medical_history_id'] = $medicalHistory->id;
+                    File::create($fileItem);
                 }
             }
 
@@ -96,13 +89,7 @@ class MedicalHistoryService {
             $this->medicalHistoryRepository->update($id, $data);
 
             if (isset($data['files']) && is_array($data['files'])) {
-                foreach ($data['files'] as $index => $fileItem) {
-
-                    if ($request->hasFile("files.$index.file")) {
-                        $file = $request->file("files.$index.file");
-                        $folder = 'medical-histories';
-                        $fileItem['file'] = $this->cloundinaryService->upload($file, $folder);
-                    }
+                foreach ($data['files'] as $fileItem) {
 
                     if (isset($fileItem['id'])) {
                         $checkFile = File::find($fileItem['id']);

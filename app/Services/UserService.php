@@ -64,14 +64,7 @@ class UserService {
             $data = $request->validated();
     
             $user = $this->userRepository->create($data);
-    
-            if ($request->hasFile('avatar')) {
-                $file = $request->file('avatar');
-                $folder = 'avatars';
-    
-                $data['user_info']['avatar'] = $this->cloundinaryService->upload($file, $folder);
-            }
-    
+
             if ($data['role_id'] == 1) {
                 if (isset($data['doctor'])) {
                     $data['doctor']['user_id'] = $user->id;
@@ -111,14 +104,6 @@ class UserService {
 
             $this->userRepository->update($id, $data);
             $user = $this->userRepository->find($id, ['userInfo.identityCard']);
-
-
-            if ($request->hasFile('avatar')) {
-                $file = $request->file('avatar');
-                $folder = 'avatars';
-    
-                $data['user_info']['avatar'] = $this->cloundinaryService->upload($file, $folder);
-            }
 
             if (isset($data['role_id']) && $data['role_id'] == 1) {
                 if (isset($data['doctor'])) {
