@@ -20,6 +20,8 @@ class PrescriptionResource extends JsonResource
             'description' => $this->description,
             'user_id' => $this->user_id,
             'patient_id' => $this->patient_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'medications' => PrescriptionInfoResource::collection($this->prescription_Infos)
         ];
     }
