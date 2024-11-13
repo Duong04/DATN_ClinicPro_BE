@@ -92,6 +92,17 @@ class DepartmentService {
                     ]);
                 }
             }
+
+            if (isset($data['users_delete'])) {
+                foreach ($data['users_delete'] as $user) {
+                    $existingUser = $this->userRepository->find($user, ['userInfo']);
+
+                    $this->userInfoRepository->update($user, [
+                        'department_id' => null
+                    ]);
+                }
+            }
+
             return response()->json(['message' => 'Cập nhât phòng ban thành công!'], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 422);

@@ -108,6 +108,7 @@ Route::prefix('v1')->group(function () {
     Route::controller(UserController::class)->prefix('users')->middleware('jwt.auth')
         ->group(function () {
             Route::get('/', 'paginate');
+            Route::get('/check-department', 'getUserCheckDepartment');
             Route::get('/{id}', 'show');
             Route::get('/role/{id}', 'getByRole');
             Route::post('/', 'create');

@@ -39,6 +39,25 @@ class UserService {
         }
     }
 
+    public function getUserCheckDepartment($request) {
+        try {
+            $limit = $request->query('limit');
+            $users = $this->userRepository->getUserCheckDepartment($limit);
+        
+            if ($limit) {
+                return response()->json([
+                    'data' => $users->items(),
+                    'prev_page_url' => $users->previousPageUrl(),
+                    'next_page_url' => $users->nextPageUrl(),
+                    'total' => $users->total()
+                ], 200);
+            }
+            return response()->json(['data' => $users], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
+    }
+
     public function getByRoleId($request, $role_id) {
         try {
             $limit = $request->query('limit');
