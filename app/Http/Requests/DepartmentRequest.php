@@ -31,6 +31,7 @@ class DepartmentRequest extends FormRequest
         if ($this->method() == 'PUT') {
             $id = $this->route('id');
             $rules['name'] = 'nullable|unique:departments,name,'.$id;
+            $rules['users_delete'] = 'nullable|array';
         }
 
         return $rules;

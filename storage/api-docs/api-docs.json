@@ -3842,6 +3842,14 @@
                                             "example": "8c3af5a6-0543-4b43-91a1-d1562b0cf21a"
                                         },
                                         "description": "Danh sách ID của người dùng sẽ được gán vào phòng ban."
+                                    },
+                                    "users_delete": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "8c3af5a6-0543-4b43-91a1-d1562b0cf21a"
+                                        },
+                                        "description": "Danh sách ID của người dùng sẽ được xóa khỏi phòng ban."
                                     }
                                 }
                             }
@@ -4741,6 +4749,117 @@
                                         "error": {
                                             "type": "string",
                                             "example": "Validation error message."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/check-department": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Lấy danh sách người dùng với thông tin phòng ban",
+                "description": "API này trả về danh sách người dùng có thông tin phòng ban, bao gồm khả năng phân trang.",
+                "operationId": "getUserCheckDepartment",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        },
+                        "description": "Số lượng bản ghi trên mỗi trang."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách người dùng với thông tin phòng ban",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "8a9c264e-d283-4550-a14c-cf932199f2dc"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "johndoe4@example.com"
+                                                    },
+                                                    "user_info": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                            },
+                                                            "user_id": {
+                                                                "type": "string",
+                                                                "example": "8a9c264e-d283-4550-a14c-cf932199f2dc"
+                                                            },
+                                                            "department_id": {
+                                                                "type": "string",
+                                                                "nullable": true,
+                                                                "example": null
+                                                            },
+                                                            "avatar": {
+                                                                "type": "string",
+                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                            },
+                                                            "fullname": {
+                                                                "type": "string",
+                                                                "example": "Nguyễn Văn A"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/users/check-department?page=1"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/users/check-department?page=3"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 100
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi yêu cầu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Chi tiết lỗi xảy ra."
                                         }
                                     }
                                 }

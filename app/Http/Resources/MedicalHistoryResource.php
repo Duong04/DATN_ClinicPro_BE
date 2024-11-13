@@ -28,14 +28,16 @@ class MedicalHistoryResource extends JsonResource
                 'email' => $this?->user?->email,
                 'fullname' => $this?->user?->userInfo?->fullname,
                 'phone_number' => $this?->user?->userInfo?->phone_number,
-                'gender' => $this?->user?->userInfo?->gender
+                'gender' => $this?->user?->userInfo?->gender,
+                'avatar' => $this?->user?->userInfo?->avatar,
             ],
             'patient' => [
                 'id' => $this?->patient?->id,
                 'fullname' => $this?->patient?->patientInfo?->fullname,
                 'email' => $this?->patient?->patientInfo?->email,
                 'phone_number' => $this?->patient?->patientInfo?->phone_number,
-                'gender' => $this?->patient?->patientInfo?->gender
+                'gender' => $this?->patient?->patientInfo?->gender,
+                'avatar' => $this?->patient?->patientInfo?->avatar,
             ]
         ];
     }

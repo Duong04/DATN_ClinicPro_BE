@@ -42,6 +42,15 @@ class UserRepository implements UserRepositoryInterface {
 
         return $limit ? $users->paginate($limit) : $users->get();
     }
+    public function getUserCheckDepartment($limit) {
+        $users = User::with(['userInfo:id,user_id,department_id,avatar,fullname'])
+            ->select('id', 'email')
+            ->whereHas('role', function ($query) {
+                $query->where('name', '!=', 'patient');
+            });
+    
+        return $limit ? $users->paginate($limit) : $users->get();
+    }
     public function find($id, array $relation) {
         return user::with($relation)->find($id);
     }
