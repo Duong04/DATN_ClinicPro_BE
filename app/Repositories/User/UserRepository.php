@@ -6,7 +6,7 @@ use App\Models\User;
 
 class UserRepository implements UserRepositoryInterface {
     public function all() {}
-    public function paginate($limit, $q) {
+    public function paginate($limit, $q, $role, $department) {
         $users = User::with('role', 'userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard')
             ->when($q, function ($query, $q) {
                 $query->where('email', 'LIKE', "%{$q}%")
@@ -15,11 +15,19 @@ class UserRepository implements UserRepositoryInterface {
                         })
                       ->orWhereHas('patient.patientInfo', function ($query) use ($q) {
                         $query->where('fullname', 'LIKE', "%{$q}%");
-                        })
-                      ->orWhereHas('role', function ($query) use ($q) {
-                          $query->where('name', 'LIKE', "%{$q}%");
                         });
             });
+        if ($role) {
+            $users->whereHas('role', function ($query) use ($role) {
+                $query->where('name', $role);
+            });
+        }
+
+        if ($department) {
+            $users->whereHas('userInfo', function ($query) use ($department) {
+                $query->where('department_id', $department);
+              });
+        }
     
         return $limit ? $users->paginate($limit) : $users->get();
     }
@@ -50,6 +58,16 @@ class UserRepository implements UserRepositoryInterface {
             });
     
         return $limit ? $users->paginate($limit) : $users->get();
+    }
+    public function getBySpecialtyId($specialty_id) {
+        $users = User::with('doctor.specialty', 'userInfo')
+        ->whereHas('role', function ($query) {
+            $query->where('name', 'doctor');
+        })->whereHas('doctor', function ($query) use ($specialty_id) {
+            $query->where('specialty_id', $specialty_id);
+        })->get();
+
+        return $users;
     }
     public function find($id, array $relation) {
         return user::with($relation)->find($id);

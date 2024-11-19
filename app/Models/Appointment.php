@@ -21,7 +21,8 @@ class Appointment extends Model
         'status',
         'cancellation_reason',
         'specialty_id',
-        'package_id'
+        'package_id',
+        'description'
     ];
 
     protected $attributes = [

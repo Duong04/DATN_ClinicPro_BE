@@ -32,8 +32,8 @@ class AppointmentRequest extends FormRequest
             'gender' => 'required',
             'dob' => 'required|date',
             'appointment_date' => 'required|date|after:now',
-            'user_id' => 'required|exists:users,id',
-            "package_id" => 'required|exists:examination_packages,id'
+            "package_id" => 'required|exists:examination_packages,id',
+            'description' =>  'nullable|string',
         ];
     }
 
@@ -62,8 +62,8 @@ class AppointmentRequest extends FormRequest
             'dob' => 'Ngày sinh',
             'appointment_date' => 'Giờ hẹn',
             "specialty_id" => 'ID chuyên khoa',
-            'user_id' => 'ID bác sĩ',
-            'package_id' => 'ID gói khám'
+            'package_id' => 'ID gói khám',
+            "description" =>  'Mô tả'
         ];
     }
 
