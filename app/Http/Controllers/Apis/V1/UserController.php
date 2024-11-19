@@ -37,4 +37,8 @@ class UserController extends Controller
     public function show($id) {
         return $this->userService->findById($id);
     }
+
+    public function getBySpecialtyId($specialtyId) {
+        return $this->userService->getBySpecialtyId($specialtyId);
+    }
 }

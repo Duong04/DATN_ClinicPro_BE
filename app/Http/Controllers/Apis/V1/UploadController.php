@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Apis\V1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\CloundinaryService;
+use App\Services\FirebaseService;
 
 class UploadController extends Controller
 {
     private $cloundinaryService;
 
-    public function __construct(CloundinaryService $cloundinaryService) {
+    private $firebaseService;
+
+    public function __construct(CloundinaryService $cloundinaryService, FirebaseService $firebaseService) {
         $this->cloundinaryService = $cloundinaryService;
+        $this->firebaseService = $firebaseService;
     }
 
     public function uploadImage(Request $request) {
@@ -73,7 +77,7 @@ class UploadController extends Controller
             ]);
     
             $file = $request->file('file');
-            $url = $this->cloundinaryService->uploadFile($file, 'files');
+            $url = $this->firebaseService->uploadFile($file, 'files');
     
             return response()->json([
                 'message' => 'Upload thành công!',
@@ -98,7 +102,7 @@ class UploadController extends Controller
     
             $urls = [];
             foreach ($request->file('files') as $file) {
-                $urls[] = $this->cloundinaryService->uploadFile($file, 'files');
+                $urls[] = $this->firebaseService->uploadFile($file, 'files');
             }
     
             return response()->json([

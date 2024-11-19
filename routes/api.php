@@ -105,12 +105,13 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'delete');
         });
 
-    Route::controller(UserController::class)->prefix('users')->middleware('jwt.auth')
+    Route::controller(UserController::class)->prefix('users')
         ->group(function () {
             Route::get('/', 'paginate');
             Route::get('/check-department', 'getUserCheckDepartment');
             Route::get('/{id}', 'show');
             Route::get('/role/{id}', 'getByRole');
+            Route::get('/{id}/specialty', 'getBySpecialtyId');
             Route::post('/', 'create');
             Route::put('/{id}', 'update');
             Route::delete('/{id}', 'delete');
