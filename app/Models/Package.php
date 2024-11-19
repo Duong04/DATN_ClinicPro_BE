@@ -17,7 +17,8 @@ class Package extends Model
         'content',
         'image',
         'slug',
-        "category_id"
+        "category_id",
+        "specialty_id"
     ];
 
     protected $hidden = [

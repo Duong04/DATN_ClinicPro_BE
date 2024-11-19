@@ -24,6 +24,10 @@ class PackageRepository implements PackageRepositoryInterface
     {
         return $this->package::where('slug', $slug)->firstOrFail();
     }
+    public function getBySpecialties($id)
+    {
+        return $this->package::where('specialty_id', $id)->get();
+    }
 
     public function create($data)
     {

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Apis\V1;
 
+use Illuminate\Http\Request;
 use App\Services\PackageService;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageRequest;
-use Illuminate\Http\JsonResponse;
 
 class PackageController extends Controller
 {
@@ -39,6 +40,10 @@ class PackageController extends Controller
     {
         return $this->respondWithData(fn() => $this->packageService->getByCategory($id));
     }
+    public function getBySpecialties(Request $request)
+    {
+        return $this->respondWithData(fn() => $this->packageService->getBySpecialties($request));
+    }
 
     public function update(PackageRequest $request, string $id): JsonResponse
     {
@@ -55,8 +60,10 @@ class PackageController extends Controller
         try {
             $data = $callback();
             return response()->json(['data' => $data], $successStatus);
+        } catch (\InvalidArgumentException $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 400);
         } catch (\Exception $e) {
-            $status = str_contains($e->getMessage(), 'not found')  ? 404 : 500;
+            $status = str_contains($e->getMessage(), 'không tồn tại') ? 404 : 500;
             return response()->json(['success' => false, 'message' => $e->getMessage() ?: $message], $status);
         }
     }

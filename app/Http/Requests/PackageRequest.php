@@ -30,6 +30,7 @@ class PackageRequest extends FormRequest
             'description' => 'required',
             'content' => 'required',
             'category_id' => "required|exists:category_packages,id",
+            'specialty_id' => 'required|exists:specialties,id',
             'image' => 'required|string'
         ];
 
@@ -56,7 +57,8 @@ class PackageRequest extends FormRequest
             'description' => 'Mô tả',
             'content' => 'Nội dung',
             'image' => 'Hình ảnh',
-            "category_id" => 'ID danh mục'
+            "category_id" => 'ID danh mục',
+            'specialty_id' => 'ID chuyên khoa'
         ];
     }
 

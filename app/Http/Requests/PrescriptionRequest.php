@@ -36,8 +36,8 @@ class PrescriptionRequest extends FormRequest
             'medications.*.duration' => 'required|integer|min:1',
         ];
         if ($this->method() == 'PUT') {
-            $rules['patient_id'] = 'nullable|exists:users,id';
-            $rules['user_id'] = 'nullable|exists:patients,id';
+            $rules['patient_id'] = 'nullable|exists:patients,id';
+            $rules['user_id'] = 'nullable|exists:users,id';
             $rules['medications.*.id'] = 'required|exists:prescription_infos,id';
         }
         return $rules;

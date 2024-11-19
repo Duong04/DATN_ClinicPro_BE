@@ -20,7 +20,8 @@ class Appointment extends Model
         'total_amount',
         'status',
         'cancellation_reason',
-        'specialty_id'
+        'specialty_id',
+        'package_id'
     ];
 
     protected $attributes = [

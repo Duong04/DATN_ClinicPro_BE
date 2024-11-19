@@ -979,6 +979,10 @@
                                                     "category_id": {
                                                         "type": "string",
                                                         "example": "b2345678-e89b-12d3-a456-426614174001"
+                                                    },
+                                                    "specialty_id": {
+                                                        "type": "string",
+                                                        "example": "71d619fa-5595-49c7-8697-a730d9c7dd9e"
                                                     }
                                                 }
                                             }
@@ -1014,7 +1018,8 @@
                                     "description",
                                     "content",
                                     "image",
-                                    "category_id"
+                                    "category_id",
+                                    "specialty_id"
                                 ],
                                 "properties": {
                                     "name": {
@@ -1037,6 +1042,10 @@
                                     "category_id": {
                                         "type": "string",
                                         "example": "b2345678-e89b-12d3-a456-426614174001"
+                                    },
+                                    "specialty_id": {
+                                        "type": "string",
+                                        "example": "71d619fa-5595-49c7-8697-a730d9c7dd9e"
                                     }
                                 }
                             }
@@ -1083,6 +1092,10 @@
                                                 "category_id": {
                                                     "type": "string",
                                                     "example": "b2345678-e89b-12d3-a456-426614174001"
+                                                },
+                                                "specialty_id": {
+                                                    "type": "string",
+                                                    "example": "71d619fa-5595-49c7-8697-a730d9c7dd9e"
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -1190,6 +1203,10 @@
                                                 "category_id": {
                                                     "type": "string",
                                                     "example": "b2345678-e89b-12d3-a456-426614174001"
+                                                },
+                                                "specialty_id": {
+                                                    "type": "string",
+                                                    "example": "71d619fa-5595-49c7-8697-a730d9c7dd9e"
                                                 }
                                             }
                                         }
@@ -1284,6 +1301,10 @@
                                                 "category_id": {
                                                     "type": "string",
                                                     "example": "64c13314-2273-49bf-bbaf-dae139a3423423"
+                                                },
+                                                "specialty_id": {
+                                                    "type": "string",
+                                                    "example": "71d619fa-5595-49c7-8697-a730d9c7dd9e"
                                                 }
                                             }
                                         }
@@ -1338,7 +1359,8 @@
                                     "description",
                                     "content",
                                     "image",
-                                    "category_id"
+                                    "category_id",
+                                    "specialty_id"
                                 ],
                                 "properties": {
                                     "name": {
@@ -1361,6 +1383,10 @@
                                     "category_id": {
                                         "type": "string",
                                         "example": "b2345678-e89b-12d3-a456-426614174001"
+                                    },
+                                    "specialty_id": {
+                                        "type": "string",
+                                        "example": "71d619fa-5595-49c7-8697-a730d9c7dd9e"
                                     }
                                 }
                             }
@@ -1596,6 +1622,10 @@
                                                     "category_id": {
                                                         "type": "string",
                                                         "example": "c3456789-e89b-12d3-a456-426614174002"
+                                                    },
+                                                    "specialty_id": {
+                                                        "type": "string",
+                                                        "example": "71d619fa-5595-49c7-8697-a730d9c7dd9e"
                                                     }
                                                 }
                                             }
@@ -1622,6 +1652,104 @@
                                         }
                                     },
                                     "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/packages/specialties": {
+            "get": {
+                "tags": ["Packages"],
+                "summary": "Lấy danh sách gói khám theo chuyên khoa",
+                "description": "API này trả về danh sách gói khám theo id chuyên khoa.",
+                "operationId": "getPackageBySpecialties",
+                "parameters": [
+                    {
+                        "name": "specialty_id",
+                        "in": "query",
+                        "description": "id chuyên khoa",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin gói khám",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Gói khám mắt"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Mô tả gói khám."
+                                                    },
+                                                    "content": {
+                                                        "type": "string",
+                                                        "example": "Nội dung gói khám."
+                                                    },
+                                                    "image": {
+                                                        "type": "string",
+                                                        "example": "http://example.com/image.jpg"
+                                                    },
+                                                    "slug": {
+                                                        "type": "string",
+                                                        "example": "goi-kham-mat"
+                                                    },
+                                                    "category_id": {
+                                                        "type": "string",
+                                                        "example": "c3456789-e89b-12d3-a456-426614174002"
+                                                    },
+                                                    "specialty_id": {
+                                                        "type": "string",
+                                                        "example": "71d619fa-5595-49c7-8697-a730d9c7dd9e"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy chuyên khoa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "chuyên khoa không tồn tại"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -5041,6 +5169,10 @@
                                                         "type": "string",
                                                         "example": "c3456789-e89b-12d3-a456-426614174002"
                                                     },
+                                                    "package_id": {
+                                                        "type": "string",
+                                                        "example": "61d6811f-f2b4-4173-8ace-95f3e5fc8545"
+                                                    },
                                                     "appointment_date": {
                                                         "type": "Date",
                                                         "format": "date-time",
@@ -5122,7 +5254,9 @@
                                     "gender",
                                     "dob",
                                     "appointment_date",
-                                    "specialty_id"
+                                    "specialty_id",
+                                    "user_id",
+                                    "package_id"
                                 ],
                                 "properties": {
                                     "fullname": {
@@ -5158,6 +5292,14 @@
                                     "specialty_id": {
                                         "type": "string",
                                         "example": "b2345678-e89b-12d3-a456-426614174002"
+                                    },
+                                    "user_id": {
+                                        "type": "string",
+                                        "example": "c3456789-e89b-12d3-a456-426614174002"
+                                    },
+                                    "package_id": {
+                                        "type": "string",
+                                        "example": "61d6811f-f2b4-4173-8ace-95f3e5fc8545"
                                     }
                                 },
                                 "type": "object"
@@ -5218,6 +5360,10 @@
                                                 "specialty_id": {
                                                     "type": "string",
                                                     "example": "b2345678-e89b-12d3-a456-426614174002"
+                                                },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "61d6811f-f2b4-4173-8ace-95f3e5fc8545"
                                                 }
                                             },
                                             "type": "object"
@@ -5315,6 +5461,10 @@
                                                 "specialty_id": {
                                                     "type": "string",
                                                     "example": "b2345678-e89b-12d3-a456-426614174002"
+                                                },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "61d6811f-f2b4-4173-8ace-95f3e5fc8545"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -5458,6 +5608,10 @@
                                                     "type": "string",
                                                     "example": "1"
                                                 },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "61d6811f-f2b4-4173-8ace-95f3e5fc8545"
+                                                },
                                                 "appointment_date": {
                                                     "type": "Date",
                                                     "format": "date-time",
@@ -5567,6 +5721,10 @@
                                                 "specialty_id": {
                                                     "type": "string",
                                                     "example": "b2345678-e89b-12d3-a456-426614174002"
+                                                },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "61d6811f-f2b4-4173-8ace-95f3e5fc8545"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
@@ -5740,6 +5898,10 @@
                                                     "type": "string",
                                                     "example": "b2345678-e89b-12d3-a456-426614174002"
                                                 },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "61d6811f-f2b4-4173-8ace-95f3e5fc8545"
+                                                },
                                                 "appointment_date": {
                                                     "type": "Date",
                                                     "format": "date-time",
@@ -5905,6 +6067,10 @@
                                                     "type": "string",
                                                     "example": "b2345678-e89b-12d3-a456-426614174002"
                                                 },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "61d6811f-f2b4-4173-8ace-95f3e5fc8545"
+                                                },
                                                 "appointment_date": {
                                                     "type": "Date",
                                                     "format": "date-time",
@@ -6052,6 +6218,10 @@
                                                 "specialty_id": {
                                                     "type": "string",
                                                     "example": "b2345678-e89b-12d3-a456-426614174002"
+                                                },
+                                                "package_id": {
+                                                    "type": "string",
+                                                    "example": "61d6811f-f2b4-4173-8ace-95f3e5fc8545"
                                                 },
                                                 "appointment_date": {
                                                     "type": "Date",
