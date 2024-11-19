@@ -27,8 +27,9 @@ class MedicalHistoryRequest extends FormRequest
             'diagnosis' => 'required|string',
             'treatment' => 'required|string',
             'user_id' => 'required|exists:users,id',
-            'files.*.file' => 'nullable|file',
+            'files.*.file' => 'nullable|string',
             'files.*.description' => 'nullable',
+            'file_deletes' => 'nullable|array',
         ];
 
         if ($this->method() == 'PUT') {

@@ -32,6 +32,7 @@ class AppointmentRequest extends FormRequest
             'gender' => 'required',
             'dob' => 'required|date',
             'appointment_date' => 'required|date|after:now',
+            'description' =>  'nullable|string',
         ];
     }
 
@@ -59,7 +60,8 @@ class AppointmentRequest extends FormRequest
             'gender' => 'Giới tính',
             'dob' => 'Ngày sinh',
             'appointment_date' => 'Giờ hẹn',
-            "specialty_id" => 'ID chuyên khoa'
+            "specialty_id" => 'ID chuyên khoa',
+            "description" =>  'Mô tả'
         ];
     }
 
