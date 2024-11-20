@@ -35,6 +35,7 @@ class AppointmentRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             "package_id" => 'required|exists:examination_packages,id',
             "description" => 'required'
+
         ];
     }
 
@@ -66,6 +67,7 @@ class AppointmentRequest extends FormRequest
             'user_id' => 'ID bác sĩ',
             'package_id' => 'ID gói khám',
             'description' => 'Mô tả'
+
         ];
     }
 

@@ -112,6 +112,7 @@ Route::prefix('v1')->group(function () {
             Route::get('/check-department', 'getUserCheckDepartment');
             Route::get('/{id}', 'show');
             Route::get('/role/{id}', 'getByRole');
+            Route::get('/{id}/specialty', 'getBySpecialtyId');
             Route::post('/', 'create');
             Route::put('/{id}', 'update');
             Route::delete('/{id}', 'delete');
