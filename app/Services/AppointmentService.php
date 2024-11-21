@@ -58,7 +58,6 @@ class AppointmentService
                 'description' => $request->input('description'),
                 'package_id' => $request->input('package_id'),
                 'specialty_id' => $request->input('specialty_id'),
-                'user_id' => $request->input('user_id'),
                 'patient_id' => $patient->id,
                 'appointment_date' => $request->input('appointment_date')
             ];
