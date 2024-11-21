@@ -55,6 +55,7 @@ class AppointmentService
                 $patient = PatientInfo::where('email', $email)->first() ?? $this->createPatient($dataPatient);
             }
             $data = [
+                'description' => $request->input('description'),
                 'package_id' => $request->input('package_id'),
                 'specialty_id' => $request->input('specialty_id'),
                 'patient_id' => $patient->id,
