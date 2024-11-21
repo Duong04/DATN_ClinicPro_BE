@@ -58,12 +58,14 @@ class AppointmentService
                 'description' => $request->input('description'),
                 'package_id' => $request->input('package_id'),
                 'specialty_id' => $request->input('specialty_id'),
-                'patient_id' => $patient->id,
+                'patient_id' => $patient->patient_id,
                 'appointment_date' => $request->input('appointment_date')
             ];
             return $this->appointmentRepository->create($data);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to create appointment: ' . $e->getMessage()], 500);
+            return ['error' => [
+                'message' => 'Failed to create appointment: ' . $e->getMessage(),
+            ]];
         }
     }
     public function assign($id, $request)
