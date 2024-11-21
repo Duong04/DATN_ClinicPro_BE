@@ -19,18 +19,13 @@ class CloundinaryService
 
     public function uploadFile($file, $folder)
     {
-        $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $extension = $file->getClientOriginalExtension();
-        $uniqueFileName = $originalName . '_' . time() . '.' . $extension;
-        $uploadedFile = Cloudinary::upload($file->getRealPath(), [
-            'resource_type' => 'raw', 
-            'folder' => trim(env('CLOUDINARY_FOLDER'), '/') . '/' . trim($folder, '/'),
-            'public_id' => pathinfo($uniqueFileName, PATHINFO_FILENAME), // Không kèm phần mở rộng trong public_id
-            'format' => $extension, 
-            'use_filename' => true,
-            'unique_filename' => false,
+        $image = Cloudinary::upload($file->getRealPath(), [
+            'folder' => env('CLOUDINARY_FOLDER') . $folder,
+            'resource_type' => 'auto'
         ]);
-        return $uploadedFile->getSecurePath();
+        $url = $image->getSecurePath();
+
+        return $url;
     }
 
     public function delete($url)

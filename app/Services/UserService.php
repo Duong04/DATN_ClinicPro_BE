@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Http\Resources\UserResourceSix;
 use App\Http\Resources\UserResourceTwo;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserInfo\UserInfoRepositoryInterface;
@@ -23,7 +24,9 @@ class UserService {
         try {
             $limit = $request->query('limit');
             $q = $request->query('q');
-            $users = $this->userRepository->paginate($limit, $q);
+            $role = $request->query('role');
+            $department = $request->query('department');
+            $users = $this->userRepository->paginate($limit, $q, $role, $department);
             
             if ($limit) {
                 return response()->json([
@@ -84,7 +87,7 @@ class UserService {
     
             $user = $this->userRepository->create($data);
 
-            if ($data['role_id'] == 1) {
+            if ($data['role_id'] == '26b53d8b-5eff-4d4e-8307-20c106b9a312') {
                 if (isset($data['doctor'])) {
                     $data['doctor']['user_id'] = $user->id;
                     Doctor::create($data['doctor']);
@@ -114,6 +117,16 @@ class UserService {
     
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 422);
+        }
+    }
+
+    public function getBySpecialtyId($specialtyId){
+        try {
+            $users = $this->userRepository->getBySpecialtyId($specialtyId);
+
+            return response()->json(['data' => UserResourceSix::collection($users)], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
         }
     }
 

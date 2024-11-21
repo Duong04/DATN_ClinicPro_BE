@@ -104,6 +104,12 @@ class MedicalHistoryService {
                 }
             }
 
+            if (isset($data['file_deletes'])) {
+                foreach ($data['file_deletes'] as $item) {
+                    File::where('id', $item)->delete();
+                } 
+            }
+
             return response()->json(['message' => 'Cập nhật lịch sử bệnh án thành công!'], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
@@ -114,7 +120,7 @@ class MedicalHistoryService {
         try {
             $this->medicalHistoryRepository->delete($id);
 
-            return response()->json(['error' => 'Xóa lịch sử bệnh án thành công!'], 200);
+            return response()->json(['message' => 'Xóa lịch sử bệnh án thành công!'], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => 'Không tìm thấy lịch sử bệnh án!'], 404);
         }

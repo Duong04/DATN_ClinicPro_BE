@@ -4150,6 +4150,27 @@
                             "example": "John"
                         },
                         "description": "Từ khóa để tìm kiếm người dùng."
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "doctor"
+                        },
+                        "description": "Filter theo role name"
+
+                    },
+                    {
+                        "name": "department",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "550e8400-e29b-41d4-a716-446655440000"
+                        },
+                        "description": "Filter theo id department"
                     }
                 ],
                 "responses": {
@@ -4997,6 +5018,142 @@
                 }
             }
         },
+        "/api/v1/users/{id}/specialty": {
+  "get": {
+    "tags": ["Users"],
+    "summary": "Lấy danh sách người dùng với thông tin chuyên ngành",
+    "description": "API này trả về danh sách người dùng có thông tin chuyên ngành, bao gồm khả năng phân trang.",
+    "operationId": "getUserSpecialty",
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "8a9c264e-d283-4550-a14c-cf932199f2dc"
+        },
+        "description": "ID của chuyên khoa."
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Danh sách người dùng với thông tin chuyên ngành",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "johndoe@examplesdwkmcdfjewjfd.com"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "active"
+                      },
+                      "fullname": {
+                        "type": "string",
+                        "example": "Nguyễn Văn A"
+                      },
+                      "avatar": {
+                        "type": "string",
+                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                      },
+                      "address": {
+                        "type": "string",
+                        "example": "123 Main St, City, Country"
+                      },
+                      "phone_number": {
+                        "type": "string",
+                        "example": "0987654321"
+                      },
+                      "gender": {
+                        "type": "string",
+                        "example": "other"
+                      },
+                      "dob": {
+                        "type": ["string", "null"],
+                        "example": null
+                      },
+                      "doctor": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "ec91ab2c-0915-49a8-93c5-23a3264928b1"
+                          },
+                          "specialty": {
+                            "type": "string",
+                            "example": "Dentistry"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "Răng Hàm Mặt"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "example": {
+              "data": [
+                {
+                  "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                  "email": "johndoe@examplesdwkmcdfjewjfd.com",
+                  "status": "active",
+                  "fullname": "Nguyễn Văn A",
+                  "avatar": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png",
+                  "address": "123 Main St, City, Country",
+                  "phone_number": "0987654321",
+                  "gender": "other",
+                  "dob": null,
+                  "doctor": {
+                    "id": "ec91ab2c-0915-49a8-93c5-23a3264928b1",
+                    "specialty": "Dentistry",
+                    "description": "Răng Hàm Mặt"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Lỗi yêu cầu",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Chi tiết lỗi xảy ra."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
         "/api/v1/users/role/{role_id}": {
             "get": {
                 "tags": ["Users"],
@@ -5255,7 +5412,6 @@
                                     "dob",
                                     "appointment_date",
                                     "specialty_id",
-                                    "user_id",
                                     "package_id"
                                 ],
                                 "properties": {
@@ -5279,6 +5435,10 @@
                                         "type": "string",
                                         "example": "male"
                                     },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mô tả"
+                                    },
                                     "dob": {
                                         "type": "string",
                                         "format": "date-time",
@@ -5292,10 +5452,6 @@
                                     "specialty_id": {
                                         "type": "string",
                                         "example": "b2345678-e89b-12d3-a456-426614174002"
-                                    },
-                                    "user_id": {
-                                        "type": "string",
-                                        "example": "c3456789-e89b-12d3-a456-426614174002"
                                     },
                                     "package_id": {
                                         "type": "string",
@@ -6804,6 +6960,11 @@
                                         "items": {
                                             "type": "object",
                                             "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "Id nếu muốn update",
+                                                    "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                },
                                                 "file": {
                                                     "type": "string",
                                                     "description": "File ảnh (mã hóa base64 hoặc URL)",
@@ -6815,6 +6976,14 @@
                                                     "example": "Kết quả chụp X-quang"
                                                 }
                                             }
+                                        }
+                                    },
+                                    "file_deletes": {
+                                        "type": "array",
+                                        "description": "Danh sách các file đính kèm với mô tả",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                         }
                                     }
                                 }
