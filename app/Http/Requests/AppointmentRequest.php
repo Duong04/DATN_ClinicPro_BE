@@ -33,7 +33,7 @@ class AppointmentRequest extends FormRequest
             'dob' => 'required|date',
             'appointment_date' => 'required|date|after:now',
             "package_id" => 'required|exists:examination_packages,id',
-            'description' =>  'nullable|string',
+            'description' =>  'nullable|string'
         ];
     }
 
@@ -64,6 +64,7 @@ class AppointmentRequest extends FormRequest
             "specialty_id" => 'ID chuyên khoa',
             'package_id' => 'ID gói khám',
             "description" =>  'Mô tả'
+
         ];
     }
 
