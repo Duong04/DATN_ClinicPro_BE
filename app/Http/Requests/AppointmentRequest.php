@@ -64,6 +64,7 @@ class AppointmentRequest extends FormRequest
             "specialty_id" => 'ID chuyên khoa',
             'package_id' => 'ID gói khám',
             "description" =>  'Mô tả'
+
         ];
     }
 
