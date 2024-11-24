@@ -7423,7 +7423,89 @@
                                                                 "example": "male"
                                                             }
                                                         }
+                                                    },
+                                                    "medical_histories": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "225a6eae-2946-44e1-ab9d-7c91bef3e7c0"
+                                                                },
+                                                                "patient_id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "2106be70-9502-4c7a-944b-3367a0d203fd"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "example": "Bệnh án của bệnh nhân A"
+                                                                },
+                                                                "diagnosis": {
+                                                                    "type": "string",
+                                                                    "example": "Cúm A"
+                                                                },
+                                                                "treatment": {
+                                                                    "type": "string",
+                                                                    "example": "Nghỉ ngơi, uống thuốc"
+                                                                },
+                                                                "user_id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "266804ad-5c29-4c89-9737-c6f1a83858a7"
+                                                                },
+                                                                "created_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-11-18T11:06:36.000000Z"
+                                                                },
+                                                                "updated_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-11-18T11:21:58.000000Z"
+                                                                },
+                                                                "files": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "id": {
+                                                                                "type": "string",
+                                                                                "format": "uuid",
+                                                                                "example": "35b2434a-93c7-4b4d-9a62-fd212d119cff"
+                                                                            },
+                                                                            "file": {
+                                                                                "type": "string",
+                                                                                "example": "Url của file hehehe"
+                                                                            },
+                                                                            "description": {
+                                                                                "type": "string",
+                                                                                "example": "Kết quả chụp X-quang"
+                                                                            },
+                                                                            "medical_history_id": {
+                                                                                "type": "string",
+                                                                                "format": "uuid",
+                                                                                "example": "225a6eae-2946-44e1-ab9d-7c91bef3e7c0"
+                                                                            },
+                                                                            "created_at": {
+                                                                                "type": "string",
+                                                                                "format": "date-time",
+                                                                                "example": "2024-11-18T11:06:36.000000Z"
+                                                                            },
+                                                                            "updated_at": {
+                                                                                "type": "string",
+                                                                                "format": "date-time",
+                                                                                "example": "2024-11-18T11:21:58.000000Z"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
                                                     }
+
                                                 }
                                             }
                                         },
@@ -7855,7 +7937,88 @@
                                                             "example": "123456789"
                                                         }
                                                     }
-                                                }
+                                                },
+                                                "medical_histories": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "225a6eae-2946-44e1-ab9d-7c91bef3e7c0"
+                                                                },
+                                                                "patient_id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "2106be70-9502-4c7a-944b-3367a0d203fd"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "example": "Bệnh án của bệnh nhân A"
+                                                                },
+                                                                "diagnosis": {
+                                                                    "type": "string",
+                                                                    "example": "Cúm A"
+                                                                },
+                                                                "treatment": {
+                                                                    "type": "string",
+                                                                    "example": "Nghỉ ngơi, uống thuốc"
+                                                                },
+                                                                "user_id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "266804ad-5c29-4c89-9737-c6f1a83858a7"
+                                                                },
+                                                                "created_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-11-18T11:06:36.000000Z"
+                                                                },
+                                                                "updated_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-11-18T11:21:58.000000Z"
+                                                                },
+                                                                "files": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "id": {
+                                                                                "type": "string",
+                                                                                "format": "uuid",
+                                                                                "example": "35b2434a-93c7-4b4d-9a62-fd212d119cff"
+                                                                            },
+                                                                            "file": {
+                                                                                "type": "string",
+                                                                                "example": "Url của file hehehe"
+                                                                            },
+                                                                            "description": {
+                                                                                "type": "string",
+                                                                                "example": "Kết quả chụp X-quang"
+                                                                            },
+                                                                            "medical_history_id": {
+                                                                                "type": "string",
+                                                                                "format": "uuid",
+                                                                                "example": "225a6eae-2946-44e1-ab9d-7c91bef3e7c0"
+                                                                            },
+                                                                            "created_at": {
+                                                                                "type": "string",
+                                                                                "format": "date-time",
+                                                                                "example": "2024-11-18T11:06:36.000000Z"
+                                                                            },
+                                                                            "updated_at": {
+                                                                                "type": "string",
+                                                                                "format": "date-time",
+                                                                                "example": "2024-11-18T11:21:58.000000Z"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                             }
                                         }
                                     }

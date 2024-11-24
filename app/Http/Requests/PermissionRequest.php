@@ -29,7 +29,7 @@ class PermissionRequest extends FormRequest
 
         if ($this->method() == 'PUT') {
             $id = $this->route('id');
-            $rules['name'] = 'nullable|unique:actions,name,' . $id;
+            $rules['name'] = 'required|unique:actions,name,' . $id;
         }
 
         return $rules;

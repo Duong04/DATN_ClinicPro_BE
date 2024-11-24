@@ -15,11 +15,11 @@ class PatientRepository implements PatientRepositoryInterface
 
     public function paginate($limit, $q)
     {
-        $patients = Patient::with('identityCard', 'patientInfo')
+        $patients = Patient::with('identityCard', 'patientInfo', 'medicalHistories.files')
             ->when($q, function ($query, $q) {
                 $query->orWhereHas('patientInfo', function ($query) use ($q) {
                     $query->where('fullname', 'LIKE', "%{$q}%")
-                        ->orWhere('phone_number', 'LIKE', "%{$q}%")
+                        ->orWhere('phone_number', $q)
                         ->orWhere('address', 'LIKE', "%{$q}%")
                         ->orWhere('email', 'LIKE', "%{$q}%");
                 });
@@ -32,7 +32,7 @@ class PatientRepository implements PatientRepositoryInterface
 
     public function find($id)
     {
-        return Patient::with('patientInfo', 'identityCard')->find($id);
+        return Patient::with('patientInfo', 'identityCard', 'medicalHistories.files')->find($id);
     }
     public function create(array $data)
     {

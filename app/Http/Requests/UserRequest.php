@@ -32,7 +32,7 @@ class UserRequest extends FormRequest
             'user_info.address' => 'nullable',
             'user_info.phone_number' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
             'user_info.gender' => 'nullable|in:male,female,other',
-            'user_info.dob' => 'nullable|date',
+            'user_info.dob' => 'nullable|date|before_or_equal:today',
             'user_info.department_id' => 'nullable|exists:departments,id',
             'user_info.identity_card.type_name' => 'nullable',
             'user_info.identity_card.identity_card_number' => 'nullable'
@@ -57,7 +57,8 @@ class UserRequest extends FormRequest
             'status.in' => 'Trạng thái phải là một trong các giá trị: active, inactive!', 
             'date' => 'Vui lòng nhập đúng định dạng ngày tháng!',
             'exists' => 'Giá trị của :attribute không tồn tại!',
-            'regex' => ':attribute không đúng định dạng!'
+            'regex' => ':attribute không đúng định dạng!',
+            'dob.before_or_equal' => ':attribute không được lớn hơn ngày hiện tại!',
         ];
     }
 

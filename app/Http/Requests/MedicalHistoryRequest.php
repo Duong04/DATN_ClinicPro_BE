@@ -32,14 +32,6 @@ class MedicalHistoryRequest extends FormRequest
             'file_deletes' => 'nullable|array',
         ];
 
-        if ($this->method() == 'PUT') {
-            $rules['patient_id'] = 'nullable|exists:patients,id';
-            $rules['user_id'] = 'nullable|exists:users,id';
-            $rules['diagnosis'] = 'nullable';
-            $rules['treatment'] = 'nullable';
-            $rules['files.*.id'] = 'nullable';
-        }
-
         return $rules;
     }
 
