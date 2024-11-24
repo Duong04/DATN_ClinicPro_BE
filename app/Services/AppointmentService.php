@@ -93,7 +93,7 @@ class AppointmentService
     private function createPatient($dataPatient)
     {
         $patient = $this->patientRepository->create([]);
-        $dataPatient['patient_id'] = $patient->id;
+        $dataPatient['patient_id'] = $patient->patient_id;
 
         $this->patientInfoRepository->create($dataPatient);
         return $patient;

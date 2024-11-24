@@ -22,8 +22,8 @@ class UserResource extends JsonResource
             'status' => $this->status,
             'role' => new RoleResource($this->role),
             'user_info' => [
-                'fullname' => $userInfo->fullname,
-                'avatar' => $userInfo->avatar
+                'fullname' => $userInfo?->fullname,
+                'avatar' => $userInfo?->avatar
             ]
         ];
     }

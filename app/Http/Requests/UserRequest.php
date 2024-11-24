@@ -40,9 +40,7 @@ class UserRequest extends FormRequest
 
         if ($this->method() === 'PUT') {
             $id = $this->route('id');
-            $rules['email'] = 'nullable|email|unique:users,email,'.$id;
-            $rules['password'] = 'nullable|min:8';
-            $rules['user_info.fullname'] = 'nullable';
+            $rules['email'] = 'required|email|unique:users,email,'.$id;
         }
 
         return $rules;
