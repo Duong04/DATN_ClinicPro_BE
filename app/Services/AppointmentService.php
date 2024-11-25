@@ -110,6 +110,7 @@ class AppointmentService
         $patient = $this->patientRepository->create($data);
         $dataPatient['patient_id'] = $patient->id;
 
+
         $this->patientInfoRepository->create($dataPatient);
         return $patient;
     }
