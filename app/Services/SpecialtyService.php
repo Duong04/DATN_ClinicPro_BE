@@ -82,7 +82,7 @@ class SpecialtyService
 
             $this->specialtyRepository->delete($id);
 
-            return response()->json(['message' => 'Đã xóa thành công!'], 400);
+            return response()->json(['message' => 'Đã xóa thành công!'], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => 'không tìm thấy thông tin chuyên khoa!'], 404);
         }
