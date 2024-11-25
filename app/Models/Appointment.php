@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Appointment extends Model
 {
-    use HasFactory;
+    use HasFactory, UsesUuid;
 
     protected $table = 'appointments';
     protected $fillable = [
