@@ -31,7 +31,7 @@ class AppointmentRequest extends FormRequest
             'address' => 'required',
             'gender' => 'required',
             'dob' => 'required|date|before:now',
-            'appointment_date' => 'required|date|after:now',
+            'appointment_date' => 'required|date',
             "package_id" => 'required|exists:examination_packages,id',
             'description' =>  'nullable|string'
         ];
@@ -47,7 +47,6 @@ class AppointmentRequest extends FormRequest
             'regex' => ':attribute phải là số hợp lệ!',
             'date' => ':attribute phải là ngày hợp lệ!',
             'appointment_date.after' => ':attribute phải lớn hơn thời gian hiện tại!',
-            'appointment_date.before' => ':attribute phải nhỏ hơn thời gian hiện tại!',
             'exists' => 'Giá trị của :attribute không tồn tại!'
         ];
     }
