@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PatientInfo;
 use App\Models\IdentityCard;
-
+use App\Models\MedicalHistory;
 
 class Patient extends Model
 {
@@ -35,5 +35,9 @@ class Patient extends Model
     public function prescriptions()
     {
         return $this->hasMany(Prescription::class, 'patient_id');
+    }
+
+    public function medicalHistories() {
+        return $this->hasMany(MedicalHistory::class, 'patient_id');
     }
 }

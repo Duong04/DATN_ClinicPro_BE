@@ -29,8 +29,8 @@ class ActionRequest extends FormRequest
 
         if ($this->method() == 'PUT') {
             $id = $this->route('id');
-            $rules['name'] = 'nullable|unique:actions,name,' . $id;
-            $rules['value'] = 'nullable|unique:actions,value,' . $id;
+            $rules['name'] = 'required|unique:actions,name,' . $id;
+            $rules['value'] = 'required|unique:actions,value,' . $id;
         }
 
         return $rules;
