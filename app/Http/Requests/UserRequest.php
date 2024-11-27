@@ -23,7 +23,6 @@ class UserRequest extends FormRequest
     {
         $rules = [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8',
             'role_id' => 'required|exists:roles,id',
             'status' => 'nullable|in:active,inactive',
             'user_info.avatar' => 'nullable|string',
@@ -37,6 +36,10 @@ class UserRequest extends FormRequest
             'user_info.identity_card.type_name' => 'nullable',
             'user_info.identity_card.identity_card_number' => 'nullable'
         ];
+
+        if ($this->method() === 'POST') {
+            $rules['password'] = 'required|string';
+        }
 
         if ($this->method() === 'PUT') {
             $id = $this->route('id');

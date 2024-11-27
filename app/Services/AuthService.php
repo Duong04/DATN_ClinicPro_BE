@@ -52,7 +52,7 @@ class AuthService
 
             return response()->json(['message' => 'Đăng ký tài khoản thành công, vui lòng kiểm tra mail để kích hoạt tài khoản!'], 201);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 422);
+            return response()->json(['message' => $e->getMessage()], 422);
         }
     }
 
@@ -62,7 +62,7 @@ class AuthService
             $credentials = $request->validated();
 
             if (! $token = auth()->attempt($credentials)) {
-                return response()->json(['error' => 'Thông tin đăng nhập của bạn không chính xác!'], 401);
+                return response()->json(['message' => 'Thông tin đăng nhập của bạn không chính xác!'], 401);
             }
 
             $user = auth()->user();
@@ -71,12 +71,12 @@ class AuthService
                 'disabled' => 'đã bị vô hiệu hóa',
             ];
             if ($user->status == 'disabled' || $user->status == 'inactive') {
-                return response()->json(['error' => 'Tài khoản của bạn ' . $status[$user->status]], 403);
+                return response()->json(['message' => 'Tài khoản của bạn ' . $status[$user->status]], 403);
             }
 
             return $this->respondWithToken($token);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 422);
+            return response()->json(['message' => $e->getMessage()], 422);
         }
     }
 
@@ -85,7 +85,7 @@ class AuthService
         try {
             return $this->respondWithToken(auth()->refresh());
         } catch (Exception $e) {
-            return response()->json(['error' => 'Token invalid!'], 401);
+            return response()->json(['message' => 'Token invalid!'], 401);
         }
     }
 
@@ -94,7 +94,7 @@ class AuthService
         try {
             return response()->json(['data' => new UserResourceThree(auth()->user()->load('userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard', 'role.permissions.actions'))], 200);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Bạn không có quyền truy cập'], 401);
+            return response()->json(['message' => 'Bạn không có quyền truy cập'], 401);
         }
     }
 
@@ -126,7 +126,7 @@ class AuthService
 
             return response()->json(['message' => 'Cập nhật thông tin cá nhân thành công!', 'data' => new UserResource($user)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 401);
+            return response()->json(['message' => $th->getMessage()], 401);
         }
     }
 
@@ -147,7 +147,7 @@ class AuthService
                 return response()->json(['message' => 'Kích hoạt tài khoản thành công!'], 400);
             }
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
 
@@ -161,7 +161,7 @@ class AuthService
 
             return response()->json(['message' => 'Cập nhật mật khẩu thành công!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['message' => $th->getMessage()], 422);
         }
     }
 
@@ -191,7 +191,7 @@ class AuthService
 
             return response()->json(['message' => 'Mã otp đã được gửi vào email của bạn, vui lòng check mail để khôi phục lại mật khẩu!']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['message' => $th->getMessage()], 422);
         }
     }
 
@@ -236,7 +236,7 @@ class AuthService
 
             return response()->json(['message' => 'Mật khẩu của bạn đã được thay đổi!']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['message' => $th->getMessage()], 422);
         }
     }
 

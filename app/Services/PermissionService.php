@@ -18,7 +18,7 @@ class PermissionService {
 
             return response()->json(['data' => $actions], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
 
@@ -40,7 +40,7 @@ class PermissionService {
             return response()->json(['data' => $permissions], 200);
     
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
     
@@ -49,12 +49,12 @@ class PermissionService {
         try {
             $permission = $this->permissionRepository->find($id);
             if (empty($permission)) {
-                return response()->json(['error' => 'Permission not found!'], 404);
+                return response()->json(['message' => 'Permission not found!'], 404);
             }
 
             return response()->json(['data' => $permission], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
 
@@ -73,7 +73,7 @@ class PermissionService {
 
             return response()->json(['message' => 'Created permission successfully!', 'data' => $permission], 201);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['message' => $th->getMessage()], 422);
         }
     }
 
@@ -93,7 +93,7 @@ class PermissionService {
 
             return response()->json(['message' => 'Updated permission successfully!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['message' => $th->getMessage()], 422);
         }
     }
 
@@ -104,7 +104,7 @@ class PermissionService {
 
             return response()->json(['message' => 'Deleted action successfully!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Action not found!'], 404);
+            return response()->json(['message' => 'Action not found!'], 404);
         }
     }
 }
