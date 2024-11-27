@@ -16,7 +16,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
 
     public function all()
     {
-        return $this->appointment::all();
+        return $this->appointment::orderByDesc('created_at')->get();
     }
     public function find($id)
     {
@@ -24,7 +24,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     }
     public function findByPatient($id)
     {
-        return $this->appointment::where('patient_id', $id)->get();
+        return $this->appointment::where('patient_id', $id)->orderByDesc('created_at')->get();
     }
 
     public function create($data)

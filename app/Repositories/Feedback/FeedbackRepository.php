@@ -13,7 +13,7 @@ class FeedbackRepository implements FeedbackRepositoryInterface
     }
     public function all()
     {
-        return $this->feedback::all();
+        return $this->feedback::orderByDesc('created_at')->get();
     }
     public function find($id)
     {
@@ -22,7 +22,7 @@ class FeedbackRepository implements FeedbackRepositoryInterface
 
     public function findByIdPackage($id)
     {
-        return $this->feedback::where('package_id', $id)->get();
+        return $this->feedback::where('package_id', $id)->orderByDesc('created_at')->get();
     }
     public function create($data)
     {

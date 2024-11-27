@@ -14,7 +14,7 @@ class PrescriptionRepository implements PrescriptionRepositoryInterface
 
     public function all()
     {
-        return $this->prescription::all();
+        return $this->prescription::orderByDesc('created_at')->get();
     }
     public function find($id)
     {
@@ -22,7 +22,7 @@ class PrescriptionRepository implements PrescriptionRepositoryInterface
     }
     public function findByIdPatient($id)
     {
-        return $this->prescription::where('patient_id', $id)->get();
+        return $this->prescription::where('patient_id', $id)->orderByDesc('created_at')->get();
     }
     public function create($data)
     {

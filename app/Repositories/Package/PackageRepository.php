@@ -13,7 +13,7 @@ class PackageRepository implements PackageRepositoryInterface
     }
     public function all()
     {
-        return $this->package::all();
+        return $this->package::orderByDesc('created_at')->get();
     }
     public function show($id)
     {
@@ -26,7 +26,7 @@ class PackageRepository implements PackageRepositoryInterface
     }
     public function getBySpecialties($id)
     {
-        return $this->package::where('specialty_id', $id)->get();
+        return $this->package::where('specialty_id', $id)->orderByDesc('created_at')->get();
     }
 
     public function create($data)
