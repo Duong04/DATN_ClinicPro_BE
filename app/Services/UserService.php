@@ -30,15 +30,16 @@ class UserService {
             
             if ($limit) {
                 return response()->json([
+                    'success' => true,
                     'data' => UserResourceTwo::collection($users->items()),
                     'prev_page_url' => $users->previousPageUrl(),
                     'next_page_url' => $users->nextPageUrl(),
                     'total' => $users->total()
                 ], 200);
             }
-            return response()->json(['data' => UserResourceTwo::collection($users)], 200);
+            return response()->json(['success' => true, 'data' => UserResourceTwo::collection($users)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -49,15 +50,16 @@ class UserService {
         
             if ($limit) {
                 return response()->json([
+                    'success' => true,
                     'data' => $users->items(),
                     'prev_page_url' => $users->previousPageUrl(),
                     'next_page_url' => $users->nextPageUrl(),
                     'total' => $users->total()
                 ], 200);
             }
-            return response()->json(['data' => $users], 200);
+            return response()->json(['success' => true, 'data' => $users], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -69,15 +71,16 @@ class UserService {
             
             if ($limit) {
                 return response()->json([
+                    'success' => true,
                     'data' => UserResourceTwo::collection($users->items()),
                     'prev_page_url' => $users->previousPageUrl(),
                     'next_page_url' => $users->nextPageUrl(),
                     'total' => $users->total()
                 ], 200);
             }
-            return response()->json(['data' => UserResourceTwo::collection($users)], 200);
+            return response()->json(['success' => true, 'data' => UserResourceTwo::collection($users)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -111,12 +114,13 @@ class UserService {
             $user = $this->userRepository->find($user->id, ['userInfo.identityCard']);
     
             return response()->json([
+                'success' => true,
                 'message' => 'Tạo tài khoản thành công!',
                 'data' => $user
             ], 201);
     
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
@@ -124,9 +128,9 @@ class UserService {
         try {
             $users = $this->userRepository->getBySpecialtyId($specialtyId);
 
-            return response()->json(['data' => UserResourceSix::collection($users)], 200);
+            return response()->json(['success' => true, 'data' => UserResourceSix::collection($users)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -167,9 +171,9 @@ class UserService {
             }
     
             $user = $this->userRepository->find($user->id, ['userInfo.identityCard']);
-            return response()->json(['message' => 'Cập nhật tài khoản thành công'], 200);
+            return response()->json(['success' => true, 'message' => 'Cập nhật tài khoản thành công'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
@@ -178,12 +182,12 @@ class UserService {
             $user = $this->userRepository->find( $id, ['role', 'userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard']);
 
             if (empty($user)) {
-                return response()->json(['error' => 'Không tìm thấy người dùng!'], 404);
+                return response()->json(['message' => 'Không tìm thấy người dùng!'], 404);
             }
 
-            return response()->json(['data' => new UserResourceTwo($user)], 200);
+            return response()->json(['success' => true, 'data' => new UserResourceTwo($user)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 }

@@ -16,9 +16,9 @@ class PermissionService {
         try {
             $actions = $this->permissionRepository->all();
 
-            return response()->json(['data' => $actions], 200);
+            return response()->json(['success' => true, 'data' => $actions], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -37,10 +37,10 @@ class PermissionService {
                 ], 200);
             }
     
-            return response()->json(['data' => $permissions], 200);
+            return response()->json(['success' => true, 'data' => $permissions], 200);
     
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
     
@@ -49,12 +49,12 @@ class PermissionService {
         try {
             $permission = $this->permissionRepository->find($id);
             if (empty($permission)) {
-                return response()->json(['error' => 'Permission not found!'], 404);
+                return response()->json(['success' => false, 'message' => 'Permission not found!'], 404);
             }
 
-            return response()->json(['data' => $permission], 200);
+            return response()->json(['success' => true, 'data' => $permission], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -71,9 +71,9 @@ class PermissionService {
                 }
             }
 
-            return response()->json(['message' => 'Created permission successfully!', 'data' => $permission], 201);
+            return response()->json(['success' => true, 'message' => 'Created permission successfully!', 'data' => $permission], 201);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
@@ -91,9 +91,9 @@ class PermissionService {
                 }
             }
 
-            return response()->json(['message' => 'Updated permission successfully!'], 200);
+            return response()->json(['success' => true, 'message' => 'Updated permission successfully!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
@@ -102,9 +102,9 @@ class PermissionService {
 
             $this->permissionRepository->delete($id);
 
-            return response()->json(['message' => 'Deleted action successfully!'], 200);
+            return response()->json(['success' => true, 'message' => 'Deleted action successfully!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Action not found!'], 404);
+            return response()->json(['success' => false, 'message' => 'Action not found!'], 404);
         }
     }
 }

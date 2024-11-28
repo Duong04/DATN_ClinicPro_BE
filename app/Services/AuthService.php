@@ -50,9 +50,9 @@ class AuthService
             $url = url("/api/v1/verify-email/$token");
             Mail::to($data['email'])->send(new VerifyEmail($url, $data['email']));
 
-            return response()->json(['message' => 'Đăng ký tài khoản thành công, vui lòng kiểm tra mail để kích hoạt tài khoản!'], 201);
+            return response()->json(['success' => true, 'message' => 'Đăng ký tài khoản thành công, vui lòng kiểm tra mail để kích hoạt tài khoản!'], 201);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
     }
 
@@ -62,7 +62,7 @@ class AuthService
             $credentials = $request->validated();
 
             if (! $token = auth()->attempt($credentials)) {
-                return response()->json(['error' => 'Thông tin đăng nhập của bạn không chính xác!'], 401);
+                return response()->json(['success' => false, 'message' => 'Thông tin đăng nhập của bạn không chính xác!'], 401);
             }
 
             $user = auth()->user();
@@ -71,12 +71,12 @@ class AuthService
                 'disabled' => 'đã bị vô hiệu hóa',
             ];
             if ($user->status == 'disabled' || $user->status == 'inactive') {
-                return response()->json(['error' => 'Tài khoản của bạn ' . $status[$user->status]], 403);
+                return response()->json(['success' => false, 'message' => 'Tài khoản của bạn ' . $status[$user->status]], 403);
             }
 
             return $this->respondWithToken($token);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
     }
 
@@ -85,16 +85,16 @@ class AuthService
         try {
             return $this->respondWithToken(auth()->refresh());
         } catch (Exception $e) {
-            return response()->json(['error' => 'Token invalid!'], 401);
+            return response()->json(['success' => false, 'message' => 'Token invalid!'], 401);
         }
     }
 
     public function profile()
     {
         try {
-            return response()->json(['data' => new UserResourceThree(auth()->user()->load('userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard', 'role.permissions.actions'))], 200);
+            return response()->json(['success' => true, 'data' => new UserResourceThree(auth()->user()->load('userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard', 'role.permissions.actions'))], 200);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Bạn không có quyền truy cập'], 401);
+            return response()->json(['success' => false, 'message' => 'Bạn không có quyền truy cập'], 401);
         }
     }
 
@@ -124,9 +124,9 @@ class AuthService
 
             $user->update($data);
 
-            return response()->json(['message' => 'Cập nhật thông tin cá nhân thành công!', 'data' => new UserResource($user)], 200);
+            return response()->json(['success' => true, 'message' => 'Cập nhật thông tin cá nhân thành công!', 'data' => new UserResource($user)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 401);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 401);
         }
     }
 
@@ -144,10 +144,10 @@ class AuthService
             ]);
 
             if ($updateStatus) {
-                return response()->json(['message' => 'Kích hoạt tài khoản thành công!'], 400);
+                return response()->json(['success' => true, 'message' => 'Kích hoạt tài khoản thành công!'], 400);
             }
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -159,9 +159,9 @@ class AuthService
 
             $this->userRepository->update($id, ['password' => $data['new_password']]);
 
-            return response()->json(['message' => 'Cập nhật mật khẩu thành công!'], 200);
+            return response()->json(['success' => true, 'message' => 'Cập nhật mật khẩu thành công!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
@@ -189,9 +189,9 @@ class AuthService
 
             Mail::to($email)->send(new ForgotPassword($otp, $email));
 
-            return response()->json(['message' => 'Mã otp đã được gửi vào email của bạn, vui lòng check mail để khôi phục lại mật khẩu!']);
+            return response()->json(['success' => true, 'message' => 'Mã otp đã được gửi vào email của bạn, vui lòng check mail để khôi phục lại mật khẩu!']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
@@ -222,10 +222,10 @@ class AuthService
                 ->first();
 
             if (!$passwordReset) {
-                return response()->json(['error' => 'OTP không hợp lệ'], 400);
+                return response()->json(['success' => false, 'message' => 'OTP không hợp lệ'], 400);
             } else if ($passwordReset->expires_at < now('Asia/Ho_Chi_Minh')) {
                 PasswordReset::where('otp', $otp)->delete();
-                return response()->json(['error' => 'OTP đã hết hạn'], 400);
+                return response()->json(['success' => false, 'message' => 'OTP đã hết hạn'], 400);
             }
 
             $passwordReset->user->update([
@@ -234,9 +234,9 @@ class AuthService
 
             PasswordReset::where('user_id', $passwordReset->user_id)->delete();
 
-            return response()->json(['message' => 'Mật khẩu của bạn đã được thay đổi!']);
+            return response()->json(['success' => true, 'message' => 'Mật khẩu của bạn đã được thay đổi!']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
@@ -244,12 +244,13 @@ class AuthService
     {
         auth()->logout(true);
 
-        return response()->json(['message' => 'Tài khoản của bạn đã được đăng xuất!'], 200);
+        return response()->json(['success' => true, 'message' => 'Tài khoản của bạn đã được đăng xuất!'], 200);
     }
 
     private function respondWithToken($token)
     {
         return response()->json([
+            'success' => true,
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,

@@ -23,6 +23,7 @@ class MedicalHistoryService {
 
             if ($limit) {
                 return response()->json([
+                    'success' => true,
                     'data' => MedicalHistoryResource::collection($medicalHistories->items()),
                     'prev_page_url' => $medicalHistories->previousPageUrl(),
                     'next_page_url' => $medicalHistories->nextPageUrl(),
@@ -30,9 +31,9 @@ class MedicalHistoryService {
                 ], 200);
             }
     
-            return response()->json(['data' => MedicalHistoryResource::collection($medicalHistories)], 200);
+            return response()->json(['success' => true, 'data' => MedicalHistoryResource::collection($medicalHistories)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -40,12 +41,12 @@ class MedicalHistoryService {
         try {
             $data = $this->medicalHistoryRepository->find($id);
             if (empty($data)) {
-                return response()->json(['error' => 'Không tìm thấy lịch sử bệnh án'], 404);
+                return response()->json(['success' => false, 'message' => 'Không tìm thấy lịch sử bệnh án'], 404);
             }
 
-            return response()->json(['data' => new MedicalHistoryResource($data)], 200);
+            return response()->json(['success' => true, 'data' => new MedicalHistoryResource($data)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -63,9 +64,9 @@ class MedicalHistoryService {
 
             $medicalHistory = $this->medicalHistoryRepository->find($medicalHistory->id);
 
-            return response()->json(['message' => 'Tạo lịch sử bệnh án thành công!', 'data' => new MedicalHistoryResource($medicalHistory)], 201);
+            return response()->json(['success' => true, 'message' => 'Tạo lịch sử bệnh án thành công!', 'data' => new MedicalHistoryResource($medicalHistory)], 201);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -74,12 +75,12 @@ class MedicalHistoryService {
         try {
             $medicalHistories = $this->medicalHistoryRepository->getByPatientId($patient_id);
             if (count($medicalHistories) <= 0) {
-                return response()->json(['error' => 'Không tìm thấy hồ sơ bệnh án của người này'], 404);
+                return response()->json(['success' => false, 'message' => 'Không tìm thấy hồ sơ bệnh án của người này'], 404);
             }
 
-            return response()->json(['data' => MedicalHistoryResource::collection($medicalHistories)], 200);
+            return response()->json(['success' => true, 'data' => MedicalHistoryResource::collection($medicalHistories)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -110,9 +111,9 @@ class MedicalHistoryService {
                 } 
             }
 
-            return response()->json(['message' => 'Cập nhật lịch sử bệnh án thành công!'], 200);
+            return response()->json(['success' => true, 'message' => 'Cập nhật lịch sử bệnh án thành công!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -120,9 +121,9 @@ class MedicalHistoryService {
         try {
             $this->medicalHistoryRepository->delete($id);
 
-            return response()->json(['message' => 'Xóa lịch sử bệnh án thành công!'], 200);
+            return response()->json(['success' => true, 'message' => 'Xóa lịch sử bệnh án thành công!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Không tìm thấy lịch sử bệnh án!'], 404);
+            return response()->json(['success' => false, 'message' => 'Không tìm thấy lịch sử bệnh án!'], 404);
         }
     }
 }

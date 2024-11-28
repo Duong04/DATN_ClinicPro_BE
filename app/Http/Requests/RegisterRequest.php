@@ -24,9 +24,12 @@ class RegisterRequest extends FormRequest
         $rules = [
             'fullname' => 'required|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8',
-            'regex:/[A-Z]/',
-            'regex:/[@$!%*#?&]/'
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/[A-Z]/',         
+                'regex:/[@$!%*#?&]/'   
+            ],
         ];
 
         return $rules;
@@ -45,6 +48,7 @@ class RegisterRequest extends FormRequest
 
     public function attributes() {
         return [
+            'email' => 'Email',
             'password' => 'Mật khẩu',
             'fullname' => 'Họ và tên',
         ];

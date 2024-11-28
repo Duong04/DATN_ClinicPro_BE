@@ -16,9 +16,9 @@ class ActionService {
         try {
             $actions = $this->actionRepository->all();
 
-            return response()->json(['data' => $actions], 200);
+            return response()->json(['success' => true, 'data' => $actions], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -30,6 +30,7 @@ class ActionService {
     
             if ($limit) {
                 return response()->json([
+                    'success' => true,
                     'data' => $actions->items(),
                     'prev_page_url' => $actions->previousPageUrl(),
                     'next_page_url' => $actions->nextPageUrl(),
@@ -37,10 +38,10 @@ class ActionService {
                 ], 200);
             }
     
-            return response()->json(['data' => $actions], 200);
+            return response()->json(['success' => true, 'data' => $actions], 200);
     
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
     
@@ -49,12 +50,12 @@ class ActionService {
         try {
             $action = $this->actionRepository->find($id);
             if (empty($action)) {
-                return response()->json(['error' => 'Action not found!'], 404);
+                return response()->json(['success' => false, 'message' => 'Action not found!'], 404);
             }
 
-            return response()->json(['data' => $action], 200);
+            return response()->json(['success' => true, 'data' => $action], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -71,9 +72,9 @@ class ActionService {
                 }
             }
 
-            return response()->json(['message' => 'Created action successfully!', 'data' => $action], 201);
+            return response()->json(['success' => true, 'message' => 'Created action successfully!', 'data' => $action], 201);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
@@ -91,9 +92,9 @@ class ActionService {
                 }
             }
 
-            return response()->json(['message' => 'Updated action successfully!'], 200);
+            return response()->json(['success' => true, 'message' => 'Updated action successfully!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
@@ -102,9 +103,9 @@ class ActionService {
 
             $this->actionRepository->delete($id);
 
-            return response()->json(['message' => 'Deleted action successfully!'], 200);
+            return response()->json(['success' => true, 'message' => 'Deleted action successfully!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Action not found!'], 404);
+            return response()->json(['success' => false, 'message' => 'Action not found!'], 404);
         }
     }
 }
