@@ -28,6 +28,10 @@ class UserRepository implements UserRepositoryInterface {
                 $query->where('department_id', $department);
               });
         }
+
+        $users->whereHas('role', function ($query) {
+            $query->where('name', '!=', 'patient');
+        });
     
         return $limit ? $users->paginate($limit) : $users->get();
     }
@@ -46,6 +50,10 @@ class UserRepository implements UserRepositoryInterface {
                           $query->where('name', 'LIKE', "%{$q}%");
                         });
             });
+        $users->whereHas('role', function ($query) {
+            $query->where('name', '!=', 'patient');
+        });
+
         $users->orderByDesc('created_at');
 
         return $limit ? $users->paginate($limit) : $users->get();
@@ -70,7 +78,9 @@ class UserRepository implements UserRepositoryInterface {
         return $users;
     }
     public function find($id, array $relation) {
-        return user::with($relation)->find($id);
+        return user::with($relation)->whereHas('role', function ($query) {
+            $query->where('name', '!=', 'patient');
+        })->find($id);
     }
     public function create(array $data) {
         return User::create($data);

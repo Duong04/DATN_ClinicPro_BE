@@ -30,7 +30,7 @@ class SpecialtyService
             }
             return response()->json(['data' => $specialties], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
 
@@ -39,12 +39,12 @@ class SpecialtyService
         try {
             $specialty = $this->specialtyRepository->find($id);
             if (empty($specialty)) {
-                return response()->json(['error' => 'Không tìm thấy chuyên khoa!'], 404);
+                return response()->json(['message' => 'Không tìm thấy chuyên khoa!'], 404);
             }
 
             return  response()->json(['data' => $specialty]);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
 
@@ -56,7 +56,7 @@ class SpecialtyService
 
             return response()->json(['message' => 'Thêm chuyên khoa thành công!', 'data' => $specialty], 201);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['message' => $th->getMessage()], 422);
         }
     }
 
@@ -68,7 +68,7 @@ class SpecialtyService
 
             return response()->json(['message' => 'Cập nhật thông tin chuyên khoa thành công!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['message' => $th->getMessage()], 422);
         }
     }
 
@@ -77,14 +77,14 @@ class SpecialtyService
         try {
             $specialty = $this->specialtyRepository->find($id);
             if ($specialty->doctors_count > 0) {
-                return response()->json(['error' => 'Chuyên khoa này đã được gán cho bác sĩ không thể xóa được!'], 400);
+                return response()->json(['message' => 'Chuyên khoa này đã được gán cho bác sĩ không thể xóa được!'], 400);
             }
 
             $this->specialtyRepository->delete($id);
 
             return response()->json(['message' => 'Đã xóa thành công!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'không tìm thấy thông tin chuyên khoa!'], 404);
+            return response()->json(['message' => 'không tìm thấy thông tin chuyên khoa!'], 404);
         }
     }
 }

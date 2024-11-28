@@ -29,15 +29,10 @@ class PatientRequest extends FormRequest
             'user_info.phone_number' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
             'user_info.address' => 'nullable|string',
             'user_info.gender' => 'nullable|in:male,female,other',
-            'user_info.dob' => 'nullable|date',
+            'user_info.dob' => 'nullable|date|before_or_equal:today',
             'identity_card.type_name' => 'nullable',
             'identity_card.identity_card_number' => 'nullable'
         ];
-
-        if ($this->method() == 'PUT') {
-            $rules['user_info.fullname'] = 'nullable|string';
-            $rules['user_info.email'] = 'nullable|email|unique:patient_infos,email|unique:users,email';
-        }
 
         return $rules;
     }
@@ -52,7 +47,8 @@ class PatientRequest extends FormRequest
             'status.in' => 'Trạng thái phải là một trong các giá trị: active, inactive, deceased, transferred!', 
             'date' => 'Vui lòng nhập đúng định dạng ngày tháng!',
             'regex' => ':attribute không đúng định dạng!',
-            'string' => 'attribute phải là 1 là string'
+            'string' => 'attribute phải là 1 là string',
+            'dob.before_or_equal' => ':attribute không được lớn hơn ngày hiện tại!',
         ];
     }
 

@@ -38,7 +38,7 @@ class UserService {
             }
             return response()->json(['data' => UserResourceTwo::collection($users)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
 
@@ -57,7 +57,7 @@ class UserService {
             }
             return response()->json(['data' => $users], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
 
@@ -77,7 +77,7 @@ class UserService {
             }
             return response()->json(['data' => UserResourceTwo::collection($users)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
 
@@ -116,7 +116,7 @@ class UserService {
             ], 201);
     
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['message' => $th->getMessage()], 422);
         }
     }
 
@@ -126,7 +126,7 @@ class UserService {
 
             return response()->json(['data' => UserResourceSix::collection($users)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
 
@@ -169,7 +169,7 @@ class UserService {
             $user = $this->userRepository->find($user->id, ['userInfo.identityCard']);
             return response()->json(['message' => 'Cập nhật tài khoản thành công'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return response()->json(['message' => $th->getMessage()], 422);
         }
     }
 
@@ -178,12 +178,12 @@ class UserService {
             $user = $this->userRepository->find( $id, ['role', 'userInfo.identityCard', 'patient.patientInfo', 'patient.identityCard']);
 
             if (empty($user)) {
-                return response()->json(['error' => 'Không tìm thấy người dùng!'], 404);
+                return response()->json(['message' => 'Không tìm thấy người dùng!'], 404);
             }
 
             return response()->json(['data' => new UserResourceTwo($user)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
 }
