@@ -23,7 +23,7 @@ class DepartmentRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|unique:departments,name',
-            'manager_id' => 'nullable|exists:users,id',
+            'manager_id' => 'nullable|exists:users,id|unique:departments,manager_id',
             'description' => 'nullable',
             'users' => 'nullable|array',
         ];
@@ -31,6 +31,7 @@ class DepartmentRequest extends FormRequest
         if ($this->method() == 'PUT') {
             $id = $this->route('id');
             $rules['name'] = 'required|unique:departments,name,'.$id;
+            $rules['manager_id'] = 'nullable|exists:users,id|unique:departments,manager_id,'.$id;
             $rules['users_delete'] = 'nullable|array';
         }
 
@@ -50,7 +51,8 @@ class DepartmentRequest extends FormRequest
         return [
             'name' => 'Tên',
             'description' => 'Mô tả',
-            'users' => 'Danh sách người dùng'
+            'users' => 'Danh sách người dùng',
+            'manager_id' => 'Quản lý'
         ];
     }
 }

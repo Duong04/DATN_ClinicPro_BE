@@ -27,9 +27,9 @@ class UserRequest extends FormRequest
             'status' => 'nullable|in:active,inactive',
             'user_info.avatar' => 'nullable|string',
             'doctor.specialty_id' => 'nullable|exists:specialties,id',
-            'user_info.fullname' => 'required',
+            'user_info.fullname' => ['required', 'regex:/^[a-zA-Z0-9\s]/'],
             'user_info.address' => 'nullable',
-            'user_info.phone_number' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
+            'user_info.phone_number' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:10',
             'user_info.gender' => 'nullable|in:male,female,other',
             'user_info.dob' => 'nullable|date|before_or_equal:today',
             'user_info.department_id' => 'nullable|exists:departments,id',
@@ -55,6 +55,7 @@ class UserRequest extends FormRequest
             'email' => 'Vui lòng nhập đúng định dạng email!',
             'unique' => ':attribute này đã tồn tại!',
             'min' => ':attribute không được nhỏ hơn :min kí tự!',
+            'max' => ':attribute không được lớn hơn :max kí tự!',
             'image' => ':attribute phải là 1 ảnh!' ,
             'user_info.gender.in' => ':attribute phải là một trong các giá trị: male, female, other!', 
             'status.in' => 'Trạng thái phải là một trong các giá trị: active, inactive!', 
@@ -67,6 +68,7 @@ class UserRequest extends FormRequest
 
     public function attributes() {
         return [
+            'email' => 'Email',
             'status' => 'Trạng thái',
             'user_info.fullname' => 'Họ và tên',
             'user_info.address' => 'Địa chỉ',
