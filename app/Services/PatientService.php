@@ -24,6 +24,7 @@ class PatientService {
 
             if ($limit) {
                 return response()->json([
+                    'success' => true,
                     'data' => PatientResource::collection($patients->items()),
                     'prev_page_url' => $patients->previousPageUrl(),
                     'next_page_url' => $patients->nextPageUrl(),
@@ -31,9 +32,9 @@ class PatientService {
                 ], 200);
             }
     
-            return response()->json(['data' => PatientResource::collection($patients)], 200);
+            return response()->json(['success' => true, 'data' => PatientResource::collection($patients)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['message' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -42,12 +43,12 @@ class PatientService {
             $patient = $this->patientRepository->find($id);
 
             if (empty($patient)) {
-                return response()->json(['message' => 'Không tìm thấy thông tin bệnh nhân!'], 404);
+                return response()->json(['success' => true, 'message' => 'Không tìm thấy thông tin bệnh nhân!'], 404);
             }
 
-            return response()->json(['data' =>new PatientResource($patient)], 200);
+            return response()->json(['success' => true, 'data' =>new PatientResource($patient)], 200);
         } catch (\Throwable $th) {
-            return response()->json(['message' => $th->getMessage()], 400);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
     }
 
@@ -71,9 +72,9 @@ class PatientService {
             }
 
             $patient = $this->patientRepository->find($patient->id);
-            return response()->json(['message' => 'Thông tin bệnh nhân đã được tạo', 'data' => $patient], 201);
+            return response()->json(['success' => true, 'message' => 'Thông tin bệnh nhân đã được tạo', 'data' => $patient], 201);
         } catch (\Throwable $th) {
-            return response()->json(['message' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
@@ -91,9 +92,9 @@ class PatientService {
                 PatientInfo::where('patient_id', $id)->update($data['user_info']); 
             }
 
-            return response()->json(['message' => 'Cập nhật thông tin bệnh nhân thành công!'], 200);
+            return response()->json(['success' => true, 'message' => 'Cập nhật thông tin bệnh nhân thành công!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['message' => $th->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 422);
         }
     }
 
