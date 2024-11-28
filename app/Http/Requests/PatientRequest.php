@@ -24,7 +24,7 @@ class PatientRequest extends FormRequest
         $rules = [
             'insurance_number' => 'nullable',
             'status' => 'nullable|in:active,inactive,deceased,transferred',
-            'user_info.fullname' => 'required|string',
+            'user_info.fullname' => ['required', 'regex:/^[a-zA-Z0-9\s]/'],
             'user_info.email' => 'required|email|unique:patient_infos,email|unique:users,email',
             'user_info.phone_number' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
             'user_info.address' => 'nullable|string',
@@ -33,6 +33,11 @@ class PatientRequest extends FormRequest
             'identity_card.type_name' => 'nullable',
             'identity_card.identity_card_number' => 'nullable'
         ];
+
+        if ($this->method() === 'PUT') {
+            $id = $this->route('id');
+            $rules['email'] = 'required|email|unique:patient_infos,email|unique:users,email,'.$id;
+        }
 
         return $rules;
     }
@@ -58,6 +63,7 @@ class PatientRequest extends FormRequest
             'insurance_number' => 'Bảo hiểm',
             'user_info.fullname' => 'Họ và tên',
             'user_info.address' => 'Địa chỉ',
+            'user_info.email' => 'Email',
             'user_info.phone_number' => 'Số điện thoại',
             'user_info.gender' => 'Giới tính',
             'user_info.dob' => 'Ngày sinh',

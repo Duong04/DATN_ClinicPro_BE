@@ -38,6 +38,7 @@ class LoginRequest extends FormRequest
 
     public function attributes() {
         return [
+            'email' => 'Email',
             'password' => 'Mật khẩu',
         ];
     }

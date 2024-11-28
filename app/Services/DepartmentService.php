@@ -5,6 +5,7 @@ use App\Http\Resources\DepartmentResource;
 use App\Repositories\Department\DepartmentRepositoryInterface;
 use App\Repositories\UserInfo\UserInfoRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
+
 class DepartmentService {
     private $departmentRepository;
     private $userInfoRepository;
@@ -42,15 +43,26 @@ class DepartmentService {
             $department = '';
 
             if (isset($data['users'])) {
+                $errors = [];
+
                 foreach ($data['users'] as $user) {
                     $existingUser = $this->userRepository->find($user, ['userInfo']);
-
+                    
                     if ($existingUser && $existingUser->userInfo->department_id) {
-                        return response()->json([
-                            'success' => false, 'message' => "Người dùng ID $user đã thuộc phòng ban khác!"
-                        ], 422);
+                        $errors[] = "{$existingUser->userInfo->fullname} đã thuộc phòng ban khác!";
                     }
-                    $department = $this->departmentRepository->create($data);
+                }
+                
+                if (!empty($errors)) {
+                    return response()->json([
+                        'success' => false, 
+                        'errors' => ['users' => $errors]
+                    ], 422);
+                }
+
+                $department = $this->departmentRepository->create($data);
+
+                foreach ($data['users'] as $user) {
                     $this->userInfoRepository->update($user, [
                         'department_id' => $department->id
                     ]);
@@ -81,20 +93,33 @@ class DepartmentService {
             $data = $request->validated();
 
             if (isset($data['users'])) {
+                
+                $errors = [];
+
                 foreach ($data['users'] as $user) {
                     $existingUser = $this->userRepository->find($user, ['userInfo']);
 
                     if ($existingUser && $existingUser->userInfo->department_id && $existingUser->userInfo->department_id != $id) {
-                        return response()->json([
-                            'success' => false, 'message' => "Người dùng ID $user đã thuộc phòng ban khác!"
-                        ], 422);
+                        $errors[] = "{$existingUser->userInfo->fullname} đã thuộc phòng ban khác!";
                     }
-                    $department = $this->departmentRepository->update($id, $data);
+                }
 
+                if (!empty($errors)) {
+                    return response()->json([
+                        'success' => false,
+                        'errors' => ['users' => $errors]
+                    ], 422);
+                }
+
+                $department = $this->departmentRepository->update($id, $data);
+
+                foreach ($data['users'] as $user) {
                     $this->userInfoRepository->update($user, [
                         'department_id' => $id
                     ]);
                 }
+            }else {
+                $department = $this->departmentRepository->update($id, $data);
             }
 
             if (isset($data['users_delete'])) {
