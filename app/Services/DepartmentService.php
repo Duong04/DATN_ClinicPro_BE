@@ -1,27 +1,32 @@
 <?php
+
 namespace App\Services;
 
 use App\Http\Resources\DepartmentResource;
 use App\Repositories\Department\DepartmentRepositoryInterface;
 use App\Repositories\UserInfo\UserInfoRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
-class DepartmentService {
+
+class DepartmentService
+{
     private $departmentRepository;
     private $userInfoRepository;
     private $userRepository;
 
-    public function __construct(DepartmentRepositoryInterface $departmentRepository, UserInfoRepositoryInterface $userInfoRepository, UserRepositoryInterface $userRepository) {
+    public function __construct(DepartmentRepositoryInterface $departmentRepository, UserInfoRepositoryInterface $userInfoRepository, UserRepositoryInterface $userRepository)
+    {
         $this->departmentRepository = $departmentRepository;
         $this->userInfoRepository = $userInfoRepository;
         $this->userRepository = $userRepository;
     }
 
-    public function getPaginate($request) {
+    public function getPaginate($request)
+    {
         try {
             $limit = $request->query('limit');
             $q = $request->query('q');
             $departments = $this->departmentRepository->paginate($limit, $q);
-            
+
             if ($limit) {
                 return response()->json([
                     'data' => $departments->items(),
@@ -36,7 +41,8 @@ class DepartmentService {
         }
     }
 
-    public function create($request) {
+    public function create($request)
+    {
         try {
             $data = $request->validated();
             $department = $this->departmentRepository->create($data);
@@ -65,7 +71,8 @@ class DepartmentService {
         }
     }
 
-    public function update($request, $id) {
+    public function update($request, $id)
+    {
         try {
 
             $checkExist = $this->departmentRepository->find($id);
@@ -109,7 +116,8 @@ class DepartmentService {
         }
     }
 
-    public function findById($id) {
+    public function findById($id)
+    {
         try {
             $department = $this->departmentRepository->find($id);
 
@@ -123,12 +131,13 @@ class DepartmentService {
         }
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         try {
             $check_role = $this->departmentRepository->find($id);
             if ($check_role->users_count > 0) {
                 return response()->json(['error' => 'Phòng ban này đã được gán cho người dùng không thể xóa được!'], 400);
-            } 
+            }
 
             $this->departmentRepository->delete($id);
 

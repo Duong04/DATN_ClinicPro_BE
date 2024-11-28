@@ -26,6 +26,10 @@ class PrescriptionController extends Controller
     {
         return $this->respondWithData(fn() => $this->prescriptionService->listByIdPatient($id));
     }
+    public function getByMedicalHistory($id)
+    {
+        return $this->respondWithData(fn() => $this->prescriptionService->getByMedicalHistory($id));
+    }
     public function store(PrescriptionRequest $request)
     {
         return $this->respondWithData(fn() => $this->prescriptionService->create($request), '', 201);
@@ -45,7 +49,7 @@ class PrescriptionController extends Controller
             $data = $callback();
             return response()->json(['data' => $data], $successStatus);
         } catch (\Exception $e) {
-            $status = str_contains($e->getMessage(), 'not found')   ? 404 : 500;
+            $status = str_contains($e->getMessage(), 'không tồn tại')   ? 404 : 500;
             return response()->json(['success' => false, 'message' => $e->getMessage() ?: $message], $status);
         }
     }

@@ -43,7 +43,8 @@ class MedicalHistoryRequest extends FormRequest
         return $rules;
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'required' => ':attribute là bắt buộc!',
             'string' => ':attribute này phải là 1 string',
@@ -52,7 +53,8 @@ class MedicalHistoryRequest extends FormRequest
         ];
     }
 
-    public function attributes() {
+    public function attributes()
+    {
         return [
             'description' => 'Mô tả',
             'diagnosis' => 'Chẩn đoán',

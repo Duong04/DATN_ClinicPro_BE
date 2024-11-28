@@ -4160,7 +4160,6 @@
                             "example": "doctor"
                         },
                         "description": "Filter theo role name"
-
                     },
                     {
                         "name": "department",
@@ -5019,141 +5018,144 @@
             }
         },
         "/api/v1/users/{id}/specialty": {
-  "get": {
-    "tags": ["Users"],
-    "summary": "Lấy danh sách người dùng với thông tin chuyên ngành",
-    "description": "API này trả về danh sách người dùng có thông tin chuyên ngành, bao gồm khả năng phân trang.",
-    "operationId": "getUserSpecialty",
-    "security": [
-      {
-        "bearerAuth": []
-      }
-    ],
-    "parameters": [
-      {
-        "name": "id",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "example": "8a9c264e-d283-4550-a14c-cf932199f2dc"
-        },
-        "description": "ID của chuyên khoa."
-      }
-    ],
-    "responses": {
-      "200": {
-        "description": "Danh sách người dùng với thông tin chuyên ngành",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
-                      },
-                      "email": {
-                        "type": "string",
-                        "example": "johndoe@examplesdwkmcdfjewjfd.com"
-                      },
-                      "status": {
-                        "type": "string",
-                        "example": "active"
-                      },
-                      "fullname": {
-                        "type": "string",
-                        "example": "Nguyễn Văn A"
-                      },
-                      "avatar": {
-                        "type": "string",
-                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                      },
-                      "address": {
-                        "type": "string",
-                        "example": "123 Main St, City, Country"
-                      },
-                      "phone_number": {
-                        "type": "string",
-                        "example": "0987654321"
-                      },
-                      "gender": {
-                        "type": "string",
-                        "example": "other"
-                      },
-                      "dob": {
-                        "type": ["string", "null"],
-                        "example": null
-                      },
-                      "doctor": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "example": "ec91ab2c-0915-49a8-93c5-23a3264928b1"
-                          },
-                          "specialty": {
-                            "type": "string",
-                            "example": "Dentistry"
-                          },
-                          "description": {
-                            "type": "string",
-                            "example": "Răng Hàm Mặt"
-                          }
-                        }
-                      }
+            "get": {
+                "tags": ["Users"],
+                "summary": "Lấy danh sách người dùng với thông tin chuyên ngành",
+                "description": "API này trả về danh sách người dùng có thông tin chuyên ngành, bao gồm khả năng phân trang.",
+                "operationId": "getUserSpecialty",
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
-                  }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "8a9c264e-d283-4550-a14c-cf932199f2dc"
+                        },
+                        "description": "ID của chuyên khoa."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách người dùng với thông tin chuyên ngành",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "johndoe@examplesdwkmcdfjewjfd.com"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "active"
+                                                    },
+                                                    "fullname": {
+                                                        "type": "string",
+                                                        "example": "Nguyễn Văn A"
+                                                    },
+                                                    "avatar": {
+                                                        "type": "string",
+                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                    },
+                                                    "address": {
+                                                        "type": "string",
+                                                        "example": "123 Main St, City, Country"
+                                                    },
+                                                    "phone_number": {
+                                                        "type": "string",
+                                                        "example": "0987654321"
+                                                    },
+                                                    "gender": {
+                                                        "type": "string",
+                                                        "example": "other"
+                                                    },
+                                                    "dob": {
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "example": null
+                                                    },
+                                                    "doctor": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "ec91ab2c-0915-49a8-93c5-23a3264928b1"
+                                                            },
+                                                            "specialty": {
+                                                                "type": "string",
+                                                                "example": "Dentistry"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "Răng Hàm Mặt"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                            "email": "johndoe@examplesdwkmcdfjewjfd.com",
+                                            "status": "active",
+                                            "fullname": "Nguyễn Văn A",
+                                            "avatar": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png",
+                                            "address": "123 Main St, City, Country",
+                                            "phone_number": "0987654321",
+                                            "gender": "other",
+                                            "dob": null,
+                                            "doctor": {
+                                                "id": "ec91ab2c-0915-49a8-93c5-23a3264928b1",
+                                                "specialty": "Dentistry",
+                                                "description": "Răng Hàm Mặt"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi yêu cầu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Chi tiết lỗi xảy ra."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
-            },
-            "example": {
-              "data": [
-                {
-                  "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
-                  "email": "johndoe@examplesdwkmcdfjewjfd.com",
-                  "status": "active",
-                  "fullname": "Nguyễn Văn A",
-                  "avatar": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png",
-                  "address": "123 Main St, City, Country",
-                  "phone_number": "0987654321",
-                  "gender": "other",
-                  "dob": null,
-                  "doctor": {
-                    "id": "ec91ab2c-0915-49a8-93c5-23a3264928b1",
-                    "specialty": "Dentistry",
-                    "description": "Răng Hàm Mặt"
-                  }
-                }
-              ]
             }
-          }
-        }
-      },
-      "400": {
-        "description": "Lỗi yêu cầu",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string",
-                  "example": "Chi tiết lỗi xảy ra."
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-},
+        },
         "/api/v1/users/role/{role_id}": {
             "get": {
                 "tags": ["Users"],
@@ -8103,6 +8105,10 @@
                                                         "type": "string",
                                                         "example": "luu y cua bac si"
                                                     },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                    },
                                                     "created_at": {
                                                         "type": "string",
                                                         "format": "date-time",
@@ -8206,6 +8212,7 @@
                                     "user_id",
                                     "patient_id",
                                     "name",
+                                    "medical_histories_id",
                                     "description",
                                     "medication.*.quantity",
                                     "medication.*.duration",
@@ -8228,6 +8235,10 @@
                                     "description": {
                                         "type": "string",
                                         "example": "luu y cua bac si"
+                                    },
+                                    "medical_histories_id": {
+                                        "type": "string",
+                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                     },
                                     "medications": {
                                         "type": "array",
@@ -8300,6 +8311,10 @@
                                                     "description": {
                                                         "type": "string",
                                                         "example": "luu y cua bac si"
+                                                    },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
@@ -8454,6 +8469,10 @@
                                                         "type": "string",
                                                         "example": "luu y cua bac si"
                                                     },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                    },
                                                     "created_at": {
                                                         "type": "string",
                                                         "format": "date-time",
@@ -8518,7 +8537,7 @@
                         }
                     },
                     "404": {
-                        "description": "Prescription not found",
+                        "description": "Đơn thuốc không tồn tại",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -8529,7 +8548,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Prescription not found"
+                                            "example": "Đơn thuốc không tồn tại"
                                         }
                                     },
                                     "type": "object"
@@ -8680,6 +8699,10 @@
                                                         "type": "string",
                                                         "example": "luu y cua bac si"
                                                     },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                    },
                                                     "created_at": {
                                                         "type": "string",
                                                         "format": "date-time",
@@ -8744,7 +8767,7 @@
                         }
                     },
                     "404": {
-                        "description": "Prescription not found",
+                        "description": "Đơn thuốc không tồn tại",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -8755,7 +8778,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Prescription not found"
+                                            "example": "Đơn thuốc không tồn tại"
                                         }
                                     },
                                     "type": "object"
@@ -8803,7 +8826,7 @@
                         }
                     },
                     "404": {
-                        "description": "Prescription not found",
+                        "description": "Đơn thuốc không tồn tại",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -8814,7 +8837,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Prescription not found"
+                                            "example": "Đơn thuốc không tồn tại"
                                         }
                                     },
                                     "type": "object"
@@ -8882,6 +8905,10 @@
                                                     "description": {
                                                         "type": "string",
                                                         "example": "luu y cua bac si"
+                                                    },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
@@ -8959,6 +8986,170 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Patient not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/prescriptions/medical_history/{id}": {
+            "get": {
+                "tags": ["Prescriptions"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách đơn thuốc theo id",
+                "description": "Lấy thông tin danh sách đơn thuốc theo id hồ sơ bệnh án",
+                "operationId": "getPrescriptionByIdMedicalHistory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                        },
+                        "description": "ID hồ sơ bệnh án."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin đơn thuốc",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
+                                                    },
+                                                    "patient_id": {
+                                                        "type": "string",
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "string",
+                                                        "example": "c3456789-e89b-12d3-a456-426614174002"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tên đơn thuốc"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "luu y cua bac si"
+                                                    },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                    },
+                                                    "medications": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "prescription_id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "medication_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                }
+                                                            }
+                                                        },
+                                                        "example": [
+                                                            {
+                                                                "id": "c3456789-e89b-12d3-a456-426614174002",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 1",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            },
+                                                            {
+                                                                "id": "c3456789-e89b-12d3-a456-426614174004",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 2",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hồ sơ bênh án không tồn tại",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Hồ sơ bênh án không tồn tại"
                                         }
                                     },
                                     "type": "object"
