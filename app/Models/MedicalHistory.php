@@ -24,15 +24,22 @@ class MedicalHistory extends Model
         'user_id'
     ];
 
-    public function files() {
+    public function files()
+    {
         return $this->hasMany(File::class, 'medical_history_id');
     }
 
-    public function patient() {
+    public function patient()
+    {
         return $this->belongsTo(Patient::class, 'patient_id');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function prescriptions()
+    {
+        return $this->hasMany(Prescription::class, 'medical_histories_id');
     }
 }

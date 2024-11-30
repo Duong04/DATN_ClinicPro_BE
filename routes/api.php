@@ -133,6 +133,7 @@ Route::prefix('v1')->group(function () {
             Route::get('/', 'index');
             Route::get('/{id}', 'show');
             Route::get('/patient/{id}', 'listById');
+            Route::get('/medical_history/{id}', 'getByMedicalHistory');
             Route::post('/', 'store');
             Route::put('/{id}', 'update');
             Route::delete('/{id}', 'destroy');

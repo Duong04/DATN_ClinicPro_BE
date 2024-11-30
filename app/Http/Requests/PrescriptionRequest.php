@@ -29,6 +29,7 @@ class PrescriptionRequest extends FormRequest
             'description' => 'nullable|string',
             'medications' => 'required|array',
             'name' => 'required',
+            'medical_histories_id' => 'required|exists:medical_histories,id',
 
             'medications.*.medication_id' => 'required',
             'medications.*.quantity' => 'required|integer|min:1',
@@ -38,6 +39,7 @@ class PrescriptionRequest extends FormRequest
         if ($this->method() == 'PUT') {
             $rules['patient_id'] = 'nullable|exists:patients,id';
             $rules['user_id'] = 'nullable|exists:users,id';
+            $rules['medical_histories_id'] = 'nullable|exists:medical_histories,id';
             $rules['medications.*.id'] = 'required|exists:prescription_infos,id';
         }
         return $rules;
@@ -64,6 +66,7 @@ class PrescriptionRequest extends FormRequest
             'duration' => 'Thời gian sử dụng',
             'medication_id' => 'ID thuốc',
             'quantity' => 'số lượng',
+            'medical_histories_id' => 'ID bệnh án'
         ];
     }
     protected function failedValidation(Validator $validator)

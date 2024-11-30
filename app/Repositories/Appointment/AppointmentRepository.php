@@ -16,17 +16,70 @@ class AppointmentRepository implements AppointmentRepositoryInterface
 
     public function all()
     {
-        return $this->appointment::orderByDesc('created_at')->get();
+        return $this->appointment::with([
+            'patient',
+            'package',
+            'specialty',
+            'user.role',
+            'user.userInfo'
+        ])->orderByDesc('created_at')->get();
     }
+    // public function all()
+    // {
+    //     return $this->appointment::with(
+    //         ['patient' => function ($query) {
+    //             $query->select('id', 'insurance_number', 'identity_card_id', 'status');
+    //         }, 'package' => function ($query) {
+    //             $query->select('id', 'name', 'description', 'content', 'image', 'slug');
+    //         }, 'specialty' => function ($query) {
+    //             $query->select('id', 'name', 'description');
+    //         }, 'user' => function ($query) {
+    //             $query->select('id', 'status', 'role_id');
+    //         }, 'user.role' => function ($query) {
+    //             $query->select('id', 'name', 'description');
+    //         }, 'user.userInfo' => function ($query) {
+    //             $query->select('id', 'fullname', 'address', 'avatar', 'phone_number', 'gender', 'dob', 'identity_card_id');
+    //         }]
+    //     )->orderByDesc('created_at')->get();
+    // }
     public function find($id)
     {
-        return $this->appointment::findOrFail($id);
+        return $this->appointment::with([
+            'patient',
+            'package',
+            'specialty',
+            'user.role',
+            'user.userInfo'
+        ])->findOrFail($id);
     }
+    // public function findByPatient($id)
+    // {
+    //     return $this->appointment::with(
+    //         ['patient' => function ($query) {
+    //             $query->select('id', 'insurance_number', 'identity_card_id', 'status');
+    //         }, 'package' => function ($query) {
+    //             $query->select('id', 'name', 'description', 'content', 'image', 'slug');
+    //         }, 'specialty' => function ($query) {
+    //             $query->select('id', 'name', 'description');
+    //         }, 'user' => function ($query) {
+    //             $query->select('id', 'status', 'role_id');
+    //         }, 'user.role' => function ($query) {
+    //             $query->select('id', 'name', 'description');
+    //         }, 'user.userInfo' => function ($query) {
+    //             $query->select('id', 'fullname', 'address', 'avatar', 'phone_number', 'gender', 'dob', 'identity_card_id');
+    //         }]
+    //     )->where('patient_id', $id)->orderByDesc('created_at')->get();
+    // }
     public function findByPatient($id)
     {
-        return $this->appointment::where('patient_id', $id)->orderByDesc('created_at')->get();
+        return $this->appointment::with([
+            'patient',
+            'package',
+            'specialty',
+            'user.role',
+            'user.userInfo'
+        ])->where('patient_id', $id)->orderByDesc('created_at')->get();
     }
-
     public function create($data)
     {
         return $this->appointment::create($data);

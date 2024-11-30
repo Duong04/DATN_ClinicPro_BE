@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Repositories\Prescription\PrescriptionRepositoryInterface;
 use App\Repositories\PrescriptionInfo\PrescriptionInfoRepositoryInterface;
 use App\Http\Resources\PrescriptionResource;
+use App\Models\MedicalHistory;
 
 class PrescriptionService
 {
@@ -40,6 +41,12 @@ class PrescriptionService
     {
         $this->findPatient($id);
         $prescriptions = $this->prescriptionRepository->findByIdPatient($id);
+        return PrescriptionResource::collection($prescriptions);
+    }
+    public function getByMedicalHistory($id)
+    {
+        $this->findMedicalHistory($id);
+        $prescriptions = $this->prescriptionRepository->findByIdMedicalHistory($id);
         return PrescriptionResource::collection($prescriptions);
     }
 
@@ -80,7 +87,7 @@ class PrescriptionService
         try {
             return $this->prescriptionRepository->destroy($id);
         } catch (ModelNotFoundException $e) {
-            throw new Exception('Prescription not found');
+            throw new Exception('Đơn thước không tồn tại');
         }
     }
 
@@ -89,7 +96,16 @@ class PrescriptionService
         try {
             return $this->patientRepository->findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            throw new Exception('Patient not found');
+            throw new Exception('bệnh nhân không tồn tại');
+        }
+    }
+
+    private function findMedicalHistory($id)
+    {
+        try {
+            return MedicalHistory::with('prescriptions')->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            throw new Exception('Hồ sơ bệnh án không tồn tại');
         }
     }
 
@@ -98,7 +114,7 @@ class PrescriptionService
         try {
             return $this->prescriptionRepository->find($id);
         } catch (ModelNotFoundException $e) {
-            throw new Exception('Prescription not found');
+            throw new Exception('Đơn thuốc không tồn tại');
         }
     }
 
@@ -108,7 +124,8 @@ class PrescriptionService
             'name' => $dataRequest['name'],
             'description' => $dataRequest['description'],
             'user_id' => $dataRequest['user_id'],
-            'patient_id' => $dataRequest['patient_id']
+            'patient_id' => $dataRequest['patient_id'],
+            'medical_histories_id' => $dataRequest['medical_histories_id']
         ];
     }
 

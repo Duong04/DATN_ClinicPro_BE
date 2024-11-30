@@ -24,6 +24,10 @@ class PrescriptionRepository implements PrescriptionRepositoryInterface
     {
         return $this->prescription::where('patient_id', $id)->orderByDesc('created_at')->get();
     }
+    public function findByIdMedicalHistory($id)
+    {
+        return $this->prescription::where('medical_histories_id', $id)->with('medical_histories')->orderByDesc('created_at')->get();
+    }
     public function create($data)
     {
         return $this->prescription::create($data);
