@@ -10,7 +10,17 @@ class DepartmentRepository implements DepartmentRepositoryInterface {
     public function paginate($limit, $q) {
         $departments = Department::with(['manager.userInfo' => function ($query) {
             $query->select('id', 'user_id', 'fullname', 'address', 'avatar', 'gender', 'dob', 'phone_number');
-        }])->withCount('users');
+        },
+        'users.user.doctor.specialty' => function ($query) {
+                $query->select('id', 'name', 'description');
+            },
+            'users.user.doctor' => function ($query) {
+                $query->select('id', 'specialty_id', 'user_id');
+            },
+            'users.user' => function ($query) {
+                $query->select('id', 'status', 'email');
+            }
+        ])->withCount('users');
         if ($q) {
             $departments->where('name', 'like', "%{$q}%")
             ->orWhereHas('manager', function ($query) use ($q) {
@@ -18,7 +28,7 @@ class DepartmentRepository implements DepartmentRepositoryInterface {
             })
             ->orWhereHas('manager.userInfo', function ($query) use ($q) {
                 $query->where('fullname', 'like', "%{$q}%");
-            });;
+            });
         }
 
         $departments->orderByDesc('created_at');

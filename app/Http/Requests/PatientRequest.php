@@ -36,7 +36,7 @@ class PatientRequest extends FormRequest
 
         if ($this->method() === 'PUT') {
             $id = $this->route('id');
-            $rules['email'] = 'required|email|unique:patient_infos,email|unique:users,email,'.$id;
+            $rules['user_info.email'] = "required|email|unique:patient_infos,email,".$id.",patient_id|unique:users,email,".$id;
         }
 
         return $rules;

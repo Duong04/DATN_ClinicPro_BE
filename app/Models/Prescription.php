@@ -16,11 +16,16 @@ class Prescription extends Model
         'user_id',
         'patient_id',
         'name',
-        'description'
+        'description',
+        'medical_histories_id'
     ];
 
     public function prescription_Infos()
     {
         return $this->hasMany(PrescriptionInfo::class, 'prescription_id');
+    }
+    public function medical_histories()
+    {
+        return $this->belongsTo(MedicalHistory::class, 'medical_histories_id');
     }
 }

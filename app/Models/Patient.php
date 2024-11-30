@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\PatientInfo;
 use App\Models\IdentityCard;
 use App\Models\MedicalHistory;
+use App\Models\User;
 
 class Patient extends Model
 {
@@ -30,6 +31,10 @@ class Patient extends Model
     public function identityCard()
     {
         return $this->belongsTo(IdentityCard::class, 'identity_card_id');
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function prescriptions()

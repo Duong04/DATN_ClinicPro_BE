@@ -8254,6 +8254,10 @@
                                                         "type": "string",
                                                         "example": "luu y cua bac si"
                                                     },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                    },
                                                     "created_at": {
                                                         "type": "string",
                                                         "format": "date-time",
@@ -8357,6 +8361,7 @@
                                     "user_id",
                                     "patient_id",
                                     "name",
+                                    "medical_histories_id",
                                     "description",
                                     "medication.*.quantity",
                                     "medication.*.duration",
@@ -8379,6 +8384,10 @@
                                     "description": {
                                         "type": "string",
                                         "example": "luu y cua bac si"
+                                    },
+                                    "medical_histories_id": {
+                                        "type": "string",
+                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                     },
                                     "medications": {
                                         "type": "array",
@@ -8451,6 +8460,10 @@
                                                     "description": {
                                                         "type": "string",
                                                         "example": "luu y cua bac si"
+                                                    },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
@@ -8605,6 +8618,10 @@
                                                         "type": "string",
                                                         "example": "luu y cua bac si"
                                                     },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                    },
                                                     "created_at": {
                                                         "type": "string",
                                                         "format": "date-time",
@@ -8669,7 +8686,7 @@
                         }
                     },
                     "404": {
-                        "description": "Prescription not found",
+                        "description": "Đơn thuốc không tồn tại",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -8680,7 +8697,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Prescription not found"
+                                            "example": "Đơn thuốc không tồn tại"
                                         }
                                     },
                                     "type": "object"
@@ -8831,6 +8848,10 @@
                                                         "type": "string",
                                                         "example": "luu y cua bac si"
                                                     },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                    },
                                                     "created_at": {
                                                         "type": "string",
                                                         "format": "date-time",
@@ -8895,7 +8916,7 @@
                         }
                     },
                     "404": {
-                        "description": "Prescription not found",
+                        "description": "Đơn thuốc không tồn tại",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -8906,7 +8927,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Prescription not found"
+                                            "example": "Đơn thuốc không tồn tại"
                                         }
                                     },
                                     "type": "object"
@@ -8954,7 +8975,7 @@
                         }
                     },
                     "404": {
-                        "description": "Prescription not found",
+                        "description": "Đơn thuốc không tồn tại",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -8965,7 +8986,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Prescription not found"
+                                            "example": "Đơn thuốc không tồn tại"
                                         }
                                     },
                                     "type": "object"
@@ -9033,6 +9054,10 @@
                                                     "description": {
                                                         "type": "string",
                                                         "example": "luu y cua bac si"
+                                                    },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
@@ -9110,6 +9135,170 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Patient not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/prescriptions/medical_history/{id}": {
+            "get": {
+                "tags": ["Prescriptions"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh sách đơn thuốc theo id",
+                "description": "Lấy thông tin danh sách đơn thuốc theo id hồ sơ bệnh án",
+                "operationId": "getPrescriptionByIdMedicalHistory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                        },
+                        "description": "ID hồ sơ bệnh án."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin đơn thuốc",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
+                                                    },
+                                                    "patient_id": {
+                                                        "type": "string",
+                                                        "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "string",
+                                                        "example": "c3456789-e89b-12d3-a456-426614174002"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tên đơn thuốc"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "luu y cua bac si"
+                                                    },
+                                                    "medical_histories_id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                    },
+                                                    "medications": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "prescription_id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "medication_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                }
+                                                            }
+                                                        },
+                                                        "example": [
+                                                            {
+                                                                "id": "c3456789-e89b-12d3-a456-426614174002",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 1",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            },
+                                                            {
+                                                                "id": "c3456789-e89b-12d3-a456-426614174004",
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 2",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hồ sơ bênh án không tồn tại",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Hồ sơ bênh án không tồn tại"
                                         }
                                     },
                                     "type": "object"

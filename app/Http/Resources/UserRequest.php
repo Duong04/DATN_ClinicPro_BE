@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'doctor.specialty_id' => 'nullable|exists:specialties,id',
             'user_info.fullname' => ['required', 'regex:/^[a-zA-Z0-9\s]/'],
             'user_info.address' => 'nullable',
-            'user_info.phone_number' => 'nullable|regex:/^([0-9\-\+\(\)]*)$/|min:10|max:10',
+            'user_info.phone_number' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:10',
             'user_info.gender' => 'nullable|in:male,female,other',
             'user_info.dob' => 'nullable|date|before_or_equal:today',
             'user_info.department_id' => 'nullable|exists:departments,id',
