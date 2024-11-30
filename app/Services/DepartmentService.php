@@ -27,7 +27,6 @@ class DepartmentService
             $limit = $request->query('limit');
             $q = $request->query('q');
             $departments = $this->departmentRepository->paginate($limit, $q);
-
             if ($limit) {
                 return response()->json([
                     'data' => DepartmentResource::collection($departments->items()),

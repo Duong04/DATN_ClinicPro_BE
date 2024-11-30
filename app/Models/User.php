@@ -47,7 +47,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Patient::class, 'user_id');
     }
 
-    public function doctor() {
+    public function doctor()
+    {
         return $this->hasOne(Doctor::class, 'user_id');
     }
 
@@ -88,7 +89,7 @@ class User extends Authenticatable implements JWTSubject
         $permission = $this->permissions()->where('name', $permissionName)->first();
 
         if (!$permission) {
-            return []; 
+            return [];
         }
 
         $filteredActions = $permission->actions->filter(function ($action) use ($role_id, $permission) {
@@ -98,7 +99,7 @@ class User extends Authenticatable implements JWTSubject
         $permissionNew = [
             'actions' => $filteredActions,
         ];
-        
+
         if ($permissionNew) {
             return $permissionNew['actions']->contains('value', $actionName);
         }

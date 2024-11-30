@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\AppointmentResource;
 use Exception;
 use App\Models\Doctor;
 use App\Models\PatientInfo;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Repositories\Patient\PatientRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Repositories\Appointment\AppointmentRepositoryInterface;
-use App\Repositories\Doctor\DoctorRepositoryInterface;
 use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
 
 class AppointmentService
@@ -31,18 +31,19 @@ class AppointmentService
 
     public function all()
     {
-        return $this->appointmentRepository->all();
+        return AppointmentResource::collection($this->appointmentRepository->all());
     }
 
     public function show($id)
     {
-        return $this->findAppointment($id);
+        $appointment = $this->findAppointment($id);
+        return new AppointmentResource($appointment);
     }
 
     public function findByIdPatient($id)
     {
         $this->findPatient($id);
-        return $this->appointmentRepository->findByPatient($id);
+        return AppointmentResource::collection($this->appointmentRepository->findByPatient($id));
     }
 
 
