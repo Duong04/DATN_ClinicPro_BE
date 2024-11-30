@@ -26,7 +26,6 @@ class DepartmentService
             $limit = $request->query('limit');
             $q = $request->query('q');
             $departments = $this->departmentRepository->paginate($limit, $q);
-
             if ($limit) {
                 return response()->json([
                     'data' => DepartmentResource::collection($departments->items()),
@@ -52,15 +51,15 @@ class DepartmentService
 
                 foreach ($data['users'] as $user) {
                     $existingUser = $this->userRepository->find($user, ['userInfo']);
-                    
+
                     if ($existingUser && $existingUser->userInfo->department_id) {
                         $errors[] = "{$existingUser->userInfo->fullname} đã thuộc phòng ban khác!";
                     }
                 }
-                
+
                 if (!empty($errors)) {
                     return response()->json([
-                        'success' => false, 
+                        'success' => false,
                         'errors' => ['users' => $errors]
                     ], 422);
                 }
@@ -72,7 +71,7 @@ class DepartmentService
                         'department_id' => $department->id
                     ]);
                 }
-            }else {
+            } else {
                 $department = $this->departmentRepository->create($data);
             }
 
@@ -99,7 +98,7 @@ class DepartmentService
             $data = $request->validated();
 
             if (isset($data['users'])) {
-                
+
                 $errors = [];
 
                 foreach ($data['users'] as $user) {
@@ -124,7 +123,7 @@ class DepartmentService
                         'department_id' => $id
                     ]);
                 }
-            }else {
+            } else {
                 $department = $this->departmentRepository->update($id, $data);
             }
 
@@ -165,8 +164,7 @@ class DepartmentService
             $check_role = $this->departmentRepository->find($id);
             if ($check_role->users_count > 0) {
                 return response()->json(['success' => false, 'message' => 'Phòng ban này đã được gán cho người dùng không thể xóa được!'], 400);
-            } 
-
+            }
             $this->departmentRepository->delete($id);
 
             return response()->json(['success' => true, 'message' => 'Đã xóa phòng ban thành công!'], 200);
