@@ -166,7 +166,6 @@ class DepartmentService
             if ($check_role->users_count > 0) {
                 return response()->json(['success' => false, 'message' => 'Phòng ban này đã được gán cho người dùng không thể xóa được!'], 400);
             }
-
             $this->departmentRepository->delete($id);
 
             return response()->json(['success' => true, 'message' => 'Đã xóa phòng ban thành công!'], 200);
