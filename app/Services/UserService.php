@@ -34,7 +34,8 @@ class UserService {
                     'data' => UserResourceTwo::collection($users->items()),
                     'prev_page_url' => $users->previousPageUrl(),
                     'next_page_url' => $users->nextPageUrl(),
-                    'total' => $users->total()
+                    'total' => $users->total(),
+                    'current_page_items_count' => count($users->items())
                 ], 200);
             }
             return response()->json(['success' => true, 'data' => UserResourceTwo::collection($users)], 200);

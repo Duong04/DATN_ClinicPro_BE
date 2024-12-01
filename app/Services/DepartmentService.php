@@ -28,7 +28,8 @@ class DepartmentService {
                     'data' => DepartmentResource::collection($departments->items()),
                     'prev_page_url' => $departments->previousPageUrl(),
                     'next_page_url' => $departments->nextPageUrl(),
-                    'total' => $departments->total()
+                    'total' => $departments->total(),
+                    'current_page_items_count' => count($departments->items())
                 ], 200);
             }
             return response()->json(['success' => true, 'data' => DepartmentResource::collection($departments)], 200);

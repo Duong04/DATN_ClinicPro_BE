@@ -16,7 +16,7 @@ class UserResource extends JsonResource
     {
         $patient = $this?->patient?->patientInfo;
         $userInfo = $this->role->name == 'patient' ? $patient : $this->userInfo;
-        return [
+        $resData = [
             'id' => $this->id,
             'email' => $this->email,
             'status' => $this->status,
@@ -26,5 +26,11 @@ class UserResource extends JsonResource
                 'avatar' => $userInfo?->avatar
             ]
         ];
+
+        if ($this->role->name == 'patient') {
+            $resData['user_info']['patient_id'] = $this->patient->id;
+        }
+
+        return $resData;
     }
 }

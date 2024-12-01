@@ -33,6 +33,8 @@ class UserRepository implements UserRepositoryInterface {
             $query->where('name', '!=', 'patient');
         });
     
+        $users->orderByDesc('created_at');
+
         return $limit ? $users->paginate($limit) : $users->get();
     }
     public function getByRoleId($role_id, $limit, $q) {

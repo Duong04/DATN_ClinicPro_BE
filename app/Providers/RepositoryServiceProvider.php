@@ -41,6 +41,10 @@ use App\Repositories\RolePermission\RolePermissionRepositoryInterface;
 use App\Repositories\PackageCategory\PackageCategoryRepositoryInterface;
 use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
 use App\Repositories\PrescriptionInfo\PrescriptionInfoRepositoryInterface;
+use App\Repositories\Conversation\ConversationRepositoryInterface;
+use App\Repositories\Conversation\ConversationRepository;
+use App\Repositories\Message\MessageRepositoryInterface;
+use App\Repositories\Message\MessageRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -68,6 +72,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(FeedbackRepositoryInterface::class, FeedbackRepository::class);
         $this->app->bind(PrescriptionInfoRepositoryInterface::class, PrescriptionInfoRepository::class);
         $this->app->bind(PackageCategoryRepositoryInterface::class, PackageCategoryRepository::class);
+        $this->app->bind(ConversationRepositoryInterface::class, ConversationRepository::class);
+        $this->app->bind(MessageRepositoryInterface::class, MessageRepository::class);
     }
 
     /**
