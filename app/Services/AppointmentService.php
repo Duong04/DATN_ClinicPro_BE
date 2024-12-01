@@ -2,16 +2,17 @@
 
 namespace App\Services;
 
+use App\Http\Resources\AppointmentResource;
 use Exception;
 use App\Models\Doctor;
 use App\Models\PatientInfo;
 use App\Mail\AcceptAppointmentMail;
+use App\Mail\SendAppointment;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\Patient\PatientRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Repositories\Appointment\AppointmentRepositoryInterface;
-use App\Repositories\Doctor\DoctorRepositoryInterface;
 use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
 
 class AppointmentService
@@ -30,18 +31,19 @@ class AppointmentService
 
     public function all()
     {
-        return $this->appointmentRepository->all();
+        return AppointmentResource::collection($this->appointmentRepository->all());
     }
 
     public function show($id)
     {
-        return $this->findAppointment($id);
+        $appointment = $this->findAppointment($id);
+        return new AppointmentResource($appointment);
     }
 
     public function findByIdPatient($id)
     {
         $this->findPatient($id);
-        return $this->appointmentRepository->findByPatient($id);
+        return AppointmentResource::collection($this->appointmentRepository->findByPatient($id));
     }
 
 
@@ -50,22 +52,28 @@ class AppointmentService
         $dataPatient = $request->validated();
         try {
             $patient = auth()->check() ? auth()->user()->patient : null;
+
             if (!$patient) {
                 $email = $request->input('email');
                 $patient = PatientInfo::where('email', $email)->first() ?? $this->createPatient($dataPatient);
             }
+
             $data = [
                 'description' => $request->input('description'),
                 'package_id' => $request->input('package_id'),
                 'specialty_id' => $request->input('specialty_id'),
-                'patient_id' => $patient->patient_id,
+                'patient_id' => $patient->patient_id ?? $patient->id,
                 'appointment_date' => $request->input('appointment_date')
             ];
-            return $this->appointmentRepository->create($data);
+
+            $appointment = $this->appointmentRepository->create($data);
+            Mail::to($appointment->patient->patientInfo->email)->send(new SendAppointment($appointment));
+
+            return $appointment;
         } catch (Exception $e) {
-            return ['error' => [
-                'message' => 'Failed to create appointment: ' . $e->getMessage(),
-            ]];
+            return [
+                'error' => 'Failed to create appointment: ' . $e->getMessage()
+            ];
         }
     }
     public function assign($id, $request)
@@ -92,8 +100,17 @@ class AppointmentService
     }
     private function createPatient($dataPatient)
     {
-        $patient = $this->patientRepository->create([]);
-        $dataPatient['patient_id'] = $patient->patient_id;
+        $data = [
+            "fullname" => $dataPatient['fullname'],
+            "email" => $dataPatient['email'],
+            "phone_number" => $dataPatient['phone_number'],
+            "address" => $dataPatient['address'],
+            "gender" => $dataPatient['gender'],
+            "dob" => $dataPatient['dob']
+        ];
+        $patient = $this->patientRepository->create($data);
+        $dataPatient['patient_id'] = $patient->id;
+
 
         $this->patientInfoRepository->create($dataPatient);
         return $patient;

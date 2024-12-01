@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 use App\Traits\UsesUuid;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Appointment extends Model
 {
@@ -47,5 +48,18 @@ class Appointment extends Model
     public function patient()
     {
         return $this->belongsTo(Patient::class);
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
+    public function specialty()
+    {
+        return $this->belongsTo(Specialty::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

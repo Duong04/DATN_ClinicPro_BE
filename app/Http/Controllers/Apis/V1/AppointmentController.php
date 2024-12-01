@@ -62,7 +62,7 @@ class AppointmentController extends Controller
             if (isset($data['error']) && $data['error']) {
                 return response()->json([
                     'error' => true,
-                    'message' => $data['message']
+                    'message' => $data['error']
                 ], 400);
             }
             return response()->json(['data' => $data], $successStatus);
