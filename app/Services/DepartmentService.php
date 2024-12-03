@@ -33,7 +33,7 @@ class DepartmentService
                     'prev_page_url' => $departments->previousPageUrl(),
                     'next_page_url' => $departments->nextPageUrl(),
                     'total' => $departments->total(),
-                    'current_page_items_count' => count($departments->items())
+                    'total_pages' => $departments->lastPage()
                 ], 200);
             }
             return response()->json(['success' => true, 'data' => DepartmentResource::collection($departments)], 200);
