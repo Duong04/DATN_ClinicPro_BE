@@ -40,4 +40,8 @@ class Patient extends Model
     public function medicalHistories() {
         return $this->hasMany(MedicalHistory::class, 'patient_id');
     }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

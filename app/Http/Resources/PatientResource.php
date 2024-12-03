@@ -19,6 +19,7 @@ class PatientResource extends JsonResource
             "insurance_number" => $this->insurance_number,
             "user_id" => $this->user_id,
             "identity_card" => $this->identityCard,
+            "status" => $this->status ?? null,
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
             "patient_info" => [

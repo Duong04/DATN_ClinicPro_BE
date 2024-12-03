@@ -6,14 +6,17 @@ use App\Repositories\Patient\PatientRepositoryInterface;
 use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
 use App\Models\IdentityCard;
 use App\Models\PatientInfo;
+use App\Repositories\User\UserRepositoryInterface;
 
 class PatientService {
     private $patientRepository;
     private $patientInfoRepository;
+    private $userRepository;
 
-    public function __construct(PatientInfoRepositoryInterface $patientInfoRepository, PatientRepositoryInterface $patientRepository) {
+    public function __construct(PatientInfoRepositoryInterface $patientInfoRepository, PatientRepositoryInterface $patientRepository, UserRepositoryInterface $userRepository) {
         $this->patientInfoRepository = $patientInfoRepository;
         $this->patientRepository = $patientRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function getPaginate($request) {
@@ -83,10 +86,23 @@ class PatientService {
             $data = $request->validated();
 
             $patient = $this->patientRepository->find($id);
-            $this->patientRepository->update($id, $data);
+
             if (isset($data['identity_card'])) {
-               $patient->identityCard->update($data['identity_card']);
+                if ($patient->identityCard) {
+                    $patient->identityCard->update($data['identity_card']);
+                }else {
+                    $identity_card_id = IdentityCard::create($data['identity_card']);
+                    $data['identity_card_id'] = $identity_card_id->id;
+                }
             }
+
+            if ($patient->user?->id) {
+                $this->userRepository->update($patient->user->id, [
+                    'email' => $data['user_info']['email'],
+                ]);
+            }
+            
+            $this->patientRepository->update($id, $data);
 
             if ($data['user_info']) {
                 PatientInfo::where('patient_id', $id)->update($data['user_info']); 

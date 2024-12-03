@@ -34,9 +34,7 @@ class DepartmentResource extends JsonResource
             'manager' => $this->manager ? $manager : null
         ];
 
-        if ($request->route('id')) {
-            $department['users'] = UserResourceFour::collection($this->users);
-        }
+        $department['users'] = UserResourceFour::collection($this->users);
 
         return $department;
     }
