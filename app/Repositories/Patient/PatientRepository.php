@@ -2,9 +2,10 @@
 
 namespace App\Repositories\Patient;
 
-use App\Models\PatientInfo;
-use App\Repositories\Patient\PatientRepositoryInterface;
 use App\Models\Patient;
+use App\Models\PatientInfo;
+use Illuminate\Support\Carbon;
+use App\Repositories\Patient\PatientRepositoryInterface;
 
 class PatientRepository implements PatientRepositoryInterface
 {
@@ -19,7 +20,7 @@ class PatientRepository implements PatientRepositoryInterface
             $query->select('id', 'email');
         }, 'medicalHistories.user.userInfo' => function ($query) {
             $query->select('id', 'fullname', 'avatar', 'user_id', 'phone_number');
-        },'medicalHistories.user.doctor.specialty','medicalHistories.files'])
+        }, 'medicalHistories.user.doctor.specialty', 'medicalHistories.files'])
             ->when($q, function ($query, $q) {
                 $query->orWhereHas('patientInfo', function ($query) use ($q) {
                     $query->where('fullname', 'LIKE', "%{$q}%")
@@ -40,7 +41,7 @@ class PatientRepository implements PatientRepositoryInterface
             $query->select('id', 'email');
         }, 'medicalHistories.user.userInfo' => function ($query) {
             $query->select('id', 'fullname', 'avatar', 'user_id', 'phone_number');
-        },'medicalHistories.user.doctor.specialty','medicalHistories.files'])->find($id);
+        }, 'medicalHistories.user.doctor.specialty', 'medicalHistories.files'])->find($id);
     }
     public function create(array $data)
     {
@@ -59,5 +60,23 @@ class PatientRepository implements PatientRepositoryInterface
     public function findOrFail($id)
     {
         return Patient::findOrFail($id);
+    }
+
+    public function statistics()
+    {
+        $result = Patient::selectRaw("
+        SUM(CASE WHEN DATE(created_at) = ? THEN 1 ELSE 0 END) as day,
+        SUM(CASE WHEN WEEK(created_at) = WEEK(?) THEN 1 ELSE 0 END) as week,
+        SUM(CASE WHEN MONTH(created_at) = ? AND YEAR(created_at) = ? THEN 1 ELSE 0 END) as month,
+        SUM(CASE WHEN YEAR(created_at) = ? THEN 1 ELSE 0 END) as year
+    ", [
+            Carbon::today()->toDateString(),
+            Carbon::now()->toDateString(),
+            Carbon::now()->month,
+            Carbon::now()->year,
+            Carbon::now()->year
+        ])->first();
+
+        return $result;
     }
 }
