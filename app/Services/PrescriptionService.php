@@ -55,6 +55,10 @@ class PrescriptionService
         try {
             $dataRequest = $request->validated();
 
+            if (!$this->checkIsValidMedicalHistory($dataRequest['patient_id'], $dataRequest['medical_histories_id'])) {
+                throw new \Exception('ID bệnh nhân không khớp với ID lịch sử y tế');
+            }
+
             $prescriptionData = $this->buildPrescriptionData($dataRequest);
             $prescription = $this->prescriptionRepository->create($prescriptionData);
 
@@ -62,7 +66,7 @@ class PrescriptionService
 
             return new PrescriptionResource($prescription);
         } catch (Exception $e) {
-            throw new Exception('Failed to create prescription: ' . $e->getMessage());
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -146,5 +150,11 @@ class PrescriptionService
                 $this->prescriptionInfoRepository->create($medicationData);
             }
         }
+    }
+    private function checkIsValidMedicalHistory($patient_id, $medical_histories_id): bool
+    {
+        $medical_history = MedicalHistory::find($medical_histories_id);
+
+        return $medical_history && $medical_history->patient_id == $patient_id;
     }
 }

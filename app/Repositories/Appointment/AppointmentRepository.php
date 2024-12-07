@@ -2,12 +2,12 @@
 
 namespace App\Repositories\Appointment;
 
+use DB;
 use App\Models\Appointment;
+use Illuminate\Support\Carbon;
 
 class AppointmentRepository implements AppointmentRepositoryInterface
 {
-
-
     private $appointment;
     public function __construct(Appointment $appointment)
     {
@@ -94,5 +94,66 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     public function destroy($id)
     {
         return $this->appointment::destroy($id);
+    }
+    public function statistics()
+    {
+        $result = $this->appointment::selectRaw("
+        SUM(CASE WHEN DATE(created_at) = ? THEN 1 ELSE 0 END) as day,
+        SUM(CASE WHEN WEEK(created_at) = WEEK(?) THEN 1 ELSE 0 END) as week,
+        SUM(CASE WHEN MONTH(created_at) = ? AND YEAR(created_at) = ? THEN 1 ELSE 0 END) as month,
+        SUM(CASE WHEN YEAR(created_at) = ? THEN 1 ELSE 0 END) as year
+    ", [
+            Carbon::today()->toDateString(),
+            Carbon::now()->toDateString(),
+            Carbon::now()->month,
+            Carbon::now()->year,
+            Carbon::now()->year
+        ])->first();
+
+        return $result;
+    }
+
+    public function getAppointmentsByStatus()
+    {
+        $result = $this->appointment::select('status', DB::raw('COUNT(*) as total'))
+            ->groupBy('status')
+            ->get();
+        return $result;
+    }
+    public function getAppointmentsByMonth($year)
+    {
+        $result = $this->appointment::select(
+            DB::raw('MONTH(appointment_date) as month'),
+            DB::raw('COUNT(*) as total')
+        )
+            ->whereYear('appointment_date', $year)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        return $result;
+    }
+
+    public function getFrequency()
+    {
+        $result = $this->appointment::select('patient_id', DB::raw('COUNT(*) as total_appointments'))
+            ->where('status', '!=', 'cancelled')
+            ->groupBy('patient_id')
+            ->having('total_appointments', '>', 1)
+            ->orderByDesc('total_appointments')
+            ->get();
+
+        return $result;
+    }
+
+    public function getTotalPatientFrequency()
+    {
+        $patients = $this->appointment::select('patient_id')
+            ->where('status', '!=', 'cancelled')
+            ->groupBy('patient_id')
+            ->havingRaw('COUNT(*) > 1')
+            ->get();
+
+        return $patients->count();
     }
 }
