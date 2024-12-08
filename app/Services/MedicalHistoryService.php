@@ -5,6 +5,7 @@ use App\Repositories\MedicalHistory\MedicalHistoryRepositoryInterface;
 use App\Services\CloundinaryService;
 use App\Models\File;
 use App\Http\Resources\MedicalHistoryResource;
+use App\Models\ServiceMedicalHistory;
 
 class MedicalHistoryService {
     private $medicalHistoryRepository;
@@ -57,8 +58,21 @@ class MedicalHistoryService {
             $medicalHistory = $this->medicalHistoryRepository->create($data);
             if (isset($data['files']) && is_array($data['files'])) {
                 foreach ($data['files'] as $fileItem) {
-                    $fileItem['medical_history_id'] = $medicalHistory->id;
-                    File::create($fileItem);
+                    if ($medicalHistory->id) {
+                        $fileItem['medical_history_id'] = $medicalHistory->id;
+                        File::create($fileItem);
+                    }
+                }
+            }
+
+            if (isset($data['services']) && is_array($data['services'])) {
+                foreach ($data['services'] as $service) {
+                    if ($medicalHistory->id) {
+                        ServiceMedicalHistory::create([
+                            'service_id' => $service['id'],
+                            'medical_history_id' => $medicalHistory->id
+                        ]);
+                    }
                 }
             }
 
@@ -105,9 +119,24 @@ class MedicalHistoryService {
                 }
             }
 
+            if (isset($data['services']) && is_array($data['services'])) {
+                foreach ($data['services'] as $service) {
+                    ServiceMedicalHistory::create([
+                        'service_id' => $service['id'],
+                        'medical_history_id' => $id
+                    ]);
+                }
+            }
+
             if (isset($data['file_deletes'])) {
                 foreach ($data['file_deletes'] as $item) {
                     File::where('id', $item)->delete();
+                } 
+            }
+
+            if (isset($data['service_deletes'])) {
+                foreach ($data['service_deletes'] as $item) {
+                    ServiceMedicalHistory::where('service_id', $item)->delete();
                 } 
             }
 

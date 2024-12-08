@@ -3,6 +3,7 @@
 use App\Http\Controllers\Apis\V1\ConversationController;
 use App\Http\Controllers\Apis\V1\MedicalHistoryController;
 use App\Http\Controllers\Apis\V1\PatientController;
+use App\Http\Controllers\Apis\V1\ServiceController;
 use App\Http\Controllers\Apis\V1\SpecialtyController;
 use App\Http\Controllers\Apis\V1\UploadController;
 use App\Http\Controllers\Apis\V1\UserController;
@@ -179,6 +180,15 @@ Route::prefix('v1')->group(function () {
             Route::post('/', 'store')->middleware('jwt.auth');
             Route::put('/{id}', 'update')->middleware('jwt.auth');
             Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
+        });
+
+    Route::controller(ServiceController::class)->prefix('services')
+        ->group(function () {
+            Route::get('/', 'paginate');
+            Route::get('/{id}', 'show');
+            Route::post('/', 'create');
+            Route::put('/{id}', 'update');
+            Route::delete('/{id}', 'delete');
         });
 
     Route::controller(ChatAIController::class)->prefix('chat-AI')

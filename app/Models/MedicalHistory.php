@@ -9,6 +9,7 @@ use App\Models\File;
 use App\Models\Patient;
 use App\Models\Doctor;
 use App\Models\User;
+use App\Models\Service;
 
 class MedicalHistory extends Model
 {
@@ -41,5 +42,9 @@ class MedicalHistory extends Model
     public function prescriptions()
     {
         return $this->hasMany(Prescription::class, 'medical_histories_id');
+    }
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'service_medical_history', 'medical_history_id', 'service_id');
     }
 }

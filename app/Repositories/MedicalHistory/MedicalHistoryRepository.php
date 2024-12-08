@@ -29,7 +29,7 @@ class MedicalHistoryRepository implements MedicalHistoryRepositoryInterface {
         return $limit ? $medicalHistories->paginate($limit) : $medicalHistories->get();
     }
     public function find($id) {
-        return MedicalHistory::with('files', 'user', 'patient')->find($id);
+        return MedicalHistory::with(['files', 'user', 'patient', 'services'])->find($id);
     }
     public function getByPatientId($patient_id) {
         return MedicalHistory::with('files', 'user', 'patient')->where('patient_id', $patient_id)->get();
