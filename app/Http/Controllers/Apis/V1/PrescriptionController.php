@@ -48,7 +48,12 @@ class PrescriptionController extends Controller
         try {
             $data = $callback();
             return response()->json(['data' => $data], $successStatus);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 422);
         } catch (\Exception $e) {
+            if (str_contains($e->getMessage(), 'không khớp')) {
+                return response()->json(['success' => false, 'error' => $e->getMessage()], 422);
+            }
             $status = str_contains($e->getMessage(), 'không tồn tại')   ? 404 : 500;
             return response()->json(['success' => false, 'message' => $e->getMessage() ?: $message], $status);
         }
