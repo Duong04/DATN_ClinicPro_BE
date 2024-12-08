@@ -26,7 +26,12 @@ class ChangePswRequest extends FormRequest
     {
         $rules = [
             'password' => 'required|string|min:8',
-            'new_password' => 'required|string|min:8',
+            'new_password' => [
+                'required',
+                'min:8',
+                'regex:/[A-Z]/',         
+                'regex:/[@$!%*#?&]/'  
+            ],
         ];
 
         return $rules;
@@ -44,6 +49,7 @@ class ChangePswRequest extends FormRequest
         return [
             'password' => 'Mật khẩu',
             'new_password' => 'Mật khẩu mới',
+            'new_password.regex' => ':attribute phải chứa ít nhất một ký tự in hoa và một ký tự đặc biệt!'
         ];
     }
 

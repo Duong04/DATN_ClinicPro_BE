@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('conversation_id');
-            $table->enum('sender_type', ['user', 'al'])->default('user')->nullable();
+            $table->enum('sender_type', ['USER', 'AI'])->default('user')->nullable();
             $table->mediumText('message_text');
 
             $table->foreign('conversation_id')->references('id')->on('conversations')->onDelete('cascade');

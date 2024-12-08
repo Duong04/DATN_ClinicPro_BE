@@ -1,10 +1,9 @@
-<?php
-namespace App\Repositories\Conversation;
+<?php 
+namespace App\Repositories\PaymentMethod;
 
-interface ConversationRepositoryInterface {
+interface PaymentMethodRepositoryInterface {
     public function all();
-    public function find($id, $user_id);
-    public function findUserId($id, $limit);
+    public function find($id);
     public function paginate($limit);
     public function create(array $data);
     public function update($id, array $data);

@@ -14,6 +14,16 @@ class MedicalHistoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $services = [];
+
+        foreach ($this->services as $service) {
+            $services[] = [
+                'id' => $service->id,
+                'service_name' => $service?->service_name,
+                'price' => $service?->price,
+                'description' => $service?->description,
+            ];
+        }
         return [
             'id' => $this->id,
             'description' => $this->description,
@@ -38,7 +48,8 @@ class MedicalHistoryResource extends JsonResource
                 'phone_number' => $this?->patient?->patientInfo?->phone_number,
                 'gender' => $this?->patient?->patientInfo?->gender,
                 'avatar' => $this?->patient?->patientInfo?->avatar,
-            ]
+            ],
+            'services' => $services
         ];
     }
 }
