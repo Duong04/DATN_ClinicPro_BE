@@ -46,7 +46,6 @@ class AppointmentService
         return AppointmentResource::collection($this->appointmentRepository->findByPatient($id));
     }
 
-
     public function create($request)
     {
         $dataPatient = $request->validated();

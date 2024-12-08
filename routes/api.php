@@ -22,7 +22,7 @@ use App\Http\Controllers\Apis\V1\PackageController;
 use App\Http\Controllers\Apis\V1\PrescriptionController;
 use PHPUnit\Framework\Attributes\Group;
 use App\Http\Controllers\Apis\V1\ChatAIController;
-
+use App\Http\Controllers\Apis\V1\StatisticsController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -216,5 +216,16 @@ Route::prefix('v1')->group(function () {
             Route::get('/', 'paginate');
             Route::get('/{id}/{user_id}', 'show');
             Route::delete('/{id}', 'delete');
+        });
+    Route::controller(StatisticsController::class)->prefix('statistics')->middleware('jwt.auth')
+        ->group(function () {
+            Route::get('/patient', 'patient');
+            Route::get('/patientTotal', 'patientTotal');
+            Route::get('/getFrequency', 'getFrequency');
+            Route::get('/getTotalPatientFrequency', 'getTotalPatientFrequency');
+            Route::get('/appointment', 'appointment');
+            Route::get('/appointmentTotal', 'appointmentTotal');
+            Route::get('/getAppointmentsByStatus', 'getAppointmentsByStatus');
+            Route::get('/getAppointmentsByMonth/{year}', 'getAppointmentsByMonth');
         });
 });
