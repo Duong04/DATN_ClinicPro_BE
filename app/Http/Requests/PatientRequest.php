@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Patient;
 
 class PatientRequest extends FormRequest
 {
@@ -35,8 +36,10 @@ class PatientRequest extends FormRequest
         ];
 
         if ($this->method() === 'PUT') {
-            $id = $this->route('id');
-            $rules['user_info.email'] = "required|email|unique:patient_infos,email,".$id.",patient_id|unique:users,email,".$id;
+            $id = $this->route('id'); 
+            $user_id = Patient::find($id)->user_id;
+
+            $rules['user_info.email'] = 'required|email|unique:patient_infos,email,'.$id.',patient_id|unique:users,email,'.$user_id;
         }
 
         return $rules;

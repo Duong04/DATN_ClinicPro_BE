@@ -41,6 +41,18 @@ use App\Repositories\RolePermission\RolePermissionRepositoryInterface;
 use App\Repositories\PackageCategory\PackageCategoryRepositoryInterface;
 use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
 use App\Repositories\PrescriptionInfo\PrescriptionInfoRepositoryInterface;
+use App\Repositories\Conversation\ConversationRepositoryInterface;
+use App\Repositories\Conversation\ConversationRepository;
+use App\Repositories\Message\MessageRepositoryInterface;
+use App\Repositories\Message\MessageRepository;
+use App\Repositories\Invoice\InvoiceRepositoryInterface;
+use App\Repositories\Invoice\InvoiceRepository;
+use App\Repositories\Payment\PaymentRepositoryInterface;
+use App\Repositories\Payment\PaymentRepository;
+use App\Repositories\PaymentMethod\PaymentMethodRepositoryInterface;
+use App\Repositories\PaymentMethod\PaymentMethodRepository;
+use App\Repositories\Service\ServiceRepositoryInterface;
+use App\Repositories\Service\ServiceRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -68,6 +80,12 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(FeedbackRepositoryInterface::class, FeedbackRepository::class);
         $this->app->bind(PrescriptionInfoRepositoryInterface::class, PrescriptionInfoRepository::class);
         $this->app->bind(PackageCategoryRepositoryInterface::class, PackageCategoryRepository::class);
+        $this->app->bind(ConversationRepositoryInterface::class, ConversationRepository::class);
+        $this->app->bind(MessageRepositoryInterface::class, MessageRepository::class);
+        $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
+        $this->app->bind(PaymentRepositoryInterface::class, PaymentRepository::class);
+        $this->app->bind(InvoiceRepositoryInterface::class, InvoiceRepository::class);
+        $this->app->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
     }
 
     /**

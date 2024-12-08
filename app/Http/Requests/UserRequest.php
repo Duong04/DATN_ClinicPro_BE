@@ -31,19 +31,43 @@ class UserRequest extends FormRequest
             'user_info.address' => 'nullable',
             'user_info.phone_number' => 'nullable|regex:/^([0-9\-\+\(\)]*)$/|min:10|max:10',
             'user_info.gender' => 'nullable|in:male,female,other',
-            'user_info.dob' => 'nullable|date|before_or_equal:today',
+            'user_info.dob' => 'required|date|before_or_equal:today',
             'user_info.department_id' => 'nullable|exists:departments,id',
             'user_info.identity_card.type_name' => 'nullable',
             'user_info.identity_card.identity_card_number' => 'nullable'
         ];
 
         if ($this->method() === 'POST') {
-            $rules['password'] = 'required|string';
+            $rules['password'] = [
+                'required',
+                'min:8',
+                'regex:/[A-Z]/',         
+                'regex:/[@$!%*#?&]/'  
+            ];
         }
 
         if ($this->method() === 'PUT') {
             $id = $this->route('id');
-            $rules['email'] = 'required|email|unique:users,email,'.$id;
+            if ($this->has('email')) {
+                $rules['email'] = 'required|email|unique:users,email,' . $id;
+            }else {
+                $rules['email'] = 'nullable|email|unique:users,email,' . $id;
+            }
+            if ($this->has('role_id')) {
+                $rules['role_id'] = 'required|exists:roles,id';
+            }else {
+                $rules['role_id'] = 'nullable|exists:roles,id';
+            }
+            if ($this->has('user_info.fullname')) {
+                $rules['user_info.fullname'] = ['required', 'regex:/^[a-zA-Z0-9\s]/'];
+            }else {
+                $rules['user_info.fullname'] = ['nullable', 'regex:/^[a-zA-Z0-9\s]/'];
+            }
+            if ($this->has('user_info.dob')) {
+                $rules['user_info.dob'] = 'required|date|before_or_equal:today';
+            }else {
+                $rules['user_info.dob'] = 'nullable|date|before_or_equal:today';
+            }
         }
 
         return $rules;
@@ -62,7 +86,8 @@ class UserRequest extends FormRequest
             'date' => 'Vui lòng nhập đúng định dạng ngày tháng!',
             'exists' => 'Giá trị của :attribute không tồn tại!',
             'regex' => ':attribute không đúng định dạng!',
-            'dob.before_or_equal' => ':attribute không được lớn hơn ngày hiện tại!',
+            'user_info.dob.before_or_equal' => ':attribute không được lớn hơn ngày hiện tại!',
+            'password.regex' => ':attribute phải chứa ít nhất một ký tự in hoa và một ký tự đặc biệt!'
         ];
     }
 
