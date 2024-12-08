@@ -11621,6 +11621,450 @@
                     }
                 }
             }
+        },
+        "/api/v1/conversations": {
+            "get": {
+                "tags": ["Conversations"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Get Paginated List of Conversations",
+                "operationId": "getPaginatedConversations",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of conversations to retrieve per page.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of conversations retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "description": "Conversation details"
+                                            }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "description": "URL to the previous page of conversations, if applicable",
+                                            "example": "/api/v1/conversations?page=1"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "description": "URL to the next page of conversations, if applicable",
+                                            "example": "/api/v1/conversations?page=3"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "description": "Total number of conversations",
+                                            "example": 100
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "description": "Error message",
+                                            "example": "An error occurred while retrieving conversations"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/conversations/{id}/{user_id}": {
+            "get": {
+                "tags": ["Conversations"],
+                "summary": "Find a Conversation by ID",
+                "operationId": "findConversationById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the conversation to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID of the user involved in the conversation",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Conversation retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "description": "Details of the conversation",
+                                            "example": {
+                                                "id": "6836f96e-aec9-459d-a7f3-496e9c3c325b",
+                                                "user_id": "3119acf9-b33c-4de6-9b51-0275be8ea689",
+                                                "title": "Hello.",
+                                                "created_at": "2024-12-03T13:42:11.000000Z",
+                                                "updated_at": "2024-12-03T13:42:11.000000Z",
+                                                "messages": [
+                                                    {
+                                                        "id": 2,
+                                                        "conversation_id": "6836f96e-aec9-459d-a7f3-496e9c3c325b",
+                                                        "sender_type": "USER",
+                                                        "message_text": "Hello.",
+                                                        "created_at": "2024-12-03T13:42:11.000000Z",
+                                                        "updated_at": "2024-12-03T13:42:11.000000Z"
+                                                    },
+                                                    {
+                                                        "id": 3,
+                                                        "conversation_id": "6836f96e-aec9-459d-a7f3-496e9c3c325b",
+                                                        "sender_type": "AI",
+                                                        "message_text": "Xin chào. Tôi là AI CLINIC PRO, trợ lý AI về sức khỏe và bệnh tật. Rất vui được hỗ trợ bạn.",
+                                                        "created_at": "2024-12-03T13:42:11.000000Z",
+                                                        "updated_at": "2024-12-03T13:42:11.000000Z"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Conversation not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Conversation not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/api/v1/conversations/{id}": {
+            "delete": {
+                "tags": ["Conversations"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Delete a Conversation",
+                "operationId": "deleteConversation",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the conversation to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Conversation deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "description": "Indicates whether the deletion was successful",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Conversation not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "description": "Error message",
+                                            "example": "Conversation not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "description": "Error message",
+                                            "example": "An error occurred while deleting the conversation"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/al/chat": {
+            "post": {
+                "tags": ["AI"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Gửi một prompt tới dịch vụ AI và nhận phản hồi",
+                "description": "Gửi một prompt từ người dùng tới dịch vụ AI để nhận phản hồi.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "prompt": {
+                                        "type": "string",
+                                        "example": "Hãy cho tôi biết về lập trình Python."
+                                    },
+                                    "id": {
+                                        "type": "string",
+                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3",
+                                        "description": "Nếu truyền id thì nó sẽ tiếp tục đoạn chat của id đó nếu không truyền đoạn chat sẽ làm mới",
+                                        "nullable": true
+                                    }
+                                },
+                                "required": ["prompt"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Phản hồi thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string",
+                                            "example": "Python là một ngôn ngữ lập trình mạnh mẽ và linh hoạt..."
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Lỗi yêu cầu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Đã có lỗi xảy ra."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{user_id}/conversations": {
+            "get": {
+                "tags": ["AI"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy cuộc trò chuyện theo ID người dùng",
+                "description": "Truy vấn cơ sở dữ liệu để tìm tất cả các cuộc trò chuyện thuộc về người dùng với ID cụ thể.",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "b2345678-e89b-12d3-a456-426614174001"
+                        },
+                        "description": "ID hộp thoại."
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        },
+                        "description": "Số lượng chuyên khoa trên mỗi trang."
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        },
+                        "description": "Trang hiện tại của các chuyên khoa."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Danh sách các cuộc trò chuyện của người dùng",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "Cuộc trò chuyện về công nghệ"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "string",
+                                                        "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                                                    },
+                                                    "created_at": {
+                                                        "example": "2024-09-01T12:34:56Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "example": "2024-09-01T12:34:56Z"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/specialties?page=1"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "example": "http://example.com/api/v1/specialties?page=3"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 100
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy cuộc trò chuyện cho người dùng",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Không tìm thấy cuộc trò chuyện cho người dùng này."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Lỗi máy chủ khi xử lý yêu cầu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Đã xảy ra lỗi khi tìm kiếm cuộc trò chuyện."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {

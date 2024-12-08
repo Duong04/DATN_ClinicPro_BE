@@ -195,7 +195,7 @@ Route::prefix('v1')->group(function () {
 
     Route::controller(ChatAIController::class)->prefix('al')
         ->group(function () {
-            Route::post('/chat', 'chatBox');
+            Route::post('/chat', 'chat');
         });
     Route::prefix('users')->group(function () {
         Route::get('/{id}/conversations', [ConversationController::class, 'getByUserId']);

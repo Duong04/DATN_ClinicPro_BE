@@ -9,6 +9,8 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\ChangePswRequest;
+use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\ForgotPasswordRequest;
 use Str;
 use Illuminate\Support\Facades\Mail;
 
@@ -51,7 +53,7 @@ class AuthController extends Controller
         return $this->authService->verifyEmail($token);
     }
 
-    public function forgotPsw(Request $request) {
+    public function forgotPsw(ForgotPasswordRequest $request) {
         return $this->authService-> forgotPsw($request);
     }
 
@@ -59,7 +61,7 @@ class AuthController extends Controller
         return response()->json($otp);
     }
 
-    public function resetPsw(Request $request) {
+    public function resetPsw(ResetPasswordRequest $request) {
         return $this->authService->resetPsw($request);
     }
 }

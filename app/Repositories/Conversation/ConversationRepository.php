@@ -11,8 +11,10 @@ class ConversationRepository implements ConversationRepositoryInterface {
     public function find($id, $user_id) {
         return Conversation::with('messages')->where('user_id', $user_id)->find($id);
     }
-    public function findUserId($id) {
-        return Conversation::where('user_id', $id)->get();
+    public function findUserId($id, $limit) {
+        $conversation = Conversation::where('user_id', $id);
+
+        return $limit ? $conversation->paginate($limit) : $conversation->get();
     }
     public function paginate($limit) {
         $conversation = Conversation::with('messages');

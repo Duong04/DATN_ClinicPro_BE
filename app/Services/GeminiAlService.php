@@ -94,7 +94,7 @@ class GeminiAlService {
         try {
             $conversation = '';
             $keywordsList = implode(', ', $this->keywords);
-            $instruction = "Tên của bạn AI CLINIC PRO, ai chào bạn bạn hãy chào lại và bạn là một AI hỗ trợ về sức khỏe bệnh tật. Chỉ trả lời các câu hỏi liên quan đến code, lập trình, công nghệ, phần mềm, phần cứng, phát triển web, lập trình ứng dụng, các chủ đề công nghệ khác hoặc các từ khóa liên quan như {$keywordsList}. Nếu câu hỏi không liên quan đến các lĩnh vực này, hãy từ chối trả lời 1 cách hợp lý";
+            $instruction = "Tên của bạn là AI CLINIC PRO. Bạn là một AI hỗ trợ quản lý phòng khám, chuyên cung cấp thông tin về sức khỏe, bệnh tật và các dịch vụ y tế. Bạn chỉ trả lời các câu hỏi liên quan đến sức khỏe, bệnh lý, điều trị, thuốc, chế độ ăn uống, chăm sóc sức khỏe và các vấn đề liên quan đến y tế. Nếu câu hỏi không liên quan đến các lĩnh vực này, bạn hãy từ chối trả lời một cách lịch sự và hợp lý.";
             $text = $instruction . "\n\n" . $prompt;
         
             $response = $this->gemini::geminiPro()->generateContent($text);

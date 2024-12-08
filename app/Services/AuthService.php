@@ -168,12 +168,7 @@ class AuthService
     public function forgotPsw($request)
     {
         try {
-            $request->validate([
-                'email' => 'required|exists:users,email'
-            ], [
-                'email.required' => 'Vui lòng nhập địa chỉ email!',
-                'email.exists' => 'Địa chỉ email không tồn tại trong hệ thống!'
-            ]);
+            $data = $request->validated();
 
             $email = $request->input('email');
             $otp = $this->generateUniqueOtp();
@@ -208,13 +203,7 @@ class AuthService
     public function resetPsw($request)
     {
         try {
-            $data = $request->validate([
-                'otp' => 'required',
-                'password' => 'required|min:8'
-            ], [
-                'required' => ':attribute là bắt buộc!',
-                'min' => 'Mật khẩu phải lớn hơn 8 ký tự!'
-            ]);
+            $data = $request->validated();
 
             $otp = $request->otp;
             $passwordReset = PasswordReset::with('user')
@@ -222,10 +211,18 @@ class AuthService
                 ->first();
 
             if (!$passwordReset) {
-                return response()->json(['success' => false, 'message' => 'OTP không hợp lệ'], 400);
+                return response()->json([
+                    'success' => false, 
+                    'message' => 'OTP không hợp lệ',
+                    'errors' => ['otp' => 'OTP không hợp lệ']
+                ], 400);
             } else if ($passwordReset->expires_at < now('Asia/Ho_Chi_Minh')) {
                 PasswordReset::where('otp', $otp)->delete();
-                return response()->json(['success' => false, 'message' => 'OTP đã hết hạn'], 400);
+                return response()->json([
+                    'success' => false, 
+                    'message' => 'OTP đã hết hạn',
+                    'errors' => ['otp' => 'OTP đã hết hạn']
+                ], 400);
             }
 
             $passwordReset->user->update([

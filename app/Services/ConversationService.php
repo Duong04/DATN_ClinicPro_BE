@@ -29,9 +29,9 @@ class ConversationService {
         }
     }
 
-    public function findByUserId($userId) {
+    public function findByUserId($userId, $limit) {
         try {
-            return $this->conversationRepository->findUserId($userId);
+            return $this->conversationRepository->findUserId($userId, $limit);
         } catch (\Throwable $th) {
             throw $th;
         }
