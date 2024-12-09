@@ -33,6 +33,7 @@ class PrescriptionResource extends JsonResource
                 'insurance_number' => $this->patient->insurance_number,
                 'identity_card_id' => $this->patient->identity_card_id,
                 'status' => $this->patient->status,
+                'patient_info' => $this->patient->patientInfo,
             ] : null,
             'medical_histories' => $this->medical_histories ? [
                 'id' => $this->id,
