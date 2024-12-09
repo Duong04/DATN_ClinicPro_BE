@@ -13531,6 +13531,11 @@
                 "summary": "Lấy danh sách các dịch vụ",
                 "description": "API này trả về danh sách các dịch vụ với phân trang, bao gồm tên dịch vụ, mô tả và giá cả.",
                 "operationId": "getAllServices",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "limit",
@@ -13617,112 +13622,114 @@
                 }
             },
             "post": {
-            "tags": ["Services"],
-            "summary": "Tạo dịch vụ mới",
-            "description": "API này cho phép tạo một dịch vụ mới với tên, mô tả và giá cả.",
-            "operationId": "createService",
-            "requestBody": {
-              "required": true,
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "service_name": {
-                        "type": "string",
-                        "example": "Tiêm thuốcc"
-                      },
-                      "description": {
-                        "type": "string",
-                        "example": "huhuh"
-                      },
-                      "price": {
-                        "type": "integer",
-                        "example": 1000000
-                      }
-                    },
-                    "required": [
-                      "service_name",
-                      "price"
-                    ]
-                  }
-                }
-              }
-            },
-            "responses": {
-              "201": {
-                "description": "Dịch vụ đã được tạo thành công",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "success": {
-                          "type": "boolean",
-                          "example": true
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Tạo dịch vụ thành công!"
-                        },
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "example": "1f02da19-5db5-4736-80b2-34f53b96d32d"
-                            },
-                            "service_name": {
-                              "type": "string",
-                              "example": "Tiêm thuốcc"
-                            },
-                            "description": {
-                              "type": "string",
-                              "example": "huhuh"
-                            },
-                            "price": {
-                              "type": "integer",
-                              "example": 1000000
-                            },
-                            "created_at": {
-                              "type": "string",
-                              "format": "date-time",
-                              "example": "2024-12-08T15:39:03.000000Z"
-                            },
-                            "updated_at": {
-                              "type": "string",
-                              "format": "date-time",
-                              "example": "2024-12-08T15:39:03.000000Z"
+                "tags": ["Services"],
+                "summary": "Tạo dịch vụ mới",
+                "description": "API này cho phép tạo một dịch vụ mới với tên, mô tả và giá cả.",
+                "operationId": "createService",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "service_name": {
+                                        "type": "string",
+                                        "example": "Tiêm thuốcc"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "huhuh"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": 1000000
+                                    }
+                                },
+                                "required": ["service_name", "price"]
                             }
-                          }
                         }
-                      }
                     }
-                  }
-                }
-              },
-              "422": {
-                "description": "Dữ liệu không hợp lệ hoặc có lỗi khi tạo dịch vụ",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "success": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Tên dịch vụ không được để trống"
+                },
+                "responses": {
+                    "201": {
+                        "description": "Dịch vụ đã được tạo thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tạo dịch vụ thành công!"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "1f02da19-5db5-4736-80b2-34f53b96d32d"
+                                                },
+                                                "service_name": {
+                                                    "type": "string",
+                                                    "example": "Tiêm thuốcc"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "huhuh"
+                                                },
+                                                "price": {
+                                                    "type": "integer",
+                                                    "example": 1000000
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-12-08T15:39:03.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-12-08T15:39:03.000000Z"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                      }
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ hoặc có lỗi khi tạo dịch vụ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tên dịch vụ không được để trống"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
-                  }
                 }
-              }
             }
-        }
         },
         "/api/v1/services/{id}": {
             "get": {
@@ -13730,6 +13737,11 @@
                 "summary": "Lấy thông tin chi tiết của một dịch vụ",
                 "description": "API này trả về thông tin chi tiết của một dịch vụ cụ thể, bao gồm tên dịch vụ, mô tả, giá cả và các thông tin khác.",
                 "operationId": "getServiceById",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -13817,171 +13829,180 @@
                 "summary": "Cập nhật dịch vụ",
                 "description": "API này cho phép cập nhật thông tin của một dịch vụ đã tồn tại dựa trên ID.",
                 "operationId": "updateService",
-                "parameters": [
-                  {
-                    "name": "id",
-                    "in": "path",
-                    "description": "ID của dịch vụ cần cập nhật",
-                    "required": true,
-                    "schema": {
-                      "type": "string",
-                      "example": "1f02da19-5db5-4736-80b2-34f53b96d32d"
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
-                  }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID của dịch vụ cần cập nhật",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "1f02da19-5db5-4736-80b2-34f53b96d32d"
+                        }
+                    }
                 ],
                 "requestBody": {
-                  "required": true,
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "service_name": {
-                            "type": "string",
-                            "example": "Cập nhật Tiêm thuốcc"
-                          },
-                          "description": {
-                            "type": "string",
-                            "example": "Cập nhật mô tả"
-                          },
-                          "price": {
-                            "type": "integer",
-                            "example": 1200000
-                          }
-                        },
-                        "required": [
-                          "service_name",
-                          "description",
-                          "price"
-                        ]
-                      }
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "service_name": {
+                                        "type": "string",
+                                        "example": "Cập nhật Tiêm thuốcc"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Cập nhật mô tả"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": 1200000
+                                    }
+                                },
+                                "required": [
+                                    "service_name",
+                                    "description",
+                                    "price"
+                                ]
+                            }
+                        }
                     }
-                  }
                 },
                 "responses": {
-                  "200": {
-                    "description": "Cập nhật dịch vụ thành công",
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "type": "object",
-                          "properties": {
-                            "success": {
-                              "type": "boolean",
-                              "example": true
-                            },
-                            "message": {
-                              "type": "string",
-                              "example": "Cập nhật dịch vụ thành công!"
+                    "200": {
+                        "description": "Cập nhật dịch vụ thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cập nhật dịch vụ thành công!"
+                                        }
+                                    }
+                                }
                             }
-                          }
                         }
-                      }
-                    }
-                  },
-                  "400": {
-                    "description": "Lỗi khi cập nhật dịch vụ, có thể do dữ liệu không hợp lệ",
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "type": "object",
-                          "properties": {
-                            "success": {
-                              "type": "boolean",
-                              "example": false
-                            },
-                            "message": {
-                              "type": "string",
-                              "example": "Không thể cập nhật dịch vụ do lỗi dữ liệu!"
+                    },
+                    "400": {
+                        "description": "Lỗi khi cập nhật dịch vụ, có thể do dữ liệu không hợp lệ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Không thể cập nhật dịch vụ do lỗi dữ liệu!"
+                                        }
+                                    }
+                                }
                             }
-                          }
                         }
-                      }
-                    }
-                  },
-                  "404": {
-                    "description": "Dịch vụ không tìm thấy",
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "type": "object",
-                          "properties": {
-                            "success": {
-                              "type": "boolean",
-                              "example": false
-                            },
-                            "message": {
-                              "type": "string",
-                              "example": "Dịch vụ không tồn tại!"
+                    },
+                    "404": {
+                        "description": "Dịch vụ không tìm thấy",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Dịch vụ không tồn tại!"
+                                        }
+                                    }
+                                }
                             }
-                          }
                         }
-                      }
                     }
-                  }
                 }
-              },          
+            },
             "delete": {
-      "tags": ["Services"],
-      "summary": "Xóa dịch vụ",
-      "description": "API này cho phép xóa một dịch vụ dựa trên ID.",
-      "operationId": "deleteService",
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "description": "ID của dịch vụ cần xóa",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "example": "1f02da19-5db5-4736-80b2-34f53b96d32d"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Dịch vụ đã được xóa thành công",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "success": {
-                    "type": "boolean",
-                    "example": true
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Xóa dịch vụ thành công!"
-                  }
+                "tags": ["Services"],
+                "summary": "Xóa dịch vụ",
+                "description": "API này cho phép xóa một dịch vụ dựa trên ID.",
+                "operationId": "deleteService",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID của dịch vụ cần xóa",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "1f02da19-5db5-4736-80b2-34f53b96d32d"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dịch vụ đã được xóa thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Xóa dịch vụ thành công!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Dịch vụ không tồn tại",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Không tìm thấy dịch vụ!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
-        },
-        "404": {
-          "description": "Dịch vụ không tồn tại",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "success": {
-                    "type": "boolean",
-                    "example": false
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Không tìm thấy dịch vụ!"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-            }
-
         }
     },
     "components": {
@@ -14066,7 +14087,7 @@
             "name": "Services",
             "description": "Dịch vụ"
         },
-      {
+        {
             "name": "Statistics",
             "description": "Thống kê"
         }

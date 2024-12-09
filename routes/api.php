@@ -182,7 +182,7 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'destroy')->middleware('jwt.auth');
         });
 
-    Route::controller(ServiceController::class)->prefix('services')
+    Route::controller(ServiceController::class)->middleware('jwt.auth')->prefix('services')
         ->group(function () {
             Route::get('/', 'paginate');
             Route::get('/{id}', 'show');
