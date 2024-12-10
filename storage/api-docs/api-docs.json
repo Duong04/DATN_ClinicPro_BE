@@ -8771,152 +8771,137 @@
                                                         "example": "b2345678-e89b-12d3-a456-426614174001"
                                                     },
                                                     "patient": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "string",
-                                                                    "example": "e3811400-4574-486c-9862-ac1b5d738959"
-                                                                },
-                                                                "insurance_number": {
-                                                                    "type": "string",
-                                                                    "example": "INS123456789"
-                                                                },
-                                                                "identity_card_id": {
-                                                                    "type": "string",
-                                                                    "example": "123456789123"
-                                                                },
-                                                                "status": {
-                                                                    "type": "string",
-                                                                    "example": "active"
-                                                                },
-                                                                "patient_info": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "id": {
-                                                                                "type": "string",
-                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                            },
-                                                                            "fullname": {
-                                                                                "type": "string",
-                                                                                "example": "Nguyen Van A"
-                                                                            },
-                                                                            "address": {
-                                                                                "type": "string",
-                                                                                "example": "123 Main St, City, Country"
-                                                                            },
-                                                                            "avatar": {
-                                                                                "type": "string",
-                                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                            },
-                                                                            "phone_number": {
-                                                                                "type": "string",
-                                                                                "example": "0123456789"
-                                                                            },
-                                                                            "gender": {
-                                                                                "type": "string",
-                                                                                "example": "male"
-                                                                            },
-                                                                            "dob": {
-                                                                                "type": "string",
-                                                                                "format": "date",
-                                                                                "example": "1990-01-01"
-                                                                            },
-                                                                            "email": {
-                                                                                "type": "string",
-                                                                                "example": "test@gmail.com"
-                                                                            },
-                                                                            "created_at": {
-                                                                                "type": "string",
-                                                                                "format": "date-time",
-                                                                                "example": "2024-09-27T12:10:32.000000Z"
-                                                                            },
-                                                                            "updated_at": {
-                                                                                "type": "string",
-                                                                                "format": "date-time",
-                                                                                "example": "2024-09-27T12:10:32.000000Z"
-                                                                            }
-                                                                        }
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "e3811400-4574-486c-9862-ac1b5d738959"
+                                                            },
+                                                            "insurance_number": {
+                                                                "type": "string",
+                                                                "example": "INS123456789"
+                                                            },
+                                                            "identity_card_id": {
+                                                                "type": "string",
+                                                                "example": "123456789123"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "active"
+                                                            },
+                                                            "patient_info": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "email": {
+                                                                        "type": "string",
+                                                                        "example": "test@gmail.com"
+                                                                    },
+                                                                    "created_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                                    },
+                                                                    "updated_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
                                                                     }
                                                                 }
                                                             }
                                                         }
                                                     },
                                                     "user": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "string",
-                                                                    "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                },
-                                                                "status": {
-                                                                    "type": "string",
-                                                                    "example": "active"
-                                                                },
-                                                                "role": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "id": {
-                                                                                "type": "string",
-                                                                                "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
-                                                                            },
-                                                                            "name": {
-                                                                                "type": "string",
-                                                                                "example": "doctor"
-                                                                            },
-                                                                            "description": {
-                                                                                "type": "string",
-                                                                                "example": "bac si"
-                                                                            }
-                                                                        }
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "active"
+                                                            },
+                                                            "role": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "doctor"
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "example": "bac si"
                                                                     }
-                                                                },
-                                                                "user_info": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "id": {
-                                                                                "type": "string",
-                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                            },
-                                                                            "fullname": {
-                                                                                "type": "string",
-                                                                                "example": "Nguyen Van A"
-                                                                            },
-                                                                            "address": {
-                                                                                "type": "string",
-                                                                                "example": "123 Main St, City, Country"
-                                                                            },
-                                                                            "avatar": {
-                                                                                "type": "string",
-                                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                            },
-                                                                            "phone_number": {
-                                                                                "type": "string",
-                                                                                "example": "0123456789"
-                                                                            },
-                                                                            "gender": {
-                                                                                "type": "string",
-                                                                                "example": "male"
-                                                                            },
-                                                                            "dob": {
-                                                                                "type": "string",
-                                                                                "format": "date",
-                                                                                "example": "1990-01-01"
-                                                                            },
-                                                                            "department_id": {
-                                                                                "type": "string",
-                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                            }
-                                                                        }
+                                                                }
+                                                            },
+                                                            "user_info": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "department_id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                                                     }
                                                                 }
                                                             }
@@ -8931,26 +8916,33 @@
                                                         "example": "luu y cua bac si"
                                                     },
                                                     "medical_histories": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "string",
-                                                                    "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                },
-                                                                "description": {
-                                                                    "type": "string",
-                                                                    "example": "Cardiology"
-                                                                },
-                                                                "diagnosis": {
-                                                                    "type": "string",
-                                                                    "example": "Cúm A"
-                                                                },
-                                                                "treatment": {
-                                                                    "type": "string",
-                                                                    "example": "Nghỉ ngơi, uống thuốc"
-                                                                }
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "Cardiology"
+                                                            },
+                                                            "diagnosis": {
+                                                                "type": "string",
+                                                                "example": "Cúm A"
+                                                            },
+                                                            "treatment": {
+                                                                "type": "string",
+                                                                "example": "Nghỉ ngơi, uống thuốc"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
                                                             }
                                                         }
                                                     },
@@ -9151,15 +9143,15 @@
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string",
-                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
-                                                },
-                                                "patient": {
-                                                    "type": "array",
-                                                    "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
+                                                    },
+                                                    "patient": {
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
@@ -9179,62 +9171,56 @@
                                                                 "example": "active"
                                                             },
                                                             "patient_info": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string",
-                                                                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                        },
-                                                                        "fullname": {
-                                                                            "type": "string",
-                                                                            "example": "Nguyen Van A"
-                                                                        },
-                                                                        "address": {
-                                                                            "type": "string",
-                                                                            "example": "123 Main St, City, Country"
-                                                                        },
-                                                                        "avatar": {
-                                                                            "type": "string",
-                                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                        },
-                                                                        "phone_number": {
-                                                                            "type": "string",
-                                                                            "example": "0123456789"
-                                                                        },
-                                                                        "gender": {
-                                                                            "type": "string",
-                                                                            "example": "male"
-                                                                        },
-                                                                        "dob": {
-                                                                            "type": "string",
-                                                                            "format": "date",
-                                                                            "example": "1990-01-01"
-                                                                        },
-                                                                        "email": {
-                                                                            "type": "string",
-                                                                            "example": "test@gmail.com"
-                                                                        },
-                                                                        "created_at": {
-                                                                            "type": "string",
-                                                                            "format": "date-time",
-                                                                            "example": "2024-09-27T12:10:32.000000Z"
-                                                                        },
-                                                                        "updated_at": {
-                                                                            "type": "string",
-                                                                            "format": "date-time",
-                                                                            "example": "2024-09-27T12:10:32.000000Z"
-                                                                        }
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "email": {
+                                                                        "type": "string",
+                                                                        "example": "test@gmail.com"
+                                                                    },
+                                                                    "created_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                                    },
+                                                                    "updated_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
                                                                     }
                                                                 }
                                                             }
                                                         }
-                                                    }
-                                                },
-                                                "user": {
-                                                    "type": "array",
-                                                    "items": {
+                                                    },
+                                                    "user": {
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
@@ -9246,80 +9232,71 @@
                                                                 "example": "active"
                                                             },
                                                             "role": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string",
-                                                                            "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
-                                                                        },
-                                                                        "name": {
-                                                                            "type": "string",
-                                                                            "example": "doctor"
-                                                                        },
-                                                                        "description": {
-                                                                            "type": "string",
-                                                                            "example": "bac si"
-                                                                        }
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "doctor"
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "example": "bac si"
                                                                     }
                                                                 }
                                                             },
                                                             "user_info": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string",
-                                                                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                        },
-                                                                        "fullname": {
-                                                                            "type": "string",
-                                                                            "example": "Nguyen Van A"
-                                                                        },
-                                                                        "address": {
-                                                                            "type": "string",
-                                                                            "example": "123 Main St, City, Country"
-                                                                        },
-                                                                        "avatar": {
-                                                                            "type": "string",
-                                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                        },
-                                                                        "phone_number": {
-                                                                            "type": "string",
-                                                                            "example": "0123456789"
-                                                                        },
-                                                                        "gender": {
-                                                                            "type": "string",
-                                                                            "example": "male"
-                                                                        },
-                                                                        "dob": {
-                                                                            "type": "string",
-                                                                            "format": "date",
-                                                                            "example": "1990-01-01"
-                                                                        },
-                                                                        "department_id": {
-                                                                            "type": "string",
-                                                                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                        }
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "department_id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                                                     }
                                                                 }
                                                             }
                                                         }
-                                                    }
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Tên đơn thuốc"
-                                                },
-                                                "description": {
-                                                    "type": "string",
-                                                    "example": "luu y cua bac si"
-                                                },
-                                                "medical_histories": {
-                                                    "type": "array",
-                                                    "items": {
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tên đơn thuốc"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "luu y cua bac si"
+                                                    },
+                                                    "medical_histories": {
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
@@ -9337,63 +9314,73 @@
                                                             "treatment": {
                                                                 "type": "string",
                                                                 "example": "Nghỉ ngơi, uống thuốc"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-27T12:10:32.000000Z"
-                                                },
-                                                "updated_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-27T12:10:32.000000Z"
-                                                },
-                                                "medications": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "id": {
-                                                                "type": "integer"
                                                             },
-                                                            "prescription_id": {
-                                                                "type": "string"
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
                                                             },
-                                                            "medication_name": {
-                                                                "type": "string"
-                                                            },
-                                                            "instructions": {
-                                                                "type": "string"
-                                                            },
-                                                            "quantity": {
-                                                                "type": "integer"
-                                                            },
-                                                            "duration": {
-                                                                "type": "integer"
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
                                                             }
                                                         }
                                                     },
-                                                    "example": [
-                                                        {
-                                                            "id": 1,
-                                                            "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                            "medication_name": "thuoc 1",
-                                                            "instructions": "Hướng dẫn sử dụng",
-                                                            "quantity": 20,
-                                                            "duration": 7
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                    },
+                                                    "medications": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "prescription_id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "medication_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                }
+                                                            }
                                                         },
-                                                        {
-                                                            "id": 2,
-                                                            "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                            "medication_name": "thuoc 2",
-                                                            "instructions": "Uống sau khi ăn",
-                                                            "quantity": 30,
-                                                            "duration": 10
-                                                        }
-                                                    ]
+                                                        "example": [
+                                                            {
+                                                                "id": 1,
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 1",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 2",
+                                                                "instructions": "Uống sau khi ăn",
+                                                                "quantity": 30,
+                                                                "duration": 10
+                                                            }
+                                                        ]
+                                                    }
                                                 }
                                             }
                                         }
@@ -9469,15 +9456,15 @@
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string",
-                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
-                                                },
-                                                "patient": {
-                                                    "type": "array",
-                                                    "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
+                                                    },
+                                                    "patient": {
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
@@ -9497,62 +9484,56 @@
                                                                 "example": "active"
                                                             },
                                                             "patient_info": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string",
-                                                                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                        },
-                                                                        "fullname": {
-                                                                            "type": "string",
-                                                                            "example": "Nguyen Van A"
-                                                                        },
-                                                                        "address": {
-                                                                            "type": "string",
-                                                                            "example": "123 Main St, City, Country"
-                                                                        },
-                                                                        "avatar": {
-                                                                            "type": "string",
-                                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                        },
-                                                                        "phone_number": {
-                                                                            "type": "string",
-                                                                            "example": "0123456789"
-                                                                        },
-                                                                        "gender": {
-                                                                            "type": "string",
-                                                                            "example": "male"
-                                                                        },
-                                                                        "dob": {
-                                                                            "type": "string",
-                                                                            "format": "date",
-                                                                            "example": "1990-01-01"
-                                                                        },
-                                                                        "email": {
-                                                                            "type": "string",
-                                                                            "example": "test@gmail.com"
-                                                                        },
-                                                                        "created_at": {
-                                                                            "type": "string",
-                                                                            "format": "date-time",
-                                                                            "example": "2024-09-27T12:10:32.000000Z"
-                                                                        },
-                                                                        "updated_at": {
-                                                                            "type": "string",
-                                                                            "format": "date-time",
-                                                                            "example": "2024-09-27T12:10:32.000000Z"
-                                                                        }
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "email": {
+                                                                        "type": "string",
+                                                                        "example": "test@gmail.com"
+                                                                    },
+                                                                    "created_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                                    },
+                                                                    "updated_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
                                                                     }
                                                                 }
                                                             }
                                                         }
-                                                    }
-                                                },
-                                                "user": {
-                                                    "type": "array",
-                                                    "items": {
+                                                    },
+                                                    "user": {
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
@@ -9564,80 +9545,71 @@
                                                                 "example": "active"
                                                             },
                                                             "role": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string",
-                                                                            "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
-                                                                        },
-                                                                        "name": {
-                                                                            "type": "string",
-                                                                            "example": "doctor"
-                                                                        },
-                                                                        "description": {
-                                                                            "type": "string",
-                                                                            "example": "bac si"
-                                                                        }
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "doctor"
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "example": "bac si"
                                                                     }
                                                                 }
                                                             },
                                                             "user_info": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string",
-                                                                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                        },
-                                                                        "fullname": {
-                                                                            "type": "string",
-                                                                            "example": "Nguyen Van A"
-                                                                        },
-                                                                        "address": {
-                                                                            "type": "string",
-                                                                            "example": "123 Main St, City, Country"
-                                                                        },
-                                                                        "avatar": {
-                                                                            "type": "string",
-                                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                        },
-                                                                        "phone_number": {
-                                                                            "type": "string",
-                                                                            "example": "0123456789"
-                                                                        },
-                                                                        "gender": {
-                                                                            "type": "string",
-                                                                            "example": "male"
-                                                                        },
-                                                                        "dob": {
-                                                                            "type": "string",
-                                                                            "format": "date",
-                                                                            "example": "1990-01-01"
-                                                                        },
-                                                                        "department_id": {
-                                                                            "type": "string",
-                                                                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                        }
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "department_id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                                                     }
                                                                 }
                                                             }
                                                         }
-                                                    }
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Tên đơn thuốc"
-                                                },
-                                                "description": {
-                                                    "type": "string",
-                                                    "example": "luu y cua bac si"
-                                                },
-                                                "medical_histories": {
-                                                    "type": "array",
-                                                    "items": {
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tên đơn thuốc"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "luu y cua bac si"
+                                                    },
+                                                    "medical_histories": {
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
@@ -9655,63 +9627,73 @@
                                                             "treatment": {
                                                                 "type": "string",
                                                                 "example": "Nghỉ ngơi, uống thuốc"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-27T12:10:32.000000Z"
-                                                },
-                                                "updated_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-27T12:10:32.000000Z"
-                                                },
-                                                "medications": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "id": {
-                                                                "type": "integer"
                                                             },
-                                                            "prescription_id": {
-                                                                "type": "string"
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
                                                             },
-                                                            "medication_name": {
-                                                                "type": "string"
-                                                            },
-                                                            "instructions": {
-                                                                "type": "string"
-                                                            },
-                                                            "quantity": {
-                                                                "type": "integer"
-                                                            },
-                                                            "duration": {
-                                                                "type": "integer"
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
                                                             }
                                                         }
                                                     },
-                                                    "example": [
-                                                        {
-                                                            "id": 1,
-                                                            "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                            "medication_name": "thuoc 1",
-                                                            "instructions": "Hướng dẫn sử dụng",
-                                                            "quantity": 20,
-                                                            "duration": 7
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                    },
+                                                    "medications": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "prescription_id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "medication_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                }
+                                                            }
                                                         },
-                                                        {
-                                                            "id": 2,
-                                                            "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                            "medication_name": "thuoc 2",
-                                                            "instructions": "Uống sau khi ăn",
-                                                            "quantity": 30,
-                                                            "duration": 10
-                                                        }
-                                                    ]
+                                                        "example": [
+                                                            {
+                                                                "id": 1,
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 1",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 2",
+                                                                "instructions": "Uống sau khi ăn",
+                                                                "quantity": 30,
+                                                                "duration": 10
+                                                            }
+                                                        ]
+                                                    }
                                                 }
                                             }
                                         }
@@ -9860,15 +9842,15 @@
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string",
-                                                    "example": "b2345678-e89b-12d3-a456-426614174001"
-                                                },
-                                                "patient": {
-                                                    "type": "array",
-                                                    "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
+                                                    },
+                                                    "patient": {
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
@@ -9888,62 +9870,56 @@
                                                                 "example": "active"
                                                             },
                                                             "patient_info": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string",
-                                                                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                        },
-                                                                        "fullname": {
-                                                                            "type": "string",
-                                                                            "example": "Nguyen Van A"
-                                                                        },
-                                                                        "address": {
-                                                                            "type": "string",
-                                                                            "example": "123 Main St, City, Country"
-                                                                        },
-                                                                        "avatar": {
-                                                                            "type": "string",
-                                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                        },
-                                                                        "phone_number": {
-                                                                            "type": "string",
-                                                                            "example": "0123456789"
-                                                                        },
-                                                                        "gender": {
-                                                                            "type": "string",
-                                                                            "example": "male"
-                                                                        },
-                                                                        "dob": {
-                                                                            "type": "string",
-                                                                            "format": "date",
-                                                                            "example": "1990-01-01"
-                                                                        },
-                                                                        "email": {
-                                                                            "type": "string",
-                                                                            "example": "test@gmail.com"
-                                                                        },
-                                                                        "created_at": {
-                                                                            "type": "string",
-                                                                            "format": "date-time",
-                                                                            "example": "2024-09-27T12:10:32.000000Z"
-                                                                        },
-                                                                        "updated_at": {
-                                                                            "type": "string",
-                                                                            "format": "date-time",
-                                                                            "example": "2024-09-27T12:10:32.000000Z"
-                                                                        }
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "email": {
+                                                                        "type": "string",
+                                                                        "example": "test@gmail.com"
+                                                                    },
+                                                                    "created_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                                    },
+                                                                    "updated_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
                                                                     }
                                                                 }
                                                             }
                                                         }
-                                                    }
-                                                },
-                                                "user": {
-                                                    "type": "array",
-                                                    "items": {
+                                                    },
+                                                    "user": {
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
@@ -9955,80 +9931,71 @@
                                                                 "example": "active"
                                                             },
                                                             "role": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string",
-                                                                            "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
-                                                                        },
-                                                                        "name": {
-                                                                            "type": "string",
-                                                                            "example": "doctor"
-                                                                        },
-                                                                        "description": {
-                                                                            "type": "string",
-                                                                            "example": "bac si"
-                                                                        }
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "doctor"
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "example": "bac si"
                                                                     }
                                                                 }
                                                             },
                                                             "user_info": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string",
-                                                                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                        },
-                                                                        "fullname": {
-                                                                            "type": "string",
-                                                                            "example": "Nguyen Van A"
-                                                                        },
-                                                                        "address": {
-                                                                            "type": "string",
-                                                                            "example": "123 Main St, City, Country"
-                                                                        },
-                                                                        "avatar": {
-                                                                            "type": "string",
-                                                                            "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                        },
-                                                                        "phone_number": {
-                                                                            "type": "string",
-                                                                            "example": "0123456789"
-                                                                        },
-                                                                        "gender": {
-                                                                            "type": "string",
-                                                                            "example": "male"
-                                                                        },
-                                                                        "dob": {
-                                                                            "type": "string",
-                                                                            "format": "date",
-                                                                            "example": "1990-01-01"
-                                                                        },
-                                                                        "department_id": {
-                                                                            "type": "string",
-                                                                            "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                        }
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "department_id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                                                     }
                                                                 }
                                                             }
                                                         }
-                                                    }
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Tên đơn thuốc"
-                                                },
-                                                "description": {
-                                                    "type": "string",
-                                                    "example": "luu y cua bac si"
-                                                },
-                                                "medical_histories": {
-                                                    "type": "array",
-                                                    "items": {
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tên đơn thuốc"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "luu y cua bac si"
+                                                    },
+                                                    "medical_histories": {
                                                         "type": "object",
                                                         "properties": {
                                                             "id": {
@@ -10046,63 +10013,73 @@
                                                             "treatment": {
                                                                 "type": "string",
                                                                 "example": "Nghỉ ngơi, uống thuốc"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-27T12:10:32.000000Z"
-                                                },
-                                                "updated_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-27T12:10:32.000000Z"
-                                                },
-                                                "medications": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "id": {
-                                                                "type": "integer"
                                                             },
-                                                            "prescription_id": {
-                                                                "type": "string"
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
                                                             },
-                                                            "medication_name": {
-                                                                "type": "string"
-                                                            },
-                                                            "instructions": {
-                                                                "type": "string"
-                                                            },
-                                                            "quantity": {
-                                                                "type": "integer"
-                                                            },
-                                                            "duration": {
-                                                                "type": "integer"
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
                                                             }
                                                         }
                                                     },
-                                                    "example": [
-                                                        {
-                                                            "id": 1,
-                                                            "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                            "medication_name": "thuoc 1",
-                                                            "instructions": "Hướng dẫn sử dụng",
-                                                            "quantity": 20,
-                                                            "duration": 7
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                    },
+                                                    "medications": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "prescription_id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "medication_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                }
+                                                            }
                                                         },
-                                                        {
-                                                            "id": 2,
-                                                            "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                            "medication_name": "thuoc 2",
-                                                            "instructions": "Uống sau khi ăn",
-                                                            "quantity": 30,
-                                                            "duration": 10
-                                                        }
-                                                    ]
+                                                        "example": [
+                                                            {
+                                                                "id": 1,
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 1",
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "medication_name": "thuoc 2",
+                                                                "instructions": "Uống sau khi ăn",
+                                                                "quantity": 30,
+                                                                "duration": 10
+                                                            }
+                                                        ]
+                                                    }
                                                 }
                                             }
                                         }
@@ -10237,152 +10214,137 @@
                                                         "example": "b2345678-e89b-12d3-a456-426614174001"
                                                     },
                                                     "patient": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "string",
-                                                                    "example": "e3811400-4574-486c-9862-ac1b5d738959"
-                                                                },
-                                                                "insurance_number": {
-                                                                    "type": "string",
-                                                                    "example": "INS123456789"
-                                                                },
-                                                                "identity_card_id": {
-                                                                    "type": "string",
-                                                                    "example": "123456789123"
-                                                                },
-                                                                "status": {
-                                                                    "type": "string",
-                                                                    "example": "active"
-                                                                },
-                                                                "patient_info": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "id": {
-                                                                                "type": "string",
-                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                            },
-                                                                            "fullname": {
-                                                                                "type": "string",
-                                                                                "example": "Nguyen Van A"
-                                                                            },
-                                                                            "address": {
-                                                                                "type": "string",
-                                                                                "example": "123 Main St, City, Country"
-                                                                            },
-                                                                            "avatar": {
-                                                                                "type": "string",
-                                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                            },
-                                                                            "phone_number": {
-                                                                                "type": "string",
-                                                                                "example": "0123456789"
-                                                                            },
-                                                                            "gender": {
-                                                                                "type": "string",
-                                                                                "example": "male"
-                                                                            },
-                                                                            "dob": {
-                                                                                "type": "string",
-                                                                                "format": "date",
-                                                                                "example": "1990-01-01"
-                                                                            },
-                                                                            "email": {
-                                                                                "type": "string",
-                                                                                "example": "test@gmail.com"
-                                                                            },
-                                                                            "created_at": {
-                                                                                "type": "string",
-                                                                                "format": "date-time",
-                                                                                "example": "2024-09-27T12:10:32.000000Z"
-                                                                            },
-                                                                            "updated_at": {
-                                                                                "type": "string",
-                                                                                "format": "date-time",
-                                                                                "example": "2024-09-27T12:10:32.000000Z"
-                                                                            }
-                                                                        }
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "e3811400-4574-486c-9862-ac1b5d738959"
+                                                            },
+                                                            "insurance_number": {
+                                                                "type": "string",
+                                                                "example": "INS123456789"
+                                                            },
+                                                            "identity_card_id": {
+                                                                "type": "string",
+                                                                "example": "123456789123"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "active"
+                                                            },
+                                                            "patient_info": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "email": {
+                                                                        "type": "string",
+                                                                        "example": "test@gmail.com"
+                                                                    },
+                                                                    "created_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                                    },
+                                                                    "updated_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
                                                                     }
                                                                 }
                                                             }
                                                         }
                                                     },
                                                     "user": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "string",
-                                                                    "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                },
-                                                                "status": {
-                                                                    "type": "string",
-                                                                    "example": "active"
-                                                                },
-                                                                "role": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "id": {
-                                                                                "type": "string",
-                                                                                "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
-                                                                            },
-                                                                            "name": {
-                                                                                "type": "string",
-                                                                                "example": "doctor"
-                                                                            },
-                                                                            "description": {
-                                                                                "type": "string",
-                                                                                "example": "bac si"
-                                                                            }
-                                                                        }
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "active"
+                                                            },
+                                                            "role": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "doctor"
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "example": "bac si"
                                                                     }
-                                                                },
-                                                                "user_info": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "id": {
-                                                                                "type": "string",
-                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                            },
-                                                                            "fullname": {
-                                                                                "type": "string",
-                                                                                "example": "Nguyen Van A"
-                                                                            },
-                                                                            "address": {
-                                                                                "type": "string",
-                                                                                "example": "123 Main St, City, Country"
-                                                                            },
-                                                                            "avatar": {
-                                                                                "type": "string",
-                                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                            },
-                                                                            "phone_number": {
-                                                                                "type": "string",
-                                                                                "example": "0123456789"
-                                                                            },
-                                                                            "gender": {
-                                                                                "type": "string",
-                                                                                "example": "male"
-                                                                            },
-                                                                            "dob": {
-                                                                                "type": "string",
-                                                                                "format": "date",
-                                                                                "example": "1990-01-01"
-                                                                            },
-                                                                            "department_id": {
-                                                                                "type": "string",
-                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                            }
-                                                                        }
+                                                                }
+                                                            },
+                                                            "user_info": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "department_id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                                                     }
                                                                 }
                                                             }
@@ -10397,26 +10359,33 @@
                                                         "example": "luu y cua bac si"
                                                     },
                                                     "medical_histories": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "string",
-                                                                    "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                },
-                                                                "description": {
-                                                                    "type": "string",
-                                                                    "example": "Cardiology"
-                                                                },
-                                                                "diagnosis": {
-                                                                    "type": "string",
-                                                                    "example": "Cúm A"
-                                                                },
-                                                                "treatment": {
-                                                                    "type": "string",
-                                                                    "example": "Nghỉ ngơi, uống thuốc"
-                                                                }
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "Cardiology"
+                                                            },
+                                                            "diagnosis": {
+                                                                "type": "string",
+                                                                "example": "Cúm A"
+                                                            },
+                                                            "treatment": {
+                                                                "type": "string",
+                                                                "example": "Nghỉ ngơi, uống thuốc"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
                                                             }
                                                         }
                                                     },
@@ -10565,152 +10534,137 @@
                                                         "example": "b2345678-e89b-12d3-a456-426614174001"
                                                     },
                                                     "patient": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "string",
-                                                                    "example": "e3811400-4574-486c-9862-ac1b5d738959"
-                                                                },
-                                                                "insurance_number": {
-                                                                    "type": "string",
-                                                                    "example": "INS123456789"
-                                                                },
-                                                                "identity_card_id": {
-                                                                    "type": "string",
-                                                                    "example": "123456789123"
-                                                                },
-                                                                "status": {
-                                                                    "type": "string",
-                                                                    "example": "active"
-                                                                },
-                                                                "patient_info": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "id": {
-                                                                                "type": "string",
-                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                            },
-                                                                            "fullname": {
-                                                                                "type": "string",
-                                                                                "example": "Nguyen Van A"
-                                                                            },
-                                                                            "address": {
-                                                                                "type": "string",
-                                                                                "example": "123 Main St, City, Country"
-                                                                            },
-                                                                            "avatar": {
-                                                                                "type": "string",
-                                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                            },
-                                                                            "phone_number": {
-                                                                                "type": "string",
-                                                                                "example": "0123456789"
-                                                                            },
-                                                                            "gender": {
-                                                                                "type": "string",
-                                                                                "example": "male"
-                                                                            },
-                                                                            "dob": {
-                                                                                "type": "string",
-                                                                                "format": "date",
-                                                                                "example": "1990-01-01"
-                                                                            },
-                                                                            "email": {
-                                                                                "type": "string",
-                                                                                "example": "test@gmail.com"
-                                                                            },
-                                                                            "created_at": {
-                                                                                "type": "string",
-                                                                                "format": "date-time",
-                                                                                "example": "2024-09-27T12:10:32.000000Z"
-                                                                            },
-                                                                            "updated_at": {
-                                                                                "type": "string",
-                                                                                "format": "date-time",
-                                                                                "example": "2024-09-27T12:10:32.000000Z"
-                                                                            }
-                                                                        }
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "e3811400-4574-486c-9862-ac1b5d738959"
+                                                            },
+                                                            "insurance_number": {
+                                                                "type": "string",
+                                                                "example": "INS123456789"
+                                                            },
+                                                            "identity_card_id": {
+                                                                "type": "string",
+                                                                "example": "123456789123"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "active"
+                                                            },
+                                                            "patient_info": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "email": {
+                                                                        "type": "string",
+                                                                        "example": "test@gmail.com"
+                                                                    },
+                                                                    "created_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
+                                                                    },
+                                                                    "updated_at": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "example": "2024-09-27T12:10:32.000000Z"
                                                                     }
                                                                 }
                                                             }
                                                         }
                                                     },
                                                     "user": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "string",
-                                                                    "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                },
-                                                                "status": {
-                                                                    "type": "string",
-                                                                    "example": "active"
-                                                                },
-                                                                "role": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "id": {
-                                                                                "type": "string",
-                                                                                "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
-                                                                            },
-                                                                            "name": {
-                                                                                "type": "string",
-                                                                                "example": "doctor"
-                                                                            },
-                                                                            "description": {
-                                                                                "type": "string",
-                                                                                "example": "bac si"
-                                                                            }
-                                                                        }
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "active"
+                                                            },
+                                                            "role": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "doctor"
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "example": "bac si"
                                                                     }
-                                                                },
-                                                                "user_info": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "id": {
-                                                                                "type": "string",
-                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                            },
-                                                                            "fullname": {
-                                                                                "type": "string",
-                                                                                "example": "Nguyen Van A"
-                                                                            },
-                                                                            "address": {
-                                                                                "type": "string",
-                                                                                "example": "123 Main St, City, Country"
-                                                                            },
-                                                                            "avatar": {
-                                                                                "type": "string",
-                                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
-                                                                            },
-                                                                            "phone_number": {
-                                                                                "type": "string",
-                                                                                "example": "0123456789"
-                                                                            },
-                                                                            "gender": {
-                                                                                "type": "string",
-                                                                                "example": "male"
-                                                                            },
-                                                                            "dob": {
-                                                                                "type": "string",
-                                                                                "format": "date",
-                                                                                "example": "1990-01-01"
-                                                                            },
-                                                                            "department_id": {
-                                                                                "type": "string",
-                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                            }
-                                                                        }
+                                                                }
+                                                            },
+                                                            "user_info": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                    },
+                                                                    "fullname": {
+                                                                        "type": "string",
+                                                                        "example": "Nguyen Van A"
+                                                                    },
+                                                                    "address": {
+                                                                        "type": "string",
+                                                                        "example": "123 Main St, City, Country"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                    },
+                                                                    "phone_number": {
+                                                                        "type": "string",
+                                                                        "example": "0123456789"
+                                                                    },
+                                                                    "gender": {
+                                                                        "type": "string",
+                                                                        "example": "male"
+                                                                    },
+                                                                    "dob": {
+                                                                        "type": "string",
+                                                                        "format": "date",
+                                                                        "example": "1990-01-01"
+                                                                    },
+                                                                    "department_id": {
+                                                                        "type": "string",
+                                                                        "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
                                                                     }
                                                                 }
                                                             }
@@ -10725,26 +10679,33 @@
                                                         "example": "luu y cua bac si"
                                                     },
                                                     "medical_histories": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "string",
-                                                                    "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
-                                                                },
-                                                                "description": {
-                                                                    "type": "string",
-                                                                    "example": "Cardiology"
-                                                                },
-                                                                "diagnosis": {
-                                                                    "type": "string",
-                                                                    "example": "Cúm A"
-                                                                },
-                                                                "treatment": {
-                                                                    "type": "string",
-                                                                    "example": "Nghỉ ngơi, uống thuốc"
-                                                                }
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "Cardiology"
+                                                            },
+                                                            "diagnosis": {
+                                                                "type": "string",
+                                                                "example": "Cúm A"
+                                                            },
+                                                            "treatment": {
+                                                                "type": "string",
+                                                                "example": "Nghỉ ngơi, uống thuốc"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2024-09-27T12:10:32.000000Z"
                                                             }
                                                         }
                                                     },
