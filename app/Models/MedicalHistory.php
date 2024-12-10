@@ -22,7 +22,8 @@ class MedicalHistory extends Model
         'description',
         'diagnosis',
         'treatment',
-        'user_id'
+        'user_id',
+        'indication'
     ];
 
     public function files()

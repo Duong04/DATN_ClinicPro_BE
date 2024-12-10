@@ -30,6 +30,7 @@ class MedicalHistoryRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             'files.*.file' => 'nullable|string',
             'files.*.description' => 'nullable',
+            'files.*.id' => 'nullable',
             'file_deletes' => 'nullable|array',
             'services.*.id' => 'required|exists:services,id',
             'services' => 'nullable|array',
