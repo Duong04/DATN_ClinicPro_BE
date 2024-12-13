@@ -41,7 +41,8 @@ class ChangePswRequest extends FormRequest
         return [
             'required' => ':attribute là bắt buộc!',
             'string' => ':attribute này phải là 1 string!',
-            'min' => ':attribute này phải lớn hơn :min ký tự!'
+            'min' => ':attribute này phải lớn hơn :min ký tự!',
+            'new_password.regex' => 'Mật khẩu phải chứa ít nhất một ký tự in hoa và một ký tự đặc biệt!'
         ];
     }
 
@@ -49,7 +50,6 @@ class ChangePswRequest extends FormRequest
         return [
             'password' => 'Mật khẩu',
             'new_password' => 'Mật khẩu mới',
-            'new_password.regex' => ':attribute phải chứa ít nhất một ký tự in hoa và một ký tự đặc biệt!'
         ];
     }
 

@@ -22,7 +22,8 @@ class ServiceProcessor {
                     'data' => $services->items(),
                     'prev_page_url' => $services->previousPageUrl(),
                     'next_page_url' => $services->nextPageUrl(),
-                    'total' => $services->total()
+                    'total' => $services->total(),
+                    'total_pages' => $services->lastPage()
                 ], 200);
             }
 

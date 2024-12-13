@@ -14,6 +14,7 @@ class ServiceRepository implements ServiceRepositoryInterface {
     public function paginate($limit, $q) {
         $services = Service::query();
 
+        $services->orderByDesc('created_at');
         return $limit ? $services->paginate($limit) : $services->get();
     }
     public function create(array $data) {

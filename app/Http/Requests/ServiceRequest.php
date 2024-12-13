@@ -29,7 +29,7 @@ class ServiceRequest extends FormRequest
 
         if ($this->method() == 'PUT') {
             $id = $this->route('id');
-            if ($this->has('name')) {
+            if ($this->has('service_name')) {
                 $rules['service_name'] = 'required|unique:services,service_name,' . $id;
             } else {
                 $rules['service_name'] = 'nullable|unique:services,service_name,' . $id;

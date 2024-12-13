@@ -19,6 +19,7 @@ class MedicalResource extends JsonResource
             'description' => $this->description,
             'diagnosis' => $this->diagnosis,
             'treatment' => $this->treatment,
+            'indication' => $this->indication,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'files' => $this->files,
