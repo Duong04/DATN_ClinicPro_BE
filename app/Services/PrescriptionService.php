@@ -75,9 +75,7 @@ class PrescriptionService
         try {
             $dataRequest = $request->validated();
 
-            $prescriptionData = $this->buildPrescriptionData($dataRequest);
-            $prescription = $this->prescriptionRepository->update($id, $prescriptionData);
-
+            $prescription = $this->prescriptionRepository->update($id, $dataRequest);
             $this->processMedications($dataRequest['medications'], $prescription->id, true);
 
             return new PrescriptionResource($prescription);
