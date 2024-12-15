@@ -8962,7 +8962,7 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer"
+                                                                    "type": "string"
                                                                 },
                                                                 "prescription_id": {
                                                                     "type": "string"
@@ -8983,7 +8983,7 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": 1,
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 1",
                                                                 "instructions": "Hướng dẫn sử dụng",
@@ -8991,7 +8991,7 @@
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": 2,
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 2",
                                                                 "instructions": "Uống sau khi ăn",
@@ -9049,10 +9049,6 @@
                                     "data": {
                                         "type": "object",
                                         "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "example": "b2345678-e89b-12d3-a456-426614174001"
-                                            },
                                             "patient_id": {
                                                 "type": "string",
                                                 "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
@@ -9073,28 +9069,15 @@
                                                 "type": "string",
                                                 "example": "c3456789-e89b-12d3-a456-426614174002"
                                             },
-                                            "created_at": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2024-09-27T12:10:32.000000Z"
-                                            },
-                                            "updated_at": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2024-09-27T12:10:32.000000Z"
-                                            },
                                             "medications": {
                                                 "type": "array",
                                                 "items": {
                                                     "type": "object",
                                                     "properties": {
-                                                        "id": {
-                                                            "type": "integer"
-                                                        },
                                                         "prescription_id": {
                                                             "type": "string"
                                                         },
-                                                        "medication_name": {
+                                                        "medication_id": {
                                                             "type": "string"
                                                         },
                                                         "instructions": {
@@ -9110,17 +9093,13 @@
                                                 },
                                                 "example": [
                                                     {
-                                                        "id": 1,
-                                                        "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                        "medication_name": "thuoc 1",
+                                                        "medication_id": "p1345678-e89b-12d3-a456-426614a14001",
                                                         "instructions": "Hướng dẫn sử dụng",
                                                         "quantity": 20,
                                                         "duration": 7
                                                     },
                                                     {
-                                                        "id": 2,
-                                                        "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                        "medication_name": "thuoc 2",
+                                                        "medication_id": "o0345678-e89b-12d3-a456-426614a140ju",
                                                         "instructions": "Uống sau khi ăn",
                                                         "quantity": 30,
                                                         "duration": 10
@@ -9343,7 +9322,7 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer"
+                                                                    "type": "string"
                                                                 },
                                                                 "prescription_id": {
                                                                     "type": "string"
@@ -9364,7 +9343,7 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": 1,
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 1",
                                                                 "instructions": "Hướng dẫn sử dụng",
@@ -9372,7 +9351,7 @@
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": 2,
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 2",
                                                                 "instructions": "Uống sau khi ăn",
@@ -9774,7 +9753,6 @@
                                 "required": [
                                     "name",
                                     "description",
-                                    "medication.*.id",
                                     "medication.*.medication_id",
                                     "medication.*.quantity",
                                     "medication.*.duration",
@@ -9794,9 +9772,6 @@
                                         "items": {
                                             "type": "object",
                                             "properties": {
-                                                "id": {
-                                                    "type": "string"
-                                                },
                                                 "medication_id": {
                                                     "type": "integer"
                                                 },
@@ -9813,14 +9788,12 @@
                                         },
                                         "example": [
                                             {
-                                                "id": "b2345678-e89b-12d3-a456-426614174005",
                                                 "medication_id": "c3456789-e89b-12d3-a456-426614174002",
                                                 "instructions": "Hướng dẫn sử dụng",
                                                 "quantity": 20,
                                                 "duration": 7
                                             },
                                             {
-                                                "id": "b2345678-e89b-12d3-a456-426614174007",
                                                 "medication_id": "c3456789-e89b-12d3-a456-426614174004",
                                                 "instructions": "Uống sau khi ăn",
                                                 "quantity": 30,
@@ -10042,7 +10015,7 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer"
+                                                                    "type": "string"
                                                                 },
                                                                 "prescription_id": {
                                                                     "type": "string"
@@ -10063,7 +10036,7 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": 1,
+                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 1",
                                                                 "instructions": "Hướng dẫn sử dụng",
@@ -10071,7 +10044,7 @@
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": 2,
+                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 2",
                                                                 "instructions": "Uống sau khi ăn",
@@ -10405,7 +10378,7 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer"
+                                                                    "type": "string"
                                                                 },
                                                                 "prescription_id": {
                                                                     "type": "string"
@@ -10426,15 +10399,15 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": 1,
+                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
-                                                                "instructions": "Hướng dẫn sử dụng",
-                                                                "quantity": 20,
-                                                                "duration": 7
+                                                                "medication_name": "thuoc 2",
+                                                                "instructions": "Uống sau khi ăn",
+                                                                "quantity": 30,
+                                                                "duration": 10
                                                             },
                                                             {
-                                                                "id": 2,
+                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 2",
                                                                 "instructions": "Uống sau khi ăn",
@@ -10725,7 +10698,7 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "id": {
-                                                                    "type": "integer"
+                                                                    "type": "string"
                                                                 },
                                                                 "prescription_id": {
                                                                     "type": "string"
@@ -10746,18 +10719,18 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": 1,
+                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 1",
-                                                                "instructions": "Hướng dẫn sử dụng",
-                                                                "quantity": 20,
-                                                                "duration": 7
+                                                                "instructions": "Uống sau khi ăn",
+                                                                "quantity": 30,
+                                                                "duration": 10
                                                             },
                                                             {
-                                                                "id": 2,
+                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "medication_name": "thuoc 2",
-                                                                "instructions": "Uống sau khi ăn",
+                                                                "instructions": "Uống sau khi ăn test",
                                                                 "quantity": 30,
                                                                 "duration": 10
                                                             }

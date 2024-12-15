@@ -133,6 +133,9 @@ class PrescriptionService
 
     private function processMedications($medications, $prescriptionId, $isUpdate = false)
     {
+        if ($isUpdate) {
+            $this->prescriptionInfoRepository->destroy($prescriptionId);
+        }
         foreach ($medications as $item) {
             $medicationData = [
                 'prescription_id' => $prescriptionId,
@@ -141,12 +144,7 @@ class PrescriptionService
                 'duration' => $item['duration'],
                 'quantity' => $item['quantity']
             ];
-
-            if ($isUpdate && isset($item['id'])) {
-                $this->prescriptionInfoRepository->update($item['id'], $medicationData);
-            } else {
-                $this->prescriptionInfoRepository->create($medicationData);
-            }
+            $this->prescriptionInfoRepository->create($medicationData);
         }
     }
     private function checkIsValidMedicalHistory($patient_id, $medical_histories_id): bool
