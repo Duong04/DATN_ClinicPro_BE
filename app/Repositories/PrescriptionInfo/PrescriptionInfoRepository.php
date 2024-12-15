@@ -30,7 +30,8 @@ class PrescriptionInfoRepository implements PrescriptionInfoRepositoryInterface
     }
     public function destroy($id)
     {
-        $prescription = $this->find($id);
-        return $prescription->delete();
+        return  $this->prescriptionInfo::where('prescription_id', $id)->delete();
+        // $prescription = $this->find($id);
+        // return $prescription->delete();
     }
 }

@@ -40,7 +40,6 @@ class PrescriptionRequest extends FormRequest
             $rules['patient_id'] = 'nullable|exists:patients,id';
             $rules['user_id'] = 'nullable|exists:users,id';
             $rules['medical_histories_id'] = 'nullable|exists:medical_histories,id';
-            $rules['medications.*.id'] = 'required|exists:prescription_infos,id';
         }
         return $rules;
     }
