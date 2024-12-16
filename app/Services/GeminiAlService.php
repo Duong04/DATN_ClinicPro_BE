@@ -118,7 +118,8 @@ class GeminiAlService {
 
             return [
                 'id' => $id,
-                'text' => $resData
+                'message_text' => $resData,
+                'sender_type' => 'AI'
             ];
         } catch (\Throwable $th) {
             throw $th;

@@ -99,6 +99,7 @@ class PatientService {
             if ($patient->user?->id) {
                 $this->userRepository->update($patient->user->id, [
                     'email' => $data['user_info']['email'],
+                    'status' => $data['status']
                 ]);
             }
             
