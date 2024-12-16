@@ -65,7 +65,8 @@ class PrescriptionRequest extends FormRequest
             'duration' => 'Thời gian sử dụng',
             'medication_id' => 'ID thuốc',
             'quantity' => 'số lượng',
-            'medical_histories_id' => 'ID bệnh án'
+            'medical_histories_id' => 'ID bệnh án',
+            'medications' => 'Thuốc'
         ];
     }
     protected function failedValidation(Validator $validator)

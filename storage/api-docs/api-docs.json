@@ -8852,8 +8852,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -8870,7 +8870,11 @@
                                                             {
                                                                 "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
@@ -8878,7 +8882,11 @@
                                                             {
                                                                 "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
@@ -9212,8 +9220,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -9230,15 +9238,23 @@
                                                             {
                                                                 "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
@@ -9525,8 +9541,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -9541,17 +9557,25 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": 1,
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": 2,
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
@@ -9905,8 +9929,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -9921,17 +9945,25 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
@@ -10268,8 +10300,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -10284,17 +10316,25 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
-                                                                "instructions": "Uống sau khi ăn",
-                                                                "quantity": 30,
-                                                                "duration": 10
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
                                                             },
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
@@ -10588,8 +10628,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -10604,18 +10644,26 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
-                                                                "instructions": "Uống sau khi ăn",
-                                                                "quantity": 30,
-                                                                "duration": 10
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
                                                             },
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
-                                                                "instructions": "Uống sau khi ăn test",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
+                                                                "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
                                                             }
