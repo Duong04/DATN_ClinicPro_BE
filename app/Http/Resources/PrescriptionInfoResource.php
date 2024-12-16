@@ -17,7 +17,11 @@ class PrescriptionInfoResource extends JsonResource
         return [
             'id' => $this->id,
             'prescription_id' => $this->prescription_id,
-            'medication_name' => $this->medication->name,
+            'medication' => $this->medication ? [
+                'id' => $this->medication->id,
+                'name' => $this->medication->name,
+                'category_id' => $this->medication->category_id
+            ] : null,
             'instructions' => $this->instructions,
             'duration' => $this->duration,
             'quantity' => $this->quantity,

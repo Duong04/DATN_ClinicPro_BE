@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
-use App\Repositories\Appointment\AppointmentRepositoryInterface;
-use App\Repositories\Patient\PatientRepositoryInterface;
-use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
+use stdClass;
 use Carbon\Carbon;
 use Hamcrest\Type\IsNumeric;
 use Illuminate\Support\Facades\Date;
+use App\Repositories\Patient\PatientRepositoryInterface;
+use App\Repositories\Appointment\AppointmentRepositoryInterface;
+use App\Repositories\PatientInfo\PatientInfoRepositoryInterface;
 
 class StatisticsService
 {
@@ -25,22 +26,6 @@ class StatisticsService
     {
         try {
             $data = $this->patientRepository->statistics();
-            return response()->json([
-                'data' => $data
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'success' => false,
-                'message' => $th->getMessage()
-            ], 500);
-        }
-    }
-
-    // lấy tổng số bệnh nhân
-    public function patientTotal()
-    {
-        try {
-            $data =  count($this->patientRepository->all());
             return response()->json([
                 'data' => $data
             ], 200);
@@ -84,21 +69,6 @@ class StatisticsService
         }
     }
 
-    // lấy tổng số lịch hẹn
-    public function appointmentTotal()
-    {
-        try {
-            $data =  count($this->appointmentRepository->all());
-            return response()->json([
-                'data' => $data
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'success' => false,
-                'message' => $th->getMessage()
-            ], 500);
-        }
-    }
 
     // Số lịch hẹn mới theo từng mốc thời gian (ngày, tuần, tháng, năm).
     public function appointment()
@@ -142,6 +112,7 @@ class StatisticsService
                 'error' => 'Năm không hợp lệ'
             ], 422);
         }
+
         try {
             $data = $this->appointmentRepository->getAppointmentsByMonth($year);
             return response()->json([

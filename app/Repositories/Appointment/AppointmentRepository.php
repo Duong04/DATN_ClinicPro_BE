@@ -98,6 +98,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     public function statistics()
     {
         $result = $this->appointment::selectRaw("
+        COUNT(*) as total,
         SUM(CASE WHEN DATE(created_at) = ? THEN 1 ELSE 0 END) as day,
         SUM(CASE WHEN WEEK(created_at) = WEEK(?) THEN 1 ELSE 0 END) as week,
         SUM(CASE WHEN MONTH(created_at) = ? AND YEAR(created_at) = ? THEN 1 ELSE 0 END) as month,
@@ -110,27 +111,49 @@ class AppointmentRepository implements AppointmentRepositoryInterface
             Carbon::now()->year
         ])->first();
 
-        return $result;
+        return [
+            'total' => (int) $result->total,
+            'day' => (int) $result->day,
+            'week' => (int) $result->week,
+            'month' => (int) $result->month,
+            'year' => (int) $result->year,
+        ];
     }
 
     public function getAppointmentsByStatus()
     {
-        $result = $this->appointment::select('status', DB::raw('COUNT(*) as total'))
+        $defaultStatus = ['pending', 'confirmed', 'cancelled', 'completed'];
+        $data = $this->appointment::select('status', DB::raw('COUNT(*) as total'))
             ->groupBy('status')
-            ->get();
+            ->get()
+            ->keyBy('status');
+
+        $result = collect($defaultStatus)->map(function ($status) use ($data) {
+            return [
+                'status' => $status,
+                'total' => $data->has($status) ? $data->get($status)->total : 0
+            ];
+        });
         return $result;
     }
     public function getAppointmentsByMonth($year)
     {
-        $result = $this->appointment::select(
+        $data = $this->appointment::select(
             DB::raw('MONTH(appointment_date) as month'),
             DB::raw('COUNT(*) as total')
         )
             ->whereYear('appointment_date', $year)
             ->groupBy('month')
             ->orderBy('month')
-            ->get();
+            ->get()
+            ->keyBy('month');
 
+        $result = collect(range(1, 12))->map(function ($month) use ($data) {
+            return [
+                'month' => $month,
+                'total' => $data->has($month) ? $data->get($month)->total : 0
+            ];
+        });
         return $result;
     }
 

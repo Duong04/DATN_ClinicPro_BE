@@ -8967,8 +8967,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -8985,7 +8985,11 @@
                                                             {
                                                                 "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
@@ -8993,7 +8997,11 @@
                                                             {
                                                                 "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
@@ -9327,8 +9335,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -9345,15 +9353,23 @@
                                                             {
                                                                 "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
@@ -9640,8 +9656,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -9656,17 +9672,25 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": 1,
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": 2,
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
@@ -10020,8 +10044,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -10036,17 +10060,25 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Hướng dẫn sử dụng",
                                                                 "quantity": 20,
                                                                 "duration": 7
                                                             },
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
@@ -10383,8 +10415,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -10399,17 +10431,25 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
-                                                                "instructions": "Uống sau khi ăn",
-                                                                "quantity": 30,
-                                                                "duration": 10
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
                                                             },
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
                                                                 "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
@@ -10703,8 +10743,8 @@
                                                                 "prescription_id": {
                                                                     "type": "string"
                                                                 },
-                                                                "medication_name": {
-                                                                    "type": "string"
+                                                                "medication": {
+                                                                    "type": "object"
                                                                 },
                                                                 "instructions": {
                                                                     "type": "string"
@@ -10719,18 +10759,26 @@
                                                         },
                                                         "example": [
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "b2345678-e89b-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 1",
-                                                                "instructions": "Uống sau khi ăn",
-                                                                "quantity": 30,
-                                                                "duration": 10
+                                                                "medication": {
+                                                                    "id": "b2345678-e89b-12d3-a456-426614174001",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
+                                                                "instructions": "Hướng dẫn sử dụng",
+                                                                "quantity": 20,
+                                                                "duration": 7
                                                             },
                                                             {
-                                                                "id": "0b796285-3092-41a6-8635-0a40ddd96fb5",
+                                                                "id": "22345678-ejsub-12d3-a456-426614174001",
                                                                 "prescription_id": "b2345678-e89b-12d3-a456-426614174001",
-                                                                "medication_name": "thuoc 2",
-                                                                "instructions": "Uống sau khi ăn test",
+                                                                "medication": {
+                                                                    "id": "00a215e3-1527-4157-8dd2-c20c18859a38",
+                                                                    "name": "Viên sủi Tovalgan Ef Trường Thọ Pharma giảm đau, hạ sốt (5 vỉ x 4 viên) ",
+                                                                    "category_id": "72d8ca3d-cbd9-4e63-82d6-2f7c2c55bdf6"
+                                                                },
+                                                                "instructions": "Uống sau khi ăn",
                                                                 "quantity": 30,
                                                                 "duration": 10
                                                             }
@@ -12687,85 +12735,26 @@
                                             "type": "object",
                                             "properties": {
                                                 "day": {
-                                                    "type": "string",
-                                                    "example": "1"
+                                                    "type": "integer",
+                                                    "example": 2
                                                 },
                                                 "week": {
-                                                    "type": "string",
-                                                    "example": "3"
+                                                    "type": "integer",
+                                                    "example": 3
                                                 },
                                                 "month": {
-                                                    "type": "string",
-                                                    "example": "9"
+                                                    "type": "integer",
+                                                    "example": 9
                                                 },
                                                 "year": {
-                                                    "type": "string",
-                                                    "example": "20"
+                                                    "type": "integer",
+                                                    "example": 20
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 40
                                                 }
                                             }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Lỗi không xác định",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Lỗi truy vấn không hợp lệ."
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/statistics/patientTotal": {
-            "get": {
-                "tags": ["Statistics"],
-                "summary": "Thống kê tổng số bệnh nhân",
-                "description": "Thống kê tổng sos bệnh nhân",
-                "operationId": "getTotalPatientStatistics",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Thống kê tổng số bệnh nhân",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "string",
-                                            "example": "100"
                                         }
                                     }
                                 }
@@ -12984,85 +12973,26 @@
                                             "type": "object",
                                             "properties": {
                                                 "day": {
-                                                    "type": "string",
-                                                    "example": "1"
+                                                    "type": "integer",
+                                                    "example": 2
                                                 },
                                                 "week": {
-                                                    "type": "string",
-                                                    "example": "3"
+                                                    "type": "integer",
+                                                    "example": 3
                                                 },
                                                 "month": {
-                                                    "type": "string",
-                                                    "example": "9"
+                                                    "type": "integer",
+                                                    "example": 9
                                                 },
                                                 "year": {
-                                                    "type": "string",
-                                                    "example": "20"
+                                                    "type": "integer",
+                                                    "example": 20
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 40
                                                 }
                                             }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Lỗi không xác định",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Lỗi truy vấn không hợp lệ."
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/statistics/appointmentTotal": {
-            "get": {
-                "tags": ["Statistics"],
-                "summary": "Thống kê tổng số lịch hẹn",
-                "description": "Thống kê tổng số lịch hẹn",
-                "operationId": "getAppointmentTotal",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Thống kê tổng số lịch hẹn",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "string",
-                                            "example": "100"
                                         }
                                     }
                                 }
@@ -13145,15 +13075,19 @@
                                     "data": [
                                         {
                                             "status": "pending",
-                                            "total": "15"
+                                            "total": 15
                                         },
                                         {
                                             "status": "cancelled",
-                                            "total": "4"
+                                            "total": 4
                                         },
                                         {
                                             "status": "confirmed",
-                                            "total": "2"
+                                            "total": 2
+                                        },
+                                        {
+                                            "status": "completed",
+                                            "total": 0
                                         }
                                     ]
                                 }
@@ -13247,16 +13181,52 @@
                                 "example": {
                                     "data": [
                                         {
-                                            "month": "1",
-                                            "total": "15"
+                                            "month": 1,
+                                            "total": 7
                                         },
                                         {
-                                            "month": "4",
-                                            "total": "4"
+                                            "month": 2,
+                                            "total": 10
                                         },
                                         {
-                                            "month": "12",
-                                            "total": "2"
+                                            "month": 3,
+                                            "total": 0
+                                        },
+                                        {
+                                            "month": 4,
+                                            "total": 0
+                                        },
+                                        {
+                                            "month": 5,
+                                            "total": 0
+                                        },
+                                        {
+                                            "month": 6,
+                                            "total": 0
+                                        },
+                                        {
+                                            "month": 7,
+                                            "total": 0
+                                        },
+                                        {
+                                            "month": 8,
+                                            "total": 0
+                                        },
+                                        {
+                                            "month": 9,
+                                            "total": 0
+                                        },
+                                        {
+                                            "month": 10,
+                                            "total": 0
+                                        },
+                                        {
+                                            "month": 11,
+                                            "total": 0
+                                        },
+                                        {
+                                            "month": 12,
+                                            "total": 28
                                         }
                                     ]
                                 }
