@@ -98,6 +98,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     public function statistics()
     {
         $result = $this->appointment::selectRaw("
+        COUNT(*) as total,
         SUM(CASE WHEN DATE(created_at) = ? THEN 1 ELSE 0 END) as day,
         SUM(CASE WHEN WEEK(created_at) = WEEK(?) THEN 1 ELSE 0 END) as week,
         SUM(CASE WHEN MONTH(created_at) = ? AND YEAR(created_at) = ? THEN 1 ELSE 0 END) as month,
@@ -110,7 +111,13 @@ class AppointmentRepository implements AppointmentRepositoryInterface
             Carbon::now()->year
         ])->first();
 
-        return $result;
+        return [
+            'total' => (int) $result->total,
+            'day' => (int) $result->day,
+            'week' => (int) $result->week,
+            'month' => (int) $result->month,
+            'year' => (int) $result->year,
+        ];
     }
 
     public function getAppointmentsByStatus()

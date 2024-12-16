@@ -210,11 +210,9 @@ Route::prefix('v1')->group(function () {
     Route::controller(StatisticsController::class)->prefix('statistics')->middleware('jwt.auth')
         ->group(function () {
             Route::get('/patient', 'patient');
-            Route::get('/patientTotal', 'patientTotal');
             Route::get('/getFrequency', 'getFrequency');
             Route::get('/getTotalPatientFrequency', 'getTotalPatientFrequency');
             Route::get('/appointment', 'appointment');
-            Route::get('/appointmentTotal', 'appointmentTotal');
             Route::get('/getAppointmentsByStatus', 'getAppointmentsByStatus');
             Route::get('/getAppointmentsByMonth/{year}', 'getAppointmentsByMonth');
         });
