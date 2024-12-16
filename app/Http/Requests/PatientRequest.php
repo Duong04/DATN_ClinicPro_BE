@@ -24,7 +24,7 @@ class PatientRequest extends FormRequest
     {
         $rules = [
             'insurance_number' => 'nullable',
-            'status' => 'nullable|in:active,inactive,deceased,transferred',
+            'status' => 'nullable|in:active,inactive,disabled',
             'user_info.fullname' => ['required', 'regex:/^[a-zA-Z0-9\s]/'],
             'user_info.email' => 'required|email|unique:patient_infos,email|unique:users,email',
             'user_info.phone_number' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
