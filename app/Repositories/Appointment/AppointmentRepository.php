@@ -122,22 +122,38 @@ class AppointmentRepository implements AppointmentRepositoryInterface
 
     public function getAppointmentsByStatus()
     {
-        $result = $this->appointment::select('status', DB::raw('COUNT(*) as total'))
+        $defaultStatus = ['pending', 'confirmed', 'cancelled', 'completed'];
+        $data = $this->appointment::select('status', DB::raw('COUNT(*) as total'))
             ->groupBy('status')
-            ->get();
+            ->get()
+            ->keyBy('status');
+
+        $result = collect($defaultStatus)->map(function ($status) use ($data) {
+            return [
+                'status' => $status,
+                'total' => $data->has($status) ? $data->get($status)->total : 0
+            ];
+        });
         return $result;
     }
     public function getAppointmentsByMonth($year)
     {
-        $result = $this->appointment::select(
+        $data = $this->appointment::select(
             DB::raw('MONTH(appointment_date) as month'),
             DB::raw('COUNT(*) as total')
         )
             ->whereYear('appointment_date', $year)
             ->groupBy('month')
             ->orderBy('month')
-            ->get();
+            ->get()
+            ->keyBy('month');
 
+        $result = collect(range(1, 12))->map(function ($month) use ($data) {
+            return [
+                'month' => $month,
+                'total' => $data->has($month) ? $data->get($month)->total : 0
+            ];
+        });
         return $result;
     }
 

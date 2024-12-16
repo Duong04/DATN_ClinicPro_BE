@@ -140,6 +140,6 @@ class StatisticsService
 
     private function change($month)
     {
-        return 'Tháng' . $month;
+        return 'Tháng ' . $month;
     }
 }
