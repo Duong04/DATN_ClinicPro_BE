@@ -91,14 +91,8 @@ class StatisticsService
     {
         try {
             $data = $this->appointmentRepository->getAppointmentsByStatus();
-            $convertedData = new stdClass();
-
-            foreach ($data as $item) {
-                $status = $item['status'];
-                $convertedData->$status = (int) $item['total'];
-            }
             return response()->json([
-                'data' => $convertedData
+                'data' => $data
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -121,14 +115,8 @@ class StatisticsService
 
         try {
             $data = $this->appointmentRepository->getAppointmentsByMonth($year);
-            $convertedData = new stdClass();
-
-            foreach ($data as $item) {
-                $month = $this->change($item['month']);
-                $convertedData->$month = (int) $item['total'];
-            }
             return response()->json([
-                'data' => $convertedData
+                'data' => $data
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -136,10 +124,5 @@ class StatisticsService
                 'message' => $th->getMessage()
             ], 500);
         }
-    }
-
-    private function change($month)
-    {
-        return 'Tháng ' . $month;
     }
 }
