@@ -37,22 +37,6 @@ class StatisticsService
         }
     }
 
-    // lấy tổng số bệnh nhân
-    public function patientTotal()
-    {
-        try {
-            $data =  count($this->patientRepository->all());
-            return response()->json([
-                'data' => $data
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'success' => false,
-                'message' => $th->getMessage()
-            ], 500);
-        }
-    }
-
     // lấy danh sách tổng số lần tái khám theo bệnh nhân
     public function getFrequency()
     {
@@ -85,21 +69,6 @@ class StatisticsService
         }
     }
 
-    // lấy tổng số lịch hẹn
-    public function appointmentTotal()
-    {
-        try {
-            $data =  count($this->appointmentRepository->all());
-            return response()->json([
-                'data' => $data
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'success' => false,
-                'message' => $th->getMessage()
-            ], 500);
-        }
-    }
 
     // Số lịch hẹn mới theo từng mốc thời gian (ngày, tuần, tháng, năm).
     public function appointment()
