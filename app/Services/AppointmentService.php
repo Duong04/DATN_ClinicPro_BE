@@ -127,12 +127,12 @@ class AppointmentService
     }
     public function cancel($request, $id)
     {
-        return $this->updateStatus($id, 'cancelled', ['cancellation_reason' => $request->input('cancellation_reason')]);
+        return $this->updateStatus($id, 'cancelled', ['completed', 'cancelled'], '', ['cancellation_reason' => $request->input('cancellation_reason')]);
     }
 
     public function complete($id)
     {
-        return $this->updateStatus($id, 'completed');
+        return $this->updateStatus($id, 'completed', ['completed', 'cancelled'], true);
     }
 
     private function checkStatus($appointment, $status)
@@ -157,11 +157,16 @@ class AppointmentService
         return $this->appointmentRepository->destroy($id);
     }
 
-    private function updateStatus($id, $status, $additionalData = [])
+    private function updateStatus($id, $status, array $statusCheck, $isCompleted = false, $additionalData = [])
     {
         $appointment = $this->findAppointment($id);
-        if ($appointment->status === $status) {
-            throw new Exception("Appointment is already $status.");
+
+        if (in_array($appointment->status, $statusCheck)) {
+            throw new Exception("Trạng thái lịch hẹn không hợp lệ!");
+        }
+
+        if ($isCompleted && $appointment->status !== 'confirmed') {
+            throw new Exception("Trạng thái lịch hẹn không hợp lệ!");
         }
         $data = array_merge(['status' => $status], $additionalData);
 
