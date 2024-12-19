@@ -6872,6 +6872,278 @@
                 }
             }
         },
+        "/api/v1/appointments/doctor/{id}": {
+            "get": {
+                "tags": ["Appointments"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lấy danh lịch hẹn theo id user",
+                "description": "Lấy thông tin danh sách lịch hẹn ở trạng thái confirmed theo id user",
+                "operationId": "getAppointmentByDoctor",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "64c13314-2273-49bf-bbaf-dae139a348b8"
+                        },
+                        "description": "ID user."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thông tin lịch hẹn",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "b2345678-e89b-12d3-a456-426614174001"
+                                                    },
+                                                    "appointment_date": {
+                                                        "type": "Date",
+                                                        "format": "date-time",
+                                                        "example": "2024-09-25 12:00"
+                                                    },
+                                                    "deposit_amount": {
+                                                        "type": "string",
+                                                        "example": "null"
+                                                    },
+                                                    "booking_type": {
+                                                        "type": "string",
+                                                        "example": "online"
+                                                    },
+                                                    "appointment_type": {
+                                                        "type": "string",
+                                                        "example": "null"
+                                                    },
+                                                    "total_amount": {
+                                                        "type": "string",
+                                                        "example": "null"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "pending"
+                                                    },
+                                                    "cancellation_reason": {
+                                                        "type": "string",
+                                                        "example": "null"
+                                                    },
+                                                    "patient": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "example": "e3811400-4574-486c-9862-ac1b5d738959"
+                                                                },
+                                                                "insurance_number": {
+                                                                    "type": "string",
+                                                                    "example": "INS123456789"
+                                                                },
+                                                                "identity_card_id": {
+                                                                    "type": "string",
+                                                                    "example": "123456789123"
+                                                                },
+                                                                "status": {
+                                                                    "type": "string",
+                                                                    "example": "active"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "user": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                },
+                                                                "status": {
+                                                                    "type": "string",
+                                                                    "example": "active"
+                                                                },
+                                                                "role": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "id": {
+                                                                                "type": "string",
+                                                                                "example": "0b796285-3092-41a6-8635-0a40ddd96fb5"
+                                                                            },
+                                                                            "name": {
+                                                                                "type": "string",
+                                                                                "example": "doctor"
+                                                                            },
+                                                                            "description": {
+                                                                                "type": "string",
+                                                                                "example": "bac si"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "user_info": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "id": {
+                                                                                "type": "string",
+                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                            },
+                                                                            "fullname": {
+                                                                                "type": "string",
+                                                                                "example": "Nguyen Van A"
+                                                                            },
+                                                                            "address": {
+                                                                                "type": "string",
+                                                                                "example": "123 Main St, City, Country"
+                                                                            },
+                                                                            "avatar": {
+                                                                                "type": "string",
+                                                                                "example": "https://res.cloudinary.com/dsdyprt1q/image/upload/v1726997687/CLINIC/avatars/kcopet60brdlxcpybxjw.png"
+                                                                            },
+                                                                            "phone_number": {
+                                                                                "type": "string",
+                                                                                "example": "0123456789"
+                                                                            },
+                                                                            "gender": {
+                                                                                "type": "string",
+                                                                                "example": "male"
+                                                                            },
+                                                                            "dob": {
+                                                                                "type": "string",
+                                                                                "format": "date",
+                                                                                "example": "1990-01-01"
+                                                                            },
+                                                                            "department_id": {
+                                                                                "type": "string",
+                                                                                "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "package": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "goi kham mat"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "example": "mo ta"
+                                                                },
+                                                                "content": {
+                                                                    "type": "string",
+                                                                    "example": "noi dung"
+                                                                },
+                                                                "image": {
+                                                                    "type": "string",
+                                                                    "example": "http://example.com/premium-package.jpg"
+                                                                },
+                                                                "slug": {
+                                                                    "type": "string",
+                                                                    "example": "goi-kham-mat"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "specialty": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "example": "00cb7278-4c3d-496f-88d9-45ea553bd0a3"
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Cardiology"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "example": "Chuyên khoa tim mạch"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "doctor not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bác sĩ không tồn tại"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/api/v1/medical-histories": {
             "get": {
                 "tags": ["Medical Histories"],

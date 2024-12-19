@@ -10,6 +10,7 @@ interface AppointmentRepositoryInterface
     public function create($data);
     public function update($data, $id);
     public function destroy($id);
+    public function findByDoctor($id);
     public function statistics();
     public function getAppointmentsByStatus();
     public function getAppointmentsByMonth($year);
