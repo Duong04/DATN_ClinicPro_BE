@@ -9,7 +9,7 @@ class PermissionRepository implements PermissionRepositoryInterface {
         return Permission::all();
     }
     public function paginate($limit, $q) {
-        $permissions = Permission::with('permissionpermissions');
+        $permissions = Permission::with('permissionActions');
         if ($q !== null) {
             $permissions->where(function ($query) use ($q) {
                 $query->where('name', 'like', "%{$q}%")

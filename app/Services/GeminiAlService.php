@@ -5,7 +5,6 @@ use Gemini\Laravel\Facades\Gemini;
 use App\Repositories\Message\MessageRepositoryInterface;
 use App\Repositories\Conversation\ConversationRepositoryInterface;
 
-
 class GeminiAlService {
     private $gemini;
     private $conversationRepository;
