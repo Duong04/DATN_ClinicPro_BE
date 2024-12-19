@@ -97,10 +97,15 @@ class PatientService {
             }
 
             if ($patient->user?->id) {
-                $this->userRepository->update($patient->user->id, [
+                $user = [
                     'email' => $data['user_info']['email'],
-                    'status' => $data['status']
-                ]);
+                ];
+
+                if ($data['status'] == 'active' || $data['status'] == 'disabled') {
+                    $user['status'] = $data['status'];
+                }
+
+                $this->userRepository->update($patient->user->id, $user);
             }
             
             $this->patientRepository->update($id, $data);
