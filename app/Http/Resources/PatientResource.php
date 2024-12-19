@@ -14,14 +14,22 @@ class PatientResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $user = null;
+        if ($this->user_id !== null) {
+            $user = [
+                'id' => $this->user->id,
+                'status' => $this->user->status
+            ];
+        }
+
         return [
             "id" => $this->id,
             "insurance_number" => $this->insurance_number,
-            "user_id" => $this->user_id,
             "identity_card" => $this->identityCard,
             "status" => $this->status ?? null,
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
+            "user" => $user,
             "patient_info" => [
                 "fullname" => $this->patientInfo->fullname ?? null,
                 "avatar" => $this->patientInfo->avatar ?? null,

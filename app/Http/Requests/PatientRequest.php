@@ -24,7 +24,7 @@ class PatientRequest extends FormRequest
     {
         $rules = [
             'insurance_number' => 'nullable',
-            'status' => 'nullable|in:active,inactive,disabled',
+            'status' => 'nullable|in:active,inactive,transferred,disabled',
             'user_info.fullname' => ['required', 'regex:/^[a-zA-Z0-9\s]/'],
             'user_info.email' => 'required|email|unique:patient_infos,email|unique:users,email',
             'user_info.phone_number' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
@@ -39,7 +39,11 @@ class PatientRequest extends FormRequest
             $id = $this->route('id'); 
             $user_id = Patient::find($id)->user_id;
 
-            $rules['user_info.email'] = 'required|email|unique:patient_infos,email,'.$id.',patient_id|unique:users,email,'.$user_id;
+            if ($this->has('user_info.email')) {
+                $rules['user_info.email'] = 'required|email|unique:patient_infos,email,'.$id.',patient_id|unique:users,email,'.$user_id;
+            } else {
+                $rules['user_info.email'] = 'nullable';
+            }
         }
 
         return $rules;
@@ -52,7 +56,7 @@ class PatientRequest extends FormRequest
             'unique' => ':attribute này đã tồn tại!',
             'min' => ':attribute không được nhỏ hơn :min kí tự!',
             'patient_info.gender.in' => ':attribute phải là một trong các giá trị: male, female, other!', 
-            'status.in' => 'Trạng thái phải là một trong các giá trị: active, inactive, deceased, transferred!', 
+            'status.in' => 'Trạng thái phải là một trong các giá trị: active, inactive, deceased, disable!', 
             'date' => 'Vui lòng nhập đúng định dạng ngày tháng!',
             'regex' => ':attribute không đúng định dạng!',
             'string' => 'attribute phải là 1 là string',

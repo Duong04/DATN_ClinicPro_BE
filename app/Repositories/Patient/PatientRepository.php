@@ -16,7 +16,9 @@ class PatientRepository implements PatientRepositoryInterface
 
     public function paginate($limit, $q)
     {
-        $patients = Patient::with(['identityCard', 'patientInfo', 'medicalHistories.user' => function ($query) {
+        $patients = Patient::with(['identityCard', 'patientInfo', 'user' => function ($query) {
+            $query->select('id', 'status');
+        }, 'medicalHistories.user' => function ($query) {
             $query->select('id', 'email');
         }, 'medicalHistories.user.userInfo' => function ($query) {
             $query->select('id', 'fullname', 'avatar', 'user_id', 'phone_number');
