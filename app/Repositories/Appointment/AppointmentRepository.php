@@ -90,6 +90,20 @@ class AppointmentRepository implements AppointmentRepositoryInterface
         $appointment->update($data);
         return $appointment;
     }
+    public function findByDoctor($id)
+    {
+        return $this->appointment::with([
+            'patient',
+            'package',
+            'specialty',
+            'user.role',
+            'user.userInfo'
+        ])
+            ->where('user_id', $id)
+            ->where('status', "=", 'confirmed')
+            ->orderByDesc('updated_at')
+            ->get();
+    }
 
     public function destroy($id)
     {

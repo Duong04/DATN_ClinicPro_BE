@@ -2,14 +2,15 @@
 
 namespace App\Services;
 
-use App\Http\Resources\AppointmentResource;
 use Exception;
+use App\Models\User;
 use App\Models\Doctor;
 use App\Models\PatientInfo;
-use App\Mail\AcceptAppointmentMail;
 use App\Mail\SendAppointment;
+use App\Mail\AcceptAppointmentMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\AppointmentResource;
 use App\Repositories\Patient\PatientRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Repositories\Appointment\AppointmentRepositoryInterface;
@@ -44,6 +45,11 @@ class AppointmentService
     {
         $this->findPatient($id);
         return AppointmentResource::collection($this->appointmentRepository->findByPatient($id));
+    }
+    public function findByDoctor($id)
+    {
+        $this->findDoctor($id);
+        return AppointmentResource::collection($this->appointmentRepository->findByDoctor($id));
     }
 
     public function create($request)
@@ -138,7 +144,7 @@ class AppointmentService
     private function checkStatus($appointment, $status)
     {
         if ($appointment->status !== $status) {
-            throw new Exception("Appointment must be $status to proceed.");
+            throw new \InvalidArgumentException('Trạng thái lịch hẹn không hợp lệ!');
         }
     }
 
@@ -147,7 +153,7 @@ class AppointmentService
         try {
             return $this->appointmentRepository->find($id);
         } catch (ModelNotFoundException $e) {
-            throw new Exception('Appointment not found');
+            throw new Exception('Lịch hẹn không tồn tại');
         }
     }
 
@@ -162,7 +168,7 @@ class AppointmentService
         $appointment = $this->findAppointment($id);
 
         if (in_array($appointment->status, $statusCheck)) {
-            throw new Exception("Trạng thái lịch hẹn không hợp lệ!");
+            throw new \InvalidArgumentException('Trạng thái lịch hẹn không hợp lệ!');
         }
 
         if ($isCompleted && $appointment->status !== 'confirmed') {
@@ -178,7 +184,15 @@ class AppointmentService
         try {
             return $this->patientRepository->findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            throw new Exception('Patient not found');
+            throw new Exception('Bệnh nhân không tồn tại');
+        }
+    }
+    private function findDoctor($id)
+    {
+        try {
+            return User::findOrFail($id);
+        } catch (ModelNotFoundException $th) {
+            throw new Exception('Bác sĩ không tồn tại');
         }
     }
 }

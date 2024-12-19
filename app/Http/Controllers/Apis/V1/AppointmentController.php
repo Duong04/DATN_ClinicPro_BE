@@ -30,6 +30,10 @@ class AppointmentController extends Controller
     {
         return $this->respondWithData(fn() => $this->appointmentService->findByIdPatient($id));
     }
+    public function findByDoctor($id)
+    {
+        return $this->respondWithData(fn() => $this->appointmentService->findByDoctor($id));
+    }
 
     public function store(AppointmentRequest $request)
     {
@@ -70,8 +74,10 @@ class AppointmentController extends Controller
                 ], 400);
             }
             return response()->json(['data' => $data], $successStatus);
+        } catch (\InvalidArgumentException $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 400);
         } catch (\Exception $e) {
-            $status = str_contains($e->getMessage(), 'not found') ? 404 : 500;
+            $status = str_contains($e->getMessage(), 'không tồn tại') ? 404 : 500;
             return response()->json(['success' => false, 'message' => $e->getMessage() ?: $message], $status);
         }
     }

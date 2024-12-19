@@ -93,6 +93,7 @@ Route::prefix('v1')->group(function () {
                 Route::post('/', 'store');
                 Route::get('/{id}', 'show')->middleware('jwt.auth');
                 Route::get('/patient/{id}', 'findByIdPatient')->middleware('jwt.auth');
+                Route::get('/doctor/{id}', 'findByDoctor')->middleware('jwt.auth');
                 Route::get('/send/{id}', 'update')->middleware('jwt.auth');
                 Route::post('/{id}', 'cancel')->middleware('jwt.auth');
                 Route::put('/{id}', 'complete')->middleware('jwt.auth');
