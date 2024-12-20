@@ -24,7 +24,8 @@ class PatientRequest extends FormRequest
     {
         $rules = [
             'insurance_number' => 'nullable',
-            'status' => 'nullable|in:active,inactive,transferred,disabled',
+            'status' => 'nullable|in:active,inactive,transferred',
+            'account_status' => 'nullable|in:active,disabled',
             'user_info.fullname' => ['required', 'regex:/^[a-zA-Z0-9\s]/'],
             'user_info.email' => 'required|email|unique:patient_infos,email|unique:users,email',
             'user_info.phone_number' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
@@ -43,6 +44,12 @@ class PatientRequest extends FormRequest
                 $rules['user_info.email'] = 'required|email|unique:patient_infos,email,'.$id.',patient_id|unique:users,email,'.$user_id;
             } else {
                 $rules['user_info.email'] = 'nullable';
+            }
+
+            if ($this->has('user_info.fullname')) {
+                $rules['user_info.fullname'] = ['required', 'regex:/^[a-zA-Z0-9\s]/'];
+            } else {
+                $rules['user_info.fullname'] = 'nullable';
             }
         }
 

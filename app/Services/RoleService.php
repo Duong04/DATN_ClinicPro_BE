@@ -22,13 +22,13 @@ class RoleService {
 
             if ($limit) {
                 return response()->json([
-                    'data' => $roles->items(),
+                    'data' => RoleResource::collection($roles->items()),
                     'prev_page_url' => $roles->previousPageUrl(),
                     'next_page_url' => $roles->nextPageUrl(),
                     'total' => $roles->total()
                 ], 200);
             }
-            return response()->json(['success' => true, 'data' => $roles], 200);
+            return response()->json(['success' => true, 'data' => RoleResource::collection($roles)], 200);
         } catch (\Throwable $th) {
             return response()->json(['success' => false, 'message' => $th->getMessage()], 400);
         }
