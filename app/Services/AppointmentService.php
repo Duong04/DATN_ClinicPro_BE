@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Exception;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Doctor;
 use App\Models\PatientInfo;
@@ -93,7 +94,7 @@ class AppointmentService
             'exists' => 'Giá trị của :attribute không tồn tại!',
         ];
         $attributes = [
-            'user_id' => 'ID Bác sĩ'
+            'user_id' => 'Bác sĩ'
         ];
         $validator = Validator::make($request->all(), $rules, $messages, $attributes);
         if ($validator->fails()) {
@@ -147,7 +148,6 @@ class AppointmentService
             throw new \InvalidArgumentException('Trạng thái lịch hẹn không hợp lệ!');
         }
     }
-
     private function findAppointment($id)
     {
         try {
