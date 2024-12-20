@@ -97,20 +97,24 @@ class PatientService {
             }
 
             if ($patient->user?->id) {
-                $user = [
-                    'email' => $data['user_info']['email'],
-                ];
+                $user = [];
+                if (isset($data['user_info']['email'])) {
+                    $user = [
+                        'email' => $data['user_info']['email'],
+                    ];
+                }
 
-                if ($data['status'] == 'active' || $data['status'] == 'disabled') {
-                    $user['status'] = $data['status'];
+                if (isset($data['account_status']) && in_array($data['account_status'], ['active', 'disabled'])) {
+                    $user['status'] = $data['account_status'];
                 }
 
                 $this->userRepository->update($patient->user->id, $user);
             }
-            
+
             $this->patientRepository->update($id, $data);
 
-            if ($data['user_info']) {
+
+            if (isset($data['user_info'])) {
                 PatientInfo::where('patient_id', $id)->update($data['user_info']); 
             }
 
