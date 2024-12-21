@@ -48,7 +48,6 @@ class AppointmentRequest extends FormRequest
             'regex' => ':attribute phải là số hợp lệ!',
             'date' => ':attribute phải là ngày hợp lệ!',
             'appointment_date.after' => ':attribute phải lớn hơn thời gian hiện tại!',
-            'appointment_time' => ['required', 'date_format:H:i'],
             'exists' => 'Giá trị của :attribute không tồn tại!',
             'dob.before_or_equal' => ':attribute không được lớn hơn ngày hiện tại!',
         ];
@@ -68,18 +67,6 @@ class AppointmentRequest extends FormRequest
             'package_id' => 'ID gói khám',
             "description" =>  'Mô tả'
         ];
-    }
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            $time = Carbon::parse($this->appointment_date);
-            $start = Carbon::createFromTime(7, 0, 0);
-            $end = Carbon::createFromTime(17, 0, 0);
-
-            if (!$time->between($start, $end)) {
-                $validator->errors()->add('appointment_date', 'Thời gian phải nằm trong giờ hành chính (từ 7:00 đến 17:00).');
-            }
-        });
     }
 
     protected function failedValidation(Validator $validator)
