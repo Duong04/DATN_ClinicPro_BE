@@ -48,7 +48,6 @@ class AppointmentRequest extends FormRequest
             'regex' => ':attribute phải là số hợp lệ!',
             'date' => ':attribute phải là ngày hợp lệ!',
             'appointment_date.after' => ':attribute phải lớn hơn thời gian hiện tại!',
-            'appointment_time' => ['required', 'date_format:H:i'],
             'exists' => 'Giá trị của :attribute không tồn tại!',
             'dob.before_or_equal' => ':attribute không được lớn hơn ngày hiện tại!',
         ];
