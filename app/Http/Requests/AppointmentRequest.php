@@ -69,18 +69,6 @@ class AppointmentRequest extends FormRequest
             "description" =>  'Mô tả'
         ];
     }
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            $time = Carbon::parse($this->appointment_date);
-            $start = Carbon::createFromTime(7, 0, 0);
-            $end = Carbon::createFromTime(17, 0, 0);
-
-            if (!$time->between($start, $end)) {
-                $validator->errors()->add('appointment_date', 'Thời gian phải nằm trong giờ hành chính (từ 7:00 đến 17:00).');
-            }
-        });
-    }
 
     protected function failedValidation(Validator $validator)
     {
